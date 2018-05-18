@@ -1,0 +1,45 @@
+.navbar-nav .nav-item:hover{
+    background-color: rgba(0, 123, 255, 0.25);
+}
+.active{
+    background-color: rgba(0, 123, 255, 0.25);
+}
+.mytable-info{
+    background-color: rgba(0, 123, 255, 0.25);
+}
+.mytable-info:hover{
+    background-color: rgb(233, 236, 239)!important;
+}
+.card{
+    // flex-direction: row!important;
+}
+.card-img-top{
+    background-color: rgb(186, 218, 251);
+}
+.img-style{
+    max-width: 100px!important;
+    padding: 5px;
+}
+.iconsFont{
+    font-size: 30px;
+}
+.addSpace{
+    margin-top: 10px;
+}
+.details-content label{
+    display: inline-block;
+    width: 106px;
+    padding-right: 10px;
+    text-align: right;
+    font-style: normal;
+    font-weight: bold;
+}
+@media (max-width: 385px) { 
+    .details-content label{
+        font-size: 13px;
+        width: 100px;
+    }
+}
+.borderless td, .borderless th {
+    border: none;
+}
