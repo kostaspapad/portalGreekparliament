@@ -15,7 +15,7 @@ class CreateSpeakersTable extends Migration
     {
         Schema::create('speakers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('speaker_id');
+            $table->string('speaker_id');
             $table->string('english_name',200);
             $table->string('greek_name',200);
             $table->string('image',200);

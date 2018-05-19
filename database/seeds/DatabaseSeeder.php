@@ -2,15 +2,13 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class DatabaseSeeder extends Seeder 
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(SpeakersSeeder::class);
+        $this->command->info('Speakers table seeded!');
     }
+
 }
+
