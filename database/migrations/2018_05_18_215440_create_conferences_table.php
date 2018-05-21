@@ -14,41 +14,46 @@ class CreateConferencesTable extends Migration
     public function up()
     {
         Schema::create('conferences', function (Blueprint $table) {
-            $table->string('conference_name');
+            $table->increments('ID');
+
+            $table->string('Conference');
 
             # e.x "2017/07/31"
-            $table->date('conference_date');
+            $table->date('Date');
 
             # Document location + document name e.x UserFiles/a08fc2dd-61a9-4a83-b09a-09f4c564609d/es20170731000490.docx
-            $table->string('transcript_doc_loc');
+            $table->string('DocumentLocation');
 
-            $table->string('document_name');
+            $table->string('DocumentName', 300);
 
             # e.x "/Vouli-ton-Ellinon/ToKtirio/Fotografiko-Archeio/#0e9a3d7f-ee81-4396-acc6-a7c200abaaa9"
-            $table->string('related_video_link');
+            $table->string('RelatedVideosLink');
 
             # e.x "Β΄Σύνοδος"
-            $table->string('session');
+            $table->string('Session');
 
             # e.x "ΙΖ΄ ΠΕΡΙΟΔΟΣ (ΠΡΟΕΔΡΕΥΟΜΕΝΗΣ ΚΟΙΝΟΒΟΥΛΕΥΤΙΚΗΣ ΔΗΜΟΚΡΑΤΙΑΣ)"
-            $table->string('time_period');
+            $table->string('TimePeriod');
 
             # e.x "2017/08/22"
-            $table->date('date_of_crawl');
+            $table->date('DateOfCrawl');
 
             # e.x Document location + document name "none" or UserFiles/a08fc2dd-61a9-4a83-b09a-09f4c564609d/es20110628.pdf
-            $table->string('pdf_doc_loc');
+            $table->string('PDFdocumentLocation');
 
-            $table->string('pdf_document_name');
+            $table->string('PDFdocuments');
 
             # e.x 452
-            $table->integer('web_page_number');
+            $table->integer('WebPageNum');
 
             # e.x True False
-            $table->binary('is_morning_conference');
+            $table->boolean('MorningConf');
 
             # e.x True False
-            $table->binary('is_afternoon_conference');
+            $table->boolean('AfternoonConf');
+
+            # e.x True False
+            $table->boolean('Downloaded');
         });
     }
 
