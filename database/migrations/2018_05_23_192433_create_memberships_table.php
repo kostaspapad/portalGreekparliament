@@ -17,11 +17,12 @@ class CreateMembershipsTable extends Migration
             $table->increments('id');
             $table->string("area_id");
             $table->string("legislative_period_id");
-            $table->string("on_behalf_of_id");
+            $table->string("on_behalf_of_id")->references('id_name')->on('parties');
             $table->string("organization_id");
-            $table->string("person_id");
+            $table->string("person_id")->references('id_name')->on('speakers');
             $table->string("role");
-            $table->timestamps();
+            $table->date("start_date");
+            $table->date("end_date");
         });
     }
 

@@ -15,10 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(MembershipsTableSeeder::class);
         $this->command->info('Memberships table seeded!');
         
-        
-        
-        // $this->call(PartiesTableSeeder::class);
-        // $this->command->info('Parties table seeded!');
+        $this->call(PartiesTableSeeder::class);
+        $this->command->info('Parties table seeded!');
     }
 
 }

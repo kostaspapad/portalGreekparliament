@@ -14,16 +14,15 @@ class CreateSpeakersTable extends Migration
     public function up()
     {
         Schema::create('speakers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('speaker_id');
-            $table->string('english_name',200);
-            $table->string('greek_name',200);
-            $table->string('image',200);
-            $table->string('email',254);
-            $table->string('wiki_el',250);
-            $table->string('wiki_en',250);
-            $table->string('twitter',250);
-            $table->string('website',250);
+            $table->primary('speaker_id');
+            $table->string('english_name')->unique();
+            $table->string('greek_name')->unique();
+            $table->string('image');
+            $table->string('email')->unique();
+            $table->string('wiki_el');
+            $table->string('wiki_en');
+            $table->string('twitter');
+            $table->string('website');
         });
     }
 
