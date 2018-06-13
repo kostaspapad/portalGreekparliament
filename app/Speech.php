@@ -13,4 +13,9 @@ class Speech extends Model
     {
         return $this->belongsTo('App\Speaker', 'speaker_id', 'speaker_id');
     }
+
+    public function conferences()
+    {
+        return $this->belongsTo('App\Conference', 'conference_date', 'conference_date');
+    }
 }

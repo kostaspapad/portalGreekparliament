@@ -17,7 +17,7 @@ class CreateSpeechesTable extends Migration
             $table->primary('speech_id');
             $table->string('speaker_id')->references('speaker_id')->on('speakers');
             $table->text('speech');
-            $table->date('conference_date') <<<<<<<<<<<<< Pio einai to key OEO????
+            $table->date('conference_date')->reference('conference_date')->on('conferences')
             $table->string('f_name');
             $table->string('md5');
             $table->timestamps();
