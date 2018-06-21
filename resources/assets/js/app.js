@@ -12,25 +12,32 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import laravelVuePagination from 'laravel-vue-pagination';
+import MultiSelect from 'vue-multiselect';
+import datepicker from 'vuejs-datepicker';
+import moment from 'moment';
+import ToggleButton from 'vue-js-toggle-button';
+
 //components
 import example from './components/ExampleComponent.vue';
 import navbar from './components/navbar.vue';
 import speakers from './components/speakers.vue';
 import speaker from './components/speaker.vue';
+import conferences from './components/conferences.vue';
 import modal from './components/modal.vue';
 
 Vue.use(VueRouter);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.use(ToggleButton);
+
+// register globally
 Vue.component('pagination', laravelVuePagination);
 Vue.component('example-component', example);
 Vue.component('navbar', navbar);
 Vue.component('speakers', speakers);
 Vue.component('speaker', speaker);
+Vue.component('conferences', conferences);
 Vue.component('modal', modal);
+Vue.component('multiselect', MultiSelect);
+Vue.component('datepicker', datepicker);
 
 //router
 // const router = new VueRouter({

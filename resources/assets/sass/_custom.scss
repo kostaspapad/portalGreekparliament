@@ -43,3 +43,75 @@
 .borderless td, .borderless th {
     border: none;
 }
+
+.multiselect__option--highlight{
+    //background-color: rgb(186, 218, 251)!important;
+}
+.custom__tag {
+    display: inline-block;
+    padding: 3px 7px;
+    background: rgb(186, 218, 251);
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.vue-js-switch#changed-font {
+    font-size: inherit;
+}
+.reset-btn{
+    color: #fff;
+    background-color: #4896e5;
+    border-color: #4896e5;
+}
+.show-details-dates{
+    background-color: #fff;
+    position: relative;
+    top: -13px;
+}
+.scrollable{
+    height: 700px;
+    overflow-y: auto;
+}
+.info-icon{
+    font-size: 20px;
+    cursor: pointer;
+}
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+    transition: all .5s ease-in-out;
+}
+.slide-fade-leave-active {
+    transition: all .3s ease-in-out;
+}
+.slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+
+
+
+//scrollbar
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(130, 199, 235); 
+    border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(130, 199, 235); 
+}

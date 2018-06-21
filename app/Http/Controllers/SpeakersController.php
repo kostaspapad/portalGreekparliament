@@ -18,8 +18,10 @@ class SpeakersController extends Controller
     public function index()
     {
         //$speakers = Speaker::all();
-        $speakers = Speaker::orderBy('id','desc')->paginate(2);
-        return view('pages.speakers')->with('speakers',$speakers);
+        //$speakers = Speaker::orderBy('id','desc')->paginate(2);
+        //$speakers = Speaker::paginate(2);
+        //return view('pages.speakers')->with('speakers',$speakers);
+        return view('pages.speakers');
     }
 
     /**
@@ -54,6 +56,7 @@ class SpeakersController extends Controller
         if(isset($id) && !empty($id) ){
             $speaker = Speaker::find($id);
         }
+        //return $speaker->toJson();
         return view('pages.speaker')->with('speaker',$speaker);
     }
 

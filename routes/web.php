@@ -29,3 +29,4 @@ Route::get('/speeches', 'PagesController@speeches');
 // Route::get('/speakers', 'SpeakersController@show');
 // Route::get('/speakers/{id}', 'SpeakersController@show');
 Route::resource('speakers','SpeakersController');
+Route::resource('conferences', 'ConferencesController');
