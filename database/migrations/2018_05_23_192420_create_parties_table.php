@@ -13,11 +13,10 @@ class CreatePartiesTable extends Migration {
     public function up() {
         if (!Schema::hasTable('parties')) {
             Schema::create('parties', function (Blueprint $table) {
-                /*
-                * Primary key 
-                */
-                $table->increments('id');
-                $table->string('id_name')->unique();
+                // Primary key 
+                $table->string('party_id')->unique();
+                $table->primary('party_id');
+
                 $table->string('fullname_el');
                 $table->string('fullname_en');
                 $table->string('image')->nullable();

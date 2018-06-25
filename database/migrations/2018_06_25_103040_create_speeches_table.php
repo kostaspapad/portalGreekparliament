@@ -27,7 +27,7 @@ class CreateSpeechesTable extends Migration
 
                         // Create index
                         $table->index('speech_conference_date');
-                        
+
                         $table->foreign('speech_conference_date')
                             ->references('conference_date')
                             ->on('conferences');
@@ -52,10 +52,8 @@ class CreateSpeechesTable extends Migration
                         // MD5 hash generated from the speech text
                         $table->string('md5');
 
-
                         // Set db engine type
                         $table->engine = 'InnoDB';
-                        
                     });
 
                 } else {

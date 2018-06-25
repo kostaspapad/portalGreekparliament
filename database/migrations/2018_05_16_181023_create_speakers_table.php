@@ -13,8 +13,10 @@ class CreateSpeakersTable extends Migration {
     public function up() {
         if(!Schema::hasTable('speakers')){
             Schema::create('speakers', function (Blueprint $table) {
+                // Primary key
                 $table->string('speaker_id')->unique();
-                #$table->primaryKey = 'speaker_id';
+                $table->primaryKey = 'speaker_id';
+
                 $table->string('english_name');
                 $table->string('greek_name');
                 $table->string('image');

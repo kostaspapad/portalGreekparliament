@@ -16,9 +16,9 @@ class PartiesTableSeeder extends Seeder
         $json = File::get("database/data/political_parties.json");
         $data = json_decode($json);
         foreach ($data as $obj) {
-            echo "insert -> " . $obj->id_name . PHP_EOL;
+            echo "insert -> " . $obj->party_id . PHP_EOL;
             Party::create(array(
-                'id_name' => $obj->id_name,
+                'party_id' => $obj->party_id,
                 'fullname_el' => $obj->fullname_el,
                 'fullname_en' => $obj->fullname_en,
                 'image' => $obj->image,
