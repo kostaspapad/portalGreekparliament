@@ -9,6 +9,9 @@ class Speaker extends Model
     // Don't use laravel auto incrementing primary key
     public $incrementing = false;
 
+    // // Primary key
+    // protected $primaryKey = 'speaker_id';
+    
     // Do not use timestamp data fields in database
     public $timestamps = false;
 
@@ -26,7 +29,7 @@ class Speaker extends Model
 
     public function memberships()
     {
-        return $this->belongsTo('App\Membership', 'speaker_id', 'person_id');
+        return $this->belongsTo('App\Membership', 'person_id', 'speaker_id');
     }
 
     public function speeches()

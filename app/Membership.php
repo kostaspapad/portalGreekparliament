@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Membership extends Model
 {
+    // Use laravel auto incrementing primary key
+    public $incrementing = true;
+
     // Do not use timestamp data fields in database
     public $timestamps = false;
 
@@ -24,6 +27,7 @@ class Membership extends Model
     }
     public function speakers()
     {
+       // return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
        return $this->hasMany('App\Speaker', 'speaker_id', 'person_id');
     }
 }

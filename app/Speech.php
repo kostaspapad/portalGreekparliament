@@ -11,6 +11,7 @@ class Speech extends Model
 
     public function speakers()
     {
+        // return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
         return $this->belongsTo('App\Speaker', 'speaker_id', 'speaker_id');
     }
 

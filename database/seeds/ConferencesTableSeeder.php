@@ -18,24 +18,33 @@ class ConferencesTableSeeder extends Seeder
         
         foreach($conferences as $c){
             // Conference::insert((array) $c);
-            echo $c->ID.PHP_EOL;
+            echo "---> " . $c->conference_date . PHP_EOL;
+            echo "--->" . $c->id. PHP_EOL;
+            echo "--->" . $c->conference_date. PHP_EOL;
+            echo "--->" . $c->conference_indicator. PHP_EOL;
+            echo "--->" . $c->doc_location. PHP_EOL;
+            echo "--->" . urldecode($c->doc_name). PHP_EOL;
+            echo "--->" . $c->video_link. PHP_EOL;
+            echo "--->" . $c->session. PHP_EOL;
+            echo "--->" . $c->date_of_crawl. PHP_EOL;
+            echo "--->" . $c->pdf_loc. PHP_EOL;
+            echo "--->" . $c->pdf_name. PHP_EOL;
+            echo "--->" . $c->time_period. PHP_EOL;
+            echo "--->" . $c->downloaded . PHP_EOL;
+            // print_r($c);
             DB::table('conferences')->insert([
-                "ID" => $c->ID,
-                "Conference" => $c->Conference,
-                "Date" => $c->Date,
-                "DocumentLocation" => $c->DocumentLocation,
-                "DocumentName" => urldecode($c->DocumentName),
-                "RelatedVideosLink" => $c->RelatedVideosLink,
-                "Session" => $c->Session,
-                "DateOfCrawl" => $c->DateOfCrawl,
-                "PDFdocumentLocation" => $c->PDFdocumentLocation,
-                "PDFdocuments" => $c->PDFdocuments,
-                "TimePeriod" => $c->TimePeriod,
-                "DateOfCrawl" => $c->DateOfCrawl,
-                "WebPageNum" => $c->WebPageNum,
-                "MorningConf" => $c->MorningConf,
-                "AfternoonConf" => $c->AfternoonConf,
-                "Downloaded" => $c->Downloaded
+                "id" => $c->id,
+                "conference_date" => $c->conference_date,
+                "conference_indicator" => $c->conference_indicator,
+                "doc_location" => $c->doc_location,
+                "doc_name" => urldecode($c->doc_name),
+                "video_link" => $c->video_link,
+                "session" => $c->session,
+                "date_of_crawl" => $c->date_of_crawl,
+                "pdf_loc" => $c->pdf_loc,
+                "pdf_name" => $c->pdf_name,
+                "time_period" => $c->time_period,
+                "downloaded" => $c->downloaded
             ]);
         }
     }

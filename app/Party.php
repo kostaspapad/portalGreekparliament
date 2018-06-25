@@ -20,6 +20,6 @@ class Party extends Model
 
     public function memberships()
     {
-        return $this->belongsTo('App\Membership', 'id_name', 'on_behalf_of_id');
+        return $this->belongsTo('App\Membership', 'on_behalf_of_id', 'id_name');
     }
 }
