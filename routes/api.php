@@ -34,7 +34,7 @@ Route::get('speakers', function(){
 Route::get('conferences', function(){
     //print_r($_GET);
     $dates = $_GET['dates'];
-    $conferences = DB::table('conferences')->whereBetween('Date', [$dates[0], $dates[1]])->get();//Conference::select("SELECT * FROM conferences WHERE conferences.Date = '1992-05-05' ")->paginate(2);
+    $conferences = DB::table('conferences')->whereBetween('conference_date', [$dates[0], $dates[1]])->get();//Conference::select("SELECT * FROM conferences WHERE conferences.Date = '1992-05-05' ")->paginate(2);
     //print_r($conferences);
     return response()->json(compact('conferences'));
 });

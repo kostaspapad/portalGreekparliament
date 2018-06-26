@@ -28,8 +28,8 @@
                     <multiselect 
                         v-model="selected_date" 
                         :options="conferencesData" 
-                        track-by="Date"
-                        label="Date"
+                        track-by="conference_date"
+                        label="conference_date"
                         placeholder="Select Date"
                         :multiple="true" 
                         :close-on-select="false" 
