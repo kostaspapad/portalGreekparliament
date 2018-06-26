@@ -15,7 +15,7 @@ class ConferencesController extends Controller
     public function index()
     {
         $arr = array();
-        $conferences = Conference::orderBy('Date','desc')->select('Date')->distinct()->get();
+        $conferences = Conference::orderBy('conference_date','desc')->select('conference_date')->distinct()->get();
         //$conferences = Conference::all(); 
         foreach($conferences as $c){
             // $arr[$c->Date]['ID'] = $c->ID;
@@ -32,7 +32,7 @@ class ConferencesController extends Controller
             // $arr[$c->Date]['MorningConf'] = $c->MorningConf;
             // $arr[$c->Date]['AfternoonConf'] = $c->AfternoonConf;
             // $arr[$c->Date]['Downloaded'] = $c->Downloaded;
-            $arr[$c->Date] = $c->Date;
+            $arr[$c->conference_date] = $c->conference_date;
         }
         // print_r($arr['1992-05-05']);
         // die;
