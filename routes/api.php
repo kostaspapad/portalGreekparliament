@@ -21,7 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('speakers', function(){
     //$speakers = Speaker::orderBy('id','desc')->paginate(51);
-    echo "Eeeee";die;
+    $speakers = DB::table('speakers')->get();
+    print_r($speakers);die;
     return response()->json(compact('speakers'));
 });
 // Route::get('conferences/{year?}/{month?}/{day?}', function($year,$month,$day){
