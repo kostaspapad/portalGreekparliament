@@ -25,7 +25,7 @@
                     />
                 </div>
                 <div v-if="isMultipleFilter" style="background-color: ;">
-                    <multiselect 
+                    <!-- <multiselect 
                         v-model="selected_date" 
                         :options="conferencesData" 
                         track-by="conference_date"
@@ -46,7 +46,7 @@
                                 <span class="custom__remove" @click="props.remove(props.option)">❌</span>
                             </span>
                         </template>
-                    </multiselect>
+                    </multiselect> -->
                     <div v-show="selected_date.length" style="text-align: left;">
                         <button @click="resetDates" class="btn btn-sm reset-btn" style="margin-top: 5px;">Reset</button>
                     </div>
