@@ -123,7 +123,7 @@
             },
             changePage(page){
                 var self = this;
-                axios.get('http://portal.test/api/speakers?page=' + page)
+                axios.get('http://95.85.38.123/api/speakers?page=' + page)
                 .then(function(response){
                     self.speakersData = response.data.speakers;
                 })
@@ -142,7 +142,7 @@
             },
             getSpeakers(){
                 var self = this;
-                axios.get('http://portal.test/api/speakers')
+                axios.get('http://95.85.38.123api/speakers')
                 .then(function(response){
                     self.speakersData = response.data.speakers;
                 })
