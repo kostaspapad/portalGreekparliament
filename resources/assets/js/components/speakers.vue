@@ -142,7 +142,7 @@
             },
             getSpeakers(){
                 var self = this;
-                axios.get('http://95.85.38.123api/speakers')
+                axios.get('http://95.85.38.123/api/speakers')
                 .then(function(response){
                     self.speakersData = response.data.speakers;
                 })
