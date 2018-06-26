@@ -19,6 +19,7 @@ class SpeakersSeeder extends Seeder
         $json = File::get("database/data/speakers_information.json");
         $data = json_decode($json);
         foreach ($data as $obj) {
+            echo "insert -> " . $obj->greek_name . PHP_EOL;
             Speaker::create(array(
                 'speaker_id' => $obj->speaker_id,
                 'english_name' => $obj->english_name,

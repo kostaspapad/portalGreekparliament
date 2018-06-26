@@ -1,289 +1,184 @@
 [{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 1,
-		"fields": {
-			"id_name": "anexartitoidimokratikoivouleftes",
-			"fullname_el": "Ανεξάρτητοι Δημοκρατικοί Βουλευτές",
-			"fullname_en": "Independent Democratic MPs",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "anexartitoidimokratikoivouleftes",
+	"fullname_el": "Ανεξάρτητοι Δημοκρατικοί Βουλευτές",
+	"fullname_en": "Independent Democratic MPs",
+	"image": "",
+	"url": ""
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 2,
-		"fields": {
-			"id_name": "anexartitoiellines",
-			"fullname_el": "Ανεξάρτητοι Έλληνες",
-			"fullname_en": "Independent Greeks",
-			"image": "",
-			"url": "http://www.anexartitoiellines.gr/"
-		}
+	"party_id": "anexartitoiellines",
+	"fullname_el": "Ανεξάρτητοι Έλληνες",
+	"fullname_en": "Independent Greeks",
+	"image": "",
+	"url": "http://www.anexartitoiellines.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 3,
-		"fields": {
-			"id_name": "allianceofprogressiveandleftforces",
-			"fullname_el": "Συμμαχία Προοδευτικών και Αριστερών Δυνάμεων",
-			"fullname_en": "Progress and Left Forces Alliance",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "allianceofprogressiveandleftforces",
+	"fullname_el": "Συμμαχία Προοδευτικών και Αριστερών Δυνάμεων",
+	"fullname_en": "Progress and Left Forces Alliance",
+	"image": "",
+	"url": ""
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 4,
-		"fields": {
-			"id_name": "coalitionoftheleftandprogress",
-			"fullname_el": "Συνασπισμός",
-			"fullname_en": "Synaspismos",
-			"image": "",
-			"url": "http://www.syn.gr/"
-		}
+	"party_id": "coalitionoftheleftandprogress",
+	"fullname_el": "Συνασπισμός",
+	"fullname_en": "Synaspismos",
+	"image": "",
+	"url": "http://www.syn.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 5,
-		"fields": {
-			"id_name": "communistpartyofgreece",
-			"fullname_el": "Κομμουνιστικό Κόμμα Ελλάδας",
-			"fullname_en": "Communist Party of Greece",
-			"image": "/static/greekparliament/kke.svg",
-			"url": "http://www.kke.gr/"
-		}
+	"party_id": "communistpartyofgreece",
+	"fullname_el": "Κομμουνιστικό Κόμμα Ελλάδας",
+	"fullname_en": "Communist Party of Greece",
+	"image": "/static/greekparliament/kke.svg",
+	"url": "http://www.kke.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 6,
-		"fields": {
-			"id_name": "democraticcoalition",
-			"fullname_el": "Δημοκρατική Συμπαράταξη",
-			"fullname_en": "Democratic Coalition",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "democraticcoalition",
+	"fullname_el": "Δημοκρατική Συμπαράταξη",
+	"fullname_en": "Democratic Coalition",
+	"image": "",
+	"url": ""
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 7,
-		"fields": {
-			"id_name": "dhmar",
-			"fullname_el": "Δημοκρατική Αριστερά",
-			"fullname_en": "Democratic Left",
-			"image": "",
-			"url": "http://www.dim-ar.gr/"
-		}
+	"party_id": "dhmar",
+	"fullname_el": "Δημοκρατική Αριστερά",
+	"fullname_en": "Democratic Left",
+	"image": "",
+	"url": "http://www.dim-ar.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 8,
-		"fields": {
-			"id_name": "diana",
-			"fullname_el": "Δημοκρατική Ανανέωση",
-			"fullname_en": "Democratic Renewal",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "diana",
+	"fullname_el": "Δημοκρατική Ανανέωση",
+	"fullname_en": "Democratic Renewal",
+	"image": "",
+	"url": ""
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 9,
-		"fields": {
-			"id_name": "dikki",
-			"fullname_el": "Δημοκρατικό Κοινωνικό Κίνημα",
-			"fullname_en": "Democratic Social Movement",
-			"image": "",
-			"url": "http://www.dikki.org/"
-		}
+	"party_id": "dikki",
+	"fullname_el": "Δημοκρατικό Κοινωνικό Κίνημα",
+	"fullname_en": "Democratic Social Movement",
+	"image": "",
+	"url": "http://www.dikki.org/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 10,
-		"fields": {
-			"id_name": "edauniteddemocraticleft",
-			"fullname_el": "Ενιαία Δημοκρατική Αριστερά",
-			"fullname_en": "United Democratic Left",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "edauniteddemocraticleft",
+	"fullname_el": "Ενιαία Δημοκρατική Αριστερά",
+	"fullname_en": "United Democratic Left",
+	"image": "",
+	"url": ""
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 11,
-		"fields": {
-			"id_name": "edik",
-			"fullname_el": "Ένωση Δημοκρατικού Κέντρου",
-			"fullname_en": "Union of the Democratic Centre",
-			"image": "",
-			"url": "http://edik.gr/"
-		}
+	"party_id": "edik",
+	"fullname_el": "Ένωση Δημοκρατικού Κέντρου",
+	"fullname_en": "Union of the Democratic Centre",
+	"image": "",
+	"url": "http://edik.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 12,
-		"fields": {
-			"id_name": "independent",
-			"fullname_el": "Ανεξάρτητος",
-			"fullname_en": "Independent politician",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "independent",
+	"fullname_el": "Ανεξάρτητος",
+	"fullname_en": "Independent politician",
+	"image": "",
+	"url": ""
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 13,
-		"fields": {
-			"id_name": "laos",
-			"fullname_el": "Λαϊκός Ορθόδοξος Συναγερμός",
-			"fullname_en": "Popular Orthodox Rally",
-			"image": "",
-			"url": "http://www.laos.gr/"
-		}
+	"party_id": "laos",
+	"fullname_el": "Λαϊκός Ορθόδοξος Συναγερμός",
+	"fullname_en": "Popular Orthodox Rally",
+	"image": "",
+	"url": "http://www.laos.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 14,
-		"fields": {
-			"id_name": "kke",
-			"fullname_el": "Κομμουνιστικό Κόμμα Ελλάδας",
-			"fullname_en": "Communist Party of Greece",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "kke",
+	"fullname_el": "Κομμουνιστικό Κόμμα Ελλάδας",
+	"fullname_en": "Communist Party of Greece",
+	"image": "",
+	"url": ""
 	},
 
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 15,
-		"fields": {
-			"id_name": "laikienotita",
-			"fullname_el": "Λαϊκή Ενότητα",
-			"fullname_en": "Popular Unity",
-			"image": "",
-			"url": "http://laiki-enotita.gr"
-		}
+	"party_id": "laikienotita",
+	"fullname_el": "Λαϊκή Ενότητα",
+	"fullname_en": "Popular Unity",
+	"image": "",
+	"url": "http://laiki-enotita.gr"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 16,
-		"fields": {
-			"id_name": "laikossyndesmoschrysiavgi",
-			"fullname_el": "Χρυσή Αυγή",
-			"fullname_en": "Golden Dawn",
-			"image": "/static/greekparliament/gd.svg",
-			"url": "http://www.xryshaygh.com/"
-		}
+	"party_id": "laikossyndesmoschrysiavgi",
+	"fullname_el": "Χρυσή Αυγή",
+	"fullname_en": "Golden Dawn",
+	"image": "/static/greekparliament/gd.svg",
+	"url": "http://www.xryshaygh.com/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 17,
-		"fields": {
-			"id_name": "nd",
-			"fullname_el": "Νέα Δημοκρατία",
-			"fullname_en": "New Democracy",
-			"image": "",
-			"url": "http://www.nd.gr/"
-		}
+	"party_id": "nd",
+	"fullname_el": "Νέα Δημοκρατία",
+	"fullname_en": "New Democracy",
+	"image": "",
+	"url": "http://www.nd.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 18,
-		"fields": {
-			"id_name": "nationalalignment",
-			"fullname_el": "Εθνική Παράταξη",
-			"fullname_en": "National Alignment",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "nationalalignment",
+	"fullname_el": "Εθνική Παράταξη",
+	"fullname_en": "National Alignment",
+	"image": "",
+	"url": ""
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 19,
-		"fields": {
-			"id_name": "neoliberalsparty",
-			"fullname_el": "Κόμμα Νεοφιλελευθέρων",
-			"fullname_en": "Party of New Liberals",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "neoliberalsparty",
+	"fullname_el": "Κόμμα Νεοφιλελευθέρων",
+	"fullname_en": "Party of New Liberals",
+	"image": "",
+	"url": ""
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 20,
-		"fields": {
-			"id_name": "pasok",
-			"fullname_el": "Πανελλήνιο Σοσιαλιστικό Κίνημα",
-			"fullname_en": "Panhellenic Socialist Movement",
-			"image": "/static/greekparliament/pasok.svg",
-			"url": "http://www.pasok.gr/portal/"
-		}
+	"party_id": "pasok",
+	"fullname_el": "Πανελλήνιο Σοσιαλιστικό Κίνημα",
+	"fullname_en": "Panhellenic Socialist Movement",
+	"image": "/static/greekparliament/pasok.svg",
+	"url": "http://www.pasok.gr/portal/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 21,
-		"fields": {
-			"id_name": "pola",
-			"fullname_el": "Πολιτική Άνοιξη",
-			"fullname_en": "Political Spring",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "pola",
+	"fullname_el": "Πολιτική Άνοιξη",
+	"fullname_en": "Political Spring",
+	"image": "",
+	"url": ""
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 22,
-		"fields": {
-			"id_name": "syriza",
-			"fullname_el": "Συνασπισμός Ριζοσπαστικής Αριστεράς",
-			"fullname_en": "SYRIZA",
-			"image": "/static/greekparliament/syriza.svg",
-			"url": "http://www.syriza.gr"
-		}
+	"party_id": "syriza",
+	"fullname_el": "Συνασπισμός Ριζοσπαστικής Αριστεράς",
+	"fullname_en": "SYRIZA",
+	"image": "/static/greekparliament/syriza.svg",
+	"url": "http://www.syriza.gr"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 23,
-		"fields": {
-			"id_name": "topotami",
-			"fullname_el": "Το Ποτάμι",
-			"fullname_en": "The River",
-			"image": "/static/greekparliament/potami.png",
-			"url": "http://topotami.gr/"
-		}
+	"party_id": "topotami",
+	"fullname_el": "Το Ποτάμι",
+	"fullname_en": "The River",
+	"image": "/static/greekparliament/potami.png",
+	"url": "http://topotami.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 24,
-		"fields": {
-			"id_name": "unionofcentrists",
-			"fullname_el": "Ένωση Κεντρώων",
-			"fullname_en": "Union of Centrists",
-			"image": "",
-			"url": "http://www.antidiaploki.gr/"
-		}
+	"party_id": "unionofcentrists",
+	"fullname_el": "Ένωση Κεντρώων",
+	"fullname_en": "Union of Centrists",
+	"image": "",
+	"url": "http://www.antidiaploki.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 25,
-		"fields": {
-			"id_name": "unionofthedemocraticcentre",
-			"fullname_el": "Ένωση Δημοκρατικού Κέντρου",
-			"fullname_en": "Union of Centrists",
-			"image": "",
-			"url": "http://edik.gr/"
-		}
+	"party_id": "unionofthedemocraticcentre",
+	"fullname_el": "Ένωση Δημοκρατικού Κέντρου",
+	"fullname_en": "Union of Centrists",
+	"image": "",
+	"url": "http://edik.gr/"
 	},
 	{
-		"model": "greekparliament.PoliticalParty",
-		"pk": 26,
-		"fields": {
-			"id_name": "ecologists",
-			"fullname_el": "Οικολόγοι Εναλλακτικοί",
-			"fullname_en": "Alternative Ecologists",
-			"image": "",
-			"url": ""
-		}
+	"party_id": "ecologists",
+	"fullname_el": "Οικολόγοι Εναλλακτικοί",
+	"fullname_en": "Alternative Ecologists",
+	"image": "",
+	"url": ""
 	}
-
 ]

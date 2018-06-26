@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Speaker extends Model
 {
+    // Don't use laravel auto incrementing primary key
+    public $incrementing = false;
+
+    // // Primary key
+    // protected $primaryKey = 'speaker_id';
+    
     // Do not use timestamp data fields in database
     public $timestamps = false;
 
@@ -20,4 +26,14 @@ class Speaker extends Model
         "wiki_en",
         "website"
     ];
+
+    public function memberships()
+    {
+        return $this->belongsTo('App\Membership', 'person_id', 'speaker_id');
+    }
+
+    public function speeches()
+    {
+        return $this->hasMany('App\Speech', 'speaker_id', 'speaker_id');
+    }
 }
