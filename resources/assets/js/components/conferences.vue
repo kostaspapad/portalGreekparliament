@@ -62,9 +62,10 @@
                 </div>
             </div>
             <div v-show="details.length" class="col-12 col-sm-6 col-md-6 col-lg-8 scrollable">
-                <div class=""  v-for="detail in details" style="margin: 15px 0 15px 0;">
+                <div class=""  v-for="detail in details" :key="detail.id" style="margin: 15px 0 15px 0;">
                     <div class="rounded shadow-sm" style="border: 1px solid red">
                         <!-- <span class="show-details-dates">{{detail[0].Date}}</span> -->
+                        {{detail}}
                         <span class="show-details-dates">{{detail.conference_date}}</span>
                         <div>{{detail.id}}</div>
                         <!-- <div v-for="info in detail" :key="info"> -->
