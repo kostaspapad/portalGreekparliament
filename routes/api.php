@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('speakers', function(){
+Route::middleware('auth:api')->get('speakers', function(){
     $speakers = Speaker::orderBy('id','desc')->paginate(51);
     echo "Eeeee";die;
     return response()->json(compact('speakers'));
