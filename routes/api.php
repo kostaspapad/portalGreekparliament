@@ -20,9 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('speakers', function(){
-    //$speakers = Speaker::orderBy('id','desc')->paginate(51);
-    $speakers = DB::table('speakers')->get();
-    print_r($speakers);die;
+    $speakers = Speaker::orderBy('speaker_id','desc')->paginate(51);
+    //$speakers = DB::table('speakers')->get();
+    //print_r($speakers);die;
     return response()->json(compact('speakers'));
 });
 // Route::get('conferences/{year?}/{month?}/{day?}', function($year,$month,$day){
