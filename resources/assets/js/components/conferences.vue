@@ -66,7 +66,7 @@
                     <div class="rounded shadow-sm" style="border: 1px solid red">
                         <!-- <span class="show-details-dates">{{detail[0].Date}}</span> -->
                         <span class="show-details-dates">{{detail.conference_date}}</span>
-                        <div>{{detail.ID}}</div>
+                        <div>{{detail.id}}</div>
                         <!-- <div v-for="info in detail" :key="info"> -->
                             <!-- {{info.ID}} -->
                             <!-- <div v-show="isEmpty(info)" v-show="info.DocumentLocation != '' && info.DocumentName != '' ">
