@@ -136,7 +136,7 @@
             changePage(page){
                 //for pagination
                 var self = this;
-                axios.get('http://portal.test/api/conferences?page=' + page)
+                axios.get('http://95.85.38.123/api/conferences?page=' + page)
                 .then(function(response){
                     if(response.status == 200 && response.statusText == "OK"){
                         self.conferencesData = response.data.conferences;
@@ -159,7 +159,7 @@
             getConferences(){
                 //get all conferences
                 var self = this;
-                axios.get('http://portal.test/api/conferences')
+                axios.get('http://95.85.38.123/api/conferences')
                 .then(function(response){
                     if(response.status == 200 && response.statusText == "OK"){
                         self.conferencesData = response.data.conferences;
@@ -190,13 +190,13 @@
                 console.log(dates);
                 // axios({
                 //     method:'get',
-                //     url:'http://portal.test/api/conferences',
+                //     url:'http://95.85.38.123/api/conferences',
                 //     responseType:'json',
                 //     data: {
                 //         dates: myJsonString
                 //     }
                 // })
-                axios.get('http://portal.test/api/conferences' ,{
+                axios.get('http://95.85.38.123/api/conferences' ,{
                     params: {
                         dates: dates
                     }
@@ -223,7 +223,7 @@
                 const self = this; //const means it will never reassigned
                 const formattedDate = moment(date.Date).format('YYYY/MM/DD');
                 let tmp = [];
-                axios.get('http://portal.test/api/conferences/' + formattedDate)
+                axios.get('http://95.85.38.123/api/conferences/' + formattedDate)
                 .then(function(response){
                     //console.log(response);
                     if(response.status == 200 && response.statusText == "OK"){

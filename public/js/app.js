@@ -69282,7 +69282,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         changePage: function changePage(page) {
             var self = this;
-            axios.get('http://portal.test/api/speakers?page=' + page).then(function (response) {
+            axios.get('http://95.85.38.123/api/speakers?page=' + page).then(function (response) {
                 self.speakersData = response.data.speakers;
             }).catch(function (error) {
                 console.log(error);
@@ -69299,7 +69299,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         getSpeakers: function getSpeakers() {
             var self = this;
-            axios.get('http://portal.test/api/speakers').then(function (response) {
+            axios.get('http://95.85.38.123/api/speakers').then(function (response) {
                 self.speakersData = response.data.speakers;
             }).catch(function (error) {
                 console.log(error);
@@ -70365,7 +70365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         changePage: function changePage(page) {
             //for pagination
             var self = this;
-            axios.get('http://portal.test/api/conferences?page=' + page).then(function (response) {
+            axios.get('http://95.85.38.123/api/conferences?page=' + page).then(function (response) {
                 if (response.status == 200 && response.statusText == "OK") {
                     self.conferencesData = response.data.conferences;
                 }
@@ -70386,7 +70386,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getConferences: function getConferences() {
             //get all conferences
             var self = this;
-            axios.get('http://portal.test/api/conferences').then(function (response) {
+            axios.get('http://95.85.38.123/api/conferences').then(function (response) {
                 if (response.status == 200 && response.statusText == "OK") {
                     self.conferencesData = response.data.conferences;
                 }
@@ -70415,13 +70415,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(dates);
             // axios({
             //     method:'get',
-            //     url:'http://portal.test/api/conferences',
+            //     url:'http://95.85.38.123/api/conferences',
             //     responseType:'json',
             //     data: {
             //         dates: myJsonString
             //     }
             // })
-            axios.get('http://portal.test/api/conferences', {
+            axios.get('http://95.85.38.123/api/conferences', {
                 params: {
                     dates: dates
                 }
@@ -70446,7 +70446,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var self = this; //const means it will never reassigned
             var formattedDate = __WEBPACK_IMPORTED_MODULE_0_moment___default()(date.Date).format('YYYY/MM/DD');
             var tmp = [];
-            axios.get('http://portal.test/api/conferences/' + formattedDate).then(function (response) {
+            axios.get('http://95.85.38.123/api/conferences/' + formattedDate).then(function (response) {
                 //console.log(response);
                 if (response.status == 200 && response.statusText == "OK") {
                     tmp = response.data.conferences;
