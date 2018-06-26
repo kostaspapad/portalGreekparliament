@@ -42,7 +42,7 @@
                     >
                         <template slot="tag" slot-scope="props">
                             <span class="custom__tag">
-                                <span>{{ props.option.Date }}</span>
+                                <span>{{ props.option.conference_date }}</span>
                                 <span class="custom__remove" @click="props.remove(props.option)">❌</span>
                             </span>
                         </template>
@@ -65,7 +65,7 @@
                 <div class=""  v-for="detail in details" style="margin: 15px 0 15px 0;">
                     <div class="rounded shadow-sm" style="border: 1px solid red">
                         <!-- <span class="show-details-dates">{{detail[0].Date}}</span> -->
-                        <span class="show-details-dates">{{detail.Date}}</span>
+                        <span class="show-details-dates">{{detail.conference_date}}</span>
                         <div>{{detail.ID}}</div>
                         <!-- <div v-for="info in detail" :key="info"> -->
                             <!-- {{info.ID}} -->
