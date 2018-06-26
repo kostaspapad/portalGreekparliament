@@ -65,6 +65,7 @@
                 <div class=""  v-for="detail in details" :key="detail.id" style="margin: 15px 0 15px 0;">
                     <div class="rounded shadow-sm" style="border: 1px solid red">
                         <!-- <span class="show-details-dates">{{detail[0].Date}}</span> -->
+                        <h1>HELLO SPIRO</h1>
                         {{detail}}
                         <span class="show-details-dates">{{detail.conference_date}}</span>
                         <div>{{detail.id}}</div>
