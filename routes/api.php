@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('speakers', function(){
-    echo "sss";die;
+    echo "sssweqw";die;
     //$speakers = Speaker::orderBy('speaker_id','desc')->paginate(51);
     //$speakers = DB::table('speakers')->get();
     //print_r($speakers);die;
