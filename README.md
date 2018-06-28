@@ -1,60 +1,118 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## About Greek parliament Portal
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Local environment setup
+Clone repository
 
-## About Laravel
+    git clone https://gitlab.com/kostaspapad/portalGreekparliament.git
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Install php7.2
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Install mysql
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+### Install composer
 
-## Learning Laravel
+    $ cd ~
+    $ curl -sS https://getcomposer.org/installer -o composer-setup.php
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+Next, run a short PHP script to verify that the installer matches the SHA-384 hash for the latest installer found on the [Composer Public Keys / Signatures page](https://composer.github.io/pubkeys.html). You will need to make sure that you substitute the latest hash for the highlighted value below:
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+    $ php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 
-## Laravel Sponsors
+Must output:
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+    Installer verified
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
+To install composer globally, use the following:
 
-## Contributing
+    $ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+This will download and install Composer as a system-wide command named composer, under /usr/local/bin. The output should look like this:
 
-## Security Vulnerabilities
+    All settings correct for using Composer
+    Downloading 1.1.1...
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    Composer successfully installed to: /usr/local/bin/composer
+    Use it: php /usr/local/bin/composer
 
-## License
+To test your installation, run:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    composer
+
+Now use can go to the project folder and run:
+
+    composer install
+
+This will install all the necessary packages
+
+### asto gia tin wra
+install npm, node
+
+### Configure mysql
+Create user "greekparliament" and grant permissions (Use same pass as production).
+
+    CREATE USER 'greekparliament'@'localhost' IDENTIFIED BY '******';
+
+    GRANT ALL PRIVILEGES ON * . * TO 'greeekparliament'@'localhost';
+
+    FLUSH PRIVILEGES;
+
+Create portal, parliament db use utf8_unicode_ci encoding.
+
+    CREATE DATABASE parliament CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    CREATE DATABASE portal CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+Create the table that will contain the scraper data:
+
+    CREATE TABLE `scraper_data` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `conference_date` date DEFAULT NULL,
+        `time_period` varchar(255) DEFAULT NULL,
+        `session` varchar(255) NOT NULL,
+        `conference_indicator` varchar(255) NOT NULL,
+        `video_link` varchar(255) DEFAULT NULL,
+        `pdf_loc` varchar(255) DEFAULT NULL,
+        `pdf_name` text,
+        `doc_location` varchar(255) NOT NULL,
+        `doc_name` text,
+        `date_of_crawl` date DEFAULT NULL,
+        `morning_conference` int(11) NOT NULL,
+        `noon_conference` int(11) NOT NULL,
+        `downloaded` tinyint(1) NOT NULL DEFAULT '0',
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+Copy some sample data from the remote parliament.scraper_data to your local database.
+
+## Laravel configuration
+Create the .env if not exists and configure it in the root project.
+
+Two database connections must be specified in the .env file.
+
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=portal
+    DB_USERNAME=greekparliament
+    DB_PASSWORD=******
+
+    DB_CONNECTION=mysql_scraper
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE_SCRAPER=parliament
+    DB_USERNAME_SCRAPER=greekparliament
+    DB_PASSWORD_SCRAPER=******
+
+Generate application key:
+
+    php artisan key:generate 
+
+Migrate:
+
+    composer dump-autoload
+    php artisan migrate
+
+Run seed:
+
+    php artisan db:seed
+
+Done
