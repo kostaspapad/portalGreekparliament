@@ -123,7 +123,8 @@
             },
             changePage(page){
                 var self = this;
-                axios.get('http://95.85.38.123/api/speakers?page=' + page)
+
+                axios.get(self.host + '/api/speakers?page=' + page)
                 .then(function(response){
                     self.speakersData = response.data.speakers;
                 })
@@ -133,16 +134,19 @@
             },
             isJsonString(str) {
                 var json;
+                
                 try {
                     json = JSON.parse(str);
                 } catch (e) {
                     return false;
                 }
+                
                 return json;
             },
             getSpeakers(){
                 var self = this;
-                axios.get('http://95.85.38.123/api/speakers')
+                
+                axios.get( self.host + '/api/speakers')
                 .then(function(response){
                     self.speakersData = response.data.speakers;
                 })
@@ -169,6 +173,13 @@
             
         },
         created() {
+            // Detect enviroment
+            if (process.env.NODE_ENV == 'production') {
+                this.host = 'http://95.85.38.123';
+            } else if (process.env.NODE_ENV == 'development') {
+                this.host = 'http://localhost:8000';
+            }
+
             this.getSpeakers();
             // var jsonParsed;
             // console.log(this.speakers);
