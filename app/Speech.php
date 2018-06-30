@@ -9,6 +9,9 @@ class Speech extends Model
     // Don't use laravel auto incrementing primary key
     public $incrementing = false;
 
+    // Custom primary key
+    public $primaryKey = 'speech_id';
+
     public function speakers()
     {
         // return $this->hasMany('App\Comment', 'foreign_key', 'local_key');

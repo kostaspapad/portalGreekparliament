@@ -47,3 +47,23 @@ Route::get('conferences', function(){
 //     //print_r($conferences);
 //     //return response()->json(compact('conferences'));
 // });
+
+// List Speeches
+Route::get('speeches', 'SpeechController@index');
+
+// List single speech
+Route::get('speeches/{id}', 'SpeechController@show');
+
+// List speeches of speaker id
+Route::get('speeches2/{speaker_id}', 'SpeechController@speechBySpeakerId');
+
+// List speeches of speaker id
+Route::get('speeches3/{speaker_id}', 'SpeechController@speechBySpeakerName');
+// // Create new speech (FUTURE)
+// Route::post('speech', 'SpeechController@store');
+
+// // Create new speech (FUTURE)
+// Route::put('speech', 'SpeechController@store');
+
+// Delete speech
+Route::delete('speech/{id}', 'SpeechController@destroy');
