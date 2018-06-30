@@ -30,3 +30,6 @@ Route::get('/speeches', 'PagesController@speeches');
 // Route::get('/speakers/{id}', 'SpeakersController@show');
 Route::resource('speakers','SpeakersController');
 Route::resource('conferences', 'ConferencesController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
