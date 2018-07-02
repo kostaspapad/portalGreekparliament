@@ -102,7 +102,7 @@ Route::get('party/{id}/speeches', 'Api\PartiesController@getPartySpeeches');
 | Speeches API endpoints
 |
 |-------------------------------------------------------------------------------
-| Get all speeches with pagination of 15
+| Get all speeches with pagination of 25
 |-------------------------------------------------------------------------------
 | URL:            /api/speeches
 | Controller:     API\SpeechesController@index
@@ -239,7 +239,7 @@ Route::get('conference/{date}', 'Api\ConferencesController@getConferenceByDate')
 | Controller:     API\ConferencesController@getConferenceByDateRange
 | Method:         GET
 */
-Route::get('conference/start/{date}/end/{date}', 'Api\ConferencesController@getConferenceByDateRange');
+Route::get('conference/start/{datestart}/end/{dateend}', 'Api\ConferencesController@getConferenceByDateRange');
 
 /*
 |-------------------------------------------------------------------------------
