@@ -9,8 +9,8 @@ class Speaker extends Model
     // Don't use laravel auto incrementing primary key
     public $incrementing = false;
 
-    // // Primary key
-    // protected $primaryKey = 'speaker_id';
+    // Primary key
+     protected $primaryKey = 'speaker_id';
     
     // Do not use timestamp data fields in database
     public $timestamps = false;

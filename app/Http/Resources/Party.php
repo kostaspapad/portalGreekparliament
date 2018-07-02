@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Speech extends JsonResource
+class Party extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,16 +14,12 @@ class Speech extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
         return [
-            'speech_id' => $this->speech_id,
-            'speech_conference_date' => $this->speech_conference_date,
-            'speaker_id' => $this->speaker_id,
-            'speech' => $this->speech,
-            'f_name' => $this->f_name,
-            // 'created_at' => $this->created_at,
-            // 'updated_at' => $this->updated_at,
-            'md5' => $this->md5
+            'party_id' => $this->party_id,
+            'fullname_el' => $this->fullname_el,
+            'fullname_en' => $this->fullname_en,
+            'image' => $this->image,
+            'url' => $this->url
         ];
     }
 

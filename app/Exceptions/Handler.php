@@ -3,10 +3,16 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Traits\RestTrait;
+use App\Traits\RestExceptionHandlerTrait;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
+    use RestTrait;
+    use RestExceptionHandlerTrait;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -41,11 +47,17 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+        if(!$this->isApiCall($request)) {
+            $retval = parent::render($request, $e);
+        } else {
+            $retval = $this->getJsonResponseForException($request, $e);
+        }
+
+        return $retval;
     }
 }

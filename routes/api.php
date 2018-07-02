@@ -48,22 +48,215 @@ Route::get('conferences', function(){
 //     //return response()->json(compact('conferences'));
 // });
 
-// List Speeches
-Route::get('speeches', 'SpeechController@index');
 
-// List single speech
-Route::get('speeches/{id}', 'SpeechController@show');
 
-// List speeches of speaker id
-Route::get('speeches2/{speaker_id}', 'SpeechController@speechBySpeakerId');
 
-// List speeches of speaker id
-Route::get('speeches3/{speaker_id}', 'SpeechController@speechBySpeakerName');
+/*
+|-------------------------------------------------------------------------------
+| Parties API endpoints
+|-------------------------------------------------------------------------------
+*/
+/*
+|-------------------------------------------------------------------------------
+| Get all parties
+|-------------------------------------------------------------------------------
+| URL:            /api/parties
+| Controller:     API\PartiesController@index
+| Method:         GET
+*/
+Route::get('parties', 'Api\PartiesController@index');
+
+/*
+|-------------------------------------------------------------------------------
+| Get data of a single party by id
+|-------------------------------------------------------------------------------
+| URL:            /api/party/{id}
+| Controller:     API\PartiesController@getPartyById
+| Method:         GET
+*/
+Route::get('Api/party/{id}', 'Api\PartiesController@getPartyById');
+
+/*
+|-------------------------------------------------------------------------------
+| Get data of a single party by name
+|-------------------------------------------------------------------------------
+| URL:            /api/party/{name}
+| Controller:     API\PartiesController@getPartyByName
+| Method:         GET
+*/
+Route::get('Api/party/{name}', 'Api\PartiesController@getPartyByName');
+
+/*
+|-------------------------------------------------------------------------------
+| Get speeches of a party with pagination
+|-------------------------------------------------------------------------------
+| URL:            /api/party/{id}/speeches
+| Controller:     API\PartiesController@getPartySpeeches
+| Method:         GET
+*/
+Route::get('party/{id}/speeches', 'Api\PartiesController@getPartySpeeches');
+
+/*
+|-------------------------------------------------------------------------------
+|
+| Speeches API endpoints
+|
+|-------------------------------------------------------------------------------
+| Get all speeches with pagination of 15
+|-------------------------------------------------------------------------------
+| URL:            /api/speeches
+| Controller:     API\SpeechesController@index
+| Method:         GET
+| Description:    Gets all of the speeches in the application
+*/
+Route::get('speeches', 'Api\SpeechesController@index');
+
+/*
+|-------------------------------------------------------------------------------
+| Get a single speech by id
+|-------------------------------------------------------------------------------
+| URL:            /api/speech/{id}
+| Controller:     API\SpeechesController@getSpeechById
+| Method:         GET
+*/
+Route::get('speech/{id}', 'Api\SpeechesController@getSpeechById');
+
+/*
+|-------------------------------------------------------------------------------
+| Delete a speech by id
+|-------------------------------------------------------------------------------
+| URL:            /api/speech/{id}
+| Controller:     API\SpeechesController@getSpeechById
+| Method:         DELETE
+*/
+Route::delete('speech/{id}', 'Api\SpeechesController@destroy');
+
 // // Create new speech (FUTURE)
-// Route::post('speech', 'SpeechController@store');
+// Route::post('speech', 'Api\SpeechesController@store');
 
 // // Create new speech (FUTURE)
-// Route::put('speech', 'SpeechController@store');
+// Route::put('speech', 'Api\SpeechesController@store');
 
-// Delete speech
-Route::delete('speech/{id}', 'SpeechController@destroy');
+/*
+|-------------------------------------------------------------------------------
+| Get speeches of a speaker by id
+|-------------------------------------------------------------------------------
+| URL:            /api/speeches/speaker/{speaker_id}
+| Sample:         /api/speeches/speaker/0ec3bdd6-140b-473d-806d-6ba089cf7a35
+| Controller:     API\SpeechesController@speechesBySpeakerId
+| Method:         GET
+| Description:    Gets all of the speeches of a speaker specified by speaker_id
+*/
+Route::get('speeches/speaker/{speaker_id}', 'Api\SpeechesController@speechesBySpeakerId');
+
+/*
+|-------------------------------------------------------------------------------
+| Get speeches of a speaker by name
+|-------------------------------------------------------------------------------
+| URL:            /api/speeches/speaker/name/{speaker_name}
+| Sample:         http://localhost:8000/api/speeches/speaker/name/Τσούκαλης Σπυρίδωνος Νικόλαος
+| Controller:     API\SpeechesController@speechBySpeakerName
+| Method:         GET
+| Description:    Gets all of the speeches of a speaker specified by greek_name
+|                 or english_name
+*/
+Route::get('speeches/speaker/name/{speaker_name}', 'Api\SpeechesController@speechesBySpeakerName');
+
+/*
+|-------------------------------------------------------------------------------
+|
+| Speakers API endpoints
+|
+|-------------------------------------------------------------------------------
+| Get all speakers with pagination
+|-------------------------------------------------------------------------------
+| URL:            /api/speakers
+| Controller:     API\SpeakersController@index
+| Method:         GET
+*/
+Route::get('speakers', 'Api\SpeakersController@index');
+
+/*
+|-------------------------------------------------------------------------------
+| Get a speaker by id
+|-------------------------------------------------------------------------------
+| URL:            /api/speaker/{speaker_id}
+| Controller:     API\SpeechesController@getSpeakerById
+| Method:         GET
+*/
+Route::get('speaker/{speaker_id}', 'Api\SpeakersController@getSpeakerById');
+
+/*
+|-------------------------------------------------------------------------------
+| Get a speaker by name
+|-------------------------------------------------------------------------------
+| URL:            /api/speaker/{name}
+| Controller:     API\SpeechesController@getSpeakerByName
+| Method:         GET
+*/
+Route::get('speaker/name/{name}', 'Api\SpeakersController@getSpeakerByName');
+
+
+/*
+|-------------------------------------------------------------------------------
+|
+| Conferences API endpoints
+|
+|-------------------------------------------------------------------------------
+| Get all conferences with pagination
+|-------------------------------------------------------------------------------
+| URL:            /api/conferences
+| Controller:     API\ConferencesController@index
+| Method:         GET
+*/
+Route::get('conferences', 'Api\ConferencesController@index');
+
+/*
+|-------------------------------------------------------------------------------
+| Get conferences by id
+|-------------------------------------------------------------------------------
+| URL:            /api/conference/{id}
+| Controller:     API\ConferencesController@getConferenceById
+| Method:         GET
+*/
+Route::get('conference/{id}', 'Api\ConferencesController@getConferenceById');
+
+/*
+|-------------------------------------------------------------------------------
+| Get conferences by date
+|-------------------------------------------------------------------------------
+| URL:            /api/conference/{date}
+| Controller:     API\ConferencesController@getConferenceByDate
+| Method:         GET
+*/
+Route::get('conference/{date}', 'Api\ConferencesController@getConferenceByDate');
+
+/*
+|-------------------------------------------------------------------------------
+| Get conferences by date rage
+|-------------------------------------------------------------------------------
+| URL:            /api/conference/start/{date}/end/{date}
+| Controller:     API\ConferencesController@getConferenceByDateRange
+| Method:         GET
+*/
+Route::get('conference/start/{date}/end/{date}', 'Api\ConferencesController@getConferenceByDateRange');
+
+/*
+|-------------------------------------------------------------------------------
+| Get conference speeches by id
+|-------------------------------------------------------------------------------
+| URL:            /api/conference/{id}/speeches
+| Controller:     API\ConferencesController@getConferenceSpeechesById
+| Method:         GET
+*/
+Route::get('conference/{id}/speeches', 'Api\ConferencesController@getConferenceSpeechesById');
+
+/*
+|-------------------------------------------------------------------------------
+| Get conference speeches by date
+|-------------------------------------------------------------------------------
+| URL:            /api/conference/{date}/speeches
+| Controller:     API\ConferencesController@getConferenceSpeechesByDate
+| Method:         GET
+*/
+Route::get('conference/{id}/speeches', 'Api\ConferencesController@getConferenceSpeechesByDate');
