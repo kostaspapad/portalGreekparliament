@@ -8,18 +8,23 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SpeakersApiTest extends TestCase
 {
+    var $api_version = 'api/v1';
+    
     public function testIndex()
     {
-        $response = $this->json('GET', 'api/speakers');
+        $endpoint = $this->api_version . '/speakers';
+
+        $response = $this->json('GET', $endpoint);
         $response->assertSee('speaker_id');
 
-
-
+        echo $endpoint . ': OK' . PHP_EOL;
     }
     
     public function testGetSpeakerById()
     {
-        $response = $this->json('GET', 'api/speaker/0ec3bdd6-140b-473d-806d-6ba089cf7a35');
+        $endpoint = $this->api_version . '/speaker/0ec3bdd6-140b-473d-806d-6ba089cf7a35';
+
+        $response = $this->json('GET', $endpoint);
         $response->assertStatus(200)
                  ->assertJsonStructure([
                     "data" => [
@@ -34,11 +39,15 @@ class SpeakersApiTest extends TestCase
                         "website"
                     ]
                 ]);
+
+        echo $endpoint . ': OK' . PHP_EOL;
     }
     
     public function testGetSpeakerByName()
     {
-        $response = $this->json('GET', 'api/speaker/name/Κωνσταντίνος Στεφανόπουλος');
+        $endpoint = $this->api_version . '/speaker/name/Κωνσταντίνος Στεφανόπουλος';
+
+        $response = $this->json('GET', $endpoint);
         $response->assertStatus(200)
                  ->assertJsonStructure([
                     "data" => [
@@ -53,6 +62,8 @@ class SpeakersApiTest extends TestCase
                         "website"
                     ]
                 ]);
+        
+        echo $endpoint . ': OK'.PHP_EOL;
     }
     
     // public function testSearchSpeakerByName()

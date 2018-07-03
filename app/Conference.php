@@ -9,6 +9,8 @@ class Conference extends Model
     // Do not use timestamp data fields in database
     public $timestamps = false;
 
+    // protected $primaryKey = 'id';
+
     public function speeches()
     {
         return $this->hasMany('App\Speech', 'conference_date', 'conference_date');

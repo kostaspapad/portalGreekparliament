@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -81,7 +81,7 @@ class SpeechesController extends Controller
 
         // Return the collection of Speeches as a resource
         if (isset($speeches) && !empty($speeches)) {
-            return  SpeechResource::collection($speeches);
+            return SpeechResource::collection($speeches);
         }
     }
 

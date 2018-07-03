@@ -17,7 +17,7 @@ class PartiesController extends Controller
     public function index()
     {
         // Get speakers
-        $parties = Party();
+        $parties = Party::paginate(50);
 
         if (isset($parties) && !empty($parties)) {
             return PartyResource::collection($parties);
@@ -32,13 +32,15 @@ class PartiesController extends Controller
      * @param  int  $party_id
      * @return \Illuminate\Http\Response
      */
-     public function getPartyById($party_id){
+    public function getPartyById($party_id)
+    {
         $party = Party::findorfail($party_id);
 
         if (isset($party) && !empty($party)) {
             return new PartyResource($party);
         }
     }
+    
     /**
      * Display a party data specified by name.
      *
