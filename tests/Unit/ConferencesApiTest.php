@@ -123,4 +123,14 @@ class ConferencesApiTest extends TestCase
         
     //     echo $endpoint . ': OK' . PHP_EOL;
     // }
+    
+    public function testGetConferenceByDateRange()
+    {
+        $endpoint = $this->api_version . '/conference/range?start=1989-07-03&end=1989-07-27';
+        
+        $response = $this->json('POST', $endpoint);
+        $response->assertSee('conference_date');
+        
+        echo $endpoint . ': OK' . PHP_EOL;
+    }
 }

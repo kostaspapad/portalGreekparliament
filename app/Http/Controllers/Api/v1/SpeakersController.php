@@ -69,7 +69,7 @@ class SpeakersController extends Controller
                 ->where('speakers.greek_name', 'like', $name)
                 ->get();
         }
-        dd($speaker);
+        
         // Return the collection of Speeches as a resource
         if (isset($speaker) && !empty($speaker)) {
             return SpeakerResource::collection($speaker);

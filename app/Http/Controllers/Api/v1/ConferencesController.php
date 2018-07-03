@@ -56,7 +56,7 @@ class ConferencesController extends Controller
             return ConferenceResource::collection($conferences);
         }
     }
-
+    
     // /**
     //  * Display conference data specified by time period.
     //  *
@@ -91,4 +91,32 @@ class ConferencesController extends Controller
     //         return ConferenceResource::collection($conferences);
     //     }
     // }
+
+    /**
+     * Display a conference data specified by date range.
+     *
+     * Example: 
+     * 
+     * @param  str  $conference_date
+     * @return \Illuminate\Http\Response
+     */
+    public function getConferenceByDateRange(Request $request)
+    {
+        $start = $request->input('start');
+        $end = $request->input('end');
+        
+        if (isset($start) && isset($end)) {
+            $start = date($start);
+            $end = date($end);
+
+            $conferences = Conference::whereBetween('conference_date', [$start, $end])
+                                // ->orWhereBetween('reservation_to', [$start_date, $end_date])
+                                // ->whereNotBetween('reservation_to', [$from3, $to3]);
+                                ->get();
+        }
+
+        if (isset($conferences) && !empty($conferences)) {
+            return ConferenceResource::collection($conferences);
+        }
+    }
 }
