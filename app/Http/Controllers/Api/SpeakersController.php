@@ -54,4 +54,25 @@ class SpeakersController extends Controller
         }
     }
     
+    public function searchSpeakerByName(Request $request){
+        
+        $name = $request->input('name');
+        $name = '%'.$name.'%';
+
+        if (mb_detect_encoding($name) == 'ASCII') {
+            $speaker = Speaker::select('speakers.*')
+                ->where('speakers.english_name', 'like', $name)
+                ->get();
+
+        } else if (mb_detect_encoding($name) == 'UTF-8') {
+            $speaker = Speaker::select('speakers.*')
+                ->where('speakers.greek_name', 'like', $name)
+                ->get();
+        }
+        dd($speaker);
+        // Return the collection of Speeches as a resource
+        if (isset($speaker) && !empty($speaker)) {
+            return SpeakerResource::collection($speaker);
+        }
+    }
 }

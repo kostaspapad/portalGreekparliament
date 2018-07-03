@@ -12,6 +12,8 @@ class Party extends Model
     // Do not use timestamp data fields in database
     public $timestamps = false;
 
+    protected $primaryKey = 'party_id';
+    
     protected $fillable = [
         "party_id",
         "fullname_el",

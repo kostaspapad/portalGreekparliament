@@ -74,7 +74,7 @@ Route::get('parties', 'Api\PartiesController@index');
 | Controller:     API\PartiesController@getPartyById
 | Method:         GET
 */
-Route::get('Api/party/{id}', 'Api\PartiesController@getPartyById');
+Route::get('party/{id}', 'Api\PartiesController@getPartyById');
 
 /*
 |-------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ Route::get('Api/party/{id}', 'Api\PartiesController@getPartyById');
 | Controller:     API\PartiesController@getPartyByName
 | Method:         GET
 */
-Route::get('Api/party/{name}', 'Api\PartiesController@getPartyByName');
+Route::get('party/{name}', 'Api\PartiesController@getPartyByName');
 
 /*
 |-------------------------------------------------------------------------------
@@ -116,6 +116,7 @@ Route::get('speeches', 'Api\SpeechesController@index');
 | Get a single speech by id
 |-------------------------------------------------------------------------------
 | URL:            /api/speech/{id}
+| Sample:         http://localhost:8000/api/speech/200510131000
 | Controller:     API\SpeechesController@getSpeechById
 | Method:         GET
 */
@@ -164,6 +165,19 @@ Route::get('speeches/speaker/name/{speaker_name}', 'Api\SpeechesController@speec
 
 /*
 |-------------------------------------------------------------------------------
+| Get speeches of a speaker by name
+|-------------------------------------------------------------------------------
+| URL:            /api/speeches/party/{speaker_id}
+| Sample:         http://localhost:8000/api/speeches/party/syriza
+| Controller:     API\SpeechesController@speechBySpeakerName
+| Method:         GET
+| Description:    Gets all of the speeches of a speaker specified by greek_name
+|                 or english_name
+*/
+Route::get('speeches/party/{speaker_id}', 'Api\SpeechesController@speechesByPartyName');
+
+/*
+|-------------------------------------------------------------------------------
 |
 | Speakers API endpoints
 |
@@ -196,6 +210,15 @@ Route::get('speaker/{speaker_id}', 'Api\SpeakersController@getSpeakerById');
 */
 Route::get('speaker/name/{name}', 'Api\SpeakersController@getSpeakerByName');
 
+/*
+|-------------------------------------------------------------------------------
+| Search for speaker by name
+|-------------------------------------------------------------------------------
+| URL:            /api/speakers/search/{name}
+| Controller:     API\SpeechesController@searchSpeakerByName
+| Method:         POST
+*/
+Route::post('speakers/search', 'Api\SpeakersController@searchSpeakerByName');
 
 /*
 |-------------------------------------------------------------------------------

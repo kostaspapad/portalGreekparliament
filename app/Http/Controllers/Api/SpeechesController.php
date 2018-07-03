@@ -60,7 +60,7 @@ class SpeechesController extends Controller
     public function getSpeechById($id)
     {
         $speech = Speech::findorfail($id);
-        
+            
         if (isset($speech) && !empty($speech)) {
             return new SpeechResource($speech);
         }
@@ -101,18 +101,42 @@ class SpeechesController extends Controller
         if (mb_detect_encoding($speaker_name) == 'ASCII') {
             $speeches = Speech::select('speeches.*')
                 ->join('speakers', 'speeches.speaker_id', '=', 'speakers.speaker_id')
-                // ->select('speeches.*', 'contacts.phone', 'orders.price')
                 ->where('speakers.english_name', '=', $speaker_name)
                 ->get();
 
         } else if (mb_detect_encoding($speaker_name) == 'UTF-8') {
             $speeches = Speech::select('speeches.*')
                 ->join('speakers', 'speeches.speaker_id', '=', 'speakers.speaker_id')
-                // ->select('speeches.*', 'contacts.phone', 'orders.price')
                 ->where('speakers.greek_name', '=', $speaker_name)
                 ->get();
         }
 
+        // Return the collection of Speeches as a resource
+        if (isset($speeches) && !empty($speeches)) {
+            return  SpeechResource::collection($speeches);
+        }
+    }
+
+    /**
+     * Get speeches of a party specified by name
+     * 
+     * Use this path for getting data using the english name
+     * and the greek name of the party
+     * 
+     * @param  str  $party_id
+     * @return \Illuminate\Http\Response
+     */
+    public function speechesByPartyName($party_id)
+    {
+        // ASCII = english name
+        // UTF-8 = greek name
+        die;
+        $speeches = Speech::select('speeches.*')
+            ->join('memberships', 'speeches.speaker_id', '=', 'memberships.person_id')
+            ->where('memberships.on_behalf_of_id', '=', $party_id)
+            ->get();
+        
+        // DEN DOULEVEI! MEMORY ERROR!!
         // Return the collection of Speeches as a resource
         if (isset($speeches) && !empty($speeches)) {
             return  SpeechResource::collection($speeches);
