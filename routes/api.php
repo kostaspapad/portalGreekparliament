@@ -165,6 +165,18 @@ Route::group(['prefix' => 'v1'], function () {
 
     /*
     |-------------------------------------------------------------------------------
+    | Get speeches of a conference by conference date
+    |-------------------------------------------------------------------------------
+    | URL:            /api/speeches/conference/{date}
+    | Sample:         http://localhost:8000/api/v1/speeches/conference/2010-05-28
+    | Controller:     api\v1\SpeechesController@speechesByConferenceDate
+    | Method:         GET
+    | Description:    Gets all of the speeches of a conference specified by date
+    */
+    Route::get('speeches/conference/{date}', 'Api\v1\SpeechesController@speechesByConferenceDate');
+
+    /*
+    |-------------------------------------------------------------------------------
     |
     | Speakers API endpoints
     |

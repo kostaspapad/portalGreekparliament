@@ -53,5 +53,16 @@ class SpeechesApiTest extends TestCase
         // na kanw ton elenxo gia keno kai gia invalid
         echo $endpoint . ': OK' . PHP_EOL;
     }
+
+    public function testSpeechesByConferenceDate()
+    {
+        $endpoint = $this->api_version . '/speeches/conference/2010-05-28';
+
+        $response = $this->json('GET', $endpoint);
+        $response->assertSee('speech_id');
+
+        // na kanw ton elenxo gia keno kai gia invalid
+        echo $endpoint . ': OK' . PHP_EOL;
+    }
 }
 
