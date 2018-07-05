@@ -7,6 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Conference;
 use App\Http\Resources\Conference as ConferenceResource;
 
+/**
+ * @SWG\Swagger(
+ *   basePath="/api/v1",
+ *   @SWG\Info(
+ *     title="Core API",
+ *     version="1.0.0"
+ *   )
+ * )
+ */
 class ConferencesController extends Controller
 {
     /**
@@ -93,30 +102,37 @@ class ConferencesController extends Controller
     // }
 
     /**
-     * Display a conference data specified by date range.
-     *
-     * Example: 
-     * 
-     * @param  str  $conference_date
-     * @return \Illuminate\Http\Response
-     */
-    public function getConferenceByDateRange(Request $request)
+    * @OA\Get(
+    *   path="/api/v1/conference/from/{start}/to/{end}",
+    *   summary="list products",
+    *   @OA\Response(
+    *     response=200,
+    *     description="A list with products"
+    *   ),
+    *   @OA\Response(
+    *     response="default",
+    *     description="an ""unexpected"" error"
+    *   )
+    * )
+    */
+    public function getConferenceByDateRange($start, $end)
     {
-        $start = $request->input('start');
-        $end = $request->input('end');
-        
-        if (isset($start) && isset($end)) {
-            $start = date($start);
-            $end = date($end);
+        // Check if string for safety
+        if (is_string($start) && is_string($end)) {
+            if (isset($start) && isset($end)) {
+                // Convert str to date obj
+                $start = date($start);
+                $end = date($end);
+                
+                // Check if valid range
+                if ($start <= $end) {
+                    $conferences = Conference::whereBetween('conference_date', [$start, $end])->get();
+                }
+            }
 
-            $conferences = Conference::whereBetween('conference_date', [$start, $end])
-                                // ->orWhereBetween('reservation_to', [$start_date, $end_date])
-                                // ->whereNotBetween('reservation_to', [$from3, $to3]);
-                                ->get();
-        }
-
-        if (isset($conferences) && !empty($conferences)) {
-            return ConferenceResource::collection($conferences);
+            if (isset($conferences) && !empty($conferences)) {
+                return ConferenceResource::collection($conferences);
+            }
         }
     }
 }

@@ -142,7 +142,7 @@ Route::group(['prefix' => 'v1'], function () {
     | Get speeches of a speaker by name
     |-------------------------------------------------------------------------------
     | URL:            /api/speeches/speaker/name/{speaker_name}
-    | Sample:         http/v1://localhost:8000/api/speeches/speaker/name/Τσούκαλης Σπυρίδωνος Νικόλαος
+    | Sample:         http://localhost:8000/api/speeches/speaker/name/Τσούκαλης Σπυρίδωνος Νικόλαος
     | Controller:     api\v1\SpeechesController@speechBySpeakerName
     | Method:         GET
     | Description:    Gets all of the speeches of a speaker specified by greek_name
@@ -155,7 +155,7 @@ Route::group(['prefix' => 'v1'], function () {
     | Get speeches of a party by party id
     |-------------------------------------------------------------------------------
     | URL:            /api/speeches/party/{speaker_id}
-    | Sample:         http/v1://localhost:8000/api/speeches/party/syriza
+    | Sample:         http://localhost:8000/api/speeches/party/syriza
     | Controller:     api\v1\SpeechesController@speechBySpeakerName
     | Method:         GET
     | Description:    Gets all of the speeches of a speaker specified by greek_name
@@ -202,10 +202,11 @@ Route::group(['prefix' => 'v1'], function () {
     | Search for speaker by name
     |-------------------------------------------------------------------------------
     | URL:            /api/v1/speakers/search/{name}
+    | Sample:         localhost:8000/api/v1/speakers/search/Αλέξης
     | Controller:     api\v1\SpeechesController@searchSpeakerByName
-    | Method:         POST
+    | Method:         GET
     */
-    Route::post('speakers/search', 'Api\v1\SpeakersController@searchSpeakerByName');
+    Route::get('speakers/search/{name}', 'Api\v1\SpeakersController@searchSpeakerByName');
 
     /*
     |-------------------------------------------------------------------------------
@@ -265,12 +266,12 @@ Route::group(['prefix' => 'v1'], function () {
     |-------------------------------------------------------------------------------
     | Get conferences by date rage
     |-------------------------------------------------------------------------------
-    | URL:            /api/v1/conference/start/{date}/end/{date}
-    | Sample          /api/v1/conference/start/1989-07-03/end/1989-07-27
+    | URL:            /api/v1/conference/start/{start}/end/{end}
+    | Sample          http://localhost:8000/api/v1/conference/from/1989-07-03/to/1989-07-27
     | Controller:     api\v1\ConferencesController@getConferenceByDateRange
     | Method:         GET
     */
-    Route::post('conference/range', 'Api\v1\ConferencesController@getConferenceByDateRange');
+    Route::get('conference/from/{start}/to/{end}', 'Api\v1\ConferencesController@getConferenceByDateRange');
 
     /*
     |-------------------------------------------------------------------------------

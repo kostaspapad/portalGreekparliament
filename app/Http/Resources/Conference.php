@@ -25,8 +25,8 @@ class Conference extends JsonResource
             'date_of_crawl' => $this->date_of_crawl,
             'pdf_loc' => $this->pdf_loc,
             'pdf_name' => $this->pdf_name,
-            'time_period' => $this->time_period,
-            'downloaded' => $this->downloaded
+            'time_period' => $this->time_period
+            // 'downloaded' => $this->downloaded
         ];
     }
 
