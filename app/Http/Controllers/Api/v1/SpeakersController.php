@@ -62,12 +62,12 @@ class SpeakersController extends Controller
         if (mb_detect_encoding($name) == 'ASCII') {
             $speaker = Speaker::select('speakers.*')
                 ->where('speakers.english_name', 'like', $name)
-                ->get();
+                ->paginate(50);
 
         } else if (mb_detect_encoding($name) == 'UTF-8') {
             $speaker = Speaker::select('speakers.*')
                 ->where('speakers.greek_name', 'like', $name)
-                ->get();
+                ->paginate(50);
         }
         
         // Return the collection of Speeches as a resource

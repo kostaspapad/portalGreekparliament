@@ -10,6 +10,11 @@ class SpeakersController extends Controller
 
     public $id = null;
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *

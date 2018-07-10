@@ -49,5 +49,8 @@ Vue.component('datepicker', datepicker);
 // });
 
 const app = new Vue({
-    el: '#app'
+    el: '#main_app',
+    data: {
+        host: process.env.NODE_ENV == 'production' ? 'http://95.85.38.123' : 'http://127.0.0.1'
+    }
 })

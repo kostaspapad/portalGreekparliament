@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
-    <p>Speakers</p>
-    
+@section('content')    
     {{-- {{json_encode($speakers)}} --}}
     {{-- @foreach($speakers as $data)
         {{$data->email}}

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <p>Speaker</p>
-    {{$speaker}}
-    <speaker speaker={{json_encode($speaker)}} path={{url('/img')}}></speaker>
+    {{-- {{$name}}
+    {{urlencode($name)}} --}}
+    <speaker name={{urlencode($name)}} path={{url('/img')}}></speaker>
 @endsection

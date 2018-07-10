@@ -74,7 +74,7 @@ class SpeechesController extends Controller
      */
     public function speechesBySpeakerId($speaker_id)
     {
-        $speeches = Speech::select('speeches.*')
+        $speeches = Speech::select('*')
             ->join('speakers', 'speeches.speaker_id', '=', 'speakers.speaker_id')
             ->where('speakers.speaker_id', '=', $speaker_id)
             ->get();

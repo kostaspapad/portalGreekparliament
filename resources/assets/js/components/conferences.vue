@@ -65,8 +65,6 @@
                 <div class=""  v-for="detail in details" :key="detail.id" style="margin: 15px 0 15px 0;">
                     <div class="rounded shadow-sm" style="border: 1px solid red">
                         <!-- <span class="show-details-dates">{{detail[0].Date}}</span> -->
-                        <h1>HELLO SPIRO</h1>
-                        {{detail}}
                         <span class="show-details-dates">{{detail.conference_date}}</span>
                         <div>{{detail.id}}</div>
                         <!-- <div v-for="info in detail" :key="info"> -->
@@ -198,7 +196,7 @@
                 //         dates: myJsonString
                 //     }
                 // })
-                axios.get('http://95.85.38.123/api/conferences' ,{
+                axios.get('http://portal.test/api/conferences' ,{
                     params: {
                         dates: dates
                     }
@@ -285,7 +283,7 @@
                     var newDate = moment(date).format('YYYY-MM-DD');
                     for(var data in self.conferencesData){
                         //console.log(newDate + " " +  self.conferencesData[data]['Date']);
-                        if(self.conferencesData[data]['Date'] != newDate){
+                        if(self.conferencesData[data]['conference_date'] != newDate){
                             return true;
                         }else{
                             return false;

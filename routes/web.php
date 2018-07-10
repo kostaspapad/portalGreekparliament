@@ -11,20 +11,14 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('pages.welcome');
-// });
-
-// Route::get('/about', function () {
-//     return view('pages.about');
-// });
-
 //With controller
-Route::get('/', 'PagesController@index');
+Route::get('/', 'PagesController@index')->name('start');
 
 Route::get('/about', 'PagesController@about');
 
 Route::get('/speeches', 'PagesController@speeches');
+
+Route::get('/speaker/{name}', 'PagesController@speaker');
 
 // Route::get('/speakers', 'SpeakersController@show');
 // Route::get('/speakers/{id}', 'SpeakersController@show');
@@ -32,4 +26,4 @@ Route::resource('speakers','SpeakersController');
 Route::resource('conferences', 'ConferencesController');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index');

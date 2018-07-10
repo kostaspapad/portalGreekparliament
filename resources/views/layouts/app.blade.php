@@ -88,7 +88,29 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-
+                            {{-- <li class="nav-item">
+                                <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">About</a>
+                            </li> --}}
+                            @if(!Auth::guest())
+                                {{-- <li class="nav-item">
+                                    <a class="nav-link {{ Request::path() === '/home' ? 'active' : null }}" href="/home">Home</a>
+                                </li> --}}
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">Conferences</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::path() === 'political-parties' ? 'active' : null }}" href="/political-parties">Political Parties</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">Speakers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::path() === 'speeches' ? 'active' : null }}" href="/speeches">Speeches</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">About</a>
+                                </li>
+                            @endif
                         </ul>
 
                         <!-- Right Side Of Navbar -->
@@ -102,40 +124,19 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @else
-                                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                                    <ul class="navbar-nav">
-                                        <li class="nav-item">
-                                            <a class="nav-link {{ Request::path() === '/' ? 'active' : null }}" href="/">Home</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">Conferences</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link {{ Request::path() === 'political-parties' ? 'active' : null }}" href="/political-parties">Political Parties</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">Speakers</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link {{ Request::path() === 'speeches' ? 'active' : null }}" href="/speeches">Speeches</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">About</a>
-                                        </li>
-                                    </ul>
-                                </div>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
-
+                                        
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
@@ -146,7 +147,7 @@
                     </div>
                 </div>
             </nav>
-            <div class="content" id="app">
+            <div class="content" id="main_app">
                 {{-- <navbar></navbar> --}}
                 @yield('content')
                 {{-- <router-view></router-view> --}}

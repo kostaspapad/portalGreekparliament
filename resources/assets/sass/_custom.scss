@@ -4,24 +4,38 @@
 .active{
     background-color: rgba(0, 123, 255, 0.25);
 }
+.tab-pane.active{
+    background-color: white;
+}
 .mytable-info{
     background-color: rgba(0, 123, 255, 0.25);
 }
 .mytable-info:hover{
     background-color: rgb(233, 236, 239)!important;
 }
+.row{
+    margin-left: -4px!important;
+}
 .card{
     // flex-direction: row!important;
 }
-.card-img-top{
+.card-img-top-bg{
     background-color: rgb(186, 218, 251);
+    height: 100px;
 }
 .img-style{
     max-width: 100px!important;
-    padding: 5px;
+    height: 100%!important;
+    border-radius: 50px;
+}
+.img-body img{
+    height: auto!important;
 }
 .iconsFont{
     font-size: 30px;
+}
+.iconsColor{
+    color:#17a2b8;
 }
 .addSpace{
     margin-top: 10px;

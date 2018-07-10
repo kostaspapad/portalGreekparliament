@@ -7,6 +7,10 @@ use Illuminate\Routing\Route;
 
 class PagesController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth')->except(['index','about']);
+    }
+
     public function index(Route $route){
         // $current_route = $route->uri();
         // echo "route = $current_route";
@@ -30,5 +34,9 @@ class PagesController extends Controller
         // $current_route = $route->uri();
         // echo "route = $current_route";
         return view('pages.speakers');
+    }
+
+    public function speaker($name,Route $route){
+        return view('pages.speaker')->with('name',$name);
     }
 }

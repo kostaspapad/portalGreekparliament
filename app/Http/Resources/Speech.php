@@ -23,7 +23,16 @@ class Speech extends JsonResource
             'f_name' => $this->f_name,
             // 'created_at' => $this->created_at,
             // 'updated_at' => $this->updated_at,
-            'md5' => $this->md5
+            'md5' => $this->md5,
+            'speaker_id' => $this->speaker_id,
+            'english_name' => $this->english_name,
+            'greek_name' => $this->greek_name,
+            'image' => $this->image,
+            'email' => $this->email,
+            'wiki_el' => $this->wiki_el,
+            'wiki_en' => $this->wiki_en,
+            'twitter' => $this->twitter,
+            'website' => $this->website
         ];
     }
 
