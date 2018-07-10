@@ -1,0 +1,683 @@
+[
+    {
+        "classification": "general election",
+        "end_date": "1902-11-17",
+        "id": "Q5602009",
+        "identifiers": [
+            {
+                "identifier": "Q5602009",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1902",
+        "start_date": "1902-11-17"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1905-02-20",
+        "id": "Q11231020",
+        "identifiers": [
+            {
+                "identifier": "Q11231020",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1905",
+        "start_date": "1905-02-20"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1906-03-26",
+        "id": "Q5602011",
+        "identifiers": [
+            {
+                "identifier": "Q5602011",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1906",
+        "start_date": "1906-03-26"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1910-08-08",
+        "id": "Q5602014",
+        "identifiers": [
+            {
+                "identifier": "Q5602014",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, August 1910",
+        "start_date": "1910-08-08"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1910-11-28",
+        "id": "Q5602018",
+        "identifiers": [
+            {
+                "identifier": "Q5602018",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, November 1910",
+        "start_date": "1910-11-28"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1912-03-11",
+        "id": "Q5602012",
+        "identifiers": [
+            {
+                "identifier": "Q5602012",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1912",
+        "start_date": "1912-03-11"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1915-05",
+        "id": "Q3556138",
+        "identifiers": [
+            {
+                "identifier": "Q3556138",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, May 1915",
+        "start_date": "1915-05"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1915-12-06",
+        "id": "Q3558599",
+        "identifiers": [
+            {
+                "identifier": "Q3558599",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, December 1915",
+        "start_date": "1915-12-06"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1920-11-01",
+        "id": "Q3565898",
+        "identifiers": [
+            {
+                "identifier": "Q3565898",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1920",
+        "start_date": "1920-11-01"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1923-12-16",
+        "id": "Q3066853",
+        "identifiers": [
+            {
+                "identifier": "Q3066853",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1923",
+        "start_date": "1923-12-16"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1926-11-07",
+        "id": "Q3565890",
+        "identifiers": [
+            {
+                "identifier": "Q3565890",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1926",
+        "start_date": "1926-11-07"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1928-08-19",
+        "id": "Q3565880",
+        "identifiers": [
+            {
+                "identifier": "Q3565880",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1928",
+        "start_date": "1928-08-19"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1932-09-25",
+        "id": "Q3566016",
+        "identifiers": [
+            {
+                "identifier": "Q3566016",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1932",
+        "start_date": "1932-09-25"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1933-03-05",
+        "id": "Q3565961",
+        "identifiers": [
+            {
+                "identifier": "Q3565961",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1933",
+        "start_date": "1933-03-05"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1935-06-09",
+        "id": "Q3565993",
+        "identifiers": [
+            {
+                "identifier": "Q3565993",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1935",
+        "start_date": "1935-06-09"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1936-01-26",
+        "id": "Q3565999",
+        "identifiers": [
+            {
+                "identifier": "Q3565999",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1936",
+        "start_date": "1936-01-26"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1946-03-31",
+        "id": "Q822042",
+        "identifiers": [
+            {
+                "identifier": "Q822042",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1946",
+        "start_date": "1946-03-31"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1950-03-05",
+        "id": "Q3565869",
+        "identifiers": [
+            {
+                "identifier": "Q3565869",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1950",
+        "start_date": "1950-03-05"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1951-09-09",
+        "id": "Q3565972",
+        "identifiers": [
+            {
+                "identifier": "Q3565972",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1951",
+        "start_date": "1951-09-09"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1952-11-16",
+        "id": "Q3565983",
+        "identifiers": [
+            {
+                "identifier": "Q3565983",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1952",
+        "start_date": "1952-11-16"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1956-02-19",
+        "id": "Q3566005",
+        "identifiers": [
+            {
+                "identifier": "Q3566005",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1956",
+        "start_date": "1956-02-19"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1958-05-11",
+        "id": "Q3566010",
+        "identifiers": [
+            {
+                "identifier": "Q3566010",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1958",
+        "start_date": "1958-05-11"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1961-10-29",
+        "id": "Q3565939",
+        "identifiers": [
+            {
+                "identifier": "Q3565939",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1961",
+        "start_date": "1961-10-29"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1963-11-03",
+        "id": "Q287400",
+        "identifiers": [
+            {
+                "identifier": "Q287400",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1963",
+        "start_date": "1963-11-03"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1964-02-16",
+        "id": "Q822037",
+        "identifiers": [
+            {
+                "identifier": "Q822037",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1964",
+        "start_date": "1964-02-16"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1974-11-17",
+        "id": "Q1510840",
+        "identifiers": [
+            {
+                "identifier": "Q1510840",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election 1974",
+        "start_date": "1974-11-17"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "1977-10-22",
+        "id": "term/1",
+        "name": "1st Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "1974-11-17"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1977-11-20",
+        "id": "Q1337928",
+        "identifiers": [
+            {
+                "identifier": "Q1337928",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1977",
+        "start_date": "1977-11-20"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "1981-09-19",
+        "id": "term/2",
+        "name": "2nd Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "1977-11-20"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1981-10-18",
+        "id": "Q1337898",
+        "identifiers": [
+            {
+                "identifier": "Q1337898",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1981",
+        "start_date": "1981-10-18"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "1985-05-07",
+        "id": "term/3",
+        "name": "3nd Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "1981-10-18"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "1989-06-02",
+        "id": "term/4",
+        "name": "4th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "1985-06-02"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1985-06-03",
+        "id": "Q1338854",
+        "identifiers": [
+            {
+                "identifier": "Q1338854",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1985",
+        "start_date": "1985-06-03"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1989-06-18",
+        "id": "Q3566034",
+        "identifiers": [
+            {
+                "identifier": "Q3566034",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, June 1989",
+        "start_date": "1989-06-18"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "1989-10-12",
+        "id": "term/5",
+        "name": "5th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "1989-06-18"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1989-11-05",
+        "id": "Q3565862",
+        "identifiers": [
+            {
+                "identifier": "Q3565862",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, November 1989",
+        "start_date": "1989-11-05"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "1990-03-12",
+        "id": "term/6",
+        "name": "6th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "1989-11-05"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1990-04-08",
+        "id": "Q2532458",
+        "identifiers": [
+            {
+                "identifier": "Q2532458",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1990",
+        "start_date": "1990-04-08"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "1993-09-11",
+        "id": "term/7",
+        "name": "7th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "1990-04-08"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1993-10-10",
+        "id": "Q2052966",
+        "identifiers": [
+            {
+                "identifier": "Q2052966",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1993",
+        "start_date": "1993-10-10"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "1996-08-24",
+        "id": "term/8",
+        "name": "8th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "1993-10-10"
+    },
+    {
+        "classification": "general election",
+        "end_date": "1996-09-22",
+        "id": "Q737031",
+        "identifiers": [
+            {
+                "identifier": "Q737031",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 1996",
+        "start_date": "1996-09-22"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "2000-03-14",
+        "id": "term/9",
+        "name": "9th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "1996-09-22"
+    },
+    {
+        "classification": "general election",
+        "end_date": "2000-04-09",
+        "id": "Q1934584",
+        "identifiers": [
+            {
+                "identifier": "Q1934584",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 2000",
+        "start_date": "2000-04-09"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "2004-02-11",
+        "id": "term/10",
+        "name": "10th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "2000-04-09"
+    },
+    {
+        "classification": "general election",
+        "end_date": "2004-03-07",
+        "id": "Q1518129",
+        "identifiers": [
+            {
+                "identifier": "Q1518129",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 2004",
+        "start_date": "2004-03-07"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "2007-08-18",
+        "id": "term/11",
+        "name": "11th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "2004-03-07"
+    },
+    {
+        "classification": "general election",
+        "end_date": "2007-09-13",
+        "id": "Q1204824",
+        "identifiers": [
+            {
+                "identifier": "Q1204824",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 2007",
+        "start_date": "2007-09-13"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "2009-09-07",
+        "id": "term/12",
+        "name": "12th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "2007-09-16"
+    },
+    {
+        "classification": "general election",
+        "end_date": "2009-10-04",
+        "id": "Q863595",
+        "identifiers": [
+            {
+                "identifier": "Q863595",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, 2009",
+        "start_date": "2009-10-04"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "2012-04-11",
+        "id": "term/13",
+        "name": "13th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "2009-10-04"
+    },
+    {
+        "classification": "general election",
+        "end_date": "2012-05-06",
+        "id": "Q429958",
+        "identifiers": [
+            {
+                "identifier": "Q429958",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, May 2012",
+        "start_date": "2012-05-06"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "2012-05-19",
+        "id": "term/14",
+        "name": "14th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "2012-05-06"
+    },
+    {
+        "classification": "general election",
+        "end_date": "2012-06-17",
+        "id": "Q751553",
+        "identifiers": [
+            {
+                "identifier": "Q751553",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, June 2012",
+        "start_date": "2012-06-17"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "2014-12-31",
+        "id": "term/15",
+        "name": "15th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "2012-06-17"
+    },
+    {
+        "classification": "general election",
+        "end_date": "2015-01-25",
+        "id": "Q17091742",
+        "identifiers": [
+            {
+                "identifier": "Q17091742",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, January 2015",
+        "start_date": "2015-01-25"
+    },
+    {
+        "classification": "legislative period",
+        "end_date": "2015-08-28",
+        "id": "term/16",
+        "name": "16th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "2015-01-25"
+    },
+    {
+        "classification": "general election",
+        "end_date": "2015-09-20",
+        "id": "Q20853340",
+        "identifiers": [
+            {
+                "identifier": "Q20853340",
+                "scheme": "wikidata"
+            }
+        ],
+        "name": "Greek legislative election, September 2015",
+        "start_date": "2015-09-20"
+    },
+    {
+        "classification": "legislative period",
+        "id": "term/17",
+        "name": "17th Hellenic Parliament",
+        "organization_id": "022607c0-5226-487d-8057-862ae73442e6",
+        "start_date": "2015-09-20"
+    }
+]
