@@ -38,8 +38,7 @@ class ConferencesApiTest extends TestCase
                         "date_of_crawl",
                         "pdf_loc",
                         "pdf_name",
-                        "time_period",
-                        "downloaded"
+                        "time_period"
                     ]
                 ]);
         
@@ -64,8 +63,7 @@ class ConferencesApiTest extends TestCase
                         "date_of_crawl",
                         "pdf_loc",
                         "pdf_name",
-                        "time_period",
-                        "downloaded"
+                        "time_period"
                     ]
                 ]);
         
@@ -90,8 +88,7 @@ class ConferencesApiTest extends TestCase
     //                     "date_of_crawl",
     //                     "pdf_loc",
     //                     "pdf_name",
-    //                     "time_period",
-    //                     "downloaded"
+    //                     "time_period"
     //                 ]
     //             ]);
         
@@ -116,8 +113,7 @@ class ConferencesApiTest extends TestCase
     //                     "date_of_crawl",
     //                     "pdf_loc",
     //                     "pdf_name",
-    //                     "time_period",
-    //                     "downloaded"
+    //                     "time_period"
     //                 ]
     //             ]);
         
@@ -126,9 +122,9 @@ class ConferencesApiTest extends TestCase
     
     public function testGetConferenceByDateRange()
     {
-        $endpoint = $this->api_version . '/conference/range?start=1989-07-03&end=1989-07-27';
+        $endpoint = $this->api_version . '/conference/from/1989-07-03/to/1989-07-27';
         
-        $response = $this->json('POST', $endpoint);
+        $response = $this->json('GET', $endpoint);
         $response->assertSee('conference_date');
         
         echo $endpoint . ': OK' . PHP_EOL;

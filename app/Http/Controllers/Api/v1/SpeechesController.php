@@ -12,7 +12,7 @@ class SpeechesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Speech
      */
     public function index()
     {
@@ -29,7 +29,7 @@ class SpeechesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Speech
      */
     public function store(Request $request)
     {
@@ -55,7 +55,7 @@ class SpeechesController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Speech
      */
     public function getSpeechById($id)
     {
@@ -70,7 +70,7 @@ class SpeechesController extends Controller
      * Get speeches of a speaker specified by ID
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Speech
      */
     public function speechesBySpeakerId($speaker_id)
     {
@@ -92,7 +92,7 @@ class SpeechesController extends Controller
      * and the greek name of the speaker
      * 
      * @param  str  $speaker_name
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Speech
      */
     public function speechesBySpeakerName($speaker_name)
     {
@@ -124,22 +124,44 @@ class SpeechesController extends Controller
      * and the greek name of the party
      * 
      * @param  str  $party_id
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Speech
      */
     public function speechesByPartyName($party_id)
     {
         // ASCII = english name
         // UTF-8 = greek name
         die;
-        $speeches = Speech::select('speeches.*')
-            ->join('memberships', 'speeches.speaker_id', '=', 'memberships.person_id')
-            ->where('memberships.on_behalf_of_id', '=', $party_id)
-            ->get();
+        // $speeches = Speech::select('speeches.*')
+        //     ->join('memberships', 'speeches.speaker_id', '=', 'memberships.person_id')
+        //     ->where('memberships.on_behalf_of_id', '=', $party_id)
+        //     ->get();
         
-        // DEN DOULEVEI! MEMORY ERROR!!
-        // Return the collection of Speeches as a resource
-        if (isset($speeches) && !empty($speeches)) {
-            return  SpeechResource::collection($speeches);
+        // // DEN DOULEVEI! MEMORY ERROR!!
+        // // Return the collection of Speeches as a resource
+        // if (isset($speeches) && !empty($speeches)) {
+        //     return  SpeechResource::collection($speeches);
+        // }
+    }
+
+    /**
+     * Get all speeches of a conference specified by date
+     *
+     * @param  str  $date
+     * @return App\Http\Resources\Speech
+     */
+    public function speechesByConferenceDate($date)
+    {
+        if (isset($date) && is_string($date))
+        {
+            $date = date($date);
+            $speeches = Speech::select('speeches.*')
+                ->join('conferences', 'conferences.conference_date', '=', 'speeches.speech_conference_date')
+                ->where('conferences.conference_date', '=', $date)
+                ->paginate(25);
+                
+            if (isset($speeches) && !empty($speeches)) {
+                return SpeechResource::collection($speeches);
+            }
         }
     }
 
@@ -147,7 +169,7 @@ class SpeechesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return App\Http\Resources\Speech
      */
     public function destroy($id)
     {

@@ -54,9 +54,7 @@ class SpeakersController extends Controller
         }
     }
     
-    public function searchSpeakerByName(Request $request){
-        
-        $name = $request->input('name');
+    public function searchSpeakerByName($name){
         $name = '%'.$name.'%';
 
         if (mb_detect_encoding($name) == 'ASCII') {
