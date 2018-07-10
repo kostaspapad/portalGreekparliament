@@ -241,12 +241,7 @@
             },
             findSpeaker(){
                 var self = this;
-                    axios.get(self.$parent.host+'/api/v1/speakers/search'
-                ,{
-                    params: {
-                        name: self.search_msg
-                    }
-                })
+                axios.get(self.$parent.host+'/api/v1/speakers/search/'+self.search_msg)
                 .then(function(response){
                     console.log(response);
                     if(response.status == 200 && response.data.data.length > 0){

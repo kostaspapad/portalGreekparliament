@@ -205,7 +205,7 @@ Route::group(['prefix' => 'v1'], function () {
     | Controller:     api\v1\SpeechesController@searchSpeakerByName
     | Method:         POST
     */
-    Route::get('speakers/search', 'Api\v1\SpeakersController@searchSpeakerByName');
+    Route::get('speakers/search/{name}', 'Api\v1\SpeakersController@searchSpeakerByName');
 
     /*
     |-------------------------------------------------------------------------------
