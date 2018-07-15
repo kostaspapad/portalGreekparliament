@@ -39,9 +39,10 @@ class MembershipsTableSeeder extends Seeder
 
             // End date does not exist
             else if(isset($obj->start_date) && !isset($obj->end_date)){
+            // if(isset($obj->start_date) && !isset($obj->end_date)){
                 $obj->end_date = NULL;
                 // When end date does not exist get end date from json events file
-                // join event id with legislative_period_id and if exist get en date
+                // join event id with legislative_period_id and if exist get the date
                 // If the legislative period has not ended end_date = null
                 foreach($events as $ev){
                     if($ev->classification == "legislative period" && $ev->id == $obj->legislative_period_id){
@@ -50,7 +51,7 @@ class MembershipsTableSeeder extends Seeder
                         }
                     }
                 }
-                
+
                 Membership::create(array(
                     'area_id' => $obj->area_id,
                     'legislative_period_id' => $obj->legislative_period_id,
@@ -65,7 +66,7 @@ class MembershipsTableSeeder extends Seeder
 
             // Start date does not exist
             else if(!isset($obj->start_date) && isset($obj->end_date)){
-                $obj->end_date = NULL;
+                $obj->start_date = NULL;
                 // When end date does not exist get end date from json events file
                 // join event id with legislative_period_id and if exist get en date
                 // If the legislative period has not ended end_date = null
@@ -88,18 +89,17 @@ class MembershipsTableSeeder extends Seeder
                     'end_date' => $obj->end_date
                 ));
             }
-
+//2012-06-17
             // Start date and End date does not exist
             // Get start date and end date from legislative period
             else if(!isset($obj->start_date) && !isset($obj->end_date)){
                 $obj->start_date = NULL;
                 $obj->end_date = NULL;
+
                 foreach($events as $ev){
                     if($ev->classification == "legislative period" && $ev->id == $obj->legislative_period_id){
-                        if(isset($ev->start_date)){
+                        if(isset($ev->start_date) && isset($ev->end_date)){
                             $obj->start_date = $ev->start_date;
-                        }
-                        if(isset($ev->end_date)){
                             $obj->end_date = $ev->end_date;
                         }
                     }
