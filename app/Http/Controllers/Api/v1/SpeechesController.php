@@ -116,7 +116,7 @@ class SpeechesController extends Controller
             return  SpeechResource::collection($speeches);
         }
     }
-
+    
     /**
      * Get speeches of a party specified by name
      * 
