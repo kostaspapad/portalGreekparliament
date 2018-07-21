@@ -33,7 +33,7 @@
                             <td><a :href="ajaxData.speakerData.twitter">twitter</a></td>
                         </tr>
                     </tbody>
-                </table> -->
+                </table> --> 
                 <div v-if="ajaxData.speakerData">
                     <div>
                         {{ajaxData.speakerData.greek_name}} 
