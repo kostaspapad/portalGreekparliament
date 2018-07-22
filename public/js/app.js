@@ -41673,12 +41673,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_navbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_navbar_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_speakers_vue__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_speakers_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_speakers_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_speaker_vue__ = __webpack_require__(184);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_speaker_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_speaker_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_conferences_vue__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_conferences_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_conferences_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_modal_vue__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_modal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_parties_vue__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_parties_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_parties_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_speaker_vue__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_speaker_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_speaker_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_conferences_vue__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_conferences_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_conferences_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_modal_vue__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_modal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_modal_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -41706,6 +41708,7 @@ __webpack_require__(143);
 
 
 
+
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_7_vue_js_toggle_button___default.a);
 
@@ -41713,10 +41716,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_7_vue_
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('pagination', __WEBPACK_IMPORTED_MODULE_3_laravel_vue_pagination___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('example-component', __WEBPACK_IMPORTED_MODULE_8__components_ExampleComponent_vue___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('navbar', __WEBPACK_IMPORTED_MODULE_9__components_navbar_vue___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('parties', __WEBPACK_IMPORTED_MODULE_11__components_parties_vue___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('speakers', __WEBPACK_IMPORTED_MODULE_10__components_speakers_vue___default.a);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('speaker', __WEBPACK_IMPORTED_MODULE_11__components_speaker_vue___default.a);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('conferences', __WEBPACK_IMPORTED_MODULE_12__components_conferences_vue___default.a);
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('modal', __WEBPACK_IMPORTED_MODULE_13__components_modal_vue___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('speaker', __WEBPACK_IMPORTED_MODULE_12__components_speaker_vue___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('conferences', __WEBPACK_IMPORTED_MODULE_13__components_conferences_vue___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('modal', __WEBPACK_IMPORTED_MODULE_14__components_modal_vue___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('multiselect', __WEBPACK_IMPORTED_MODULE_4_vue_multiselect___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('datepicker', __WEBPACK_IMPORTED_MODULE_5_vuejs_datepicker__["a" /* default */]);
 
@@ -69340,14 +69344,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -69372,17 +69368,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card card-default" }, [
-            _c("div", { staticClass: "card-header" }, [_vm._v("12312321")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example Deku.\n                "
-              )
-            ])
-          ])
-        ])
+        _c("img", { attrs: { src: "/img/greek-parliament.jpg" } })
       ])
     ])
   }
@@ -71269,6 +71255,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -71363,7 +71370,7 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _vm.ajaxData
       ? _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 col-sm-3 col-md-3 col-lg-3 mt-2" }, [
+          _c("div", { staticClass: "col-12 col-sm-4 col-md-4 col-lg-3 mt-2" }, [
             _c("img", {
               staticClass: "img-fluid",
               staticStyle: { width: "50%" },
@@ -71371,12 +71378,61 @@ var render = function() {
                 src: _vm.path + "/" + _vm.ajaxData.speakerData.image,
                 alt: ""
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.ajaxData.speakerData
+              ? _c("div", [
+                  _c("div", [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.ajaxData.speakerData.greek_name) +
+                        " \n                    "
+                    ),
+                    _vm.ajaxData.speakerData.greek_name != "" &&
+                    _vm.ajaxData.speakerData.english_name != ""
+                      ? _c("span", [_vm._v("/")])
+                      : _vm._e(),
+                    _vm._v(
+                      " \n                    " +
+                        _vm._s(_vm.ajaxData.speakerData.english_name) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("span", [_vm._v(_vm._s(_vm.ajaxData.speakerData.email))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "a",
+                      { attrs: { href: _vm.ajaxData.speakerData.wiki_el } },
+                      [_vm._v("wiki_el")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "a",
+                      { attrs: { href: _vm.ajaxData.speakerData.wiki_en } },
+                      [_vm._v("wiki_en")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "a",
+                      { attrs: { href: _vm.ajaxData.speakerData.twitter } },
+                      [_vm._v("Twitter")]
+                    )
+                  ])
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "col-12 col-sm-9 col-md-9 col-lg-9 mt-2 p-0" },
+            { staticClass: "col-12 col-sm-8 col-md-8 col-lg-9 mt-2 p-0" },
             [
               _c("nav", [
                 _c(
@@ -71391,20 +71447,20 @@ var render = function() {
                       {
                         staticClass: "nav-item nav-link active",
                         attrs: {
-                          id: "nav-information-tab",
+                          id: "nav-speeches-tab",
                           "data-toggle": "tab",
-                          href: "#nav-information",
+                          href: "#nav-speeches",
                           role: "tab",
-                          "aria-controls": "nav-information",
+                          "aria-controls": "nav-speeches",
                           "aria-selected": "true"
                         },
                         on: {
                           click: function($event) {
-                            _vm.currentTab = "Information"
+                            _vm.currentTab = "Speeches"
                           }
                         }
                       },
-                      [_vm._v("Information")]
+                      [_vm._v("Speeches")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -71426,27 +71482,6 @@ var render = function() {
                         }
                       },
                       [_vm._v("Membership")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-item nav-link",
-                        attrs: {
-                          id: "nav-speeches-tab",
-                          "data-toggle": "tab",
-                          href: "#nav-speeches",
-                          role: "tab",
-                          "aria-controls": "nav-speeches",
-                          "aria-selected": "false"
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.currentTab = "Speeches"
-                          }
-                        }
-                      },
-                      [_vm._v("Speeches")]
                     )
                   ]
                 )
@@ -71459,134 +71494,8 @@ var render = function() {
                   _c(
                     "div",
                     {
-                      staticClass: "tab-pane fade show active",
-                      attrs: {
-                        id: "nav-information",
-                        role: "tabpanel",
-                        "aria-labelledby": "nav-information-tab"
-                      }
-                    },
-                    [
-                      _vm.ajaxData.speakerData
-                        ? _c(
-                            "table",
-                            { staticClass: "table mt-2 speaker-info" },
-                            [
-                              _c("thead"),
-                              _vm._v(" "),
-                              _c("tbody", [
-                                _c("tr", [
-                                  _c("td", [_vm._v("Email")]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _vm._v(
-                                      _vm._s(_vm.ajaxData.speakerData.email)
-                                    )
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c("td", [_vm._v("Names")]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    { staticStyle: { "padding-right": "0" } },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(
-                                            _vm.ajaxData.speakerData.greek_name
-                                          ) +
-                                          " \n                                    "
-                                      ),
-                                      _vm.ajaxData.speakerData.greek_name !=
-                                        "" &&
-                                      _vm.ajaxData.speakerData.english_name !=
-                                        ""
-                                        ? _c("span", [_vm._v("/")])
-                                        : _vm._e(),
-                                      _vm._v(
-                                        " \n                                    " +
-                                          _vm._s(
-                                            _vm.ajaxData.speakerData
-                                              .english_name
-                                          )
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c("td", [_vm._v("Wiki EL")]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: {
-                                          href: _vm.ajaxData.speakerData.wiki_el
-                                        }
-                                      },
-                                      [_vm._v("wiki_el")]
-                                    )
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c("td", [_vm._v("Wiki EN")]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: {
-                                          href: _vm.ajaxData.speakerData.wiki_en
-                                        }
-                                      },
-                                      [_vm._v("wiki_en")]
-                                    )
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _c("tr", [
-                                  _c("td", [_vm._v("Twitter")]),
-                                  _vm._v(" "),
-                                  _c("td", [
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: {
-                                          href: _vm.ajaxData.speakerData.twitter
-                                        }
-                                      },
-                                      [_vm._v("twitter")]
-                                    )
-                                  ])
-                                ])
-                              ])
-                            ]
-                          )
-                        : _vm._e()
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "tab-pane fade",
-                      attrs: {
-                        id: "nav-membership",
-                        role: "tabpanel",
-                        "aria-labelledby": "nav-membership-tab"
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.currentTab))]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "tab-pane fade speeches-container",
+                      staticClass:
+                        "tab-pane fade show speeches-container active",
                       attrs: {
                         id: "nav-speeches",
                         role: "tabpanel",
@@ -71606,7 +71515,7 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("div", [
+                          _c("div", { staticClass: "text-left" }, [
                             _vm._v(
                               "\n                            " +
                                 _vm._s(speech.speech) +
@@ -71616,6 +71525,19 @@ var render = function() {
                         ]
                       )
                     })
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-pane fade",
+                      attrs: {
+                        id: "nav-membership",
+                        role: "tabpanel",
+                        "aria-labelledby": "nav-membership-tab"
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.currentTab))]
                   )
                 ]
               )
@@ -72572,6 +72494,847 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(211)
+/* template */
+var __vue_template__ = __webpack_require__(212)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/parties.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0f849c3d", Component.options)
+  } else {
+    hotAPI.reload("data-v-0f849c3d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 211 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        //Parties: Object,
+        path: String
+    },
+    data: function data() {
+        return {
+            users: [],
+            user_id: 0,
+            partiesData: [],
+            selected_party: null,
+            show_modal: false,
+            defaultImg: 'polical_party_default_image.png',
+            search_msg: '',
+            search_data: [],
+            search_result_msg: null,
+            showResults: false
+        };
+    },
+
+    methods: {
+        showModal: function showModal(party) {
+            this.show_modal = true;
+            this.selected_party = party;
+        },
+        findParty: function findParty() {
+            var self = this;
+            axios.get(self.$parent.host + '/api/v1/parties/search/' + self.search_msg).then(function (response) {
+
+                if (response.status == 200 && response.data.data.length > 0) {
+                    self.search_data = response;
+                    self.search_result_msg = "Search Results";
+                    self.showResults = true;
+                } else {
+                    self.search_result_msg = 'No results found';
+                    self.showResults = false;
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        changePage: function changePage(page) {
+            var self = this;
+            axios.get(this.$parent.host + '/api/v1/parties?page=' + page).then(function (response) {
+                self.partiesData = response;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        changePageParty: function changePageParty(page) {
+            var self = this;
+            axios.get(this.$parent.host + '/api/v1/parties?page=' + page + '&fullname_el=' + this.search_msg).then(function (response) {
+                self.search_data = response;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        isJsonString: function isJsonString(str) {
+            var json;
+            try {
+                json = JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return json;
+        },
+        getParties: function getParties() {
+            var self = this;
+            axios.get(this.$parent.host + '/api/v1/parties').then(function (response) {
+                self.partiesData = response;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        printImg: function printImg(img) {
+            if (img == 'polical_party_default_image.png' || img == null || img == '') {
+                return this.defaultImg;
+            } else {
+                return img;
+            }
+        },
+        checkLinks: function checkLinks(party) {
+            // if(party.wiki_el != '' || Party.wiki_en != '' || Party.website != '' || Party.twitter != ''){
+            //     return true;
+            // }else{
+            //     return false;
+            // }
+            return true;
+        }
+    },
+    computed: {
+        is_search_msg_empty: function is_search_msg_empty() {
+            //when search_msg is empty return true to show the initial "data"
+            if (this.search_msg.length > 0) {
+                return false;
+            } else {
+                if (this.search_msg.length == 0) {
+                    this.showResults = false;
+                    this.search_result_msg = null;
+                    return true;
+                }
+            }
+        },
+        party_search_result_msg: function party_search_result_msg() {
+            if (this.search_result_msg == 'Search Results' || this.search_result_msg == null) {
+                return true;
+            } else {
+                console.log(this.search_msg.length);
+                if (this.search_msg.length == 0) {
+                    this.showResults = false;
+                    this.search_result_msg = '';
+                    return false;
+                }
+            }
+        }
+    },
+    created: function created() {
+        this.getParties();
+    }
+});
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _vm.partiesData.data
+      ? _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "row w-100 mt-2" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-group mb-3",
+                  staticStyle: { width: "275px" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.trim",
+                        value: _vm.search_msg,
+                        expression: "search_msg",
+                        modifiers: { trim: true }
+                      }
+                    ],
+                    staticClass: "form-control py-2 border-right-0 border",
+                    staticStyle: { "/*width": "200px" },
+                    attrs: { type: "text", placeholder: "Search" },
+                    domProps: { value: _vm.search_msg },
+                    on: {
+                      keypress: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.findParty($event)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.search_msg = $event.target.value.trim()
+                      },
+                      blur: function($event) {
+                        _vm.$forceUpdate()
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticStyle: { margin: "2px 0 0 5px" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn",
+                        staticStyle: {
+                          "background-color": "#17a2b8",
+                          color: "white"
+                        },
+                        on: { click: _vm.findParty }
+                      },
+                      [_vm._v("Search")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row w-100" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("p", [_vm._v(_vm._s(_vm.search_result_msg))])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.party_search_result_msg
+            ? _c("div", { staticClass: "row w-100" }, [
+                !_vm.is_search_msg_empty && _vm.showResults
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "row w-100",
+                        staticStyle: { width: "100%" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "col-12" },
+                          [
+                            _c(
+                              "pagination",
+                              {
+                                attrs: {
+                                  data: _vm.search_data.data.meta,
+                                  limit: 2
+                                },
+                                on: {
+                                  "pagination-change-page": _vm.changePageParty
+                                }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    attrs: { slot: "prev-nav" },
+                                    slot: "prev-nav"
+                                  },
+                                  [_vm._v("< Previous")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    attrs: { slot: "next-nav" },
+                                    slot: "next-nav"
+                                  },
+                                  [_vm._v("Next >")]
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.search_data.data.data, function(party) {
+                          return _c(
+                            "div",
+                            {
+                              key: party.party_id,
+                              staticClass: "col-12 col-sm-6 col-md-6 col-lg-4",
+                              staticStyle: { "margin-bottom": "15px" }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "card",
+                                  staticStyle: { height: "500px" }
+                                },
+                                [
+                                  party.image != ""
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "card-img-top-bg" },
+                                        [
+                                          _c("img", {
+                                            staticClass:
+                                              "img-fluid img-style card-img-top",
+                                            attrs: {
+                                              src:
+                                                _vm.path +
+                                                "/" +
+                                                _vm.printImg(party.image)
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    : _c(
+                                        "div",
+                                        { staticClass: "card-img-top" },
+                                        [
+                                          _c("img", {
+                                            staticClass:
+                                              "img-fluid img-style card-img-top",
+                                            attrs: {
+                                              src:
+                                                _vm.path +
+                                                "/" +
+                                                _vm.printImg(party.image)
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "card-body" }, [
+                                    _c("div", { staticClass: "names" }, [
+                                      _c("h5", { staticClass: "card-title" }, [
+                                        _vm._v(_vm._s(party.fullname_el))
+                                      ]),
+                                      _vm._v(" "),
+                                      party.fullname_el != ""
+                                        ? _c("span", [
+                                            _vm._v(_vm._s(party.fullname_el))
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      party.fullname_el != "" &&
+                                      party.fullname_en != ""
+                                        ? _c("span", [_vm._v("/")])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      party.fullname_en != ""
+                                        ? _c("span", [
+                                            _vm._v(_vm._s(party.fullname_en))
+                                          ])
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "email addSpace" },
+                                      [
+                                        _c("p", { staticClass: "card-text" }, [
+                                          _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href: _vm.selected_party.url
+                                              }
+                                            },
+                                            [_vm._v(_vm._s(party.url))]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "links card-footer" },
+                                    [
+                                      _c("div", [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-info btn-sm",
+                                            staticStyle: {
+                                              "margin-top": "8px"
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.showModal(party)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("View more")]
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-12" },
+                          [
+                            _c(
+                              "pagination",
+                              {
+                                attrs: {
+                                  data: _vm.search_data.data.meta,
+                                  limit: 2
+                                },
+                                on: {
+                                  "pagination-change-page": _vm.changePageParty
+                                }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    attrs: { slot: "prev-nav" },
+                                    slot: "prev-nav"
+                                  },
+                                  [_vm._v("< Previous")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    attrs: { slot: "next-nav" },
+                                    slot: "next-nav"
+                                  },
+                                  [_vm._v("Next >")]
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      2
+                    )
+                  : _c(
+                      "div",
+                      { staticClass: "row w-100" },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "col-12" },
+                          [
+                            _c(
+                              "pagination",
+                              {
+                                attrs: {
+                                  data: _vm.partiesData.data.meta,
+                                  limit: 2
+                                },
+                                on: { "pagination-change-page": _vm.changePage }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    attrs: { slot: "prev-nav" },
+                                    slot: "prev-nav"
+                                  },
+                                  [_vm._v("<")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    attrs: { slot: "next-nav" },
+                                    slot: "next-nav"
+                                  },
+                                  [_vm._v(">")]
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.partiesData.data.data, function(party) {
+                          return _c(
+                            "div",
+                            {
+                              key: party.party_id,
+                              staticClass: "col-12 col-sm-6 col-md-6 col-lg-4",
+                              staticStyle: { "margin-bottom": "15px" }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "card",
+                                  staticStyle: { height: "500px" }
+                                },
+                                [
+                                  _c("div", { staticClass: "card-img-top" }, [
+                                    _c("img", {
+                                      staticClass:
+                                        "img-fluid img-style card-img-top",
+                                      attrs: {
+                                        src:
+                                          _vm.path +
+                                          "/" +
+                                          _vm.printImg(party.image)
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "card-body" }, [
+                                    _c("div", { staticClass: "names" }, [
+                                      _c("h5", { staticClass: "card-title" }, [
+                                        _vm._v("Names ")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "card-text" }, [
+                                        party.fullname_el != ""
+                                          ? _c("span", [
+                                              _vm._v(_vm._s(party.fullname_el))
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        party.fullname_el != "" &&
+                                        party.fullname_en != ""
+                                          ? _c("span", [_vm._v("/")])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        party.fullname_en != ""
+                                          ? _c("span", [
+                                              _vm._v(_vm._s(party.fullname_en))
+                                            ])
+                                          : _vm._e()
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    party.url != ""
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "email addSpace" },
+                                          [
+                                            _c(
+                                              "h5",
+                                              { staticClass: "card-title" },
+                                              [
+                                                _c(
+                                                  "a",
+                                                  {
+                                                    attrs: { href: party.url }
+                                                  },
+                                                  [_vm._v(_vm._s(party.url))]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c("div")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "links card-footer"
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-12" },
+                          [
+                            _c(
+                              "pagination",
+                              {
+                                attrs: {
+                                  data: _vm.partiesData.data.meta,
+                                  limit: 1
+                                },
+                                on: { "pagination-change-page": _vm.changePage }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    attrs: { slot: "prev-nav" },
+                                    slot: "prev-nav"
+                                  },
+                                  [_vm._v("<")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    attrs: { slot: "next-nav" },
+                                    slot: "next-nav"
+                                  },
+                                  [_vm._v(">")]
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      2
+                    )
+              ])
+            : _c("div")
+        ])
+      : _c("div", [_c("img", { attrs: { src: _vm.path + "/Spinner.gif" } })])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("span", { staticClass: "input-group-text bg-transparent" }, [
+        _c("i", { staticClass: "fa fa-search" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0f849c3d", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

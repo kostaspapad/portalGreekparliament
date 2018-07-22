@@ -79,7 +79,7 @@
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <i class="fa fa-bullhorn" style="font-size:25px;"></i>
-                        {{ config('app.name', 'Laravel') }}
+                        Greekparliament.info
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -99,7 +99,7 @@
                                     <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">Conferences</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'political-parties' ? 'active' : null }}" href="/political-parties">Political Parties</a>
+                                    <a class="nav-link {{ Request::path() === 'parties' ? 'active' : null }}" href="/parties">Political Parties</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">Speakers</a>

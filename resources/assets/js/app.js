@@ -21,6 +21,7 @@ import ToggleButton from 'vue-js-toggle-button';
 import example from './components/ExampleComponent.vue';
 import navbar from './components/navbar.vue';
 import speakers from './components/speakers.vue';
+import parties from './components/parties.vue';
 import speaker from './components/speaker.vue';
 import conferences from './components/conferences.vue';
 import modal from './components/modal.vue';
@@ -32,6 +33,7 @@ Vue.use(ToggleButton);
 Vue.component('pagination', laravelVuePagination);
 Vue.component('example-component', example);
 Vue.component('navbar', navbar);
+Vue.component('parties', parties);
 Vue.component('speakers', speakers);
 Vue.component('speaker', speaker);
 Vue.component('conferences', conferences);
@@ -51,6 +53,6 @@ Vue.component('datepicker', datepicker);
 const app = new Vue({
     el: '#main_app',
     data: {
-        host: process.env.NODE_ENV == 'production' ? 'http://95.85.38.123' : 'http://127.0.0.1:8000'
+        host: process.env.NODE_ENV == 'production' ? 'http://95.85.38.123' : 'http://localhost:8000'
     }
 })

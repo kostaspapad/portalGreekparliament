@@ -27,3 +27,7 @@ Route::resource('conferences', 'ConferencesController');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
+
+
+Route::get('parties','PagesController@parties');
+Route::get('/party/{name}', 'PagesController@party');

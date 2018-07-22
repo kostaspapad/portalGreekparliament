@@ -39,4 +39,12 @@ class PagesController extends Controller
     public function speaker($name,Route $route){
         return view('pages.speaker')->with('name',$name);
     }
+
+    public function parties(Route $route){
+        return view('pages.parties');
+    }
+
+    public function party($name,Route $route){
+        return view('pages.party')->with('name',$name);
+    }
 }
