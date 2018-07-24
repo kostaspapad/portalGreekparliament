@@ -15,7 +15,7 @@ class Speech extends JsonResource
     public function toArray($request)
     {
         // return parent::toArray($request);
-        return [
+        $arr = [
             'speech_id' => $this->speech_id,
             'speech_conference_date' => $this->speech_conference_date,
             'speaker_id' => $this->speaker_id,
@@ -34,6 +34,10 @@ class Speech extends JsonResource
             'twitter' => $this->twitter,
             'website' => $this->website
         ];
+        
+        // array_filter without second argument removes null elements of entry array
+        return array_filter((array) $arr);
+        
     }
 
     /**

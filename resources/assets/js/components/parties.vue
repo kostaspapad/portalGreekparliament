@@ -49,8 +49,7 @@
                             </div>
                             <div class="links card-footer">
                                 <div>
-                                    <button @click="showModal(party)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
-                                    <!--<a :href="/party/ + party.fullname_el" class="btn btn-info btn-sm" style="margin-top:8px;">Show speeches</a>-->
+                                    <a :href="/party/ + party.party_id" class="btn btn-info btn-sm" style="margin-top:8px;">Show party</a>
                                 </div>
                             </div>
                         </div>
@@ -98,6 +97,7 @@
                                 </div>
                             </div>
                             <div class="links card-footer">
+                            <a :href="/party/ + party.party_id" class="btn btn-info btn-sm" style="margin-top:8px;">Show party</a>
                                 <!--<div>
                                     <button @click="showModal(party)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
                                     <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show speeches</a>

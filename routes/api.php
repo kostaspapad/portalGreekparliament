@@ -290,5 +290,5 @@ Route::group(['prefix' => 'v1'], function () {
     | Controller:     api\v1\ConferencesController@getConferenceSpeechesByDate
     | Method:         GET
     */
-    // Route::get('conference/{id}/speeches', 'Api\v1\ConferencesController@getConferenceSpeechesByDate');
+    Route::get('conference/{date}/speeches', 'Api\v1\SpeechesController@getSpeechesByConferenceDate');
 });

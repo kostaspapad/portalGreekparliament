@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Speech;
+use DB;
 use App\Http\Resources\Speech as SpeechResource;
 
 class SpeechesController extends Controller
@@ -149,17 +150,21 @@ class SpeechesController extends Controller
      * @param  str  $date
      * @return App\Http\Resources\Speech
      */
-    public function speechesByConferenceDate($date)
+    public function getSpeechesByConferenceDate($date)
     {
         if (isset($date) && is_string($date))
         {
             $date = date($date);
-            $speeches = Speech::select('speeches.*')
-                ->join('conferences', 'conferences.conference_date', '=', 'speeches.speech_conference_date')
-                ->where('conferences.conference_date', '=', $date)
+            
+
+            $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
+                ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
+                ->select(['conf.conference_date', 'sp.greek_name', 'sp.english_name', 'speeches.speech_id', 'speeches.speech', 'sp.image'])
+                ->where('conf.conference_date', '=', $date)
                 ->paginate(25);
-                
-            if (isset($speeches) && !empty($speeches)) {
+
+            if (isset($speeches) && !empty($speeches)) 
+            {
                 return SpeechResource::collection($speeches);
             }
         }

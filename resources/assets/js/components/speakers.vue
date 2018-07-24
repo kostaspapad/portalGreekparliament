@@ -69,7 +69,7 @@
                                 </div>
                                 <div>
                                     <button @click="showModal(speaker)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
-                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show speeches</a>
+                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show parties</a>
                                 </div>
                             </div>
                         </div>
