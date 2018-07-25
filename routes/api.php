@@ -19,23 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('speakers', function(){
-    #echo "sssweqw";die;
-    $speakers = Speaker::orderBy('speaker_id','desc')->paginate(51);
-    #$speakers = DB::table('speakers')->get();
-    #print_r($speakers);die;
-    return response()->json(compact('speakers'));
-    #return response()->json($speakers);
-    
-});
-
-Route::get('conferences', function(){
-    $dates = $_GET['dates'];
-    $conferences = DB::table('conferences')->whereBetween('conference_date', [$dates[0], $dates[1]])->get();//Conference::select("SELECT * FROM conferences WHERE conferences.Date = '1992-05-05' ")->paginate(2);
-    //print_r($conferences);
-    return response()->json(compact('conferences'));
-});
-
 // Run tests with ./vendor/bin/phpunit (Install phpunit with composer)
 Route::group(['prefix' => 'v1'], function () {
     /*
@@ -270,7 +253,7 @@ Route::group(['prefix' => 'v1'], function () {
     | Controller:     api\v1\ConferencesController@getConferenceByDateRange
     | Method:         GET
     */
-    Route::post('conference/range', 'Api\v1\ConferencesController@getConferenceByDateRange');
+    Route::get('conference/start/{startDate}/end/{endDate}', 'Api\v1\ConferencesController@getConferenceByDateRange');
 
     /*
     |-------------------------------------------------------------------------------
