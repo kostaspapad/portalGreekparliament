@@ -40,6 +40,14 @@ class PagesController extends Controller
         return view('pages.speaker')->with('name',$name);
     }
 
+    public function conferences(Route $route){
+        return view('pages.conferences');
+    }
+
+    public function conference($date,Route $route){
+        return view('pages.conference')->with('conf_date',$date);
+    }
+
     public function parties(Route $route){
         return view('pages.parties');
     }

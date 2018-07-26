@@ -34,7 +34,7 @@
                         </tr>
                     </tbody>
                 </table> --> 
-                <div v-if="ajaxData.speakerData">
+                <div v-if="ajaxData.speakerData" class="mt-2">
                     <div>
                         {{ajaxData.speakerData.greek_name}} 
                         <span v-if="ajaxData.speakerData.greek_name != '' && ajaxData.speakerData.english_name != '' ">/</span> 

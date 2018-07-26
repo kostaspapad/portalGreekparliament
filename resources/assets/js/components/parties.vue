@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div v-if="partiesData.data" class="row">
+        <div v-if="ajaxData.partiesData.data" class="row">
             <div class="row w-100 mt-2">
                 <div class="col-12">
                     <div class="input-group mb-3" style="width:275px;">
@@ -23,12 +23,12 @@
                 <div class="row w-100" v-if="!is_search_msg_empty && showResults" style="width:100%">
                     <!-- <div class="col-12 text-center"><p>{{search_result_msg}}</p></div> -->
                     <div class="col-12">
-                        <pagination :data="search_data.data.meta" @pagination-change-page="changePageParty" :limit=2>
+                        <pagination :data="ajaxData.search_data.data.meta" @pagination-change-page="changePageParty" :limit=2>
                             <span slot="prev-nav">&lt; Previous</span>
                             <span slot="next-nav">Next &gt;</span>
                         </pagination>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="party in search_data.data.data" :key="party.party_id" style="margin-bottom: 15px;">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="party in ajaxData.search_data.data.data" :key="party.party_id" style="margin-bottom: 15px;">
                         <div class="card" style="height: 500px;">
                             <div v-if="party.image != '' " class="card-img-top-bg">
                                 <img :src="path + '/' + printImg(party.image) " class="img-fluid img-style card-img-top">
@@ -49,13 +49,14 @@
                             </div>
                             <div class="links card-footer">
                                 <div>
+                                    <button @click="showModal(party)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
                                     <a :href="/party/ + party.party_id" class="btn btn-info btn-sm" style="margin-top:8px;">Show party</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <pagination :data="search_data.data.meta" @pagination-change-page="changePageParty" :limit=2>
+                        <pagination :data="ajaxData.search_data.data.meta" @pagination-change-page="changePageParty" :limit=2>
                             <span slot="prev-nav">&lt; Previous</span>
                             <span slot="next-nav">Next &gt;</span>
                         </pagination>
@@ -63,12 +64,12 @@
                 </div>
                 <div class="row w-100" v-else>
                     <div class="col-12">
-                        <pagination :data="partiesData.data.meta" @pagination-change-page="changePage" :limit=2>
+                        <pagination :data="ajaxData.partiesData.data.meta" @pagination-change-page="changePage" :limit=2>
                             <span slot="prev-nav">&lt;</span>
                             <span slot="next-nav">&gt;</span>
                         </pagination>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="party in partiesData.data.data" :key="party.party_id" style="margin-bottom: 15px;">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="party in ajaxData.partiesData.data.data" :key="party.party_id" style="margin-bottom: 15px;">
                         <div class="card" style="height: 500px;">
                             <!--<div v-if="party.image != '' " class="card-img-top-bg">
                                 <img :src="path + '/' + printImg(party.image) " class="img-fluid img-style card-img-top">
@@ -97,16 +98,15 @@
                                 </div>
                             </div>
                             <div class="links card-footer">
-                            <a :href="/party/ + party.party_id" class="btn btn-info btn-sm" style="margin-top:8px;">Show party</a>
-                                <!--<div>
+                                <div>
                                     <button @click="showModal(party)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
-                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show speeches</a>
-                                </div>-->
+                                    <a :href="/party/ + party.party_id" class="btn btn-info btn-sm" style="margin-top:8px;">Show party</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <pagination :data="partiesData.data.meta" @pagination-change-page="changePage" :limit=1>
+                        <pagination :data="ajaxData.partiesData.data.meta" @pagination-change-page="changePage" :limit=1>
                             <span slot="prev-nav">&lt;</span>
                             <span slot="next-nav">&gt;</span>
                         </pagination>
@@ -165,14 +165,14 @@
         },
         data(){
             return {
-                users: [],
-                user_id: 0,
-                partiesData: [],
+                ajaxData: {
+                    partiesData: [],
+                    search_data: []
+                },
                 selected_party: null,
                 show_modal: false,
                 defaultImg: 'polical_party_default_image.png',
                 search_msg: '',
-                search_data: [],
                 search_result_msg: null,
                 showResults: false
             }
@@ -188,7 +188,7 @@
                 .then(function(response){
                     
                     if(response.status == 200 && response.data.data.length > 0){
-                        self.search_data = response;
+                        self.ajaxData.search_data = response;
                         self.search_result_msg = "Search Results";
                         self.showResults = true;
                     }else{
@@ -204,7 +204,7 @@
                 var self = this;
                 axios.get(this.$parent.host+'/api/v1/parties?page=' + page)
                 .then(function(response){
-                    self.partiesData = response;
+                    self.ajaxData.partiesData = response;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -214,7 +214,7 @@
                 var self = this;
                 axios.get(this.$parent.host+'/api/v1/parties?page=' + page+'&fullname_el='+this.search_msg)
                 .then(function(response){
-                    self.search_data = response;
+                    self.ajaxData.search_data = response;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -233,7 +233,7 @@
                 var self = this;
                 axios.get(this.$parent.host+'/api/v1/parties')
                 .then(function(response){
-                    self.partiesData = response;
+                    self.ajaxData.partiesData = response;
                 })
                 .catch(function (error) {
                     console.log(error);

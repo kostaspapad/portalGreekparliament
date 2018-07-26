@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <div v-if="conferencesData" class="row">
+    <div class="container mt-2">
+        <div v-if="!loading" class="row">
             <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                 <!-- <label>Filters</label> -->
                 <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" style="float:right;"><i class="fa fa-info-circle info-icon"></i></span>
@@ -15,7 +15,7 @@
                         <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
                     </div>
                 </transition>
-                <div style="text-align:left;">
+                <!-- <div style="text-align:left;">
                     <toggle-button 
                         id="changed-font"
                         v-model="isMultipleFilter"
@@ -23,11 +23,11 @@
                         :labels="{checked: 'Multiple Dates', unchecked: 'Single Date'}"
                         :width="135" 
                     />
-                </div>
+                </div> -->
                 <div v-if="isMultipleFilter" style="background-color: ;">
                     <!-- <multiselect 
                         v-model="selected_date" 
-                        :options="conferencesData" 
+                        :options="ajaxData.conferencesData" 
                         track-by="conference_date"
                         label="conference_date"
                         placeholder="Select Date"
@@ -57,16 +57,21 @@
                     <label>End Date</label>
                     <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true" wrapper-class="pickerDiv" placeholder="Select end date"></datepicker>
                     <div style="text-align: left;">
-                        <button class="btn btn-primary reset-btn" @click="getDates" :disabled="isDisabled">Apply</button>
+                        <button class="btn reset-btn" @click="getDates" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">Apply</button>
                     </div>
                 </div>
             </div>
-            <div v-show="details.length" class="col-12 col-sm-6 col-md-6 col-lg-8 scrollable">
-                <div class=""  v-for="detail in details" :key="detail.id" style="margin: 15px 0 15px 0;">
-                    <div class="rounded shadow-sm" style="border: 1px solid red">
+            <div v-show="ajaxDone" class="col-12 col-sm-6 col-md-6 col-lg-8 scrollable">
+                <div v-if="ajaxData.conferencesData && !noData" class=""  v-for="conference in ajaxData.conferencesData" :key="conference.id" style="margin: 15px 0 15px 0;">
+                    <div class="rounded shadow-sm" style="border: 1px solid #35495e;">
                         <!-- <span class="show-details-dates">{{detail[0].Date}}</span> -->
-                        <span class="show-details-dates">{{detail.conference_date}}</span>
-                        <div>{{detail.id}}</div>
+                        <span class="show-details-dates">
+                            <a :href=" '/conference/' + conference.conference_date + '/speeches' ">{{conference.conference_date}}</a>
+                        </span>
+                        <div>
+                            <p style="margin: 0;">{{conference.session}}</p>
+                            <span>{{conference.time_period}}</span>
+                        </div>
                         <!-- <div v-for="info in detail" :key="info"> -->
                             <!-- {{info.ID}} -->
                             <!-- <div v-show="isEmpty(info)" v-show="info.DocumentLocation != '' && info.DocumentName != '' ">
@@ -79,12 +84,12 @@
                         
                     </div>
                 </div>
-            </div>
-            <div v-show="noData" class="col-12 col-sm-6 col-md-6 col-lg-8 scrollable">
-                <h4>No data available</h4>
+                <div v-show="noData" class="col-12 col-sm-6 col-md-6 col-lg-8 scrollable">
+                    <h4>No data available</h4>
+                </div>
             </div>
             <!-- <div class="col-12">
-                <pagination :data="conferencesData" @pagination-change-page="changePage" :limit=2>
+                <pagination :data="ajaxData.conferencesData" @pagination-change-page="changePage" :limit=2>
                     <span slot="prev-nav">&lt; Previous</span>
 	                <span slot="next-nav">Next &gt;</span>
                 </pagination>
@@ -113,15 +118,19 @@
                 disabledFn: {
                     
                 },
-                conferencesData: [],
-                details: [],
+                ajaxData: {
+                    conferencesData: [],
+                    details: []
+                },
                 selected_date: [],
                 startDate: null,
                 endDate: null,
                 show_modal: false,
                 isMultipleFilter: false,
                 showInfoDiv: false,
-                noData: false,
+                noData: true,
+                loading: true,
+                ajaxDone: false,
                 defaultImg: 'default_speaker_icon.png',
                 startUrl: 'https://www.hellenicparliament.gr' 
             }
@@ -136,10 +145,10 @@
             changePage(page){
                 //for pagination
                 var self = this;
-                axios.get('http://95.85.38.123/api/conferences?page=' + page)
+                axios.get(this.$parent.host+'/api/v1/conferences?page=' + page)
                 .then(function(response){
                     if(response.status == 200 && response.statusText == "OK"){
-                        self.conferencesData = response.data.conferences;
+                        self.ajaxData.conferencesData = response.data.conferences;
                     }
                 })
                 .catch(function (error) {
@@ -159,10 +168,10 @@
             getConferences(){
                 //get all conferences
                 var self = this;
-                axios.get('http://95.85.38.123/api/conferences')
+                axios.get(this.$parent.host+'/api/v1/conferences')
                 .then(function(response){
                     if(response.status == 200 && response.statusText == "OK"){
-                        self.conferencesData = response.data.conferences;
+                        self.ajaxData.conferencesData = response.data.conferences;
                     }
                 })
                 .catch(function (error) {
@@ -179,44 +188,28 @@
             },
             getDates(date){
                 //get dates from datepicker
-                const self = this;
-                let dates = [];
-                let tmp = [];
+                const self = this
                 if(this.startDate && this.endDate){
-                    dates.push(moment(this.startDate).format('YYYY/MM/DD'));
-                    dates.push(moment(this.endDate).format('YYYY/MM/DD'));
-                }
-                // let myJsonString = JSON.stringify(dates);
-                console.log(dates);
-                // axios({
-                //     method:'get',
-                //     url:'http://95.85.38.123/api/conferences',
-                //     responseType:'json',
-                //     data: {
-                //         dates: myJsonString
-                //     }
-                // })
-                axios.get('http://portal.test/api/conferences' ,{
-                    params: {
-                        dates: dates
-                    }
-                })
-                .then(function(response){
-                    if(response.status == 200 && response.statusText == "OK"){
-                        // tmp = response.data.conferences;
-                        // self.details.push(tmp);
-                        if(response.data.conferences.length > 0){
-                            self.noData = false;
-                            self.details = response.data.conferences;
-                        }else{
-                            self.noData = true;
+                    this.startDate = moment(this.startDate).format('YYYY-MM-DD')
+                    this.endDate = moment(this.endDate).format('YYYY-MM-DD')
+                    axios.get(this.$parent.host+'/api/v1/conference/start/'+this.startDate+'/end/'+this.endDate)
+                    .then(function(response){
+                        console.log(response)
+                        if(response.status == 200 && response.statusText == "OK"){
+                            if(response.data.data.length > 0){
+                                self.noData = false
+                                //self.ajaxData.details = response.data.data;
+                                self.ajaxData.conferencesData = response.data.data
+                            }else{
+                                self.noData = true
+                            }
                         }
-                    }
-                    //self.conferencesData = response.data.conferences;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                        self.ajaxDone = true
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }
             },
             getDatesDp(date){
                 //get dates from Dropdown
@@ -228,7 +221,7 @@
                     //console.log(response);
                     if(response.status == 200 && response.statusText == "OK"){
                         tmp = response.data.conferences;
-                        self.details.push(tmp);
+                        self.ajaxData.details.push(tmp);
                     }
                 })
                 .catch(function (error) {
@@ -238,23 +231,23 @@
             resetDates(){
                 //reset selected dates from dropdown
                 this.selected_date = [];
-                this.details = [];
+                this.ajaxData.details = [];
             },
             isEmpty(info){
 
             },
             removeOption(removedOption){
                 //remove the selected option from array
-                for(var i=0;i<this.details.length;i++){
-                    for(var j=0;j<this.details[i].length;j++){
-                        if(removedOption.Date == this.details[i][j].Date){
-                            this.details.splice(i,1);
+                for(var i=0;i<this.ajaxData.details.length;i++){
+                    for(var j=0;j<this.ajaxData.details[i].length;j++){
+                        if(removedOption.Date == this.ajaxData.details[i][j].Date){
+                            this.ajaxData.details.splice(i,1);
                             break;
                         }
                     }
                 }
                 //we do this so we can hide the reset button
-                if(this.details.length == 0){
+                if(this.ajaxData.details.length == 0){
                     this.selected_date = [];
                 }
             },
@@ -272,26 +265,27 @@
             }
         },
         created() {
-            var self = this;
-            //this.getConferences();
-            //console.log(typeof this.conferences);
-            this.conferencesData = this.conferences;
-            this.disabledFn = {
-                customPredictor (date) {
-                    //console.log(moment(date).format('YYYY-MM-DD'));
-                    //console.log(self.conferencesData);
-                    var newDate = moment(date).format('YYYY-MM-DD');
-                    for(var data in self.conferencesData){
-                        //console.log(newDate + " " +  self.conferencesData[data]['Date']);
-                        if(self.conferencesData[data]['conference_date'] != newDate){
-                            return true;
-                        }else{
-                            return false;
-                        }
-                        //console.log(self.conferencesData[data]['Date']);
-                    }
-                }
-            }
+            this.loading = false
+            // var self = this;
+            // //this.getConferences();
+            // //console.log(typeof this.conferences);
+            // this.ajaxData.conferencesData = this.conferences;
+            // this.disabledFn = {
+            //     customPredictor (date) {
+            //         //console.log(moment(date).format('YYYY-MM-DD'));
+            //         //console.log(self.ajaxData.conferencesData);
+            //         var newDate = moment(date).format('YYYY-MM-DD');
+            //         for(var data in self.ajaxData.conferencesData){
+            //             //console.log(newDate + " " +  self.ajaxData.conferencesData[data]['Date']);
+            //             if(self.ajaxData.conferencesData[data]['conference_date'] != newDate){
+            //                 return true;
+            //             }else{
+            //                 return false;
+            //             }
+            //             //console.log(self.conferencesData[data]['Date']);
+            //         }
+            //     }
+            // }
             //console.log(this.isJsonString(this.conferences));
         }
     }

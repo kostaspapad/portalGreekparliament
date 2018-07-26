@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div v-if="speakersData.data" class="row">
+        <div v-if="ajaxData.speakersData.data" class="row">
             <div class="row w-100 mt-2">
                 <div class="col-12">
                     <div class="input-group mb-3" style="width:275px;">
@@ -23,12 +23,12 @@
                 <div class="row w-100" v-if="!is_search_msg_empty && showResults" style="width:100%">
                     <!-- <div class="col-12 text-center"><p>{{search_result_msg}}</p></div> -->
                     <div class="col-12">
-                        <pagination :data="search_data.data.meta" @pagination-change-page="changePageSpeaker" :limit=2>
+                        <pagination :data="ajaxData.search_data.data.meta" @pagination-change-page="changePageSpeaker" :limit=2>
                             <span slot="prev-nav">&lt; Previous</span>
                             <span slot="next-nav">Next &gt;</span>
                         </pagination>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="speaker in search_data.data.data" :key="speaker.id" style="margin-bottom: 15px;">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="speaker in ajaxData.search_data.data.data" :key="speaker.id" style="margin-bottom: 15px;">
                         <div class="card" style="height: 500px;">
                             <div v-if="speaker.image != '' " class="card-img-top-bg">
                                 <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
@@ -54,16 +54,16 @@
                             </div>
                             <div class="links card-footer">
                                 <div>
-                                    <span v-if="speaker.wiki_el == '' "><i class="fa fa-wikipedia-w iconsFont"></i>(EL) </span>
-                                    <span v-else><a :href="speaker.wiki_el"><i class="fa fa-wikipedia-w iconsFont iconsColor"></i></a>(EL) </span>
-                                    <span v-if="speaker.wiki_en == '' "><i class="fa fa-wikipedia-w iconsFont"></i>(EN) </span>
-                                    <span v-else><a :href="speaker.wiki_en"><i class="fa fa-wikipedia-w iconsFont iconsColor"></i></a>(EN) </span>
+                                    <span v-if="speaker.wiki_el == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EL) </span>
+                                    <span v-else><a :href="speaker.wiki_el"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EL) </span>
+                                    <span v-if="speaker.wiki_en == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EN) </span>
+                                    <span v-else><a :href="speaker.wiki_en"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EN) </span>
                                     <span class="twitter" v-if="speaker.twitter == '' ">
-                                            <i class="fa fa-twitter-square iconsFont"></i>
+                                            <i class="fab fa-twitter-square iconsFont"></i>
                                     </span>
                                     <span class="twitter" v-else>
                                         <a :href="speaker.twitter">
-                                            <i class="fa fa-twitter-square iconsFont" style="color:#17a2b8;"></i>
+                                            <i class="fab fa-twitter-square iconsFont" style="color:#17a2b8;"></i>
                                         </a>
                                     </span>
                                 </div>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <pagination :data="search_data.data.meta" @pagination-change-page="changePageSpeaker" :limit=2>
+                        <pagination :data="ajaxData.search_data.data.meta" @pagination-change-page="changePageSpeaker" :limit=2>
                             <span slot="prev-nav">&lt; Previous</span>
                             <span slot="next-nav">Next &gt;</span>
                         </pagination>
@@ -83,12 +83,12 @@
                 </div>
                 <div class="row w-100" v-else>
                     <div class="col-12">
-                        <pagination :data="speakersData.data.meta" @pagination-change-page="changePage" :limit=2>
+                        <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=2>
                             <span slot="prev-nav">&lt;</span>
                             <span slot="next-nav">&gt;</span>
                         </pagination>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="speaker in speakersData.data.data" :key="speaker.id" style="margin-bottom: 15px;">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.id" style="margin-bottom: 15px;">
                         <div class="card" style="height: 500px;">
                             <div v-if="speaker.image != '' " class="card-img-top-bg">
                                 <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
@@ -119,28 +119,28 @@
                             </div>
                             <div class="links card-footer">
                                 <div>
-                                    <span v-if="speaker.wiki_el == '' "><i class="fa fa-wikipedia-w iconsFont"></i>(EL) </span>
-                                    <span v-else><a :href="speaker.wiki_el"><i class="fa fa-wikipedia-w iconsFont iconsColor"></i></a>(EL) </span>
-                                    <span v-if="speaker.wiki_en == '' "><i class="fa fa-wikipedia-w iconsFont"></i>(EN) </span>
-                                    <span v-else><a :href="speaker.wiki_en"><i class="fa fa-wikipedia-w iconsFont iconsColor"></i></a>(EN) </span>
+                                    <span v-if="speaker.wiki_el == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EL) </span>
+                                    <span v-else><a :href="speaker.wiki_el"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EL) </span>
+                                    <span v-if="speaker.wiki_en == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EN) </span>
+                                    <span v-else><a :href="speaker.wiki_en"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EN) </span>
                                     <span class="twitter" v-if="speaker.twitter == '' ">
-                                            <i class="fa fa-twitter-square iconsFont"></i>
+                                            <i class="fab fa-twitter-square iconsFont"></i>
                                     </span>
                                     <span class="twitter" v-else>
                                         <a :href="speaker.twitter">
-                                            <i class="fa fa-twitter-square iconsFont" style="color:#17a2b8;"></i>
+                                            <i class="fab fa-twitter-square iconsFont" style="color:#17a2b8;"></i>
                                         </a>
                                     </span>
                                 </div>
                                 <div>
                                     <button @click="showModal(speaker)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
-                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show speeches</a>
+                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show parties</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <pagination :data="speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
+                        <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
                             <span slot="prev-nav">&lt;</span>
                             <span slot="next-nav">&gt;</span>
                         </pagination>
@@ -221,14 +221,14 @@
         },
         data(){
             return {
-                users: [],
-                user_id: 0,
-                speakersData: [],
+                ajaxData: {
+                    speakersData: [],
+                    search_data: []
+                },
                 selected_speaker: null,
                 show_modal: false,
                 defaultImg: 'default_speaker_icon.png',
                 search_msg: '',
-                search_data: [],
                 search_result_msg: null,
                 showResults: false
             }
@@ -236,16 +236,14 @@
         methods:{
             showModal(speaker){
                 this.show_modal = true;
-                console.log(speaker);
                 this.selected_speaker = speaker;
             },
             findSpeaker(){
                 var self = this;
                 axios.get(self.$parent.host+'/api/v1/speakers/search/'+self.search_msg)
                 .then(function(response){
-                    console.log(response);
                     if(response.status == 200 && response.data.data.length > 0){
-                        self.search_data = response;
+                        self.ajaxData.search_data = response;
                         self.search_result_msg = "Search Results";
                         self.showResults = true;
                     }else{
@@ -261,7 +259,7 @@
                 var self = this;
                 axios.get(this.$parent.host+'/api/v1/speakers?page=' + page)
                 .then(function(response){
-                    self.speakersData = response;
+                    self.ajaxData.speakersData = response;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -271,7 +269,7 @@
                 var self = this;
                 axios.get(this.$parent.host+'/api/v1/speakers?page=' + page+'&name='+this.search_msg)
                 .then(function(response){
-                    self.search_data = response;
+                    self.ajaxData.search_data = response;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -290,7 +288,7 @@
                 var self = this;
                 axios.get(this.$parent.host+'/api/v1/speakers')
                 .then(function(response){
-                    self.speakersData = response;
+                    self.ajaxData.speakersData = response;
                 })
                 .catch(function (error) {
                     console.log(error);

@@ -23,7 +23,9 @@ Route::get('/speaker/{name}', 'PagesController@speaker');
 // Route::get('/speakers', 'SpeakersController@show');
 // Route::get('/speakers/{id}', 'SpeakersController@show');
 Route::resource('speakers','SpeakersController');
-Route::resource('conferences', 'ConferencesController');
+Route::get('/conferences', 'PagesController@conferences');
+Route::get('conference/{date}/speeches', 'PagesController@conference');
+//Route::get('/conference', 'PagesController@conference');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
