@@ -16,6 +16,7 @@ import MultiSelect from 'vue-multiselect';
 import datepicker from 'vuejs-datepicker';
 import moment from 'moment';
 import ToggleButton from 'vue-js-toggle-button';
+import ReadMore from 'vue-read-more';
 
 //components
 import example from './components/ExampleComponent.vue';
@@ -30,6 +31,7 @@ import modal from './components/modal.vue';
 
 Vue.use(VueRouter);
 Vue.use(ToggleButton);
+Vue.use(ReadMore);
 
 // register globally
 Vue.component('pagination', laravelVuePagination);

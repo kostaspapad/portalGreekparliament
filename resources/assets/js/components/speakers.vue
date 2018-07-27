@@ -28,8 +28,8 @@
                             <span slot="next-nav">Next &gt;</span>
                         </pagination>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="speaker in ajaxData.search_data.data.data" :key="speaker.id" style="margin-bottom: 15px;">
-                        <div class="card" style="height: 500px;">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 card-deck"  v-for="speaker in ajaxData.search_data.data.data" :key="speaker.id" style="margin-bottom: 15px;">
+                        <div class="card" >
                             <div v-if="speaker.image != '' " class="card-img-top-bg">
                                 <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
                             </div>
@@ -69,7 +69,7 @@
                                 </div>
                                 <div>
                                     <button @click="showModal(speaker)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
-                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show parties</a>
+                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show speeches</a>
                                 </div>
                             </div>
                         </div>
@@ -88,8 +88,8 @@
                             <span slot="next-nav">&gt;</span>
                         </pagination>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4"  v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.id" style="margin-bottom: 15px;">
-                        <div class="card" style="height: 500px;">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 card-deck"  v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.id" style="margin-bottom: 15px;">
+                        <div class="card" >
                             <div v-if="speaker.image != '' " class="card-img-top-bg">
                                 <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
                             </div>
@@ -134,7 +134,7 @@
                                 </div>
                                 <div>
                                     <button @click="showModal(speaker)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
-                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show parties</a>
+                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show speeches</a>
                                 </div>
                             </div>
                         </div>

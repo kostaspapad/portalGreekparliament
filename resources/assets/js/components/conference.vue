@@ -20,23 +20,44 @@
                 </span>
             </div>
             <div v-if="ajaxData.conferenceData.data.length" class="col-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="conversation"  v-for="conference in ajaxData.conferenceData.data" :key="conference.speech_id">
+                <!-- <div class="conversation"  v-for="conference in ajaxData.conferenceData.data" :key="conference.speech_id">
                     <div class="rounded shadow-sm row" style="border: 1px solid #ddd;">
-                        <div class="col-5 col-sm-3 col-md-2 col-lg-2">
-                            <img :src="path + '/' + conference.image" class="img-fluid speech_speaker_img" style="border-radius: 40px;"/>
-                        </div>
-                        <div class="mt-2 col-7 col-sm-9 col-md-10 col-lg-10" style="/*margin-bottom: -15px;padding-left: 0;*/">
-                            <span class="speech_speaker_name ml-2">{{conference.greek_name}}</span>
+                        <div class="row" style="background-color: #dc3545;">
+                            <div class="col-5 col-sm-3 col-md-2 col-lg-2">
+                                <img :src="path + '/' + conference.image" class="img-fluid speech_speaker_img"/>
+                            </div>
+                            <div class="mt-2 col-7 col-sm-9 col-md-10 col-lg-10" style="/*margin-bottom: -15px;padding-left: 0;*/">
+                                <h2 class="speech_speaker_name ml-2">{{conference.greek_name}}</h2>
+                            </div>
                         </div>
                         <br/>
                         <div class="speech mb-2 col-12">
                             <span>{{conference.speech}}</span>
                         </div>
                     </div>
+                </div> -->
+                <div class="card conversation" v-for="conference in ajaxData.conferenceData.data" :key="conference.speech_id">
+                    <!-- <div v-if="conference.image != '' " class="card-img-top-bg">
+                        <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
+                    </div>
+                    <div v-else class="card-img-top">
+                        <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
+                    </div> -->
+                    <div class="mt-2">
+                        <img :src="path + '/' + conference.image" class="img-fluid speech_speaker_img card-img-top"/>
+                        <h2 class="speech_speaker_name ml-2">{{conference.greek_name}}</h2>
+                    </div>
+                    <hr/>
+                    <div class="card-body speech mb-2">
+                        <read-more more-str="read more" :text="conference.speech" link="#" less-str="read less" :max-chars="2000"></read-more>
+                    </div>
+                    <!-- <div class="links card-footer">
+
+                    </div> -->
                 </div>
             </div>
             <div v-else class="col-12 col-sm-12 col-md-12 col-lg-12">
-                <h4>No speech available</h4>
+                <h4>No speeches available</h4>
             </div>
             <!-- <div v-show="noData" class="col-12 col-sm-6 col-md-6 col-lg-8 scrollable">
                 <h4>No data available</h4>
@@ -56,17 +77,22 @@
         text-align: left;
     }
     .speech_speaker_name{
-        font-style: italic;
+        /* font-style: italic; */
         font-weight: bold;
+        /* color: white; */
     }
     .speech_speaker_img{
+        border-radius: 60px;
+        border: 2px solid #35495e;
+        max-width: 130px !important;
         /* max-width: 80px; */
         /* width: 70%; */
-        padding: 5px;
+        /* padding: 5px; */
         /* margin: 13px 0 0 5px; */
     }
     .speech{
         /* margin: -50px 0 0 90px; */
+        text-align: justify;
     }
 </style>
 
