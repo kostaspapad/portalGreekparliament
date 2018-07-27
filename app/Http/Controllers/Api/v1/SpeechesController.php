@@ -155,12 +155,16 @@ class SpeechesController extends Controller
         if (isset($date) && is_string($date))
         {
             $date = date($date);
-            
-
+            // One speaker can be in many parties (check it later)
             $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                 ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                ->select(['conf.conference_date', 'sp.greek_name', 'sp.english_name', 'speeches.speech_id', 'speeches.speech', 'sp.image'])
-                ->where('conf.conference_date', '=', $date)
+                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
+                ->select(['conf.conference_date', 'sp.greek_name', 'sp.english_name', 'speeches.speech_id', 'speeches.speech', 'sp.image', 'm.on_behalf_of_id'])
+                ->where([
+                    ['conf.conference_date', '=', $date],
+                    // ['m.start_date', '>', $date],
+                    // ['m.end_date', '<=', $date]
+                ])
                 ->paginate(25);
 
             if (isset($speeches) && !empty($speeches)) 
