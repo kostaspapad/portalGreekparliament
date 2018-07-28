@@ -75,8 +75,8 @@
     </style>
     </head>
     <body>
-        <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <div id="app" class="content-bg-color">
+            <nav class="navbar navbar-expand-md navbar-light navbar-laravel navbar-bg-color">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <i class="fa fa-bullhorn" style="font-size:25px;"></i>

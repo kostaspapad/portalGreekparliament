@@ -33,7 +33,8 @@ class Speech extends JsonResource
             'wiki_en' => $this->wiki_en,
             'twitter' => $this->twitter,
             'website' => $this->website,
-            'on_behalf_of_id' => $this->on_behalf_of_id
+            'on_behalf_of_id' => $this->on_behalf_of_id,
+            'fullname_el' => $this->fullname_el
         ];
         
         // array_filter without second argument removes null elements of entry array

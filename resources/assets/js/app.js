@@ -47,6 +47,11 @@ Vue.component('modal', modal);
 Vue.component('multiselect', MultiSelect);
 Vue.component('datepicker', datepicker);
 
+Vue.filter('capitalize', function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+})
 //router
 // const router = new VueRouter({
 //     mode: 'history',
@@ -57,7 +62,7 @@ Vue.component('datepicker', datepicker);
 // });
 
 const app = new Vue({
-    el: '#main_app',
+    el: '#app',
     data: {
         host: process.env.NODE_ENV == 'production' ? 'http://95.85.38.123' : 'http://127.0.0.1:8000'
     }

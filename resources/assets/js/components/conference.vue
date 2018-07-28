@@ -44,8 +44,11 @@
                         <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
                     </div> -->
                     <div class="mt-2">
-                        <img :src="path + '/' + conference.image" class="img-fluid speech_speaker_img card-img-top"/>
-                        <h2 class="speech_speaker_name ml-2">{{conference.greek_name}}</h2>
+                        <img :src="path + '/' + conference.image" class="img-fluid speech_speaker_img card-img-top ml-2 mb-2"/>
+                        <h2 class="speech_speaker_name ml-2">
+                            <a :href="/speaker/ + conference.greek_name" class="" style="margin-top:8px;">{{conference.greek_name}}</a>
+                        </h2>
+                        <h4 class="speech_speaker_name ml-2">{{conference.fullname_el | capitalize}} ({{conference.on_behalf_of_id}})</h4>
                     </div>
                     <hr/>
                     <div class="card-body speech mb-2">
