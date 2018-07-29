@@ -43,9 +43,6 @@ class CreateSpeechesTable extends Migration
                         // Text
                         $table->text('speech');
 
-                        // Speaker name
-                        $table->string('f_name');
-
                         // Speech timestamp(when the speech parsed and inserted to db)
                         $table->timestamps();
                         
