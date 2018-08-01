@@ -2,6 +2,7 @@
 
 namespace App;
 
+use FullTextSearch;
 use Illuminate\Database\Eloquent\Model;
 
 class Speech extends Model

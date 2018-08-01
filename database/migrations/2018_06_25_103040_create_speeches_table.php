@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateSpeechesTable extends Migration
 {
@@ -52,6 +53,9 @@ class CreateSpeechesTable extends Migration
                         // Set db engine type
                         $table->engine = 'InnoDB';
                     });
+
+                    // Full Text Index
+                    DB::statement('ALTER TABLE portal.speeches ADD FULLTEXT (speech)');
 
                 } else {
                     echo 'Speakers table does not exist' . PHP_EOL;

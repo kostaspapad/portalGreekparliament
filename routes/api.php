@@ -148,6 +148,18 @@ Route::group(['prefix' => 'v1'], function () {
 
     /*
     |-------------------------------------------------------------------------------
+    | Fulltext search for speeches
+    |-------------------------------------------------------------------------------
+    | URL:            /api/speeches/search/{text}
+    | Sample:         http://localhost:8000/api/v1/speeches/search/μνημόνιο
+    | Controller:     api\v1\SpeechesController@fulltextSpeechesSearch
+    | Method:         GET
+    | Description:    Full text search for speeches
+    */
+    Route::get('speeches/search/{text}', 'Api\v1\SpeechesController@fulltextSpeechSearch');
+
+    /*
+    |-------------------------------------------------------------------------------
     |
     | Speakers API endpoints
     |

@@ -176,6 +176,40 @@ class SpeechesController extends Controller
         }
     }
 
+    public function fulltextSpeechSearch($input)
+    {
+        if (isset($input) && is_string($input))
+        {
+            $exp = explode(' ', $input);
+
+            $s = '';
+            $c = 1;
+            foreach ($exp AS $e)
+            {
+                $s .= "+$e*";
+
+                if ($c + 1 == count($exp))
+                    $s .= ' ';
+
+                $c++;
+            }
+
+            $query = "MATCH (speech) AGAINST ('$s' IN BOOLEAN MODE)";
+            // $query looks like 
+            // + is for AND 
+            // - is for NOT
+            // MATCH (speech) AGAINST ('+Μνημόνιο* +Σύριζα*' IN BOOLEAN MODE)
+
+            $speeches = Speech::whereRaw($query)
+                ->paginate(25);
+        }
+
+        if (isset($speeches) && !empty($speeches))
+        {
+            return SpeechResource::collection($speeches);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
