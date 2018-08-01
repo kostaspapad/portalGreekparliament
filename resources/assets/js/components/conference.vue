@@ -136,6 +136,23 @@
                     if(response.status == 200 && response.statusText == "OK"){
                         self.noData = false
                         self.ajaxData.conferenceData = response.data;
+                        // let speech = null;
+                        // let test;
+                        // for (const key in self.ajaxData.conferenceData.data) {
+                        //     if (self.ajaxData.conferenceData.data.hasOwnProperty(key)) {
+                        //         const element = self.ajaxData.conferenceData.data[key];
+                        //         //console.log(self.ajaxData.conferenceData.data[key])
+                        //         test = element.speech.replace(/\s{2,}/gm,' ')
+                        //         //console.log(test)
+                        //         //console.log(speech)
+                        //         self.ajaxData.conferenceData.data[key].speech = test
+                        //         speech = self.ajaxData.conferenceData.data[key].speech.replace(/\\n/gm, 'SPIROSSSSSSSSSSSSSSSSS')
+                        //         self.ajaxData.conferenceData.data[key].speech = speech
+                        //         // console.log('--------------------------------------')
+                        //         // console.log(self.ajaxData.conferenceData.data[key])
+
+                        //     }
+                        // }
                     }
                     self.ajaxDone = true
                 })
