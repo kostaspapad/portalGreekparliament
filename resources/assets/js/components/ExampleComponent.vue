@@ -2,9 +2,12 @@
     <div class="container">
         <div class="row justify-content-center">
             <!-- <img src="/img/greek-parliament.jpg"> -->
-            <h2>Welcome</h2>
-            <br>
-            <p>greekparliament.info is a platform for the presentation of the greek parliament transcripts</p>
+            <div class="col-12">
+                <h2>Welcome</h2>
+            </div>
+            <div class="col-12" style="font-size: 1.3rem;">
+                <p>Greekparliament.info is a platform for the presentation of the greek parliament transcripts.</p>
+            </div>
         </div>
     </div>
 </template>
