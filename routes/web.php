@@ -38,3 +38,13 @@ Route::get('/dashboard', 'DashboardController@index');
 
 Route::get('parties','PagesController@parties');
 Route::get('/party/{name}', 'PagesController@party');
+
+// Locale
+Route::get('locale', function () {
+    return \App::getLocale();
+});
+
+Route::get('locale/{locale}', function ($locale) {
+    \Session::put('locale', $locale);
+    return redirect()->back();
+});

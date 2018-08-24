@@ -13,13 +13,13 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'forgot_password' => 'Forgot your password?',
-    'remember_me' => 'Remember me',
+    'failed' => 'Λάθος email ή λάθος κωδικός πρόσβασης.',
+    'throttle' => 'Πάρα πολλές αποτυχημένες προσπάθειες. Παρακαλώ δοκιμάστε αργότερα.',
+    'forgot_password' => 'Ξεχάσατε τον κωδικό σας;',
+    'remember_me' => 'Θυμήσου με',
     'email' => 'Email',
-    'password' => 'Password',
-    'login' => 'Login',
-    'logout' => 'Logout',
-    'register' => 'Register'
+    'password' => 'Κωδικός',
+    'login' => 'Σύνδεση',
+    'logout' => 'Αποσύνδεση',
+    'register' => 'Εγγραφή'
 ];

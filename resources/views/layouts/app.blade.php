@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!-- lang="{{ app()->getLocale() }}" -->
 <head>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -200,41 +201,30 @@
     <body>
 
         <div id="app" class="content-bg-color">
-            
+        
             <!-- Main nav -->
             <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color">
-            
                 <div class="container">
-                    
                     <a class="navbar-brand logo" style="color:#fff" href="{{ url('/') }}">
                         Greekparliament.info
                     </a>
-                    
-                    
-                    
                     <button class="navbar-toggler" type="button" data-toggle="collapse" 
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
                             aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-            
                     <speechsearch></speechsearch>
-            
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
-            
                             <!-- Authentication Links -->
                             @guest
-
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('auth.login') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('auth.register') }}</a>
                                 </li>
-
                             @else
 
                                 <li class="nav-item dropdown">
@@ -245,12 +235,12 @@
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
+                                        <!-- <a class="dropdown-item" href="/dashboard">Dashboard</a> -->
 
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            {{ __('auth.logout') }}
                                         </a>
                                         
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -262,6 +252,21 @@
                         </ul>
                     </div>
                 </div>
+                <!-- Language dropdown -->
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle  btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @if (app()->getLocale() === 'en')
+                            <img src="/img/flags/flag_uk.png" alt="{{__('navbar.lang')}}">
+                        @elseif (app()->getLocale() === 'el')
+                            <img src="/img/flags/flag_gr.png" alt="{{__('navbar.lang')}}">
+                        @endif
+                    </button>
+                    
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="nav-link" href="/locale/en">{{ __('navbar.lang_en') }}</a>
+                        <a class="nav-link" href="/locale/el">{{ __('navbar.lang_el') }}</a>
+                    </div>
+                </div>
             </nav>
             <!-- Main nav -->
             <hr class="divider" />
@@ -271,23 +276,20 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                                {{-- <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === '/home' ? 'active' : null }}" href="/home">Home</a>
-                                </li> --}}
                                 <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">Conferences</a>
+                                    <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">{{ __('navbar.conferences') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'parties' ? 'active' : null }}" href="/parties">Political Parties</a>
+                                    <a class="nav-link {{ Request::path() === 'parties' ? 'active' : null }}" href="/parties">{{ __('navbar.political_parties') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">Speakers</a>
+                                    <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">{{ __('navbar.speakers') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'speeches' ? 'active' : null }}" href="/speeches">Speeches</a>
+                                    <a class="nav-link {{ Request::path() === 'speeches' ? 'active' : null }}" href="/speeches">{{ __('navbar.speeches') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">About</a>
+                                    <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">{{ __('navbar.about') }}</a>
                                 </li>
                         </ul>
                     </div>
@@ -313,7 +315,7 @@
 
                             <!-- Content -->
                             <h5 class="font-weight-bold">Greekparliament.info</h5>
-                            <p>Online presentation of the Greek Parliament transcripts</p>
+                            <p>{{ __('footer.about_text') }}</p>
 
                         </div>
                         <!-- Grid column -->
@@ -328,22 +330,21 @@
 
                             <ul class="list-unstyled">
                                 <li>
-                                    <a class="nav-link {{ Request::path() === '/about' ? 'active' : null }}" href="/about">About us</a>
+                                    <a class="nav-link {{ Request::path() === '/about' ? 'active' : null }}" href="/about">{{ __('footer.about_us') }}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link {{ Request::path() === '/news' ? 'active' : null }}" href="/news">News</a>
+                                    <a class="nav-link {{ Request::path() === '/news' ? 'active' : null }}" href="/news">{{ __('footer.news') }}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link {{ Request::path() === '/contact' ? 'active' : null }}" href="/contact">Contact</a>
+                                    <a class="nav-link {{ Request::path() === '/contact' ? 'active' : null }}" href="/contact">{{ __('footer.contact') }}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link {{ Request::path() === '/donate' ? 'active' : null }}" href="/donate">Donate</a>
+                                    <a class="nav-link {{ Request::path() === '/donate' ? 'active' : null }}" href="/donate">{{ __('footer.donate') }}</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link {{ Request::path() === '/policy' ? 'active' : null }}" href="/policy">Privacy policy</a>
+                                    <a class="nav-link {{ Request::path() === '/policy' ? 'active' : null }}" href="/policy">{{ __('footer.privacy_policy') }}</a>
                                 </li>
                             </ul>
-
                         </div>
                         <!-- Grid column -->
 
