@@ -19,7 +19,6 @@ import ToggleButton from 'vue-js-toggle-button';
 import ReadMore from 'vue-read-more';
 
 //components
-import example from './components/ExampleComponent.vue';
 import navbar from './components/navbar.vue';
 import speakers from './components/speakers.vue';
 import parties from './components/parties.vue';
@@ -28,6 +27,7 @@ import speaker from './components/speaker.vue';
 import conferences from './components/conferences.vue';
 import conference from './components/conference.vue';
 import modal from './components/modal.vue';
+import speechsearch from './components/speechsearch.vue';
 
 Vue.use(VueRouter);
 Vue.use(ToggleButton);
@@ -35,7 +35,6 @@ Vue.use(ReadMore);
 
 // register globally
 Vue.component('pagination', laravelVuePagination);
-Vue.component('example-component', example);
 Vue.component('navbar', navbar);
 Vue.component('parties', parties);
 Vue.component('party', party);
@@ -46,6 +45,7 @@ Vue.component('conference', conference);
 Vue.component('modal', modal);
 Vue.component('multiselect', MultiSelect);
 Vue.component('datepicker', datepicker);
+Vue.component('speechsearch', speechsearch)
 
 Vue.filter('capitalize', function (value) {
     if (!value) return ''

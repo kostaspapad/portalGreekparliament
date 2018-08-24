@@ -15,6 +15,11 @@
 Route::get('/', 'PagesController@index')->name('start');
 
 Route::get('/about', 'PagesController@about');
+Route::get('/news', 'PagesController@news');
+Route::get('/contact', 'PagesController@contact');
+Route::get('/donate', 'PagesController@donate');
+Route::get('/policy', 'PagesController@policy');
+Route::get('/help', 'PagesController@help');
 
 Route::get('/speeches', 'PagesController@speeches');
 

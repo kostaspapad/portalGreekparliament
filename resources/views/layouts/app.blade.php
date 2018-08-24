@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58724981-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-58724981-1');
+    </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +23,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -20,17 +31,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <!-- Styles -->
     <style>
-        html, body {
-            background-color: #fff;
+         html, body {
+            background-color: #f3f1eb;
             color: #636b6f;
             font-family: 'Raleway', sans-serif;
             font-weight: 400;
             height: 100vh;
             margin: 0;
         }
-
+        
         .full-height {
             height: 100vh;
         }
@@ -55,9 +67,9 @@
             text-align: center;
         }
 
-        .title {
+        /* .title {
             font-size: 84px;
-        }
+        } */
 
         .links > a {
             color: #636b6f;
@@ -71,28 +83,194 @@
 
         .m-b-md {
             margin-bottom: 30px;
+        } 
+        
+        .logo {
+            background-color: #17a2b8;
+            padding: 10px;
         }
+
+        footer {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            background-color: #fff;
+        } 
+
+        hr.divider { 
+            margin: 0em;
+            border-width: 1px;
+        } 
+ .container-imagebox {
+        background-color:#1e374d;
+        padding-left:5%;
+    }
+
+    /* Container holding the image and the text */
+    .image-container {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+
+    /* Centered text */
+    .centered {
+        position: absolute;
+        top: 80%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+    } 
+
+    .image-text {
+        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        font-weight: 600;
+    }
+    
+    .imagebox-text-title {
+        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+        font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        color: #fff;
+    }
+    .imagebox-text {
+        padding-top:20px;
+        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        font-size: 18px;
+    }
+    
+    .search {
+        position: absolute;
+        top: 90%;
+        left: 47.5%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* css for home page*/
+    .container-imagebox {
+        background-color:#1e374d;
+        padding-left:5%;
+    }
+
+    /* Container holding the image and the text */
+    .image-container {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+
+    /* Centered text */
+    .centered {
+        position: absolute;
+        top: 80%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+    } 
+
+    .image-text {
+        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        font-weight: 600;
+    }
+    
+    .imagebox-text-title {
+        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+        font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        color: #fff;
+    }
+    .imagebox-text {
+        padding-top:20px;
+        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        font-size: 18px;
+    }
+    
+    .search {
+        position: absolute;
+        top: 90%;
+        left: 47.5%;
+        transform: translate(-50%, -50%);
+    }
     </style>
+
     </head>
+
     <body>
+
         <div id="app" class="content-bg-color">
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel navbar-bg-color">
+            
+            <!-- Main nav -->
+            <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color">
+            
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        <i class="fa fa-bullhorn" style="font-size:25px;"></i>
+                    
+                    <a class="navbar-brand logo" style="color:#fff" href="{{ url('/') }}">
                         Greekparliament.info
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    
+                    
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+                            aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+            
+                    <speechsearch></speechsearch>
+            
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
+            
+                            <!-- Authentication Links -->
+                            @guest
 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+
+                            @else
+
+                                <li class="nav-item dropdown">
+
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Main nav -->
+            <hr class="divider" />
+            <!-- Menu -->
+            <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color">
+                <div class="container">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            {{-- <li class="nav-item">
-                                <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">About</a>
-                            </li> --}}
-                            @if(!Auth::guest())
                                 {{-- <li class="nav-item">
                                     <a class="nav-link {{ Request::path() === '/home' ? 'active' : null }}" href="/home">Home</a>
                                 </li> --}}
@@ -111,48 +289,98 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">About</a>
                                 </li>
-                            @endif
-                        </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
-                            @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-                                        
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endguest
                         </ul>
                     </div>
                 </div>
             </nav>
+            <!-- Menu -->
+
             <div class="content" id="main_app">
-                {{-- <navbar></navbar> --}}
                 @yield('content')
-                {{-- <router-view></router-view> --}}
             </div>
+
+            <!-- Footer -->
+            <footer class="page-footer font-small pt-4">
+
+                <!-- Footer Links -->
+                <div class="container-fluid text-center text-md-left">
+
+                    <!-- Grid row -->
+                    <div class="row">
+
+                        <!-- Grid column -->
+                        <div class="col-md-6 mt-md-0 mt-3">
+
+                            <!-- Content -->
+                            <h5 class="font-weight-bold">Greekparliament.info</h5>
+                            <p>Online presentation of the Greek Parliament transcripts</p>
+
+                        </div>
+                        <!-- Grid column -->
+
+                        <hr class="clearfix w-100 d-md-none pb-3">
+
+                        <!-- Grid column -->
+                        <div class="col-md-3 mb-md-0 mb-3">
+
+                            <!-- Links -->
+                            <!-- <h5 class="text-uppercase">Links</h5> -->
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a class="nav-link {{ Request::path() === '/about' ? 'active' : null }}" href="/about">About us</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link {{ Request::path() === '/news' ? 'active' : null }}" href="/news">News</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link {{ Request::path() === '/contact' ? 'active' : null }}" href="/contact">Contact</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link {{ Request::path() === '/donate' ? 'active' : null }}" href="/donate">Donate</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link {{ Request::path() === '/policy' ? 'active' : null }}" href="/policy">Privacy policy</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <!-- <div class="col-md-3 mb-md-0 mb-3">
+
+                            
+                            <h5 class="text-uppercase">Links</h5>
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="#!">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!">Link 4</a>
+                                </li>
+                            </ul>
+
+                        </div> -->
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                </div>
+                <!-- Footer Links -->
+
+                <!-- Copyright -->
+                <!-- <div class="footer-copyright text-center py-3">© 2018 Copyright: -->
+                <!-- </div> -->
+                <!-- Copyright -->
+                
+            </footer>
+            <!-- Footer -->
             <!-- <main class="py-4">
                 @yield('content')
             </main> -->
