@@ -6,7 +6,11 @@
         <div class="image-container">
             <img src="/img/justice2.jpg" alt="">
             <h1 class="centered image-text">Find a speaker</h1>
-            <speechsearch class="search"></speechsearch>
+            {{-- <speechsearch class="search"></speechsearch> --}}
+            <search-input
+                btn_text="Find"
+                placeholder_text="Find a speaker"
+            ></search-input>
         </div>
         <div class="imagebox-text col-sm">
             <h2 class="imagebox-text-title">Democracy: it’s for everyone</h2>

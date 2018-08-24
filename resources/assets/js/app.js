@@ -21,13 +21,14 @@ import ReadMore from 'vue-read-more';
 //components
 import navbar from './components/navbar.vue';
 import speakers from './components/speakers.vue';
+import speakersNew from './components/speakersNew.vue';
 import parties from './components/parties.vue';
 import party from './components/party.vue';
 import speaker from './components/speaker.vue';
 import conferences from './components/conferences.vue';
 import conference from './components/conference.vue';
 import modal from './components/modal.vue';
-import speechsearch from './components/speechsearch.vue';
+import searchInput from './components/searchInput.vue';
 
 Vue.use(VueRouter);
 Vue.use(ToggleButton);
@@ -39,13 +40,14 @@ Vue.component('navbar', navbar);
 Vue.component('parties', parties);
 Vue.component('party', party);
 Vue.component('speakers', speakers);
+Vue.component('speakers-new', speakersNew);
 Vue.component('speaker', speaker);
 Vue.component('conferences', conferences);
 Vue.component('conference', conference);
 Vue.component('modal', modal);
 Vue.component('multiselect', MultiSelect);
 Vue.component('datepicker', datepicker);
-Vue.component('speechsearch', speechsearch)
+Vue.component('search-input', searchInput)
 
 Vue.filter('capitalize', function (value) {
     if (!value) return ''
