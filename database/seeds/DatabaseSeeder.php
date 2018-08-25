@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->call(MembershipsTableSeeder::class);
         $this->command->info('Memberships table seeded!');
         
+        $this->call(PartyColorTableSeeder::class);
+        $this->command->info('Party colors table seeded!');
+
         $this->command->info('------------------------');
         $this->command->info('Table seeding successful');
         $this->command->info('------------------------');

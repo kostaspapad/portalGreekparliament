@@ -1,0 +1,106 @@
+[
+    {
+        "party_id": "anexartitoidimokratikoivouleftes",
+        "color": "#b0c4de"
+    },
+    {
+        "party_id": "anexartitoiellines",
+        "color": "#1abcd9"
+    },
+    {
+        "party_id": "allianceofprogressiveandleftforces",
+        "color": "#ffb6c1"
+    },
+    {
+        "party_id": "coalitionoftheleftandprogress",
+        "color": "#ff8080"
+    },
+    {
+        "party_id": "communistpartyofgreece",
+        "color": "#c80000"
+    },
+    {
+        "party_id": "democraticcoalition",
+        "color": "#ff8080"
+    },
+    {
+        "party_id": "dhmar",
+        "color": "#ff4100"
+    },
+    {
+        "party_id": "diana",
+        "color": "#ffff00"
+    },
+    {
+        "party_id": "dikki",
+        "color": "#ff8952"
+    },
+    {
+        "party_id": "edauniteddemocraticleft",
+        "color": "#49b6e6"
+    },
+    {
+        "party_id": "edik",
+        "color": "#ffbf00"
+    },
+    {
+        "party_id": "independent",
+        "color": "#686868"
+    },
+    {
+        "party_id": "laos",
+        "color": "#000080"
+    },
+    {
+        "party_id": "kke",
+        "color": "#c80000"
+    },
+    {
+        "party_id": "laikienotita",
+        "color": "#b51442"
+    },
+    {
+        "party_id": "laikossyndesmoschrysiavgi",
+        "color": "#000000"
+    },
+    {
+        "party_id": "nd",
+        "color": "#1569c7"
+    },
+    {
+        "party_id": "nationalalignment",
+        "color": "#0c578e"
+    },
+    {
+        "party_id": "neoliberalsparty",
+        "color": "#add8e6"
+    },
+    {
+        "party_id": "pasok",
+        "color": "#2d902d"
+    },
+    {
+        "party_id": "pola",
+        "color": "#0000ff"
+    },
+    {
+        "party_id": "syriza",
+        "color": "#fa8072"
+    },
+    {
+        "party_id": "topotami",
+        "color": "#9c514a"
+    },
+    {
+        "party_id": "unionofcentrists",
+        "color": "#ff7f50"
+    },
+    {
+        "party_id": "unionofthedemocraticcentre",
+        "color": "#ffbf00"
+    },
+    {
+        "party_id": "ecologists",
+        "color": "#90ee90"
+    }
+]

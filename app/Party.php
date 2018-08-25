@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\PartyColor;
 
 class Party extends Model
 {
@@ -27,4 +28,12 @@ class Party extends Model
     {
         return $this->belongsTo('App\Membership', 'on_behalf_of_id', 'party_id');
     }
+
+    /**
+     * Get the comments for the blog post.
+     */
+     public function party_colors()
+     {
+         return $this->hasMany('App\PartyColor', 'party_id', 'party_id');
+     }
 }
