@@ -15,6 +15,10 @@ class PagesController extends Controller
         return view('pages.home');
     }
 
+    public function home(Route $route){
+        return view('pages.home');
+    }
+
     public function about(Route $route){
         return view('pages.about');
     }
