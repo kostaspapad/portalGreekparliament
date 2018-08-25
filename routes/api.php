@@ -19,8 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Throttle specifies how many requests per minute
 // Run tests with ./vendor/bin/phpunit (Install phpunit with composer)
-Route::group(['prefix' => 'v1'], function () {
+Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () {
     /*
     |-------------------------------------------------------------------------------
     | Parties API endpoints
@@ -86,7 +87,7 @@ Route::group(['prefix' => 'v1'], function () {
     | Get a single speech by id
     |-------------------------------------------------------------------------------
     | URL:            /api/speech/{id}
-    | Sample:         http/v1://localhost:8000/api/speech/200510131000
+    | Sample:         http://localhost:8000/api/v1/speech/200510131000
     | Controller:     api\v1\SpeechesController@getSpeechById
     | Method:         GET
     */
@@ -125,7 +126,7 @@ Route::group(['prefix' => 'v1'], function () {
     | Get speeches of a speaker by name
     |-------------------------------------------------------------------------------
     | URL:            /api/speeches/speaker/name/{speaker_name}
-    | Sample:         http/v1://localhost:8000/api/speeches/speaker/name/Τσούκαλης Σπυρίδωνος Νικόλαος
+    | Sample:         http://localhost:8000/api/v1/speeches/speaker/name/Τσούκαλης Σπυρίδωνος Νικόλαος
     | Controller:     api\v1\SpeechesController@speechBySpeakerName
     | Method:         GET
     | Description:    Gets all of the speeches of a speaker specified by greek_name
@@ -138,7 +139,7 @@ Route::group(['prefix' => 'v1'], function () {
     | Get speeches of a party by party id
     |-------------------------------------------------------------------------------
     | URL:            /api/speeches/party/{speaker_id}
-    | Sample:         http/v1://localhost:8000/api/speeches/party/syriza
+    | Sample:         http://localhost:8000/api/v1/speeches/party/syriza
     | Controller:     api\v1\SpeechesController@speechBySpeakerName
     | Method:         GET
     | Description:    Gets all of the speeches of a speaker specified by greek_name
