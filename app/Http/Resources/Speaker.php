@@ -14,7 +14,7 @@ class Speaker extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $arr = [
             'speaker_id' => $this->speaker_id,
             'english_name' => $this->english_name,
             'greek_name' => $this->greek_name,
@@ -23,8 +23,13 @@ class Speaker extends JsonResource
             'wiki_el' => $this->wiki_el,
             'wiki_en' => $this->wiki_en,
             'twitter' => $this->twitter,
-            'website' => $this->website
+            'website' => $this->website,
+            'party_id' => $this->fullname_el,
+            'color' => $this->color,
         ];
+
+        // array_filter without second argument removes null elements of entry array
+        return array_filter((array) $arr);
     }
 
     /**
