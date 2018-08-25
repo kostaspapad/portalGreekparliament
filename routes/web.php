@@ -20,6 +20,7 @@ Route::get('/contact', 'PagesController@contact');
 Route::get('/donate', 'PagesController@donate');
 Route::get('/policy', 'PagesController@policy');
 Route::get('/help', 'PagesController@help');
+Route::get('/home', 'PagesController@home')->name('home');
 
 Route::get('/speeches', 'PagesController@speeches');
 
@@ -40,10 +41,12 @@ Route::get('parties','PagesController@parties');
 Route::get('/party/{name}', 'PagesController@party');
 
 // Locale
+// Get locale
 Route::get('locale', function () {
     return \App::getLocale();
 });
 
+// Set locale
 Route::get('locale/{locale}', function ($locale) {
     \Session::put('locale', $locale);
     return redirect()->back();
