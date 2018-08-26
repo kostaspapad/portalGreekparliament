@@ -44,6 +44,7 @@
                             <img :src="path + '/' + printImg(speaker.image) " class="person-img">
                             <h2 class="person-name text-left">{{speaker.greek_name}}</h2>
                             <p class="person-membership text-left">
+                                <span class="party-name">{{speaker.party_fullname}}</span>
                                 <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
                             </p>
                         </a>
