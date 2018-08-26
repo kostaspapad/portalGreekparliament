@@ -131,7 +131,7 @@
             getConferenceSpeeches(){
                 var self = this;
                 self.ajaxDone = false
-                axios.get(this.$parent.host+'/api/v1/conference/'+ this.conf_date +'/speeches')
+                axios.get(this.$root.host+'/api/v1/conference/'+ this.conf_date +'/speeches')
                 .then(function(response){
                     if(response.status == 200 && response.statusText == "OK"){
                         self.noData = false
@@ -162,7 +162,7 @@
             },
             getConferenceInfo(){
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/conference/date/'+ this.conf_date)
+                axios.get(this.$root.host+'/api/v1/conference/date/'+ this.conf_date)
                 .then(function(response){
                     if(response.status == 200 && response.statusText == "OK"){
                         //self.noData = false

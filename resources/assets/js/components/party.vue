@@ -162,7 +162,7 @@
             },
             getPartySpeeches(){
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/speeches/party/party_id/'+this.finalName)
+                axios.get(this.$root.host+'/api/v1/speeches/party/party_id/'+this.finalName)
                 .then(function(response){
                     if(response.status == 200 && response.data.data){
                         self.ajaxData.speechesData = response.data.data
@@ -174,7 +174,7 @@
             },
             getPartyData(){
                 var self = this
-                axios.get(this.$parent.host+'/api/v1/party/'+this.finalName)
+                axios.get(this.$root.host+'/api/v1/party/'+this.finalName)
                 .then(function(response){
                     if(response.status == 200 && response.data.data){
                         self.ajaxData.partyData = response.data.data

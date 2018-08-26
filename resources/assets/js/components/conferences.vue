@@ -145,7 +145,7 @@
             changePage(page){
                 //for pagination
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/conferences?page=' + page)
+                axios.get(this.$root.host+'/api/v1/conferences?page=' + page)
                 .then(function(response){
                     if(response.status == 200 && response.statusText == "OK"){
                         self.ajaxData.conferencesData = response.data.conferences;
@@ -168,7 +168,7 @@
             getConferences(){
                 //get all conferences
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/conferences')
+                axios.get(this.$root.host+'/api/v1/conferences')
                 .then(function(response){
                     if(response.status == 200 && response.statusText == "OK"){
                         self.ajaxData.conferencesData = response.data.conferences;
@@ -192,7 +192,7 @@
                 if(this.startDate && this.endDate){
                     this.startDate = moment(this.startDate).format('YYYY-MM-DD')
                     this.endDate = moment(this.endDate).format('YYYY-MM-DD')
-                    axios.get(this.$parent.host+'/api/v1/conference/start/'+this.startDate+'/end/'+this.endDate)
+                    axios.get(this.$root.host+'/api/v1/conference/start/'+this.startDate+'/end/'+this.endDate)
                     .then(function(response){
                         console.log(response)
                         if(response.status == 200 && response.statusText == "OK"){

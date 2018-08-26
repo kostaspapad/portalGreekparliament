@@ -202,7 +202,7 @@
             },
             changePage(page){
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/parties?page=' + page)
+                axios.get(this.$root.host+'/api/v1/parties?page=' + page)
                 .then(function(response){
                     self.ajaxData.partiesData = response;
                 })
@@ -212,7 +212,7 @@
             },
             changePageParty(page){
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/parties?page=' + page+'&fullname_el='+this.search_msg)
+                axios.get(this.$root.host+'/api/v1/parties?page=' + page+'&fullname_el='+this.search_msg)
                 .then(function(response){
                     self.ajaxData.search_data = response;
                 })
@@ -231,7 +231,7 @@
             },
             getParties(){
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/parties')
+                axios.get(this.$root.host+'/api/v1/parties')
                 .then(function(response){
                     self.ajaxData.partiesData = response;
                 })

@@ -1,145 +1,54 @@
 <template>
     <div class="container">
-        <div v-if="ajaxData.speakersData.data" class="row">
-            <div class="row w-100 mt-2">
-                <div class="col-12">
-                    <div class="input-group mb-3" style="width:275px;">
-                        <input v-model.trim="search_msg" @keypress.enter="findSpeaker" type="text" class="form-control py-2 border-right-0 border" placeholder="Search" style="/*width:200px;*/" />
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent"><i class="fa fa-search"></i></span>
-                        </div>
-                        <div style="margin: 2px 0 0 5px;">
-                            <button @click="findSpeaker" class="btn" style="background-color:#17a2b8;color:white;">Search</button>
-                        </div>
-                    </div>
-                </div>
+        <div v-if="ajaxData.speakersData.data" class="row mt-5 speakers-bg">
+            <!-- <search-input
+                btn_text="Find"
+                placeholder_text="Find speaker"
+            ></search-input> -->
+            <div class="mt-5 col-12 col-md-6 speaker-search">
+                <search-plugin></search-plugin>
             </div>
-            <div class="row w-100">
+            <!-- <div class="row w-100">
                 <div class="col-12">
                     <p>{{search_result_msg}}</p>
                 </div>
-            </div>
+            </div> -->
             <div v-if="speaker_search_result_msg" class="row w-100">
                 <div class="row w-100" v-if="!is_search_msg_empty && showResults" style="width:100%">
                     <!-- <div class="col-12 text-center"><p>{{search_result_msg}}</p></div> -->
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <pagination :data="ajaxData.search_data.data.meta" @pagination-change-page="changePageSpeaker" :limit=2>
                             <span slot="prev-nav">&lt; Previous</span>
                             <span slot="next-nav">Next &gt;</span>
                         </pagination>
+                    </div> -->
+                    <div class="col-12"  v-for="speaker in ajaxData.search_data.data.data" :key="speaker.id" style="margin-bottom: 15px;">
+                        
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 card-deck"  v-for="speaker in ajaxData.search_data.data.data" :key="speaker.id" style="margin-bottom: 15px;">
-                        <div class="card" >
-                            <div v-if="speaker.image != '' " class="card-img-top-bg">
-                                <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
-                            </div>
-                            <div v-else class="card-img-top">
-                                <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
-                            </div>
-                            <div class="card-body">
-                                <div class="names">
-                                    <h5 class="card-title">Names </h5>
-                                    <span v-if="speaker.greek_name != '' ">{{speaker.greek_name}}</span>
-                                    <span v-if="speaker.greek_name != '' && speaker.english_name != '' ">/</span>
-                                    <span v-if="speaker.english_name != '' ">{{speaker.english_name}}</span>
-                                </div>
-                                <div class="email addSpace">
-                                    <h5 class="card-title">Email </h5>
-                                    <p class="card-text">{{speaker.email}}</p>
-                                </div>
-                                <div class="website addSpace">
-                                    <h5 class="card-title">Website </h5>
-                                    <p class="card-text"><a :href="speaker.website">{{speaker.website}}</a></p>
-                                </div>
-                            </div>
-                            <div class="links card-footer">
-                                <div>
-                                    <span v-if="speaker.wiki_el == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EL) </span>
-                                    <span v-else><a :href="speaker.wiki_el"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EL) </span>
-                                    <span v-if="speaker.wiki_en == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EN) </span>
-                                    <span v-else><a :href="speaker.wiki_en"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EN) </span>
-                                    <span class="twitter" v-if="speaker.twitter == '' ">
-                                            <i class="fab fa-twitter-square iconsFont"></i>
-                                    </span>
-                                    <span class="twitter" v-else>
-                                        <a :href="speaker.twitter">
-                                            <i class="fab fa-twitter-square iconsFont" style="color:#17a2b8;"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                                <div>
-                                    <button @click="showModal(speaker)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
-                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show speeches</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <pagination :data="ajaxData.search_data.data.meta" @pagination-change-page="changePageSpeaker" :limit=2>
                             <span slot="prev-nav">&lt; Previous</span>
                             <span slot="next-nav">Next &gt;</span>
                         </pagination>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row w-100" v-else>
-                    <div class="col-12">
-                        <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=2>
+                    <div class="col-12" style="padding-left: 2.5rem;">
+                        <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
                             <span slot="prev-nav">&lt;</span>
                             <span slot="next-nav">&gt;</span>
                         </pagination>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 card-deck"  v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.id" style="margin-bottom: 15px;">
-                        <div class="card" >
-                            <div v-if="speaker.image != '' " class="card-img-top-bg">
-                                <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
-                            </div>
-                            <div v-else class="card-img-top">
-                                <img :src="path + '/' + printImg(speaker.image) " class="img-fluid img-style card-img-top">
-                            </div>
-                            <div class="card-body">
-                                <div class="names">
-                                    <h5 class="card-title">Names </h5>
-                                    <p class="card-text">
-                                        <span v-if="speaker.greek_name != '' ">{{speaker.greek_name}}</span>
-                                        <span v-if="speaker.greek_name != '' && speaker.english_name != '' ">/</span>
-                                        <span v-if="speaker.english_name != '' ">{{speaker.english_name}}</span>
-                                    </p>
-                                </div>
-                                <div class="email addSpace" v-if="speaker.email != '' ">
-                                    <h5 class="card-title">Email </h5>
-                                    <p class="card-text">{{speaker.email}}</p>
-                                </div>
-                                <div class="website addSpace" v-if="speaker.website != '' ">
-                                    <h5 class="card-title">Website </h5>
-                                    <p class="card-text"><a :href="speaker.website">{{speaker.website}}</a></p>
-                                </div>
-                                <div>
-                                    
-                                </div>
-                            </div>
-                            <div class="links card-footer">
-                                <div>
-                                    <span v-if="speaker.wiki_el == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EL) </span>
-                                    <span v-else><a :href="speaker.wiki_el"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EL) </span>
-                                    <span v-if="speaker.wiki_en == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EN) </span>
-                                    <span v-else><a :href="speaker.wiki_en"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EN) </span>
-                                    <span class="twitter" v-if="speaker.twitter == '' ">
-                                            <i class="fab fa-twitter-square iconsFont"></i>
-                                    </span>
-                                    <span class="twitter" v-else>
-                                        <a :href="speaker.twitter">
-                                            <i class="fab fa-twitter-square iconsFont" style="color:#17a2b8;"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                                <div>
-                                    <button @click="showModal(speaker)" class="btn btn-info btn-sm" style="margin-top:8px;">View more</button>
-                                    <a :href="/speaker/ + speaker.greek_name" class="btn btn-info btn-sm" style="margin-top:8px;">Show speeches</a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-12 speaker"  v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.id" style="margin-bottom: 15px;">
+                        <a :href="/speaker/ + speaker.greek_name" class="person-link">
+                            <img :src="path + '/' + printImg(speaker.image) " class="person-img">
+                            <h2 class="person-name text-left">{{speaker.greek_name}}</h2>
+                            <p class="person-membership text-left">
+                                <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
+                            </p>
+                        </a>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12" style="padding-left: 2.5rem;">
                         <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
                             <span slot="prev-nav">&lt;</span>
                             <span slot="next-nav">&gt;</span>
@@ -152,64 +61,67 @@
         <div v-else>
             <img :src="path + '/Spinner.gif' "/>
         </div>
-        <modal title="Details" :speaker="selected_speaker" modalClasses="mine" :is-large="true" v-if="show_modal" @close="show_modal = false">
-            <div class="modal-body">
-                <div class="img-body"><img :src="path + '/' + selected_speaker.image" class="" style="width: 30%;"></div>
-                <div class="details-content text-left">
-                    <!-- <table class="table bordeless">
-                        <thead>
-                            <th>Greek name</th>
-                            <th>English name</th>
-                            <th>Email</th>
-                            <th>Links</th>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table> -->
-                    <div>
-                        <label>Greek name:</label>
-                        <span v-if="selected_speaker.greek_name != '' ">{{selected_speaker.greek_name}}</span>
-                        <span v-else>Not available</span>
-                    </div>
-                    <div>
-                        <label>English name:</label>
-                        <span v-if="selected_speaker.english_name != '' ">{{selected_speaker.english_name}}</span>
-                        <span v-else>Not available</span>
-                    </div>
-                    <div>
-                        <label>Email:</label>
-                        <span v-if="selected_speaker.email != '' ">{{selected_speaker.email}}</span>
-                        <span v-else>Not available</span>
-                    </div>
-                    <div v-if="checkLinks(selected_speaker)">
-                        <label style="float:left;">Links:</label>
-                        <ul style="display:inline-block;padding-left: 15px;">
-                            <li v-if="selected_speaker.website != '' "><a :href="selected_speaker.website">website</a></li>
-                            <li v-if="selected_speaker.wiki_el != '' "><a :href="selected_speaker.wiki_el">wiki-el</a></li>
-                            <li v-if="selected_speaker.wiki_en != '' "><a :href="selected_speaker.wiki_en">wiki-en</a></li>
-                            <li v-if="selected_speaker.twitter != '' "><a :href="selected_speaker.twitter">twitter</a></li>
-                        </ul>
-                    </div>
-                    <div v-else>
-                        <label>Links:</label>
-                        <span>No Links</span>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" @click="show_modal = false">Close</button>
-            </div>
-        </modal>
     </div>
 </template>
 
 <style scoped>
-    /* hide the blue outline */
-    .form-control:focus {
-        outline: 0 !important;
-        border-color: initial;
-        box-shadow: none;
+    .speaker-search, .speaker{
+        padding-left: 2rem;
+    }
+    .party-indicator{
+        content: "";
+        display: inline-block;
+        height: 0.6em;
+        width: 0.6em;
+        -moz-border-radius: 0.6em;
+        -webkit-border-radius: 0.6em;
+        border-radius: 0.6em;
+        margin-right: 0.3em;
+        vertical-align: 0.05em;
+    }
+    .speakers-bg{
+        background-color: #ffffff;
+    }
+    .person-link{
+        display: block;
+        padding: 1.2em 0 1.2em 60px;
+        border-top: 1px solid #f3f1eb;
+        position: relative;
+        color: inherit;
+        width: fit-content;
+    }
+    .person-img {
+        position: absolute;
+        top: 1.2em;
+        left: 0;
+        width: 45px;
+    }
+    .person-name{
+        color: inherit;
+        margin: 0;
+        line-height: 1.2em;
+        font-size: 1.4rem;
+    }
+    .person-name:hover{
+        color:#62b356;
+    }
+    .person-link:hover, .person-link:focus {
+        text-decoration: none;
+        color: inherit;
+    }
+    .person-link:hover .person-name, .person-link:focus .person-name {
+        color: #62b356;
+        text-decoration: underline;
+    }
+    .person-membership {
+        margin: 0.2em -0.3em 0 0;
+        line-height: 1.4em;
+        color: #878582;
+    }
+    @media (max-width: 460px) {
+        .person-name{
+            font-size: 1.2rem;
+        }
     }
 </style>
 
@@ -240,7 +152,7 @@
             },
             findSpeaker(){
                 var self = this;
-                axios.get(self.$parent.host+'/api/v1/speakers/search/'+self.search_msg)
+                axios.get(this.$root.host+'/api/v1/speakers/search/'+self.search_msg)
                 .then(function(response){
                     if(response.status == 200 && response.data.data.length > 0){
                         self.ajaxData.search_data = response;
@@ -257,7 +169,7 @@
             },
             changePage(page){
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/speakers?page=' + page)
+                axios.get(this.$root.host+'/api/v1/speakers?page=' + page)
                 .then(function(response){
                     self.ajaxData.speakersData = response;
                 })
@@ -267,7 +179,7 @@
             },
             changePageSpeaker(page){
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/speakers?page=' + page+'&name='+this.search_msg)
+                axios.get(this.$root.host+'/api/v1/speakers?page=' + page+'&name='+this.search_msg)
                 .then(function(response){
                     self.ajaxData.search_data = response;
                 })
@@ -286,7 +198,7 @@
             },
             getSpeakers(){
                 var self = this;
-                axios.get(this.$parent.host+'/api/v1/speakers')
+                axios.get(this.$root.host+'/api/v1/speakers')
                 .then(function(response){
                     self.ajaxData.speakersData = response;
                 })
