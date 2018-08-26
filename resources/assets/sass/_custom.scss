@@ -1,5 +1,23 @@
 // .content-bg-color{ background-color: red!important }
 // .navbar-bg-color{ background-color: green!important }
+html {height: 100%;}
+body {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+html, body {
+    background-color: #f3f1eb;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    // height: 100vh;
+    min-height:100%;
+    margin: 0;
+}
+@media (min-width: 768px){
+    nav{ padding: 0!important;}
+}
 .navbar-nav .nav-item:hover{
     background-color: rgba(0, 123, 255, 0.25);
 }
@@ -107,7 +125,121 @@
     opacity: 0;
 }
 
+.full-height {
+    height: 100vh;
+}
 
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+} 
+
+.logo {
+    background-color: #17a2b8;
+    padding: 10px;
+}
+
+
+hr.divider { 
+    margin: 0em;
+    border-width: 1px;
+} 
+
+/* Container holding the image and the text */
+.image-container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+/* Centered text */
+.centered {
+    position: absolute;
+    top: 80%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+} 
+
+.image-text {
+    font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    font-weight: 600;
+}
+
+.imagebox-text-title {
+    font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    color: #fff;
+}
+.imagebox-text {
+    padding-top:20px;
+    font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    font-size: 18px;
+    text-align: justify;
+}
+
+/* css for home page*/
+.container-imagebox {
+    background-color:#1e374d;
+    // padding-left:5%;
+}
+
+/* Container holding the image and the text */
+.image-container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.search {
+    position: absolute;
+    top: 90%;
+    left: 47.5%;
+    transform: translate(-50%, -50%);
+}
+
+//footer
+.page-footer{
+    // position: absolute;
+    // bottom: 0;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+    display: table-footer-group;
+    height: 1px;
+}
 
 //scrollbar
 /* width */

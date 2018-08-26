@@ -1,210 +1,47 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<!-- lang="{{ app()->getLocale() }}" -->
-<head>
+    <!-- lang="{{ app()->getLocale() }}" -->
+    <head>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58724981-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58724981-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-        gtag('config', 'UA-58724981-1');
-    </script>
+            gtag('config', 'UA-58724981-1');
+        </script>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Greekparliament.info</title>
+        <title>Greekparliament.info</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-         html, body {
-            background-color: #f3f1eb;
-            color: #636b6f;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 400;
-            height: 100vh;
-            margin: 0;
-        }
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
         
-        .full-height {
-            height: 100vh;
-        }
+        <!-- Fonts -->
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        /* .title {
-            font-size: 84px;
-        } */
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        } 
-        
-        .logo {
-            background-color: #17a2b8;
-            padding: 10px;
-        }
-
-        footer {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-            background-color: #fff;
-        } 
-
-        hr.divider { 
-            margin: 0em;
-            border-width: 1px;
-        } 
- .container-imagebox {
-        background-color:#1e374d;
-        padding-left:5%;
-    }
-
-    /* Container holding the image and the text */
-    .image-container {
-        position: relative;
-        text-align: center;
-        color: white;
-    }
-
-    /* Centered text */
-    .centered {
-        position: absolute;
-        top: 80%;
-        left: 25%;
-        transform: translate(-50%, -50%);
-    } 
-
-    .image-text {
-        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        font-weight: 600;
-    }
-    
-    .imagebox-text-title {
-        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
-        font-weight: 600;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        color: #fff;
-    }
-    .imagebox-text {
-        padding-top:20px;
-        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
-        color: #fff;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        font-size: 18px;
-    }
-    
-    .search {
-        position: absolute;
-        top: 90%;
-        left: 47.5%;
-        transform: translate(-50%, -50%);
-    }
-
-    /* css for home page*/
-    .container-imagebox {
-        background-color:#1e374d;
-        padding-left:5%;
-    }
-
-    /* Container holding the image and the text */
-    .image-container {
-        position: relative;
-        text-align: center;
-        color: white;
-    }
-
-    /* Centered text */
-    .centered {
-        position: absolute;
-        top: 80%;
-        left: 25%;
-        transform: translate(-50%, -50%);
-    } 
-
-    .image-text {
-        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        font-weight: 600;
-    }
-    
-    .imagebox-text-title {
-        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
-        font-weight: 600;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        color: #fff;
-    }
-    .imagebox-text {
-        padding-top:20px;
-        font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
-        color: #fff;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        font-size: 18px;
-    }
-    
-    .search {
-        position: absolute;
-        top: 90%;
-        left: 47.5%;
-        transform: translate(-50%, -50%);
-    }
-    </style>
+        <!-- CSS -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     </head>
 
-    <body>
+    <body style="margin-bottom: 0!important;">
 
         <div id="app" class="content-bg-color">
         
             <!-- Main nav -->
             <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color">
-                <div class="container">
+                <div class="container-fluid ml-0">
                     <a class="navbar-brand logo" style="color:#fff" href="{{ url('/') }}">
                         Greekparliament.info
                     </a>
@@ -213,7 +50,7 @@
                             aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <speechsearch></speechsearch>
+                    {{-- <speechsearch></speechsearch> --}}
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
@@ -249,30 +86,30 @@
                                     </div>
                                 </li>
                             @endguest
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @if (app()->getLocale() === 'en')
+                                        <img src="/img/flags/flag_uk.png" alt="{{__('navbar.lang')}}">
+                                    @elseif (app()->getLocale() === 'el')
+                                        <img src="/img/flags/flag_gr.png" alt="{{__('navbar.lang')}}">
+                                    @endif
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="/locale/en">{{ __('navbar.lang_en') }}</a>
+                                        <a class="dropdown-item" href="/locale/el">{{ __('navbar.lang_el') }}</a>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <!-- Language dropdown -->
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle  btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @if (app()->getLocale() === 'en')
-                            <img src="/img/flags/flag_uk.png" alt="{{__('navbar.lang')}}">
-                        @elseif (app()->getLocale() === 'el')
-                            <img src="/img/flags/flag_gr.png" alt="{{__('navbar.lang')}}">
-                        @endif
-                    </button>
-                    
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="nav-link" href="/locale/en">{{ __('navbar.lang_en') }}</a>
-                        <a class="nav-link" href="/locale/el">{{ __('navbar.lang_el') }}</a>
-                    </div>
-                </div>
+                
             </nav>
             <!-- Main nav -->
             <hr class="divider" />
             <!-- Menu -->
             <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color">
-                <div class="container">
+                <div class="container ml-0">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
@@ -297,12 +134,17 @@
             </nav>
             <!-- Menu -->
 
-            <div class="content" id="main_app">
+            <div class="content mb-5" id="main_app">
                 @yield('content')
             </div>
 
-            <!-- Footer -->
-            <footer class="page-footer font-small pt-4">
+           
+            <!-- <main class="py-4">
+                @yield('content')
+            </main> -->
+        </div>
+         <!-- Footer -->
+         <footer class="footer page-footer font-small pt-4">
 
                 <!-- Footer Links -->
                 <div class="container-fluid text-center text-md-left">
@@ -382,9 +224,5 @@
                 
             </footer>
             <!-- Footer -->
-            <!-- <main class="py-4">
-                @yield('content')
-            </main> -->
-        </div>
     </body>
 </html>

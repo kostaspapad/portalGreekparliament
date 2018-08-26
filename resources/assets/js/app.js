@@ -12,7 +12,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import laravelVuePagination from 'laravel-vue-pagination';
-import MultiSelect from 'vue-multiselect';
+//import MultiSelect from 'vue-multiselect';
+import MultiSelect from './multiselect_custom';
 import datepicker from 'vuejs-datepicker';
 import moment from 'moment';
 import ToggleButton from 'vue-js-toggle-button';
@@ -21,7 +22,6 @@ import ReadMore from 'vue-read-more';
 //components
 import navbar from './components/navbar.vue';
 import speakers from './components/speakers.vue';
-import speakersNew from './components/speakersNew.vue';
 import parties from './components/parties.vue';
 import party from './components/party.vue';
 import speaker from './components/speaker.vue';
@@ -29,6 +29,7 @@ import conferences from './components/conferences.vue';
 import conference from './components/conference.vue';
 import modal from './components/modal.vue';
 import searchInput from './components/searchInput.vue';
+import search from './components/searchSpeaker.vue';
 
 Vue.use(VueRouter);
 Vue.use(ToggleButton);
@@ -40,14 +41,14 @@ Vue.component('navbar', navbar);
 Vue.component('parties', parties);
 Vue.component('party', party);
 Vue.component('speakers', speakers);
-Vue.component('speakers-new', speakersNew);
 Vue.component('speaker', speaker);
 Vue.component('conferences', conferences);
 Vue.component('conference', conference);
 Vue.component('modal', modal);
-Vue.component('multiselect', MultiSelect);
+Vue.component('custom-multiselect', MultiSelect);
 Vue.component('datepicker', datepicker);
 Vue.component('search-input', searchInput)
+Vue.component('search-plugin', search)
 
 Vue.filter('capitalize', function (value) {
     if (!value) return ''
