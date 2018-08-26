@@ -76,7 +76,7 @@
                 }
             },
             goToProfile(selected){
-                window.location = this.$parent.host + '/speaker/' + selected.greek_name
+                window.location = this.$root.host + '/speaker/' + selected.greek_name
             }
         },
         computed:{
