@@ -129,7 +129,7 @@ class SpeakersController extends Controller
 
         $speaker = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
             ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
-            ->join('party_colors as c', 'c.party_id', '=', 'p.party_id')
+            ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
             ->select([
                 'speakers.speaker_id', 
                 'speakers.english_name',

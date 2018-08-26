@@ -21,5 +21,5 @@ return [
     'password' => 'Password',
     'login' => 'Login',
     'logout' => 'Logout',
-    'register' => 'Register'
+    'register' => 'Join'
 ];
