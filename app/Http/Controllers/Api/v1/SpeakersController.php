@@ -178,9 +178,7 @@ class SpeakersController extends Controller
                     $this->order_field = 'speakers.'.$this->order_field;
                 }
             }
-        } else {
-            return ['Error' => 'Invalid query parameters'];
-        }
+        } 
 
         $speaker_name = '%'.$speaker_name.'%';
         $name_lang = '';
