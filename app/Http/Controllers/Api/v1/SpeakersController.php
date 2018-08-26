@@ -32,9 +32,6 @@ class SpeakersController extends Controller
 
     public function index(){
         // Query parameter validation
-        if($this->order_field == '' || $this->order_orientation == ''){
-            return ['Error' => 'Invalid arguments'];
-        }
         if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)){
             return ['Error' => 'Invalid order field'];
         }
@@ -162,6 +159,29 @@ class SpeakersController extends Controller
      * memberships of a speaker that has changed more than one party
      */ 
     public function searchSpeakerByName($speaker_name){
+        if((isset($this->order_orientation) && !empty($this->order_orientation)) &&
+           (isset($this->order_field) && !empty($this->order_field))){
+            // Query parameter validation
+            if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)){
+                return ['Error' => 'Invalid order field'];
+            }
+            
+            if ($this->order_orientation && !in_array($this->order_orientation, $this->orientations)){
+                return ['Error' => 'Invalid order orientation'];
+            }
+            
+            // Create dynamic field for query
+            if ($this->order_field){
+                if($this->order_field == 'fullname_el'){
+                    $this->order_field = 'p.'.$this->order_field;
+                } else {
+                    $this->order_field = 'speakers.'.$this->order_field;
+                }
+            }
+        } else {
+            return ['Error' => 'Invalid query parameters'];
+        }
+
         $speaker_name = '%'.$speaker_name.'%';
         $name_lang = '';
         
