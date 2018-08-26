@@ -19,12 +19,14 @@ class Speaker extends JsonResource
             'english_name' => $this->english_name,
             'greek_name' => $this->greek_name,
             'image' => $this->image,
+            'party_image' => $this->party_image,
             'email' => $this->email,
             'wiki_el' => $this->wiki_el,
             'wiki_en' => $this->wiki_en,
             'twitter' => $this->twitter,
             'website' => $this->website,
-            'party_id' => $this->fullname_el,
+            'party_id' => $this->party_id,
+            'party_fullname' => $this->fullname_el,
             'color' => $this->color,
         ];
 

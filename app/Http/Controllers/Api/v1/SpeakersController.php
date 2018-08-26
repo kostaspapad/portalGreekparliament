@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\api\v1;
-
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Speaker;
@@ -9,42 +9,102 @@ use App\Http\Resources\Speaker as SpeakerResource;
 
 class SpeakersController extends Controller
 {
+    var $allowed_order_fields = ['greek_name', 'english_name', 'fullname_el'];
+    var $orientations = ['asc', 'desc'];
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        // Get speakers
-        $speakers = Speaker::paginate(15);
 
+    public function __construct(Request $request)
+    {
+        // Get query parameters from Request object
+        $this->order_field = $request->get('order_field');
+        $this->order_orientation = $request->get('orientation');
+
+        // echo $this->order_field.PHP_EOL;
+        
+        // echo $this->order_orientation.PHP_EOL;die;
+        
+        
+    }
+
+    public function index(){
+        // Query parameter validation
+        if($this->order_field == '' || $this->order_orientation == ''){
+            return ['Error' => 'Invalid arguments'];
+        }
+        if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)){
+            return ['Error' => 'Invalid order field'];
+        }
+        
+        if ($this->order_orientation && !in_array($this->order_orientation, $this->orientations)){
+            return ['Error' => 'Invalid order orientation'];
+        }
+        
+        // Create dynamic field for query
+        if ($this->order_field){
+            if($this->order_field == 'fullname_el'){
+                $this->order_field = 'p.'.$this->order_field;
+            } else {
+                $this->order_field = 'speakers.'.$this->order_field;
+            }
+        }
+
+        $speakers = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
+            ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
+            ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
+            ->select([
+                'speakers.speaker_id', 
+                'speakers.english_name',
+                'speakers.greek_name',
+                'speakers.image',
+                'p.party_id',
+                'p.image as party_image',
+                'p.fullname_el',
+                'pc.color',
+            ])
+            ->groupBy('speakers.speaker_id');
+        
+        if ($this->order_field && $this->order_orientation)
+        {
+            $speakers->orderBy($this->order_field, $this->order_orientation);
+        }
+
+        $speakers = $speakers->paginate(50);
+        
         if (isset($speakers) && !empty($speakers)) {
             return  SpeakerResource::collection($speakers);
         }
     }
-
+    
     /**
      * Display a speakers data specified by id. If request query parameter
      * exists (?color=true) return the party color code
      *
      * example /speaker/0067f43b-4d76-46d5-89f2-6a71f7e236e8
      * 
-     * @param  int  $id
+     * @param  int  $speaker_id
      * @return \Illuminate\Http\Response
      */
-    public function getSpeakerById($speaker_id, Request $request){
+    public function getSpeakerById($speaker_id){
         
-        if ($request->get('color') == true)
-        {
-            $speaker = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
-                ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
-                ->join('party_colors as c', 'c.party_id', '=', 'p.party_id')
-                ->where('speakers.speaker_id', '=', $speaker_id)
-                ->first();
-        } else {
-            $speaker = Speaker::findorfail($speaker_id);
-        }
+        $speaker = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
+            ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
+            ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
+            ->select([
+                'speakers.speaker_id', 
+                'speakers.english_name',
+                'speakers.greek_name',
+                'speakers.image',
+                'p.party_id',
+                'p.image as party_image',
+                'p.fullname_el',
+                'pc.color',
+            ])
+            ->where('speakers.speaker_id', '=', $speaker_id)
+            ->first();
 
         if (isset($speaker) && !empty($speaker)) {
             return new SpeakerResource($speaker);
@@ -58,7 +118,7 @@ class SpeakersController extends Controller
      * If request query parameter exists (?color=true) return the party
      * color code
      */ 
-    public function getSpeakerByName($speaker_name, Request $request){
+    public function getSpeakerByName($speaker_name){
         $name_lang = '';
         
         // ASCII = english name
@@ -69,16 +129,22 @@ class SpeakersController extends Controller
             $name_lang = 'speakers.greek_name';
         }
 
-        if ($request->get('color') == true)
-        {
-            $speaker = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
-                ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
-                ->join('party_colors as c', 'c.party_id', '=', 'p.party_id')
-                ->where($name_lang, '=', $speaker_name)
-                ->first();
-        } else {
-            $speaker = Speaker::where($name_lang, '=', $speaker_name)->first();
-        }
+
+        $speaker = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
+            ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
+            ->join('party_colors as c', 'c.party_id', '=', 'p.party_id')
+            ->select([
+                'speakers.speaker_id', 
+                'speakers.english_name',
+                'speakers.greek_name',
+                'speakers.image',
+                'p.party_id',
+                'p.image as party_image',
+                'p.fullname_el',
+                'pc.color',
+            ])
+            ->where($name_lang, '=', $speaker_name)
+            ->first();
         
         if (isset($speaker) && !empty($speaker)) {
             return new SpeakerResource($speaker);
@@ -95,7 +161,7 @@ class SpeakersController extends Controller
      * When using color parameter the response will contain all the 
      * memberships of a speaker that has changed more than one party
      */ 
-    public function searchSpeakerByName($speaker_name, Request $request){
+    public function searchSpeakerByName($speaker_name){
         $speaker_name = '%'.$speaker_name.'%';
         $name_lang = '';
         
@@ -107,22 +173,33 @@ class SpeakersController extends Controller
             $name_lang = 'speakers.greek_name';
         }
 
-        if ($request->get('color') == true)
+        $speakers = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
+            ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
+            ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
+            ->select([
+                'speakers.speaker_id', 
+                'speakers.english_name',
+                'speakers.greek_name',
+                'speakers.image',
+                'p.party_id',
+                'p.image as party_image',
+                'p.fullname_el',
+                'pc.color',
+            ])
+            ->where($name_lang, 'like', $speaker_name);
+        
+        $speakers = $speakers->groupBy('speakers.speaker_id');
+
+        if ($this->order_field && $this->order_orientation)
         {
-            $speaker = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
-                ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
-                ->join('party_colors as c', 'c.party_id', '=', 'p.party_id')
-                ->where($name_lang, 'like', $speaker_name)
-                ->paginate(50);
-        } else {
-            $speaker = Speaker::select('speakers.*')
-                ->where($name_lang, 'like', $speaker_name)
-                ->paginate(50);
+            $speakers->orderBy($this->order_field, $this->order_orientation);
         }
+        
+        $speakers = $speakers->paginate(50);
 
         // Return the collection of Speeches as a resource
-        if (isset($speaker) && !empty($speaker)) {
-            return SpeakerResource::collection($speaker);
+        if (isset($speakers) && !empty($speakers)) {
+            return SpeakerResource::collection($speakers);
         }
     }
 }
