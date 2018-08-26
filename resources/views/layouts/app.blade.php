@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+@include('cookieConsent::index')
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <!-- lang="{{ app()->getLocale() }}" -->
     <head>
