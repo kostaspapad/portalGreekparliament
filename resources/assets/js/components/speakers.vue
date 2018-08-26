@@ -1,38 +1,28 @@
 <template>
     <div class="container">
-        <div v-if="ajaxData.speakersData.data" class="row mt-5 speakers-bg">
-            <!-- <search-input
-                btn_text="Find"
-                placeholder_text="Find speaker"
-            ></search-input> -->
+        <div v-if="!loading" class="row mt-5 speakers-bg">
             <div class="mt-5 col-12 col-md-6 speaker-search">
                 <search-plugin></search-plugin>
             </div>
-            <!-- <div class="row w-100">
-                <div class="col-12">
-                    <p>{{search_result_msg}}</p>
-                </div>
-            </div> -->
-            <div v-if="speaker_search_result_msg" class="row w-100">
-                <div class="row w-100" v-if="!is_search_msg_empty && showResults" style="width:100%">
-                    <!-- <div class="col-12 text-center"><p>{{search_result_msg}}</p></div> -->
-                    <!-- <div class="col-12">
-                        <pagination :data="ajaxData.search_data.data.meta" @pagination-change-page="changePageSpeaker" :limit=2>
-                            <span slot="prev-nav">&lt; Previous</span>
-                            <span slot="next-nav">Next &gt;</span>
-                        </pagination>
-                    </div> -->
-                    <div class="col-12"  v-for="speaker in ajaxData.search_data.data.data" :key="speaker.id" style="margin-bottom: 15px;">
-                        
-                    </div>
-                    <!-- <div class="col-12">
-                        <pagination :data="ajaxData.search_data.data.meta" @pagination-change-page="changePageSpeaker" :limit=2>
-                            <span slot="prev-nav">&lt; Previous</span>
-                            <span slot="next-nav">Next &gt;</span>
-                        </pagination>
-                    </div> -->
-                </div>
-                <div class="row w-100" v-else>
+            <div class="col-12 text-left mt-2 mb-2">
+                <ul class="sort-ul">
+                    <li>
+                        <strong>Sorted by </strong>
+                        <span v-if="order_field == 'greek_name' ">Greek_name</span>
+                        <span v-else>Party</span>
+                    </li>
+                    <li v-if="order_field == 'greek_name' ">
+                        <span>Sort by </span>
+                        <span class="sort-text" @click="sortBy('fullname_el')">Party</span>
+                    </li>
+                    <li v-else>
+                        <span>Sort by </span>
+                        <span class="sort-text" @click="sortBy('greek_name')">Greek_name</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="row w-100">
+                <div class="row w-100">
                     <div class="col-12" style="padding-left: 2.5rem;">
                         <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
                             <span slot="prev-nav">&lt;</span>
@@ -57,7 +47,6 @@
                     </div>
                 </div>
             </div>
-            <div v-else></div>
         </div>
         <div v-else>
             <img :src="path + '/Spinner.gif' "/>
@@ -66,6 +55,21 @@
 </template>
 
 <style scoped>
+    .sort-ul{
+        font-size: 0.9em;
+        color: #6c6b68;
+        margin-left: -2.3em;
+        margin-bottom: 0;
+    }
+    .sort-ul li{
+        display: inline-block;
+        margin-left: 0.5em;
+    }
+    .sort-text{
+        color: inherit;
+        text-decoration: underline;
+        cursor: pointer;
+    }
     .speaker-search, .speaker{
         padding-left: 2rem;
     }
@@ -129,7 +133,6 @@
 <script>
     export default {
         props: {
-            //speakers: Object,
             path: String
         },
         data(){
@@ -143,13 +146,18 @@
                 defaultImg: 'default_speaker_icon.png',
                 search_msg: '',
                 search_result_msg: null,
-                showResults: false
+                showResults: false,
+                loading: true,
+                order_field: 'greek_name',
+                order_text: null
             }
         },
         methods:{
-            showModal(speaker){
-                this.show_modal = true;
-                this.selected_speaker = speaker;
+            sortBy(sortField){
+                if(sortField){
+                    this.order_field = sortField
+                    this.getSpeakers()
+                }
             },
             findSpeaker(){
                 var self = this;
@@ -170,19 +178,9 @@
             },
             changePage(page){
                 var self = this;
-                axios.get(this.$root.host+'/api/v1/speakers?page=' + page)
+                axios.get(this.$root.host+'/api/v1/speakers?page=' + page + '&order_field='+this.order_field+'&orientation=asc')
                 .then(function(response){
                     self.ajaxData.speakersData = response;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-            changePageSpeaker(page){
-                var self = this;
-                axios.get(this.$root.host+'/api/v1/speakers?page=' + page+'&name='+this.search_msg)
-                .then(function(response){
-                    self.ajaxData.search_data = response;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -199,13 +197,19 @@
             },
             getSpeakers(){
                 var self = this;
-                axios.get(this.$root.host+'/api/v1/speakers')
-                .then(function(response){
-                    self.ajaxData.speakersData = response;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                this.loading = true
+                setTimeout( () =>{
+                    axios.get(this.$root.host+'/api/v1/speakers?order_field='+this.order_field+'&orientation=asc')
+                    .then(function(response){
+                        if(response.status == 200 && response.data.data){
+                            self.loading = false
+                            self.ajaxData.speakersData = response
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }, 1000)
             },
             printImg(img){
                 if(img == 'default-speaker.jpg' || img == null){
@@ -223,30 +227,7 @@
             }
         },
         computed:{
-            is_search_msg_empty(){
-                //when search_msg is empty return true to show the initial "data"
-                if(this.search_msg.length > 0){
-                    return false;
-                }else{
-                    if(this.search_msg.length == 0){
-                        this.showResults = false;
-                        this.search_result_msg = null;
-                        return true;
-                    }
-                }
-            },
-            speaker_search_result_msg(){
-                if(this.search_result_msg == 'Search Results' || this.search_result_msg == null){
-                    return true;
-                }else{
-                    console.log(this.search_msg.length)
-                    if(this.search_msg.length == 0){
-                        this.showResults = false;
-                        this.search_result_msg = '';
-                        return false;
-                    }
-                }
-            }
+            
         },
         created() {
             this.getSpeakers();
