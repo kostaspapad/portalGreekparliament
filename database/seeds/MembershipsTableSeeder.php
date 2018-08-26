@@ -37,7 +37,7 @@ class MembershipsTableSeeder extends Seeder
                 ));
             }
 
-            // End date does not exist
+            // End date does not exist in memberships
             else if(isset($obj->start_date) && !isset($obj->end_date)){
             // if(isset($obj->start_date) && !isset($obj->end_date)){
                 $obj->end_date = NULL;
@@ -64,7 +64,7 @@ class MembershipsTableSeeder extends Seeder
                 ));
             }
 
-            // Start date does not exist
+            // Start date does not exist in memberships
             else if(!isset($obj->start_date) && isset($obj->end_date)){
                 $obj->start_date = NULL;
                 // When end date does not exist get end date from json events file
@@ -74,7 +74,7 @@ class MembershipsTableSeeder extends Seeder
                     if($ev->classification == "legislative period" && $ev->id == $obj->legislative_period_id){
                         if(isset($ev->start_date)){
                             $obj->start_date = $ev->start_date;
-                        }
+                        } 
                     }
                 }
 
@@ -89,8 +89,8 @@ class MembershipsTableSeeder extends Seeder
                     'end_date' => $obj->end_date
                 ));
             }
-//2012-06-17
-            // Start date and End date does not exist
+
+            // Start date and End date does not exist in memberships
             // Get start date and end date from legislative period
             else if(!isset($obj->start_date) && !isset($obj->end_date)){
                 $obj->start_date = NULL;
@@ -101,6 +101,9 @@ class MembershipsTableSeeder extends Seeder
                         if(isset($ev->start_date) && isset($ev->end_date)){
                             $obj->start_date = $ev->start_date;
                             $obj->end_date = $ev->end_date;
+                        } else {
+                            $obj->start_date = $ev->start_date;
+                            $obj->end_date = NULL;
                         }
                     }
                 }
