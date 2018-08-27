@@ -28,10 +28,10 @@
 	},
 	{
 	"party_id": "communistpartyofgreece",
-	"fullname_el": "Κομμουνιστικό Κόμμα Ελλάδας",
-	"fullname_en": "Communist Party of Greece",
-	"image": "/static/greekparliament/kke.svg",
-	"url": "http://www.kke.gr/"
+	"fullname_el": "Κομμουνιστικό Κόμμα Ελλάδας Εσωτερικού",
+	"fullname_en": "Communist Party of Greece of the Internal",
+	"image": "",
+	"url": ""
 	},
 	{
 	"party_id": "democraticcoalition",
