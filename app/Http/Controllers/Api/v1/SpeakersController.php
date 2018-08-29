@@ -52,14 +52,20 @@ class SpeakersController extends Controller
 
         // Use the start_date field to find the latest membership
         // $speakers = DB::table('speakers as s')
-            $speakers = Speaker::join(DB::raw("(select
-                                                    person_id,
-                                                    max( start_date ) as max_start_date,
-                                                    on_behalf_of_id
-                                                from
-                                                    memberships 
-                                                group by
-                                                    person_id) as m"), 'm.person_id', '=', 'speakers.speaker_id')
+            $speakers = Speaker::join(
+                DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
+                        FROM(
+                            SELECT
+                                person_id,
+                                MAX(start_date) AS start_date
+                                FROM
+                                    memberships
+                                GROUP BY
+                                    person_id
+                        ) r
+                        INNER JOIN memberships m
+                        ON m.start_date = r.start_date 
+                        AND m.person_id = r.person_id) AS m"), 'm.person_id', '=', 'speakers.speaker_id')
             ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
             ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
             ->select([
@@ -98,14 +104,20 @@ class SpeakersController extends Controller
      */
     public function getSpeakerById($speaker_id){
         
-        $speaker = Speaker::join(DB::raw("(select
-                                            person_id,
-                                            max( start_date ) as max_start_date,
-                                            on_behalf_of_id
-                                        from
-                                            memberships 
-                                        group by
-                                            person_id) as m"), 'm.person_id', '=', 'speakers.speaker_id')
+        $speaker = Speaker::join(
+            DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
+                    FROM(
+                        SELECT
+                            person_id,
+                            MAX(start_date) AS start_date
+                            FROM
+                                memberships
+                            GROUP BY
+                                person_id
+                    ) r
+                    INNER JOIN memberships m
+                    ON m.start_date = r.start_date 
+                    AND m.person_id = r.person_id) AS m"), 'm.person_id', '=', 'speakers.speaker_id')
             ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
             ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
             ->select([
@@ -145,14 +157,20 @@ class SpeakersController extends Controller
         }
 
 
-        $speaker = Speaker::join(DB::raw("(select
-                                            person_id,
-                                            max( start_date ) as max_start_date,
-                                            on_behalf_of_id
-                                        from
-                                            memberships 
-                                        group by
-                                            person_id) as m"), 'm.person_id', '=', 'speakers.speaker_id')
+        $speaker = Speaker::join(
+            DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
+                    FROM(
+                        SELECT
+                            person_id,
+                            MAX(start_date) AS start_date
+                            FROM
+                                memberships
+                            GROUP BY
+                                person_id
+                    ) r
+                    INNER JOIN memberships m
+                    ON m.start_date = r.start_date 
+                    AND m.person_id = r.person_id) AS m"), 'm.person_id', '=', 'speakers.speaker_id')
             ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
             ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
             ->select([
@@ -216,14 +234,20 @@ class SpeakersController extends Controller
             $name_lang = 'speakers.greek_name';
         }
 
-        $speakers = Speaker::join(DB::raw("(select
-                                                person_id,
-                                                max( start_date ) as max_start_date,
-                                                on_behalf_of_id
-                                            from
-                                                memberships 
-                                            group by
-                                                person_id) as m"), 'm.person_id', '=', 'speakers.speaker_id')
+        $speaker = Speaker::join(
+            DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
+                    FROM(
+                        SELECT
+                            person_id,
+                            MAX(start_date) AS start_date
+                            FROM
+                                memberships
+                            GROUP BY
+                                person_id
+                    ) r
+                    INNER JOIN memberships m
+                    ON m.start_date = r.start_date 
+                    AND m.person_id = r.person_id) AS m"), 'm.person_id', '=', 'speakers.speaker_id')
             ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
             ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
             ->select([
