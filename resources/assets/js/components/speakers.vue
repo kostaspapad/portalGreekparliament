@@ -7,17 +7,17 @@
             <div class="col-12 text-left mt-2 mb-2">
                 <ul class="sort-ul">
                     <li>
-                        <strong>Sorted by </strong>
-                        <span v-if="order_field == 'greek_name' ">Greek_name</span>
-                        <span v-else>Party</span>
+                        <strong>{{ $t('speakers.sortedby') }}: </strong>
+                        <span v-if="order_field == 'greek_name' ">{{ $t('speakers.name') }}: </span>
+                        <span v-else>{{ $t('speakers.party') }}</span>
                     </li>
                     <li v-if="order_field == 'greek_name' ">
-                        <span>Sort by </span>
-                        <span class="sort-text" @click="sortBy('fullname_el')">Party</span>
+                        <span>{{ $t('speakers.sortby') }} </span>
+                        <span class="sort-text" @click="sortBy('fullname_el')">{{ $t('speakers.party') }}</span>
                     </li>
                     <li v-else>
-                        <span>Sort by </span>
-                        <span class="sort-text" @click="sortBy('greek_name')">Greek_name</span>
+                        <span>{{ $t('speakers.sortby') }} </span>
+                        <span class="sort-text" @click="sortBy('greek_name')">{{ __('speakers.name') }}</span>
                     </li>
                 </ul>
             </div>
