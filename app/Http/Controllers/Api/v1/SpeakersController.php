@@ -27,7 +27,8 @@ class SpeakersController extends Controller
         
         // echo $this->order_orientation.PHP_EOL;die;
         
-        
+        // DB::enableQueryLog();     
+        // dd(DB::getQueryLog());   
     }
 
     public function index(){
@@ -49,7 +50,16 @@ class SpeakersController extends Controller
             }
         }
 
-        $speakers = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
+        // Use the start_date field to find the latest membership
+        // $speakers = DB::table('speakers as s')
+            $speakers = Speaker::join(DB::raw("(select
+                                                    person_id,
+                                                    max( start_date ) as max_start_date,
+                                                    on_behalf_of_id
+                                                from
+                                                    memberships 
+                                                group by
+                                                    person_id) as m"), 'm.person_id', '=', 'speakers.speaker_id')
             ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
             ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
             ->select([
@@ -61,9 +71,8 @@ class SpeakersController extends Controller
                 'p.image as party_image',
                 'p.fullname_el',
                 'pc.color',
-            ])
-            ->groupBy('speakers.speaker_id');
-        
+            ]);
+
         if ($this->order_field && $this->order_orientation)
         {
             $speakers->orderBy($this->order_field, $this->order_orientation);
@@ -71,8 +80,10 @@ class SpeakersController extends Controller
 
         $speakers = $speakers->paginate(50);
         
+        // dd($speakers);
+
         if (isset($speakers) && !empty($speakers)) {
-            return  SpeakerResource::collection($speakers);
+            return SpeakerResource::collection($speakers);
         }
     }
     
@@ -87,7 +98,14 @@ class SpeakersController extends Controller
      */
     public function getSpeakerById($speaker_id){
         
-        $speaker = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
+        $speaker = Speaker::join(DB::raw("(select
+                                            person_id,
+                                            max( start_date ) as max_start_date,
+                                            on_behalf_of_id
+                                        from
+                                            memberships 
+                                        group by
+                                            person_id) as m"), 'm.person_id', '=', 'speakers.speaker_id')
             ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
             ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
             ->select([
@@ -127,7 +145,14 @@ class SpeakersController extends Controller
         }
 
 
-        $speaker = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
+        $speaker = Speaker::join(DB::raw("(select
+                                            person_id,
+                                            max( start_date ) as max_start_date,
+                                            on_behalf_of_id
+                                        from
+                                            memberships 
+                                        group by
+                                            person_id) as m"), 'm.person_id', '=', 'speakers.speaker_id')
             ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
             ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
             ->select([
@@ -191,7 +216,14 @@ class SpeakersController extends Controller
             $name_lang = 'speakers.greek_name';
         }
 
-        $speakers = Speaker::join('memberships as m', 'speakers.speaker_id', '=' ,'m.person_id')
+        $speakers = Speaker::join(DB::raw("(select
+                                                person_id,
+                                                max( start_date ) as max_start_date,
+                                                on_behalf_of_id
+                                            from
+                                                memberships 
+                                            group by
+                                                person_id) as m"), 'm.person_id', '=', 'speakers.speaker_id')
             ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
             ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
             ->select([
