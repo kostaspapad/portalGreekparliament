@@ -234,7 +234,7 @@ class SpeakersController extends Controller
             $name_lang = 'speakers.greek_name';
         }
 
-        $speaker = Speaker::join(
+        $speakers = Speaker::join(
             DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
                     FROM(
                         SELECT
