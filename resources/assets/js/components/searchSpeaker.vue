@@ -63,7 +63,7 @@
                         clearTimeout(this.debounceTimer)   // clearing debounceTimer
                     }
                     this.debounceTimer = setTimeout( () =>{
-                        axios.get(self.$root.host+'/api/v1/speakers/search/' + query + '?color=true')
+                        axios.get(self.$root.host+'/api/v1/speakers/search/' + query)
                         .then(function(response){
                             if(response.status == 200 && response.data.data.length > 0){
                                 self.isLoading = false

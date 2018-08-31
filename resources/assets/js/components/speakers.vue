@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div v-if="!loading" class="row mt-5 speakers-bg">
+        <div v-if="!loading" class="row speakers-bg">
             <div class="mt-5 col-12 col-md-6 speaker-search">
                 <search-plugin></search-plugin>
             </div>
@@ -8,8 +8,10 @@
                 <ul class="sort-ul">
                     <li>
                         <strong>Sorted by </strong>
-                        <span v-if="order_field == 'greek_name' ">Greek_name</span>
+                        <span v-if="order_field == 'greek_name' ">Name</span>
                         <span v-else>Party</span>
+                        <span>({{order_orientation | capitalizeAll}})</span>
+                        <span @click=sortBy(order_field,order_orientation)><i class="fas fa-sort pointer"></i></span>
                     </li>
                     <li v-if="order_field == 'greek_name' ">
                         <span>Sort by </span>
@@ -17,7 +19,7 @@
                     </li>
                     <li v-else>
                         <span>Sort by </span>
-                        <span class="sort-text" @click="sortBy('greek_name')">Greek_name</span>
+                        <span class="sort-text" @click="sortBy('greek_name')">Name</span>
                     </li>
                 </ul>
             </div>
@@ -149,13 +151,21 @@
                 showResults: false,
                 loading: true,
                 order_field: 'greek_name',
-                order_text: null
+                order_text: null,
+                order_orientation: 'asc'
             }
         },
         methods:{
-            sortBy(sortField){
+            sortBy(sortField, sortOrientation = null){
                 if(sortField){
                     this.order_field = sortField
+                }
+                if(sortOrientation == 'asc'){
+                    this.order_orientation = 'desc'
+                }else{
+                    this.order_orientation = 'asc'
+                }
+                if(this.order_field && this.order_orientation){
                     this.getSpeakers()
                 }
             },
@@ -199,7 +209,7 @@
                 var self = this;
                 this.loading = true
                 setTimeout( () =>{
-                    axios.get(this.$root.host+'/api/v1/speakers?order_field='+this.order_field+'&orientation=asc')
+                    axios.get(this.$root.host+'/api/v1/speakers?order_field='+this.order_field+'&orientation='+this.order_orientation)
                     .then(function(response){
                         if(response.status == 200 && response.data.data){
                             self.loading = false

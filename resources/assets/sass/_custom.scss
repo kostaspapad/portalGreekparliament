@@ -1,3 +1,8 @@
+$topNavBgColor: red;
+$midNavBgColor: cyan;
+$mainContentBgColor: green;
+$footerBgColor: yellow;
+//to background whole page , add the variable inside body BgColor
 // .content-bg-color{ background-color: red!important }
 // .navbar-bg-color{ background-color: green!important }
 html {height: 100%;}
@@ -15,9 +20,28 @@ html, body {
     min-height:100%;
     margin: 0;
 }
+::-moz-selection { /* Code for Firefox */
+    color: white;
+    background: rgb(130, 199, 235);
+}
+
+::selection {
+    color: white;
+    background: rgb(130, 199, 235);
+}
 @media (min-width: 768px){
     nav{ padding: 0!important;}
 }
+.pointer{
+    cursor: pointer;
+}
+.navbar-laravel {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  }
+  .menu-navbar{
+    border-top: 1px solid rgba(0, 0, 0, 0.1)
+  }
 .navbar-nav .nav-item:hover{
     background-color: rgba(0, 123, 255, 0.25);
 }

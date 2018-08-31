@@ -56,6 +56,22 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
+                            <li class="nav-item d-block d-sm-block d-md-none">
+                                <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">{{ __('navbar.conferences') }}</a>
+                            </li>
+                            <li class="nav-item d-block d-sm-block d-md-none">
+                                <a class="nav-link {{ Request::path() === 'parties' ? 'active' : null }}" href="/parties">{{ __('navbar.political_parties') }}</a>
+                            </li>
+                            <li class="nav-item d-block d-sm-block d-md-none">
+                                <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">{{ __('navbar.speakers') }}</a>
+                            </li>
+                            <li class="nav-item d-block d-sm-block d-md-none">
+                                <a class="nav-link {{ Request::path() === 'speeches' ? 'active' : null }}" href="/speeches">{{ __('navbar.speeches') }}</a>
+                            </li>
+                            <li class="nav-item d-block d-sm-block d-md-none">
+                                <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">{{ __('navbar.about') }}</a>
+                            </li>
+                            <hr class="divider">
                             @guest
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('auth.login') }}</a>
@@ -64,17 +80,12 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('auth.register') }}</a>
                                 </li>
                             @else
-
                                 <li class="nav-item dropdown">
-
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
-
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
                                         <!-- <a class="dropdown-item" href="/dashboard">Dashboard</a> -->
-
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
@@ -85,7 +96,7 @@
                                             @csrf
                                         </form>
                                     </div>
-                                </li>
+                                </li> 
                             @endguest
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -107,123 +118,108 @@
                 
             </nav>
             <!-- Main nav -->
-            <hr class="divider" />
+            
             <!-- Menu -->
-            <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color">
+            <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color menu-navbar d-none d-sm-block">
                 <div class="container ml-0">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">{{ __('navbar.conferences') }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'parties' ? 'active' : null }}" href="/parties">{{ __('navbar.political_parties') }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">{{ __('navbar.speakers') }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'speeches' ? 'active' : null }}" href="/speeches">{{ __('navbar.speeches') }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">{{ __('navbar.about') }}</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">{{ __('navbar.conferences') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::path() === 'parties' ? 'active' : null }}" href="/parties">{{ __('navbar.political_parties') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">{{ __('navbar.speakers') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::path() === 'speeches' ? 'active' : null }}" href="/speeches">{{ __('navbar.speeches') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">{{ __('navbar.about') }}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <!-- Menu -->
 
-            <div class="content mb-5" id="main_app">
+            <div class="content pt-5 pb-5" id="main_app">
                 @yield('content')
             </div>
-
-           
-            <!-- <main class="py-4">
-                @yield('content')
-            </main> -->
         </div>
          <!-- Footer -->
-         <footer class="footer page-footer font-small pt-4">
-
-                <!-- Footer Links -->
-                <div class="container-fluid text-center text-md-left">
-
-                    <!-- Grid row -->
-                    <div class="row">
-
-                        <!-- Grid column -->
-                        <div class="col-md-6 mt-md-0 mt-3">
-
-                            <!-- Content -->
-                            <h5 class="font-weight-bold">Greekparliament.info</h5>
-                            <p>{{ __('footer.about_text') }}</p>
-
-                        </div>
-                        <!-- Grid column -->
-
-                        <hr class="clearfix w-100 d-md-none pb-3">
-
-                        <!-- Grid column -->
-                        <div class="col-md-3 mb-md-0 mb-3">
-
-                            <!-- Links -->
-                            <!-- <h5 class="text-uppercase">Links</h5> -->
-
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a class="nav-link {{ Request::path() === '/about' ? 'active' : null }}" href="/about">{{ __('footer.about_us') }}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link {{ Request::path() === '/news' ? 'active' : null }}" href="/news">{{ __('footer.news') }}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link {{ Request::path() === '/contact' ? 'active' : null }}" href="/contact">{{ __('footer.contact') }}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link {{ Request::path() === '/donate' ? 'active' : null }}" href="/donate">{{ __('footer.donate') }}</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link {{ Request::path() === '/policy' ? 'active' : null }}" href="/policy">{{ __('footer.privacy_policy') }}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Grid column -->
-
-                        <!-- Grid column -->
-                        <!-- <div class="col-md-3 mb-md-0 mb-3">
-
-                            
-                            <h5 class="text-uppercase">Links</h5>
-
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="#!">Link 2</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Link 3</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Link 4</a>
-                                </li>
-                            </ul>
-
-                        </div> -->
-                        <!-- Grid column -->
+        <footer class="footer page-footer font-small pt-4">
+            <!-- Footer Links -->
+            <div class="container-fluid text-center text-md-left">
+                <!-- Grid row -->
+                <div class="row">
+                    <!-- Grid column -->
+                    <div class="col-md-6 mt-md-0 mt-3">
+                        <!-- Content -->
+                        <h5 class="font-weight-bold">Greekparliament.info</h5>
+                        <p>{{ __('footer.about_text') }}</p>
 
                     </div>
-                    <!-- Grid row -->
+                    <!-- Grid column -->
+                    <hr class="clearfix w-100 d-md-none pb-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 mb-md-0 mb-3">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a class="nav-link {{ Request::path() === '/about' ? 'active' : null }}" href="/about">{{ __('footer.about_us') }}</a>
+                            </li>
+                            <li>
+                                <a class="nav-link {{ Request::path() === '/news' ? 'active' : null }}" href="/news">{{ __('footer.news') }}</a>
+                            </li>
+                            <li>
+                                <a class="nav-link {{ Request::path() === '/contact' ? 'active' : null }}" href="/contact">{{ __('footer.contact') }}</a>
+                            </li>
+                            <li>
+                                <a class="nav-link {{ Request::path() === '/donate' ? 'active' : null }}" href="/donate">{{ __('footer.donate') }}</a>
+                            </li>
+                            <li>
+                                <a class="nav-link {{ Request::path() === '/policy' ? 'active' : null }}" href="/policy">{{ __('footer.privacy_policy') }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <!-- <div class="col-md-3 mb-md-0 mb-3">
+
+                        
+                        <h5 class="text-uppercase">Links</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!">Link 4</a>
+                            </li>
+                        </ul>
+
+                    </div> -->
+                    <!-- Grid column -->
 
                 </div>
-                <!-- Footer Links -->
+                <!-- Grid row -->
 
-                <!-- Copyright -->
-                <!-- <div class="footer-copyright text-center py-3">© 2018 Copyright: -->
-                <!-- </div> -->
-                <!-- Copyright -->
-                
-            </footer>
-            <!-- Footer -->
+            </div>
+            <!-- Footer Links -->
+
+            <!-- Copyright -->
+            <!-- <div class="footer-copyright text-center py-3">© 2018 Copyright: -->
+            <!-- </div> -->
+            <!-- Copyright -->
+            
+        </footer>
+        <!-- Footer -->
     </body>
 </html>
