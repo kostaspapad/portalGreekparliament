@@ -18,8 +18,6 @@ import datepicker from 'vuejs-datepicker';
 import moment from 'moment';
 import ToggleButton from 'vue-js-toggle-button';
 import ReadMore from 'vue-read-more';
-import VueInternationalization from 'vue-i18n';
-import Locale from './vue-i18n-locales.generated';
 
 //components
 import navbar from './components/navbar.vue';
@@ -36,7 +34,6 @@ import search from './components/searchSpeaker.vue';
 Vue.use(VueRouter);
 Vue.use(ToggleButton);
 Vue.use(ReadMore);
-Vue.use(VueInternationalization);
 
 // register globally
 Vue.component('pagination', laravelVuePagination);
@@ -53,20 +50,11 @@ Vue.component('datepicker', datepicker);
 Vue.component('search-input', searchInput)
 Vue.component('search-plugin', search)
 
-
-
 Vue.filter('capitalize', function (value) {
     if (!value) return ''
     value = value.toString()
     return value.charAt(0).toUpperCase() + value.slice(1)
 })
-
-// Localization
-const lang = document.documentElement.lang.substr(0, 2); 
-const i18n = new VueInternationalization({
-    locale: lang,
-    messages: Locale
-});
 //router
 // const router = new VueRouter({
 //     mode: 'history',
@@ -78,7 +66,6 @@ const i18n = new VueInternationalization({
 
 const app = new Vue({
     el: '#app',
-    i18n,
     data: {
         host: process.env.NODE_ENV == 'production' ? 'http://95.85.38.123' : 'http://127.0.0.1:8000'
     }
