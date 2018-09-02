@@ -142,8 +142,6 @@ class SpeakersController extends Controller
      * This function is returning a speaker, name can be greek(utf8) or
      * an english(ASCII)
      * 
-     * If request query parameter exists (?color=true) return the party
-     * color code
      */ 
     public function getSpeakerByName($speaker_name){
         $name_lang = '';
@@ -155,7 +153,6 @@ class SpeakersController extends Controller
         } else if (mb_detect_encoding($speaker_name) == 'UTF-8') {
             $name_lang = 'speakers.greek_name';
         }
-
 
         $speaker = Speaker::join(
             DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
@@ -276,4 +273,56 @@ class SpeakersController extends Controller
             return SpeakerResource::collection($speakers);
         }
     }
+    
+    public function getSpeakerMembershipsById($speaker_name){
+        $speakers = Speaker::join('memberships as m', 'speakers.speaker_id', '=', 'm.person_id')
+            ->select([
+                'm.area_id',
+                'm.legislative_period_id',
+                'm.on_behalf_of_id',
+                'm.organization_id',
+                'm.role',
+                'm.start_date',
+                'm.end_date'
+            ])
+            ->where('m.person_id', '=', $speaker_id);
+
+        $speakers = $speakers->paginate(50);
+        
+        if (isset($speakers) && !empty($speakers)) {
+            return SpeakerResource::collection($speakers);
+        }
+    }
+
+    public function getSpeakerMembershipsByName($speaker_name){
+        $speaker_name = '%'.$speaker_name.'%';
+        $name_lang = '';
+        
+        // ASCII = english name
+        // UTF-8 = greek name
+        if (mb_detect_encoding($speaker_name) == 'ASCII') {
+            $name_lang = 'speakers.english_name';
+        } else if (mb_detect_encoding($speaker_name) == 'UTF-8') {
+            $name_lang = 'speakers.greek_name';
+        }
+
+        $speakers = Speaker::join('memberships as m', 'speakers.speaker_id', '=', 'm.person_id')
+            ->select([
+                'm.area_id',
+                'm.legislative_period_id',
+                'm.on_behalf_of_id',
+                'm.organization_id',
+                'm.role',
+                'm.start_date',
+                'm.end_date'
+            ])
+            ->where($name_lang, 'like', $speaker_name);
+
+        $speakers = $speakers->paginate(50);
+        
+        if (isset($speakers) && !empty($speakers)) {
+            return SpeakerResource::collection($speakers);
+        }
+    }
+
 }
