@@ -5,9 +5,13 @@ Clone repository
 
     git clone https://gitlab.com/kostaspapad/portalGreekparliament.git
 
-Install php7.2
+Install php 7.2
 
 Install mysql
+
+### Install php extensions
+
+sudo apt-get install php-mbstring php-xml php-mysql
 
 ### Install composer
 
@@ -44,15 +48,18 @@ Now use can go to the project folder and run:
 
 This will install all the necessary packages
 
-### asto gia tin wra
-install npm, node
+### Install Node.js and NPM
+sudo apt-get install npm nodejs
+sudo npm install 
+sudo npm install vue-read-more
+sudo npm install cross-env
 
 ### Configure mysql
 Create user "greekparliament" and grant permissions (Use same pass as production).
 
     CREATE USER 'greekparliament'@'localhost' IDENTIFIED BY '******';
 
-    GRANT ALL PRIVILEGES ON * . * TO 'greeekparliament'@'localhost';
+    GRANT ALL PRIVILEGES ON * . * TO 'greekparliament'@'localhost';
 
     FLUSH PRIVILEGES;
 
@@ -63,6 +70,7 @@ Create portal, parliament db use utf8_unicode_ci encoding.
 
 Create the table that will contain the scraper data:
 
+    USE parliament
     CREATE TABLE `scraper_data` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `conference_date` date DEFAULT NULL,
