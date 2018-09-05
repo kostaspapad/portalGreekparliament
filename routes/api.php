@@ -116,7 +116,7 @@ Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () 
       *-------------------------------------------------------------------------------
       * Get speeches of a speaker by id
       *-------------------------------------------------------------------------------
-      * Sample:         /api/v1/speeches/speaker/0ec3bdd6-140b-473d-806d-6ba089cf7a35
+      * Sample:         http://localhost:8000/api/v1/speeches/speaker/0ec3bdd6-140b-473d-806d-6ba089cf7a35
       * Controller:     api\v1\SpeechesController@speechesBySpeakerId
       * Method:         GET
       * Description:    Gets all of the speeches of a speaker specified by speaker_id
@@ -204,10 +204,11 @@ Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () 
       * Conferences API endpoints
       *
       *-------------------------------------------------------------------------------
-      * Get all conferences with pagination
+      * Get all conferences with pagination and query parameters for ordering
       *-------------------------------------------------------------------------------
       * Controller:     api\v1\ConferencesController@index
       * Method:         GET
+      * Example:        localhost:8000/api/v1/conferences?order_field=conference_date&orientation=asc
       */
     Route::get('conferences', 'Api\v1\ConferencesController@index');
 
