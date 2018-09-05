@@ -29,14 +29,7 @@ class SpeakersApiTest extends TestCase
                  ->assertJsonStructure([
                     "data" => [
                         "speaker_id",
-                        "english_name",
-                        "greek_name",
-                        "image",
-                        "email",
-                        "wiki_el",
-                        "wiki_en",
-                        "twitter",
-                        "website"
+                        "greek_name"
                     ]
                 ]);
 
@@ -52,14 +45,7 @@ class SpeakersApiTest extends TestCase
                  ->assertJsonStructure([
                     "data" => [
                         "speaker_id",
-                        "english_name",
-                        "greek_name",
-                        "image",
-                        "email",
-                        "wiki_el",
-                        "wiki_en",
-                        "twitter",
-                        "website"
+                        "greek_name"
                     ]
                 ]);
         

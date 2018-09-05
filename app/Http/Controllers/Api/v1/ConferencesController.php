@@ -144,7 +144,7 @@ class ConferencesController extends Controller {
                 
                 // Check if valid range
                 if ($start <= $end) {
-                    $conferences = Conference::whereBetween('conference_date', [$start, $end])->get();
+                    $conferences = Conference::whereBetween('conference_date', [$start, $end])->paginate(10);
                 }
             }
 

@@ -122,7 +122,7 @@ class ConferencesApiTest extends TestCase
     
     public function testGetConferenceByDateRange()
     {
-        $endpoint = $this->api_version . '/conference/from/1989-07-03/to/1989-07-27';
+        $endpoint = $this->api_version . '/conference/start/1989-07-03/end/1989-07-27';
         
         $response = $this->json('GET', $endpoint);
         $response->assertSee('conference_date');
