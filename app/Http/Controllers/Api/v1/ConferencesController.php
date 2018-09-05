@@ -7,25 +7,46 @@ use App\Http\Controllers\Controller;
 use App\Conference;
 use App\Http\Resources\Conference as ConferenceResource;
 
-/**
- * @SWG\Swagger(
- *   basePath="/api/v1",
- *   @SWG\Info(
- *     title="Core API",
- *     version="1.0.0"
- *   )
- * )
- */
-class ConferencesController extends Controller
-{
+class ConferencesController extends Controller {
+
+    var $allowed_order_fields = ['conference_date', 'conference_indicator', 'session', 'time_period'];
+    var $orientations = ['asc', 'desc'];
+
+    public function __construct(Request $request) {
+        // Get query parameters from Request object
+        $this->order_field = $request->get('order_field');
+        $this->order_orientation = $request->get('orientation');
+    }
+
+    public function validate_query_params() {
+        // Query parameter validation
+        if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)){
+            return ['Error' => 'Invalid order field'];
+        }
+        
+        if ($this->order_orientation && !in_array($this->order_orientation, $this->orientations)){
+            return ['Error' => 'Invalid order orientation'];
+        }
+        
+        // Create dynamic field for query
+        if (isset($this->order_field) && !empty($this->order_field)){
+            $this->order_field = 'conferences.'.$this->order_field;
+        }
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $conferences = Conference::paginate(50);
+    public function index() {
+        
+
+        if ($this->order_field && $this->order_orientation) {
+            $conferences = Conference::orderBy($this->order_field, $this->order_orientation)
+                ->paginate(20);
+        } else {
+            $conferences = Conference::paginate(20);
+        }
 
         if (isset($conferences) && !empty($conferences)) {
             return ConferenceResource::collection($conferences);
@@ -40,8 +61,7 @@ class ConferencesController extends Controller
      * @param  int  $conference_id
      * @return \Illuminate\Http\Response
      */
-    public function getConferenceById($conference_id)
-    {
+    public function getConferenceById($conference_id) {
         $conference = Conference::findorfail($conference_id);
        
         if (isset($conference) && !empty($conference)) {
@@ -57,8 +77,7 @@ class ConferencesController extends Controller
      * @param  int  $conference_date
      * @return \Illuminate\Http\Response
      */
-    public function getConferenceByDate($conference_date)
-    {
+    public function getConferenceByDate($conference_date) {
         $conferences = Conference::where('conference_date', '=', $conference_date)->get();
 
         if (isset($conferences) && !empty($conferences)) {
@@ -115,8 +134,7 @@ class ConferencesController extends Controller
     *   )
     * )
     */
-    public function getConferenceByDateRange($start, $end)
-    {
+    public function getConferenceByDateRange($start, $end) {
         // Check if string for safety
         if (is_string($start) && is_string($end)) {
             if (isset($start) && isset($end)) {
