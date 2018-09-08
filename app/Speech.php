@@ -21,6 +21,7 @@ class Speech extends Model
 
     public function conferences()
     {
-        return $this->belongsTo('App\Conference', 'conference_date', 'conference_date');
+        // return $this->belongsTo('App\Post', 'foreign_key', 'other_key');
+        return $this->belongsTo('App\Conference', 'speech_conference_date', 'conference_date');
     }
 }

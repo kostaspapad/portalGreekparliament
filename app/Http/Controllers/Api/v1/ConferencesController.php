@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use Illuminate\Http\Request;
+use DB;
 use App\Http\Controllers\Controller;
 use App\Conference;
 use App\Http\Resources\Conference as ConferenceResource;
@@ -16,23 +17,30 @@ class ConferencesController extends Controller {
         // Get query parameters from Request object
         $this->order_field = $request->get('order_field');
         $this->order_orientation = $request->get('orientation');
+        $this->speech_count = $request->get('speech_count');
+
+        $this->validate_query_params();
     }
 
+    /**
+     * Validate query parameters if exist.
+     */
     public function validate_query_params() {
         // Query parameter validation
-        if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)){
+        if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)) {
             return ['Error' => 'Invalid order field'];
         }
         
-        if ($this->order_orientation && !in_array($this->order_orientation, $this->orientations)){
+        if ($this->order_orientation && !in_array($this->order_orientation, $this->orientations)) {
             return ['Error' => 'Invalid order orientation'];
         }
-        
+
         // Create dynamic field for query
-        if (isset($this->order_field) && !empty($this->order_field)){
+        if (isset($this->order_field) && !empty($this->order_field)) {
             $this->order_field = 'conferences.'.$this->order_field;
         }
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,19 +48,28 @@ class ConferencesController extends Controller {
      */
     public function index() {
         
+        $conferences = Conference::join('speeches as sp', 'sp.speech_conference_date', '=', 'conferences.conference_date')
+                        ->select('*', DB::raw('COUNT(sp.speech_conference_date) as speech_count'))
+                        ->groupBy('conferences.conference_date');
 
         if ($this->order_field && $this->order_orientation) {
-            $conferences = Conference::orderBy($this->order_field, $this->order_orientation)
+            $conferences = $conferences->orderBy($this->order_field, $this->order_orientation)
                 ->paginate(20);
         } else {
-            $conferences = Conference::paginate(20);
+            $conferences = $conferences->paginate(20);
         }
 
         if (isset($conferences) && !empty($conferences)) {
-            return ConferenceResource::collection($conferences);
+            try {
+                return ConferenceResource::collection($conferences);
+
+            } catch(LengthAwarePaginator $e) {
+                return new ConferenceResource($conferences);
+            }
         }
     }
 
+    
     /**
      * Display a conference data specified by id.
      *
@@ -120,37 +137,39 @@ class ConferencesController extends Controller {
     //     }
     // }
 
-    /**
-    * @OA\Get(
-    *   path="/api/v1/conference/from/{start}/to/{end}",
-    *   summary="list products",
-    *   @OA\Response(
-    *     response=200,
-    *     description="A list with products"
-    *   ),
-    *   @OA\Response(
-    *     response="default",
-    *     description="an ""unexpected"" error"
-    *   )
-    * )
-    */
     public function getConferenceByDateRange($start, $end) {
         // Check if string for safety
         if (is_string($start) && is_string($end)) {
             if (isset($start) && isset($end)) {
+
                 // Convert str to date obj
                 $start = date($start);
                 $end = date($end);
-                
+
                 // Check if valid range
                 if ($start <= $end) {
-                    $conferences = Conference::whereBetween('conference_date', [$start, $end])->paginate(10);
+                    $conferences = Conference::join('speeches as sp', 'sp.speech_conference_date', '=', 'conferences.conference_date')
+                        ->select('*', DB::raw('COUNT(sp.speech_conference_date) as speech_count'))
+                        ->whereBetween('conference_date', [$start, $end])
+                        ->groupBy('conference_date');
+
+                    if ($this->order_field && $this->order_orientation) {
+                        $conferences->orderBy($this->order_field, $this->order_orientation);
+                    }
+
+                    $conferences = $conferences->paginate(10);
                 }
             }
-
+            
             if (isset($conferences) && !empty($conferences)) {
-                return ConferenceResource::collection($conferences);
+                try {
+                    return ConferenceResource::collection($conferences);
+
+                } catch(LengthAwarePaginator $e) {
+                    return new ConferenceResource($conferences);
+                }
             }
         }
+        
     }
 }
