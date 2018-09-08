@@ -32,8 +32,17 @@ class Party extends Model
     /**
      * Get the comments for the blog post.
      */
-     public function party_colors()
-     {
-         return $this->hasMany('App\PartyColor', 'party_id', 'party_id');
-     }
+    public function party_colors()
+    {
+        return $this->hasMany('App\PartyColor', 'party_id', 'party_id');
+    }
+
+
+    /**
+     * Get all of the speakers for a party
+     */
+    public function speakers()
+    {
+        return $this->hasManyThrough('App\Speaker', 'App\Membership');
+    }
 }
