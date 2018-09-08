@@ -81,12 +81,12 @@ Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () 
     
     /**
       *-------------------------------------------------------------------------------
-      * Get speeches of a party with pagination
+      * Get speakers of a party
       *-------------------------------------------------------------------------------
-      * Controller:     api\v1\PartiesController@getPartySpeeches
+      * Controller:     api\v1\PartiesController@getPartySpeakers
       * Method:         GET
       */
-    // Route::get('party/{id}/speeches', 'Api\v1\PartiesController@getPartySpeeches');
+    Route::get('party/{party_id}/speakers', 'Api\v1\PartiesController@getPartySpeakers');
 
     /**
       *-------------------------------------------------------------------------------
