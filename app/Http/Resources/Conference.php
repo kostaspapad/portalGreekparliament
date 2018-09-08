@@ -14,7 +14,7 @@ class Conference extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $arr = [
             'id' => $this->id,
             'conference_date' => $this->conference_date,
             'conference_indicator' => $this->conference_indicator,
@@ -25,9 +25,13 @@ class Conference extends JsonResource
             'date_of_crawl' => $this->date_of_crawl,
             'pdf_loc' => $this->pdf_loc,
             'pdf_name' => $this->pdf_name,
-            'time_period' => $this->time_period
+            'time_period' => $this->time_period,
             // 'downloaded' => $this->downloaded
+            'speech_count' => $this->speech_count
         ];
+        
+        // array_filter without second argument removes null elements of entry array
+        return array_filter((array) $arr);
     }
 
     /**
