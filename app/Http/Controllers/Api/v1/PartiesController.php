@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Party;
 use App\Http\Resources\Party as PartyResource;
+use App\Speaker;
+use App\Http\Resources\Speaker as SpeakerResource;
 
 class PartiesController extends Controller
 {
@@ -60,6 +62,27 @@ class PartiesController extends Controller
         
         if (isset($party) && !empty($party)) {
             return new PartyResource($party);
+        }
+    }
+
+    public function getPartySpeakers($party_id) {
+        
+        
+        $speakers = Party::join('memberships as m', 'parties.party_id', '=' ,'m.on_behalf_of_id')
+            ->join('speakers as s', 'm.person_id', '=', 's.speaker_id')
+            ->select([
+                's.speaker_id',
+                's.greek_name', 
+                's.english_name',
+                's.image'])
+            ->where('parties.party_id', '=', $party_id)
+            ->groupBy('s.speaker_id')
+            ->paginate(20);
+        
+        
+         
+        if (isset($speakers) && !empty($speakers)) {
+            return SpeakerResource::collection($speakers);
         }
     }
 }
