@@ -1,89 +1,93 @@
 <template>
     <div class="container">
-        <div v-if="ajaxDone" class="row conferences-container">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-8">
-                <div class="conference-title-box mb-4">
-                    <h4>Latest conferences</h4>
-                </div>
-                <div v-if="ajaxData.conferencesData.data.data && !noData" class="p-4 bg-white conference-content"  v-for="conference in ajaxData.conferencesData.data.data" :key="conference.id">
-                    <span class="show-details-dates">
-                        <a :href=" '/conference/' + conference.conference_date + '/speeches' ">{{conference.conference_date}}</a>
-                    </span>
-                    <div>
-                        <p style="margin: 0;">{{conference.session}}</p>
-                        <span>{{conference.time_period}}</span>
-                    </div>
-                </div>
-                <div class="col-12 mt-5" style="padding-left: 2.5rem;">
-                    <pagination :data="ajaxData.conferencesData.data.meta" @pagination-change-page="changePage" :limit=1>
-                        <span slot="prev-nav">&lt;</span>
-                        <span slot="next-nav">&gt;</span>
-                    </pagination>
-                </div>
-                <div v-show="noData" class="col-12 col-sm-6 col-md-6 col-lg-8">
-                    <h4>No data available</h4>
-                </div>
+    
+        <div v-if="ajaxDone" class="conferences-container">
+            <div class="conference-title-box mb-4">
+                <h2 class="font-weight-bold">Latest conferences</h2>
             </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-8">
+                    
+                    <div v-if="ajaxData.conferencesData.data.data && !noData" class="p-4 bg-white conference-content-box"  v-for="conference in ajaxData.conferencesData.data.data" :key="conference.id">
+                        <h3 class="show-details-dates">
+                            <div @click="redirectToConference(conference.conference_date)">{{conference.conference_date}}</div>
+                        </h3>
+                        <div>
+                            <p style="margin: 0;">{{conference.session}}</p>
+                            <span>{{conference.time_period}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-5" style="padding-left: 2.5rem;">
+                        <pagination :data="ajaxData.conferencesData.data.meta" @pagination-change-page="changePage" :limit=1>
+                            <span slot="prev-nav">&lt;</span>
+                            <span slot="next-nav">&gt;</span>
+                        </pagination>
+                    </div>
+                    <div v-show="noData" class="col-12 col-sm-6 col-md-6 col-lg-8">
+                        <h4>No data available</h4>
+                    </div>
+                </div>
 
-            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" style="float:right;"><i class="fa fa-info-circle info-icon"></i></span>
-                <transition name="slide-fade">
-                    <div v-if="showInfoDiv" class="alert alert-info" role="alert">
-                        <button @click="showInfoDiv = !showInfoDiv" type="button" class="close" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="alert-heading">Informations</h4>
-                        <p>You can choose to select between one date or a range of dates.</p>
+                <div class="datepicker col-12 col-sm-6 col-md-6 col-lg-4">
+                    <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" style="float:right;"><i class="fa fa-info-circle info-icon"></i></span>
+                    <transition name="slide-fade">
+                        <div v-if="showInfoDiv" class="alert alert-info" role="alert">
+                            <button @click="showInfoDiv = !showInfoDiv" type="button" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="alert-heading">Informations</h4>
+                            <p>You can choose to select between one date or a range of dates.</p>
+                        </div>
+                    </transition>
+                    <div style="text-align:left;">
+                        <toggle-button 
+                            id="changed-font"
+                            v-model="isMultipleFilter"
+                            color="#82C7EB" 
+                            :labels="{checked: 'Range of Dates', unchecked: 'Single Date'}"
+                            :width="140" 
+                        />
                     </div>
-                </transition>
-                <div style="text-align:left;">
-                    <toggle-button 
-                        id="changed-font"
-                        v-model="isMultipleFilter"
-                        color="#82C7EB" 
-                        :labels="{checked: 'Range of Dates', unchecked: 'Single Date'}"
-                        :width="140" 
-                    />
-                </div>
-                <div v-if="isMultipleFilter" style="background-color: ;">
-                    <!-- <multiselect 
-                        v-model="selected_date" 
-                        :options="ajaxData.conferencesData" 
-                        track-by="conference_date"
-                        label="conference_date"
-                        placeholder="Select Date"
-                        :multiple="true" 
-                        :close-on-select="false" 
-                        :clear-on-select="false" 
-                        :hide-selected="true" 
-                        :preserve-search="true"
-                        :closeOnSelect="true"
-                        @select="getDatesDp"
-                        @remove="removeOption"
-                    >
-                        <template slot="tag" slot-scope="props">
-                            <span class="custom__tag">
-                                <span>{{ props.option.conference_date }}</span>
-                                <span class="custom__remove" @click="props.remove(props.option)">❌</span>
-                            </span>
-                        </template>
-                    </multiselect> -->
-                    <!-- <div v-show="selected_date.length" style="text-align: left;">
-                        <button @click="resetDates" class="btn btn-sm reset-btn" style="margin-top: 5px;">Reset</button>
-                    </div> -->
-                    <label>Start Date</label>
-                    <datepicker v-model="startDate" :format="myFormattedDate" :bootstrap-styling="true" wrapper-class="pickerDiv" placeholder="Select start date"></datepicker>
-                    <label>End Date</label>
-                    <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true" wrapper-class="pickerDiv" placeholder="Select end date"></datepicker>
-                    <div style="text-align: left;">
-                        <button class="btn reset-btn" @click="getDates" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">Apply</button>
+                    <div v-if="isMultipleFilter" style="background-color: ;">
+                        <!-- <multiselect 
+                            v-model="selected_date" 
+                            :options="ajaxData.conferencesData" 
+                            track-by="conference_date"
+                            label="conference_date"
+                            placeholder="Select Date"
+                            :multiple="true" 
+                            :close-on-select="false" 
+                            :clear-on-select="false" 
+                            :hide-selected="true" 
+                            :preserve-search="true"
+                            :closeOnSelect="true"
+                            @select="getDatesDp"
+                            @remove="removeOption"
+                        >
+                            <template slot="tag" slot-scope="props">
+                                <span class="custom__tag">
+                                    <span>{{ props.option.conference_date }}</span>
+                                    <span class="custom__remove" @click="props.remove(props.option)">❌</span>
+                                </span>
+                            </template>
+                        </multiselect> -->
+                        <!-- <div v-show="selected_date.length" style="text-align: left;">
+                            <button @click="resetDates" class="btn btn-sm reset-btn" style="margin-top: 5px;">Reset</button>
+                        </div> -->
+                        <label>Start Date</label>
+                        <datepicker v-model="startDate" :format="myFormattedDate" :bootstrap-styling="true" wrapper-class="pickerDiv" placeholder="Select start date"></datepicker>
+                        <label>End Date</label>
+                        <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true" wrapper-class="pickerDiv" placeholder="Select end date"></datepicker>
+                        <div style="text-align: left;">
+                            <button class="btn reset-btn" @click="getDates" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">Apply</button>
+                        </div>
                     </div>
-                </div>
-                <div v-else style="text-align: left;">
-                    <label>Select Date</label>
-                    <datepicker v-model="singleDate" :format="myFormattedDate" :bootstrap-styling="true" wrapper-class="pickerDiv" placeholder="Select date"></datepicker>
-                    <div style="text-align: left;">
-                        <button class="btn reset-btn" @click="getDate" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">Apply</button>
+                    <div v-else style="text-align: left;">
+                        <label>Select Date</label>
+                        <datepicker v-model="singleDate" :format="myFormattedDate" :bootstrap-styling="true" wrapper-class="pickerDiv" placeholder="Select date"></datepicker>
+                        <div style="text-align: left;">
+                            <button class="btn reset-btn" @click="getDate" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">Apply</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -94,49 +98,7 @@
     </div>
 </template>
 <style scoped>
-    .conferences-container {
-        background-color: #ffffff;
-        border-radius: 3px;
-        padding-top: 20px;
-    }
-    .conference-title-box {
-        background-color: #bfdeff;
-    }
-    .pickerDiv{
-        margin-bottom: 10px;
-    }
-    .conference-content{
-        border-bottom: 1px solid #e6e6e6;
-        /* margin: 15px 0 15px 0; */
-    }
-    .conference-content:hover{
-        }
-    @media (min-width: 768px) { 
-        .conference-content:hover{
-            position: relative;
-            /* height: 200px; */
-            width: inherit;
-            background: #fff;
-            border: none;
-            /* top: -30px;*/
-            padding: 20px;
-            /* -webkit-box-shadow: 0px 0px 30px 10px rgba(18,18,18,0.5);
-            -moz-box-shadow: 0px 0px 30px 10px rgba(18,18,18,0.5); */
-            -webkit-box-shadow: 0px 0px 30px 10px #8888885c;
-            -moz-box-shadow: 0px 0px 30px 10px #8888885c;
-            /* box-shadow: 0px 0px 30px 10px rgba(18,18,18,0.5); */
-            box-shadow: 0px 0px 30px 10px #8888885c;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            left: -20px;
-        }
-    }
-    @media (min-width: 992px) { 
-        .conference-content:hover{
-            left: -20px;
-        }
-    }
+    
 </style>
 
 <script>
@@ -197,6 +159,9 @@
                     return false;
                 }
                 return json;
+            },
+            redirectToConference(conference_date) {
+                window.location = '/conference/' + conference_date + '/speeches'
             },
             printImg(img){
                 //check if deafault img has different name then return our default img
