@@ -97,13 +97,20 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
+    $ContainerTitleColor: #39c562;
+    $titleTextFontColor: #636b6f;
+    $bodyTextFontColor: #636b6f;
+    $ContainerColor: white;
+    $containerBoxColor: white;
+    $contentBoxColor: #e6e6e6;
+
     .conferences-container {
-        background-color: $conferencesContainerColor;
+        background-color: $ContainerColor;
         border-radius: 3px;
     }
     .conference-title-box {
-        background-color: $containerTitleColor;
+        background-color: $ContainerTitleColor;
         height: 100px;
         padding-top: 25px;
     }
@@ -111,9 +118,9 @@
         margin-bottom: 10px;
     }
     .conference-content-box {
-        border-bottom: 1px solid $conferenceContentBoxColor;
+        border-bottom: 1px solid $contentBoxColor;
         text-align: initial;
-        background-color: $conferenceContainerBoxColor;
+        background-color: $containerBoxColor;
         /* margin: 15px 0 15px 0; */
     }
     .conference-content-box:hover {
