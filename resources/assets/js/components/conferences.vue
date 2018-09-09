@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-8">
                     
-                    <div v-if="ajaxData.conferencesData.data.data && !noData" class="p-4 bg-white conference-content-box"  v-for="conference in ajaxData.conferencesData.data.data" :key="conference.id">
+                    <div v-if="ajaxData.conferenceData.data.data && !noData" class="p-4 bg-white conference-content-box"  v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
                         <h3 class="show-details-dates">
                             <div @click="redirectToConference(conference.conference_date)">{{conference.conference_date}}</div>
                         </h3>
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="col-12 mt-5" style="padding-left: 2.5rem;">
-                        <pagination :data="ajaxData.conferencesData.data.meta" @pagination-change-page="changePage" :limit=1>
+                        <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
                             <span slot="prev-nav">&lt;</span>
                             <span slot="next-nav">&gt;</span>
                         </pagination>
@@ -51,7 +51,7 @@
                     <div v-if="isMultipleFilter" style="background-color: ;">
                         <!-- <multiselect 
                             v-model="selected_date" 
-                            :options="ajaxData.conferencesData" 
+                            :options="ajaxData.conferenceData" 
                             track-by="conference_date"
                             label="conference_date"
                             placeholder="Select Date"
@@ -98,7 +98,60 @@
     </div>
 </template>
 <style scoped>
-    
+    .conferences-container {
+        background-color: $conferencesContainerColor;
+        border-radius: 3px;
+    }
+    .conference-title-box {
+        background-color: $containerTitleColor;
+        height: 100px;
+        padding-top: 25px;
+    }
+    .pickerDiv {
+        margin-bottom: 10px;
+    }
+    .conference-content-box {
+        border-bottom: 1px solid $conferenceContentBoxColor;
+        text-align: initial;
+        background-color: $conferenceContainerBoxColor;
+        /* margin: 15px 0 15px 0; */
+    }
+    .conference-content-box:hover {
+        cursor: hand;
+        cursor: pointer;
+        opacity: .9;
+    }
+
+    .datepicker {
+        padding-right: 30px;
+    }
+
+    @media (min-width: 768px) { 
+        .conference-content-box:hover{
+            position: relative;
+            /* height: 200px; */
+            width: inherit;
+            background: #fff;
+            border: none;
+            /* top: -30px;*/
+            padding: 20px;
+            /* -webkit-box-shadow: 0px 0px 30px 10px rgba(18,18,18,0.5);
+            -moz-box-shadow: 0px 0px 30px 10px rgba(18,18,18,0.5); */
+            -webkit-box-shadow: 0px 0px 30px 10px #8888885c;
+            -moz-box-shadow: 0px 0px 30px 10px #8888885c;
+            /* box-shadow: 0px 0px 30px 10px rgba(18,18,18,0.5); */
+            box-shadow: 0px 0px 30px 10px #8888885c;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            left: -20px;
+        }
+    }
+    @media (min-width: 992px) { 
+        .conference-content-box:hover{
+            left: -20px;
+        }
+    }
 </style>
 
 <script>
@@ -111,7 +164,6 @@
         data(){
             return {
                 ajaxData: {
-                    conferencesData: [],
                     conferenceData: [],
                     details: []
                 },
@@ -143,7 +195,7 @@
                 axios.get(this.$root.host + url)
                 .then(function(response){
                     if(response.status == 200 && response.statusText == "OK"){
-                        self.ajaxData.conferencesData = response
+                        self.ajaxData.conferenceData = response
                     }
                 })
                 .catch(function (error) {
@@ -160,7 +212,7 @@
                 }
                 return json;
             },
-            redirectToConference(conference_date) {
+            redirectToConference(conference_date) {console.log(1);
                 window.location = '/conference/' + conference_date + '/speeches'
             },
             printImg(img){
@@ -179,7 +231,7 @@
                         if(response.status == 200 && response.statusText == "OK"){
                             if(response.data.data.length > 0){
                                 self.noData = false
-                                self.ajaxData.conferencesData = response
+                                self.ajaxData.conferenceData = response
                             }else{
                                 self.noData = true
                             }
@@ -205,7 +257,7 @@
                         if(response.status == 200 && response.statusText == "OK"){
                             if(response.data.data.length > 0){
                                 self.noData = false
-                                self.ajaxData.conferencesData = response
+                                self.ajaxData.conferenceData = response
                             }else{
                                 self.noData = true
                             }
@@ -244,7 +296,7 @@
                         if(response.status == 200 && response.statusText == "OK"){
                             if(response.data.data.length > 0){
                                 self.noData = false
-                                self.ajaxData.conferencesData = response
+                                self.ajaxData.conferenceData = response
                             }else{
                                 self.noData = true
                             }
