@@ -1,22 +1,18 @@
 // Layout
 
-$midNavBgColor: cyan;
+$topNavBgColor: white;
+$menuNavBgColor: #33a8ff;
 $mainContentBgColor: green;
 $footerBgColor: yellow;
 
-// Topnav
-$topNavBgColor: red;
-$logoColor: #39c562;
 
-// Conferences
-$containerTitleColor: #39c562;
-$titleTextFontColor: #636b6f;
-$bodyTextFontColor: #636b6f;
-$conferencesContainerColor: white;
-$conferenceContainerBoxColor: white;
-$conferenceContentBoxColor: #e6e6e6;
+$logoColor: #33a8ff;
 
 
+
+
+// Home
+$imageContainerColor: #39c562;
 
 //to background whole page , add the variable inside body BgColor
 // .content-bg-color{ background-color: red!important }
@@ -52,12 +48,13 @@ html, body {
     cursor: pointer;
 }
 .navbar-laravel {
-    background-color: #fff;
+    background-color: $topNavBgColor;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   }
-  .menu-navbar{
-    border-top: 1px solid rgba(0, 0, 0, 0.1)
-  }
+.menu-navbar{
+    background-color: $menuNavBgColor;
+border-top: 1px solid rgba(0, 0, 0, 0.1)
+}
 .navbar-nav .nav-item:hover{
     background-color: rgba(0, 123, 255, 0.25);
 }
@@ -249,7 +246,7 @@ hr.divider {
 
 /* css for home page*/
 .container-imagebox {
-    background-color:#1e374d;
+    background-color: $imageContainerColor;
     // padding-left:5%;
 }
 
@@ -342,61 +339,4 @@ hr.divider {
 .logo {
     background-color: $logoColor;
     padding: 10px;
-}
-
-
-// Conferences
-.conferences-container {
-    background-color: $conferencesContainerColor;
-    border-radius: 3px;
-}
-.conference-title-box {
-    background-color: $containerTitleColor;
-    height: 100px;
-    padding-top: 25px;
-}
-.pickerDiv {
-    margin-bottom: 10px;
-}
-.conference-content-box {
-    border-bottom: 1px solid $conferenceContentBoxColor;
-    text-align: initial;
-    background-color: $conferenceContainerBoxColor;
-    /* margin: 15px 0 15px 0; */
-}
-.conference-content-box:hover {
-    cursor: hand;
-    cursor: pointer;
-    opacity: .9;
-}
-
-.datepicker {
-    padding-right: 30px;
-}
-
-@media (min-width: 768px) { 
-    .conference-content-box:hover{
-        position: relative;
-        /* height: 200px; */
-        width: inherit;
-        background: #fff;
-        border: none;
-        /* top: -30px;*/
-        padding: 20px;
-        /* -webkit-box-shadow: 0px 0px 30px 10px rgba(18,18,18,0.5);
-        -moz-box-shadow: 0px 0px 30px 10px rgba(18,18,18,0.5); */
-        -webkit-box-shadow: 0px 0px 30px 10px #8888885c;
-        -moz-box-shadow: 0px 0px 30px 10px #8888885c;
-        /* box-shadow: 0px 0px 30px 10px rgba(18,18,18,0.5); */
-        box-shadow: 0px 0px 30px 10px #8888885c;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        left: -20px;
-    }
-}
-@media (min-width: 992px) { 
-    .conference-content-box:hover{
-        left: -20px;
-    }
 }
