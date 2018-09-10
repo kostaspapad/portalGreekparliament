@@ -5,10 +5,42 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Speech;
 use DB;
-use App\Http\Resources\Speech as SpeechResource;
+use App\Helpers\ApiHelper;
 
 class SpeechesController extends Controller
 {
+    var $allowed_order_fields = ['conference_date', 'conference_indicator', 'session', 'time_period'];
+    var $orientations = ['asc', 'desc'];
+
+    public function __construct(Request $request) {
+        // Get query parameters from Request object
+        $this->order_field = $request->get('order_field');
+        $this->order_orientation = $request->get('orientation');
+        $this->speech_count = $request->get('speech_count');
+
+        $this->validate_query_params();
+        $this->apiHelper = new ApiHelper();
+    }
+
+    /**
+     * Validate query parameters if exist.
+     */
+    public function validate_query_params() {
+        // Query parameter validation
+        if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)) {
+            return ['Error' => 'Invalid order field'];
+        }
+        
+        if ($this->order_orientation && !in_array($this->order_orientation, $this->orientations)) {
+            return ['Error' => 'Invalid order orientation'];
+        }
+
+        // Create dynamic field for query
+        if (isset($this->order_field) && !empty($this->order_field)) {
+            $this->order_field = 'conferences.'.$this->order_field;
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,10 +51,7 @@ class SpeechesController extends Controller
         // Get Speeches
         $speeches = Speech::paginate(25);
 
-        // Return the collection of Speeches as a resource
-        if (isset($speeches) && !empty($speeches)) {
-            return  SpeechResource::collection($speeches);
-        }
+        return $this->apiHelper('Speech', $speeches);
     }
 
     /**
@@ -61,9 +90,10 @@ class SpeechesController extends Controller
     {
         $speech = Speech::findorfail($id);
             
-        if (isset($speech) && !empty($speech)) {
-            return new SpeechResource($speech);
-        }
+        // if (isset($speech) && !empty($speech)) {
+        //     return new SpeechResource($speech);
+        // }
+        return $this->apiHelper::returnResource('Speech', $speech);
     }
 
     /**
@@ -106,11 +136,9 @@ class SpeechesController extends Controller
                 ])
                 ->groupBy('speeches.speech_id')
                 ->whereIn('speeches.speech_id', $conversation_ids)
-                ->paginate(50);
+                ->paginate(20);
 
-        if(isset($speeches) && !empty($speeches)){
-            return  SpeechResource::collection($speeches);
-        }    
+        return $this->apiHelper::returnResource('Speech', $speeches);
     }
 
     /**
@@ -165,11 +193,11 @@ class SpeechesController extends Controller
                 ])
                 ->groupBy('speeches.speech_id')
                 ->whereIn('speeches.speech_id', $conversation_ids)
-                ->paginate(50);
-// dd($speeches);
-        if(isset($speeches) && !empty($speeches)){
-            return  SpeechResource::collection($speeches);
-        }    
+                ->paginate(20);
+
+                
+        return $this->apiHelper::returnResource('Speech', $speeches);
+
     }
     
     /**
@@ -223,10 +251,7 @@ class SpeechesController extends Controller
                 ])
                 ->paginate(25);
 
-            if (isset($speeches) && !empty($speeches)) 
-            {
-                return SpeechResource::collection($speeches);
-            }
+            return $this->apiHelper::returnResource('Speech', $speeches);
         }
     }
 
@@ -264,10 +289,7 @@ class SpeechesController extends Controller
                 ->paginate(25);
         }
 
-        if (isset($speeches) && !empty($speeches))
-        {
-            return SpeechResource::collection($speeches);
-        }
+        return $this->apiHelper::returnResource('Speech', $speeches);
     }
 
     /**

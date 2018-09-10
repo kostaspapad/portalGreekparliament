@@ -4,13 +4,20 @@ namespace App\Http\Controllers\api\v1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\ApiHelper;
 use App\Party;
-use App\Http\Resources\Party as PartyResource;
 use App\Speaker;
-use App\Http\Resources\Speaker as SpeakerResource;
+
 
 class PartiesController extends Controller
 {
+    public function __construct(Request $request) {
+        // Get query parameters from Request object
+        // $this->order_field = $request->get('order_field');
+        // $this->order_orientation = $request->get('orientation');
+
+        $this->apiHelper = new ApiHelper();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +28,7 @@ class PartiesController extends Controller
         // Get speakers
         $parties = Party::paginate(50);
 
-        if (isset($parties) && !empty($parties)) {
-            return PartyResource::collection($parties);
-        }
+        return $this->apiHelper::returnResource('Party', $parties);
     }
 
     /**
@@ -38,9 +43,7 @@ class PartiesController extends Controller
     {
         $party = Party::findorfail($party_id);
 
-        if (isset($party) && !empty($party)) {
-            return new PartyResource($party);
-        }
+        return $this->apiHelper::returnResource('Party', $party);
     }
     
     /**
@@ -60,13 +63,10 @@ class PartiesController extends Controller
             $party = Party::where('fullname_el', '=', $party_name)->first();
         }
         
-        if (isset($party) && !empty($party)) {
-            return new PartyResource($party);
-        }
+        return $this->apiHelper::returnResource('Party', $party);
     }
 
     public function getPartySpeakers($party_id) {
-        
         
         $speakers = Party::join('memberships as m', 'parties.party_id', '=' ,'m.on_behalf_of_id')
             ->join('speakers as s', 'm.person_id', '=', 's.speaker_id')
@@ -78,11 +78,7 @@ class PartiesController extends Controller
             ->where('parties.party_id', '=', $party_id)
             ->groupBy('s.speaker_id')
             ->paginate(20);
-        
-        
          
-        if (isset($speakers) && !empty($speakers)) {
-            return SpeakerResource::collection($speakers);
-        }
+        return $this->apiHelper::returnResource('Speaker', $speakers);
     }
 }

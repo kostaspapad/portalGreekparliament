@@ -6,10 +6,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use App\Membership;
-use App\Http\Resources\Membership as MembershipResource;
+use App\Helpers\ApiHelper;
 
 class MembershipsController extends Controller
 {
+    public function __construct(Request $request) {
+        // Get query parameters from Request object
+        // $this->order_field = $request->get('order_field');
+        // $this->order_orientation = $request->get('orientation');
+
+        // $this->validate_query_params();
+
+        $this->apiHelper = new ApiHelper();
+    }
+
     public function getMembershipsBySpeakerId($speaker_id){
         $membership = Membership:://join('memberships as m', 'speakers.speaker_id', '=', 'm.person_id')
             select([
@@ -25,9 +35,7 @@ class MembershipsController extends Controller
 
         $membership = $membership->paginate(50);
         
-        if (isset($membership) && !empty($membership)) {
-            return MembershipResource::collection($membership);
-        }
+        return $this->apiHelper::returnResource('Membership', $membership);
     }
 
     public function getMembershipsBySpeakerName($speaker_name){
@@ -56,8 +64,6 @@ class MembershipsController extends Controller
 
         $membership = $membership->paginate(50);
         
-        if (isset($membership) && !empty($membership)) {
-            return MembershipResource::collection($membership);
-        }
+        return $this->apiHelper::returnResource('Membership', $membership);
     }
 }

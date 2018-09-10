@@ -4,9 +4,9 @@ namespace App\Http\Controllers\api\v1;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
 use App\Conference;
-use App\Http\Resources\Conference as ConferenceResource;
 
 class ConferencesController extends Controller {
 
@@ -20,6 +20,8 @@ class ConferencesController extends Controller {
         $this->speech_count = $request->get('speech_count');
 
         $this->validate_query_params();
+
+        $this->apiHelper = new ApiHelper();
     }
 
     /**
@@ -58,15 +60,8 @@ class ConferencesController extends Controller {
         } else {
             $conferences = $conferences->paginate(20);
         }
-
-        if (isset($conferences) && !empty($conferences)) {
-            try {
-                return ConferenceResource::collection($conferences);
-
-            } catch(LengthAwarePaginator $e) {
-                return new ConferenceResource($conferences);
-            }
-        }
+        
+        return $this->apiHelper::returnResource('Conference', $conferences);
     }
 
     
@@ -81,9 +76,7 @@ class ConferencesController extends Controller {
     public function getConferenceById($conference_id) {
         $conference = Conference::findorfail($conference_id);
        
-        if (isset($conference) && !empty($conference)) {
-            return new ConferenceResource($conference);
-        }
+        return $this->apiHelper::returnResource('Conference', $conference);
     }
 
     /**
@@ -97,9 +90,7 @@ class ConferencesController extends Controller {
     public function getConferenceByDate($conference_date) {
         $conferences = Conference::where('conference_date', '=', $conference_date)->get();
 
-        if (isset($conferences) && !empty($conferences)) {
-            return ConferenceResource::collection($conferences);
-        }
+        return $this->apiHelper::returnResource('Conference', $conferences);
     }
     
     // /**
@@ -161,14 +152,7 @@ class ConferencesController extends Controller {
                 }
             }
             
-            if (isset($conferences) && !empty($conferences)) {
-                try {
-                    return ConferenceResource::collection($conferences);
-
-                } catch(LengthAwarePaginator $e) {
-                    return new ConferenceResource($conferences);
-                }
-            }
+            return $this->apiHelper::returnResource('Conference', $conferences);
         }
         
     }

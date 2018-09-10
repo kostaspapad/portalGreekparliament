@@ -5,18 +5,13 @@ use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Speaker;
-use App\Http\Resources\Speaker as SpeakerResource;
+use App\Helpers\ApiHelper;
 
 class SpeakersController extends Controller
 {
     var $allowed_order_fields = ['greek_name', 'english_name', 'fullname_el'];
     var $orientations = ['asc', 'desc'];
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+    
     public function __construct(Request $request)
     {
         // Get query parameters from Request object
@@ -29,8 +24,14 @@ class SpeakersController extends Controller
         
         // DB::enableQueryLog();     
         // dd(DB::getQueryLog());   
+        $this->apiHelper = new ApiHelper();
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(){
         // Query parameter validation
         if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)){
@@ -79,18 +80,13 @@ class SpeakersController extends Controller
                 'pc.color',
             ]);
 
-        if ($this->order_field && $this->order_orientation)
-        {
+        if ($this->order_field && $this->order_orientation) {
             $speakers->orderBy($this->order_field, $this->order_orientation);
         }
 
         $speakers = $speakers->paginate(50);
-        
-        // dd($speakers);
 
-        if (isset($speakers) && !empty($speakers)) {
-            return SpeakerResource::collection($speakers);
-        }
+        return $this->apiHelper::returnResource('Speaker', $speakers);
     }
     
     /**
@@ -133,9 +129,7 @@ class SpeakersController extends Controller
             ->where('speakers.speaker_id', '=', $speaker_id)
             ->first();
 
-        if (isset($speaker) && !empty($speaker)) {
-            return new SpeakerResource($speaker);
-        }
+            return $this->apiHelper::returnResource('Speaker', $speaker);
     }
     
     /**
@@ -183,9 +177,7 @@ class SpeakersController extends Controller
             ->where($name_lang, '=', $speaker_name)
             ->first();
         
-        if (isset($speaker) && !empty($speaker)) {
-            return new SpeakerResource($speaker);
-        }
+        return $this->apiHelper::returnResource('Speaker', $speaker);
     }
     
     /**
@@ -268,9 +260,6 @@ class SpeakersController extends Controller
         
         $speakers = $speakers->paginate(50);
 
-        // Return the collection of Speeches as a resource
-        if (isset($speakers) && !empty($speakers)) {
-            return SpeakerResource::collection($speakers);
-        }
+        return $this->apiHelper::returnResource('Speaker', $speakers);
     }
 }
