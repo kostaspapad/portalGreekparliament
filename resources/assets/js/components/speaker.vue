@@ -1,30 +1,86 @@
 <template>
-    <div class="container">
-        <div class="speaker-container">
-            <div v-if="ajaxDoneSpeaker" class="row">
-                <div class="col-12 col-sm-4 col-md-4 col-lg-3 mt-2">
-                    <img :src="path + '/' + ajaxData.speakerData.data.data.image " alt="" class="img-fluid" style="width:50%;">
-                    <div v-if="ajaxData.speakerData" class="mt-2">
-                        <div>
-                            {{ajaxData.speakerData.data.data.greek_name}}
-                            <span v-if="ajaxData.speakerData.data.data.greek_name != '' && ajaxData.speakerData.data.data.english_name != '' ">/</span>
-                            {{ajaxData.speakerData.data.data.english_name}}
+    <div class="">
+        <div v-if="ajaxData" class="row mr-0">
+           <!-- <div class="col-12 col-sm-4 col-md-4 col-lg-3 mt-2"> -->
+            <!-- <div class="w-100 bg-img" :style="{ backgroundColor: ajaxData.speakerData.color }"> -->
+            <div class="w-100 bg-img">
+                <div class="container-fluid speaker-data">
+                    <div class="speaker-info">
+                        <div class="speaker-img">
+                            <img :src="path + '/' + ajaxData.speakerData.image " class="img-fluid" style="margin: 5px 0 5px 0;">
                         </div>
-                        <div>
-                            <span>{{ajaxData.speakerData.data.data.email}}</span>
+                        <div class="speaker-name">
+                            <div class="speaker-name-info">
+                                <h1 class="text-left">{{ajaxData.speakerData.greek_name}}
+                                    <!-- <span v-if="ajaxData.speakerData.greek_name != '' && ajaxData.speakerData.english_name != '' ">/</span> 
+                                    {{ajaxData.speakerData.english_name}} -->
+                                </h1>
+                                <p>{{ajaxData.speakerData.email}}</p>
+                            </div>
                         </div>
-                        <div>
-                            <a :href="ajaxData.speakerData.data.data.wiki_el">wiki_el</a>
-                        </div>
-                        <div>
-                            <a :href="ajaxData.speakerData.data.data.wiki_en">wiki_en</a>
-                        </div>
-                        <div>
-                            <a :href="ajaxData.speakerData.data.data.twitter">Twitter</a>
+                    </div>
+                    <div class="speaker-social-links">
+                        
+                        <!-- <span><a :href="ajaxData.speakerData.wiki_el">wiki_el</a></span>
+                        <span>
+                            <a :href="ajaxData.speakerData.wiki_en">
+                                wiki_en
+                                <i class="fab fa-wikipedia-w"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <a :href="ajaxData.speakerData.twitter">
+                                Twitter
+                                <i class="fab fa-twitter" style="color: #007bff;"></i>
+                            </a>
+                        </span> -->
+                        <span v-if="ajaxData.speakerData.wiki_el == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EL) </span>
+                        <span v-else><a :href="ajaxData.speakerData.wiki_el"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EL) </span>
+                        <span v-if="ajaxData.speakerData.wiki_en == '' "><i class="fab fa-wikipedia-w iconsFont"></i>(EN) </span>
+                        <span v-else><a :href="ajaxData.speakerData.wiki_en"><i class="fab fa-wikipedia-w iconsFont iconsColor"></i></a>(EN) </span>
+                        <span class="twitter" v-if="ajaxData.speakerData.twitter == '' ">
+                            <i class="fab fa-twitter iconsFont"></i>
+                        </span>
+                        <span class="twitter" v-else>
+                            <a :href="ajaxData.speakerData.twitter">
+                                
+                                <i class="fab fa-twitter iconsFont iconsColor"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-12 pr-5 mb-4 mt-4 float-right">
+                    <div class="float-right">
+                        <div class="input-group search-div">
+                            <input class="form-control" type="search" placeholder="Search this speaker's speeches">
+                            <span class="input-group-append">
+                                <i class="fa fa-search"></i>
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-8 col-md-8 col-lg-9 mt-2">
+                <!-- <div v-if="ajaxData.speakerData" class="mt-2">
+                    <div>
+                        {{ajaxData.speakerData.greek_name}} 
+                        <span v-if="ajaxData.speakerData.greek_name != '' && ajaxData.speakerData.english_name != '' ">/</span> 
+                        {{ajaxData.speakerData.english_name}}
+                    </div>
+                    <div>
+                        <span>{{ajaxData.speakerData.email}}</span>
+                    </div>
+                    <div>
+                        <a :href="ajaxData.speakerData.wiki_el">wiki_el</a>
+                    </div>
+                    <div>
+                        <a :href="ajaxData.speakerData.wiki_en">wiki_en</a>
+                    </div>
+                    <div>
+                        <a :href="ajaxData.speakerData.twitter">Twitter</a>
+                    </div>
+                </div> -->
+           </div>
+                <!-- <div class="col-12 col-sm-8 col-md-8 col-lg-9 mt-2"> -->
+                <div class="container  mt-2 p-0">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <!-- <a @click="currentTab = 'Information' " class="nav-item nav-link active" id="nav-information-tab" data-toggle="tab" href="#nav-information" role="tab" aria-controls="nav-information" aria-selected="true">Information</a> -->
@@ -70,7 +126,7 @@
                 <img :src="path + '/Spinner.gif' " />
             </div>
         </div>
-    </div>
+    
 </template>
 
 <style lang="scss" scoped>
@@ -84,9 +140,15 @@
     .nav-tabs a {
         color: #17a2b8;
     }
-
-    .speeches {
-        border-radius: 3px;   
+    .bg-img{
+        background-image: url(/img/bgvouli.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: contain;
+    }
+    .speeches-container{
+        // height: 630px;
+        // overflow-y: scroll;
     }
     // .speeches-container {
     //     height: 630px;
@@ -99,27 +161,84 @@
     /* .speeches:last-child{
         border-bottom: none;
     } */
-    .speaker-info td {
-        border: 0;
+    .speaker-info{
+        display: table;
     }
-    .sort-ul{
-        font-size: 0.9em;
-        color: #6c6b68;
-        margin-left: -2.3em;
-        margin-bottom: 0;
+    .speaker-data{
+        /* background:  rgba(0,0,0,0.4); */
+        color: white;   
     }
-    .sort-ul li{
-        display: inline-block;
-        margin-left: 0.5em;
+    .speaker-img{
+        width: 70px;
+        vertical-align: top;
     }
-    .sort-text{
-        color: inherit;
-        text-decoration: underline;
-        cursor: pointer;
+    .speaker-name{
+        vertical-align: middle;
+        padding-left: 10px;
     }
-    @media (max-width: 352px) {
-        nav {
+    .speaker-name p{
+        font-size: 1.33333em;
+    }
+    .speaker-data .speaker-info .speaker-name,.speaker-data .speaker-info .speaker-img{
+        display: table-cell;
+    }
+    .speaker-data .speaker-info .speaker-name h1{
+        font-size: 1.5rem;
+        margin: 0px;
+        padding: 0px;
+        line-height: 1em;
+    }
+    .speaker-data .speaker-info .speaker-social-links span a{
+        color: inherit!important;
+    }
+    .speaker-data .speaker-info .speaker-social-links span a:hover{
+        color: #62b356;
+    }
+    .search-div{
+        width: 18rem;
+    }
+    .search-div input{
+        border-right-style: none;
+        border-radius: 2px;
+        font-style: italic;
+    }
+    .search-div input:focus{
+        border-color: #ced4da;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .search-div span{
+        padding: 13px 16px;
+        background-color: #fff;
+        border: 1px solid;
+        border-color: #ced4da;
+        border-radius: 2px;
+    }
+    .nav-tabs .nav-link.active{
+        background: transparent;
+        border-color: transparent;
+        border-bottom-color: #6c6b68;
+    }
+    @media (max-width: 352px) { 
+        nav{
             font-size: 0.78rem;
+        }
+    }
+    @media (max-width: 768px) { 
+        .bg-img{
+            background-size: auto;
+        }
+    }
+    @media (min-width: 1040px) { 
+        .speaker-social-links{
+            position: absolute;
+            right: 2.6em;
+            margin-top: -1em;
+        }
+    }
+    @media (max-width: 1040px) { 
+        .speaker-social-links{
+           text-align: left;
         }
     }
 </style>
@@ -239,7 +358,7 @@
                     .then(function (response) {
                         if (response.status == 200 && response) {
                             self.noDataSpeaker = false
-                            self.ajaxData.speakerData = response
+                            self.ajaxData.speakerData = response.data.data
                         } else {
                             self.noDataSpeaker = true
                         }
