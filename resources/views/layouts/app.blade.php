@@ -17,7 +17,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="description" content="Online presentation of the Greek Parliament transcripts" />
+        
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -43,7 +44,7 @@
             <!-- Main nav -->
             <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color">
                 <div class="container-fluid ml-0">
-                    <a class="navbar-brand logo" style="color:#fff" href="{{ url('/') }}">
+                    <a class="navbar-brand logo" href="{{ url('/') }}">
                         Greekparliament.info
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" 
@@ -64,9 +65,6 @@
                             </li>
                             <li class="nav-item d-block d-sm-block d-md-none">
                                 <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">{{ __('navbar.speakers') }}</a>
-                            </li>
-                            <li class="nav-item d-block d-sm-block d-md-none">
-                                <a class="nav-link {{ Request::path() === 'speeches' ? 'active' : null }}" href="/speeches">{{ __('navbar.speeches') }}</a>
                             </li>
                             <li class="nav-item d-block d-sm-block d-md-none">
                                 <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">{{ __('navbar.about') }}</a>
@@ -107,18 +105,16 @@
                                     @endif
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="/locale/en">{{ __('navbar.lang_en') }}</a>
-                                        <a class="dropdown-item" href="/locale/el">{{ __('navbar.lang_el') }}</a>
+                                    <a class="dropdown-item" href="/locale/en">{{ __('navbar.lang_en') }}</a>
+                                    <a class="dropdown-item" href="/locale/el">{{ __('navbar.lang_el') }}</a>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <!-- Language dropdown -->
-                
             </nav>
             <!-- Main nav -->
-            
             <!-- Menu -->
             <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color menu-navbar d-none d-sm-block">
                 <div class="container ml-0">
@@ -135,9 +131,6 @@
                                 <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">{{ __('navbar.speakers') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::path() === 'speeches' ? 'active' : null }}" href="/speeches">{{ __('navbar.speeches') }}</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">{{ __('navbar.about') }}</a>
                             </li>
                         </ul>
@@ -145,7 +138,6 @@
                 </div>
             </nav>
             <!-- Menu -->
-
             <div class="content pt-5 pb-5" id="main_app">
                 @yield('content')
             </div>
@@ -185,32 +177,7 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <!-- <div class="col-md-3 mb-md-0 mb-3">
-
-                        
-                        <h5 class="text-uppercase">Links</h5>
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#!">Link 2</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 4</a>
-                            </li>
-                        </ul>
-
-                    </div> -->
-                    <!-- Grid column -->
-
                 </div>
-                <!-- Grid row -->
-
             </div>
             <!-- Footer Links -->
 
