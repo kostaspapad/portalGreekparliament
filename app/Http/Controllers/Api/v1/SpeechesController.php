@@ -5,10 +5,42 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Speech;
 use DB;
-use App\Http\Resources\Speech as SpeechResource;
+use App\Helpers\ApiHelper;
 
 class SpeechesController extends Controller
 {
+    var $allowed_order_fields = ['conference_date', 'conference_indicator', 'session', 'time_period'];
+    var $orientations = ['asc', 'desc'];
+
+    public function __construct(Request $request) {
+        // Get query parameters from Request object
+        $this->order_field = $request->get('order_field');
+        $this->order_orientation = $request->get('orientation');
+        $this->speech_count = $request->get('speech_count');
+
+        $this->validate_query_params();
+        $this->apiHelper = new ApiHelper();
+    }
+
+    /**
+     * Validate query parameters if exist.
+     */
+    public function validate_query_params() {
+        // Query parameter validation
+        if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)) {
+            return ['Error' => 'Invalid order field'];
+        }
+        
+        if ($this->order_orientation && !in_array($this->order_orientation, $this->orientations)) {
+            return ['Error' => 'Invalid order orientation'];
+        }
+
+        // Create dynamic field for query
+        if (isset($this->order_field) && !empty($this->order_field)) {
+            $this->order_field = 'conferences.'.$this->order_field;
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,10 +51,7 @@ class SpeechesController extends Controller
         // Get Speeches
         $speeches = Speech::paginate(25);
 
-        // Return the collection of Speeches as a resource
-        if (isset($speeches) && !empty($speeches)) {
-            return  SpeechResource::collection($speeches);
-        }
+        return $this->apiHelper('Speech', $speeches);
     }
 
     /**
@@ -61,9 +90,10 @@ class SpeechesController extends Controller
     {
         $speech = Speech::findorfail($id);
             
-        if (isset($speech) && !empty($speech)) {
-            return new SpeechResource($speech);
-        }
+        // if (isset($speech) && !empty($speech)) {
+        //     return new SpeechResource($speech);
+        // }
+        return $this->apiHelper::returnResource('Speech', $speech);
     }
 
     /**
@@ -106,11 +136,9 @@ class SpeechesController extends Controller
                 ])
                 ->groupBy('speeches.speech_id')
                 ->whereIn('speeches.speech_id', $conversation_ids)
-                ->paginate(50);
+                ->paginate(20);
 
-        if(isset($speeches) && !empty($speeches)){
-            return  SpeechResource::collection($speeches);
-        }    
+        return $this->apiHelper::returnResource('Speech', $speeches);
     }
 
     /**
@@ -124,25 +152,52 @@ class SpeechesController extends Controller
      */
     public function speechesBySpeakerName($speaker_name)
     {
+        $speaker_name = $this->test_input($speaker_name);
+
         // ASCII = english name
         // UTF-8 = greek name
         if (mb_detect_encoding($speaker_name) == 'ASCII') {
-            $speeches = Speech::select('speeches.*')
-                ->join('speakers', 'speeches.speaker_id', '=', 'speakers.speaker_id')
-                ->where('speakers.english_name', '=', $speaker_name)
-                ->get();
-
+            $name_lang = 'sp.english_name';
         } else if (mb_detect_encoding($speaker_name) == 'UTF-8') {
-            $speeches = Speech::select('speeches.*')
-                ->join('speakers', 'speeches.speaker_id', '=', 'speakers.speaker_id')
-                ->where('speakers.greek_name', '=', $speaker_name)
-                ->get();
+            $name_lang = 'sp.greek_name';
         }
 
-        // Return the collection of Speeches as a resource
-        if (isset($speeches) && !empty($speeches)) {
-            return  SpeechResource::collection($speeches);
+        $speech_ids = Speech::select('speeches.speech_id')
+                ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
+                ->where($name_lang, 'like', $speaker_name)
+                ->get();
+
+        $conversation_ids = array();
+
+        // Get next and previous id
+        foreach($speech_ids as $id){
+            // echo $id->speech_id.PHP_EOL;
+            $conversation_ids[] = $id->speech_id - 1;
+            $conversation_ids[] = $id->speech_id;
+            $conversation_ids[] = $id->speech_id + 1;
         }
+        
+        // Remove duplicates
+        $conversation_ids = array_unique($conversation_ids);
+        
+        // Get speeches
+        // [FUTURE] Show memberships defined by the date that the speech took place
+        $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
+                ->join('speakers as sp', 'speeches.speaker_id', '=', 'sp.speaker_id')
+                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
+                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
+                ->select(['conf.conference_date as speech_conference_date', 'sp.greek_name', 'sp.english_name', 
+                    'speeches.speech_id', 'speeches.speech', 'sp.image'
+                    // 'm.on_behalf_of_id', 
+                    // 'parties.fullname_el'
+                ])
+                ->groupBy('speeches.speech_id')
+                ->whereIn('speeches.speech_id', $conversation_ids)
+                ->paginate(20);
+
+                
+        return $this->apiHelper::returnResource('Speech', $speeches);
+
     }
     
     /**
@@ -196,10 +251,7 @@ class SpeechesController extends Controller
                 ])
                 ->paginate(25);
 
-            if (isset($speeches) && !empty($speeches)) 
-            {
-                return SpeechResource::collection($speeches);
-            }
+            return $this->apiHelper::returnResource('Speech', $speeches);
         }
     }
 
@@ -237,10 +289,7 @@ class SpeechesController extends Controller
                 ->paginate(25);
         }
 
-        if (isset($speeches) && !empty($speeches))
-        {
-            return SpeechResource::collection($speeches);
-        }
+        return $this->apiHelper::returnResource('Speech', $speeches);
     }
 
     /**
