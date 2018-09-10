@@ -49,10 +49,15 @@ class ConferencesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        
         $conferences = Conference::join('speeches as sp', 'sp.speech_conference_date', '=', 'conferences.conference_date')
-                        ->select('*', DB::raw('COUNT(sp.speech_conference_date) as speech_count'))
-                        ->groupBy('conferences.conference_date');
+                            ->select([
+                                'conferences.id', 
+                                'conferences.conference_date',
+                                'conferences.session',
+                                'conferences.time_period',
+                                DB::raw('COUNT(sp.speech_conference_date) as speech_count')
+                            ])
+                            ->groupBy('conferences.id');
 
         if ($this->order_field && $this->order_orientation) {
             $conferences = $conferences->orderBy($this->order_field, $this->order_orientation)
@@ -140,9 +145,15 @@ class ConferencesController extends Controller {
                 // Check if valid range
                 if ($start <= $end) {
                     $conferences = Conference::join('speeches as sp', 'sp.speech_conference_date', '=', 'conferences.conference_date')
-                        ->select('*', DB::raw('COUNT(sp.speech_conference_date) as speech_count'))
+                        ->select([
+                            'conferences.id', 
+                            'conferences.conference_date',
+                            'conferences.session',
+                            'conferences.time_period',
+                            DB::raw('COUNT(sp.speech_conference_date) as speech_count')
+                        ])
                         ->whereBetween('conference_date', [$start, $end])
-                        ->groupBy('conference_date');
+                        ->groupBy('conferences.id');
 
                     if ($this->order_field && $this->order_orientation) {
                         $conferences->orderBy($this->order_field, $this->order_orientation);
