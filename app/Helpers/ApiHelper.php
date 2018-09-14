@@ -33,6 +33,32 @@ class ApiHelper {
     //     }
     // }
 
+    public static function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    /**
+     * Validate query parameters if exist.
+     */
+    public static function validate_query_params($order_field, $allowed_order_fields, $order_orientation) {
+        // Query parameter validation
+        if ($order_field && !in_array($order_field, $allowed_order_fields)) {
+            return ['Error' => 'Invalid order field'];
+        }
+        
+        if ($order_orientation && !in_array($order_orientation, $orientations)) {
+            return ['Error' => 'Invalid order orientation'];
+        }
+
+        // Create dynamic field for query
+        if (isset($order_field) && !empty($order_field)) {
+            $order_field = 'conferences.'.$order_field;
+        }
+    }
+
     public static function returnResource($resource_type, $data) {
 
         $baseClass = class_basename($data);

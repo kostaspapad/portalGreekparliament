@@ -12,7 +12,8 @@ class SpeechesController extends Controller
     var $allowed_order_fields = ['conference_date', 'conference_indicator', 'session', 'time_period'];
     var $orientations = ['asc', 'desc'];
 
-    public function __construct(Request $request) {
+    public function __construct(Request $request) 
+    {
         // Get query parameters from Request object
         $this->order_field = $request->get('order_field');
         $this->order_orientation = $request->get('orientation');
@@ -25,7 +26,8 @@ class SpeechesController extends Controller
     /**
      * Validate query parameters if exist.
      */
-    public function validate_query_params() {
+    public function validate_query_params() 
+    {
         // Query parameter validation
         if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)) {
             return ['Error' => 'Invalid order field'];
@@ -37,7 +39,7 @@ class SpeechesController extends Controller
 
         // Create dynamic field for query
         if (isset($this->order_field) && !empty($this->order_field)) {
-            $this->order_field = 'conferences.'.$this->order_field;
+            $this->order_field = 'speeches.'.$this->order_field;
         }
     }
 
@@ -51,33 +53,7 @@ class SpeechesController extends Controller
         // Get Speeches
         $speeches = Speech::paginate(25);
 
-        return $this->apiHelper('Speech', $speeches);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return App\Http\Resources\Speech
-     */
-    public function store(Request $request)
-    {
-
-        // THIS IS A SAMPLE ITS NOT GOING TO WORK THIS WAY!!!
-
-        // $speech = $request->isMethod('put') ? Speech::findorfail(
-        //     $request->speech_id) : new Speech;
-        
-        // $speech->speech_id = $request->input('speech_id');
-        // $speech->speech_conference_date = $request->input('speech_conference_date');
-        // $speech->speaker_id = $request->input('speaker_id');
-        // $speech->speech = $request->input('speech');
-        // $speech->f_name = $request->input('f_name');
-        // $speech->md5 = $request->input('md5');
-            
-        // if (Speech->save()){
-        //     return new SpeechResource($speech);
-        // }            
+        return $this->apiHelper::returnResource('Speech', $speeches);
     }
 
     /**
@@ -89,176 +65,13 @@ class SpeechesController extends Controller
     public function getSpeechById($id)
     {
         $speech = Speech::findorfail($id);
-            
-        // if (isset($speech) && !empty($speech)) {
-        //     return new SpeechResource($speech);
-        // }
+
         return $this->apiHelper::returnResource('Speech', $speech);
-    }
-
-    /**
-     * Get speeches of a speaker specified by ID
-     *
-     * @param  int  $id
-     * @return App\Http\Resources\Speech
-     */
-     public function getSpeechesBySpeakerId($speaker_id){
-
-        $speaker_id = $this->test_input($speaker_id);
-
-        $speech_ids = Speech::select('speeches.speech_id')
-                ->where('speeches.speaker_id', '=', $speaker_id)
-                ->get();
-
-        $conversation_ids = array();
-
-        // Get next and previous id
-        foreach($speech_ids as $id){
-            // echo $id->speech_id.PHP_EOL;
-            $conversation_ids[] = $id->speech_id - 1;
-            $conversation_ids[] = $id->speech_id;
-            $conversation_ids[] = $id->speech_id + 1;
-        }
-        
-        // Remove duplicates
-        $conversation_ids = array_unique($conversation_ids);
-        
-        // Get speeches
-        // [FUTURE] Show memberships defined by the date that the speech took place
-        $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
-                ->join('speakers as sp', 'speeches.speaker_id', '=', 'sp.speaker_id')
-                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
-                ->select(['conf.conference_date as speech_conference_date', 'sp.greek_name', 'sp.english_name', 
-                    'speeches.speech_id', 'speeches.speech', 'sp.image'
-                    // 'm.on_behalf_of_id', 
-                    // 'parties.fullname_el'
-                ])
-                ->groupBy('speeches.speech_id')
-                ->whereIn('speeches.speech_id', $conversation_ids)
-                ->paginate(20);
-
-        return $this->apiHelper::returnResource('Speech', $speeches);
-    }
-
-    /**
-     * Get speeches of a speaker specified by name
-     * 
-     * Use this path for getting data using the english name
-     * and the greek name of the speaker
-     * 
-     * @param  str  $speaker_name
-     * @return App\Http\Resources\Speech
-     */
-    public function speechesBySpeakerName($speaker_name)
-    {
-        $speaker_name = $this->test_input($speaker_name);
-
-        // ASCII = english name
-        // UTF-8 = greek name
-        if (mb_detect_encoding($speaker_name) == 'ASCII') {
-            $name_lang = 'sp.english_name';
-        } else if (mb_detect_encoding($speaker_name) == 'UTF-8') {
-            $name_lang = 'sp.greek_name';
-        }
-
-        $speech_ids = Speech::select('speeches.speech_id')
-                ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                ->where($name_lang, 'like', $speaker_name)
-                ->get();
-
-        $conversation_ids = array();
-
-        // Get next and previous id
-        foreach($speech_ids as $id){
-            // echo $id->speech_id.PHP_EOL;
-            $conversation_ids[] = $id->speech_id - 1;
-            $conversation_ids[] = $id->speech_id;
-            $conversation_ids[] = $id->speech_id + 1;
-        }
-        
-        // Remove duplicates
-        $conversation_ids = array_unique($conversation_ids);
-        
-        // Get speeches
-        // [FUTURE] Show memberships defined by the date that the speech took place
-        $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
-                ->join('speakers as sp', 'speeches.speaker_id', '=', 'sp.speaker_id')
-                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
-                ->select(['conf.conference_date as speech_conference_date', 'sp.greek_name', 'sp.english_name', 
-                    'speeches.speech_id', 'speeches.speech', 'sp.image'
-                    // 'm.on_behalf_of_id', 
-                    // 'parties.fullname_el'
-                ])
-                ->groupBy('speeches.speech_id')
-                ->whereIn('speeches.speech_id', $conversation_ids)
-                ->paginate(20);
-
-                
-        return $this->apiHelper::returnResource('Speech', $speeches);
-
-    }
-    
-    /**
-     * Get speeches of a party specified by name
-     * 
-     * Use this path for getting data using the english name
-     * and the greek name of the party
-     * 
-     * @param  str  $party_id
-     * @return App\Http\Resources\Speech
-     */
-    public function speechesByPartyName($party_id)
-    {
-        // ASCII = english name
-        // UTF-8 = greek name
-        die;
-        // $speeches = Speech::select('speeches.*')
-        //     ->join('memberships', 'speeches.speaker_id', '=', 'memberships.person_id')
-        //     ->where('memberships.on_behalf_of_id', '=', $party_id)
-        //     ->get();
-        
-        // // DEN DOULEVEI! MEMORY ERROR!!
-        // // Return the collection of Speeches as a resource
-        // if (isset($speeches) && !empty($speeches)) {
-        //     return  SpeechResource::collection($speeches);
-        // }
-    }
-
-    /**
-     * Get all speeches of a conference specified by date
-     *
-     * @param  str  $date
-     * @return App\Http\Resources\Speech
-     */
-    public function getSpeechesByConferenceDate($date)
-    {
-        if (isset($date) && is_string($date))
-        {
-            $date = date($date);
-            // One speaker can be in many parties (check it later)
-            $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
-                ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
-                ->select(['conf.conference_date', 'sp.greek_name', 'sp.english_name', 'speeches.speech_id', 'speeches.speech', 'sp.image', 'm.on_behalf_of_id', 'parties.fullname_el'])
-                ->groupBy('speeches.speech_id')
-                ->where([
-                    ['conf.conference_date', '=', $date],
-                    // ['m.start_date', '>', $date],
-                    // ['m.end_date', '<=', $date]
-                ])
-                ->paginate(25);
-
-            return $this->apiHelper::returnResource('Speech', $speeches);
-        }
     }
 
     public function fulltextSpeechSearch($input)
     {
-        if (isset($input) && is_string($input))
-        {
+        if (isset($input) && is_string($input)) {
             $exp = explode(' ', $input);
 
             $s = '';
@@ -292,23 +105,8 @@ class SpeechesController extends Controller
         return $this->apiHelper::returnResource('Speech', $speeches);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return App\Http\Resources\Speech
-     */
-    public function destroy($id)
+    public function test_input($data) 
     {
-        // MAYBE WORKS (FUTURE)
-        // $speech = Speech::findorfail($id);
-
-        // if ($speech->delete()){
-        //     return new SpeechResource($speech);
-        // }
-    }
-
-    public function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);

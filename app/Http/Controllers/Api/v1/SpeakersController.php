@@ -32,7 +32,8 @@ class SpeakersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
         // Query parameter validation
         if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)){
             return ['Error' => 'Invalid order field'];
@@ -102,8 +103,8 @@ class SpeakersController extends Controller
      * @param  int  $speaker_id
      * @return \Illuminate\Http\Response
      */
-    public function getSpeakerById($speaker_id){
-        
+    public function getSpeakerById($speaker_id)
+    {
         $speaker = Speaker::join(
             DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
                     FROM(
@@ -137,7 +138,7 @@ class SpeakersController extends Controller
             ->where('speakers.speaker_id', '=', $speaker_id)
             ->first();
 
-            return $this->apiHelper::returnResource('Speaker', $speaker);
+        return $this->apiHelper::returnResource('Speaker', $speaker);
     }
     
     /**
@@ -145,7 +146,8 @@ class SpeakersController extends Controller
      * an english(ASCII)
      * 
      */ 
-    public function getSpeakerByName($speaker_name){
+    public function getSpeakerByName($speaker_name)
+    {
         $name_lang = '';
         
         // ASCII = english name
@@ -202,7 +204,8 @@ class SpeakersController extends Controller
      * When using color parameter the response will contain all the 
      * memberships of a speaker that has changed more than one party
      */ 
-    public function searchSpeakerByName($speaker_name){
+    public function searchSpeakerByName($speaker_name)
+    {
         if((isset($this->order_orientation) && !empty($this->order_orientation)) &&
            (isset($this->order_field) && !empty($this->order_field))){
             // Query parameter validation
@@ -269,8 +272,7 @@ class SpeakersController extends Controller
         
         $speakers = $speakers->groupBy('speakers.speaker_id');
 
-        if ($this->order_field && $this->order_orientation)
-        {
+        if ($this->order_field && $this->order_orientation) {
             $speakers->orderBy($this->order_field, $this->order_orientation);
         }
         

@@ -296,7 +296,7 @@
                 let url = null
 
                 if (this.finalName) {
-                    url = '/api/v1/speeches/speaker/name/' + this.finalName + '?page=' + page
+                    url = '/api/v1/speaker/name/' + this.finalName + '/speeches' + '?page=' + page
                 }
 
                 axios.get(this.$root.host + url)
@@ -341,7 +341,7 @@
                 const self = this;
 
                 setTimeout(() => {
-                    axios.get(this.$root.host + '/api/v1/speeches/speaker/name/' + this.finalName)
+                    axios.get(this.$root.host + '/api/v1/speaker/name/' + this.finalName + '/speeches')
                         .then(function (response) {
                             if (response.status == 200 && response.data.data.length > 0) {
                                 self.noDataSpeeches = false
