@@ -13,6 +13,6 @@ class Conference extends Model
 
     public function speeches()
     {
-        return $this->hasMany('App\Speech', 'speech_conference_date', 'conference_date');
+        return $this->hasMany('App\Models\Speech', 'speech_conference_date', 'conference_date');
     }
 }

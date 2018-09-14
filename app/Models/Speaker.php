@@ -29,11 +29,11 @@ class Speaker extends Model
 
     public function memberships()
     {
-        return $this->belongsTo('App\Membership', 'person_id', 'speaker_id');
+        return $this->belongsTo('App\Models\Membership', 'person_id', 'speaker_id');
     }
 
     public function speeches()
     {
-        return $this->hasMany('App\Speech', 'speaker_id', 'speaker_id');
+        return $this->hasMany('App\Models\Speech', 'speaker_id', 'speaker_id');
     }
 }

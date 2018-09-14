@@ -26,7 +26,7 @@ class Party extends Model
 
     public function memberships()
     {
-        return $this->belongsTo('App\Membership', 'on_behalf_of_id', 'party_id');
+        return $this->belongsTo('App\Models\Membership', 'on_behalf_of_id', 'party_id');
     }
 
     /**
@@ -34,7 +34,7 @@ class Party extends Model
      */
     public function party_colors()
     {
-        return $this->hasMany('App\PartyColor', 'party_id', 'party_id');
+        return $this->hasMany('App\Models\PartyColor', 'party_id', 'party_id');
     }
 
 
@@ -43,6 +43,6 @@ class Party extends Model
      */
     public function speakers()
     {
-        return $this->hasManyThrough('App\Speaker', 'App\Membership');
+        return $this->hasManyThrough('App\Models\Speaker', 'App\Membership');
     }
 }

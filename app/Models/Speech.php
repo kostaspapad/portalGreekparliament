@@ -16,12 +16,12 @@ class Speech extends Model
     public function speakers()
     {
         // return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
-        return $this->belongsTo('App\Speaker', 'speaker_id', 'speaker_id');
+        return $this->belongsTo('App\Models\Speaker', 'speaker_id', 'speaker_id');
     }
 
     public function conferences()
     {
         // return $this->belongsTo('App\Post', 'foreign_key', 'other_key');
-        return $this->belongsTo('App\Conference', 'speech_conference_date', 'conference_date');
+        return $this->belongsTo('App\Models\Conference', 'speech_conference_date', 'conference_date');
     }
 }

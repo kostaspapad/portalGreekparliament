@@ -20,6 +20,6 @@ class PartyColor extends Model
      */
     public function party()
     {
-        return $this->belongsTo('App\Party', 'party_id', 'party_id');
+        return $this->belongsTo('App\Models\Party', 'party_id', 'party_id');
     }
 }
