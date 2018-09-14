@@ -84,7 +84,7 @@ class ConferencesController extends Controller
      * @param  int  $conference_id
      * @return \Illuminate\Http\Response
      */
-    public function getConferenceById($conference_id) 
+    public function conferenceById($conference_id) 
     {
         $conference = Conference::findorfail($conference_id);
 
@@ -99,14 +99,14 @@ class ConferencesController extends Controller
      * @param  int  $conference_date
      * @return \Illuminate\Http\Response
      */
-    public function getConferenceByDate($conference_date) 
+    public function conferenceByDate($conference_date) 
     {
-        $conferences = Conference::where('conference_date', '=', $conference_date)->get();
+        $conference = Conference::where('conference_date', '=', $conference_date)->first();
 
-        return $this->apiHelper::returnResource('Conference', $conferences);
+        return $this->apiHelper::returnResource('Conference', $conference);
     }
 
-    public function getConferencesByDateRange($start, $end) 
+    public function conferencesByDateRange($start, $end) 
     {
         if (isset($start) && isset($end)) {
 

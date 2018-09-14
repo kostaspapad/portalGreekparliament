@@ -53,11 +53,11 @@ Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () 
      */
     // http://localhost:8000/api/v1/conferences?order_field=conference_date&orientation=asc
     Route::get('conferences', 'Api\v1\ConferencesController@index');
-    Route::get('conference/{id}', 'Api\v1\ConferencesController@getConferenceById');
-    Route::get('conference/date/{date}', 'Api\v1\ConferencesController@getConferenceByDate');
-    
+    Route::get('conference/{id}', 'Api\v1\ConferencesController@conferenceById');
+    Route::get('conference/date/{date}', 'Api\v1\ConferencesController@conferenceByDate');
+
     // http://localhost:8000/api/v1/conference/start/1989-07-03/end/1989-07-27
-    Route::get('conference/start/{startDate}/end/{endDate}', 'Api\v1\ConferencesController@getConferencesByDateRange');
+    Route::get('conference/start/{startDate}/end/{endDate}', 'Api\v1\ConferencesController@conferencesByDateRange');
 
     // Conference->Speeches
     Route::get('conference/{date}/speeches', 'Api\v1\Conferences\SpeechesController@speechesByConferenceDate');

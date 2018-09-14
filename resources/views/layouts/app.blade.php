@@ -42,7 +42,7 @@
         <div id="app" class="content-bg-color">
         
             <!-- Main nav -->
-            <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color">
+            <nav class="navbar navbar-expand-md py-0 px-4 navbar-light navbar-laravel navbar-bg-color">
                 <div class="container-fluid ml-0">
                     <a class="navbar-brand logo" href="{{ url('/') }}">
                         Greekparliament.info
@@ -116,7 +116,7 @@
             </nav>
             <!-- Main nav -->
             <!-- Menu -->
-            <nav class="navbar navbar-expand-md py-0 navbar-light navbar-laravel navbar-bg-color menu-navbar d-none d-sm-block">
+            <nav class="navbar navbar-expand-md py-0 px-4 navbar-light navbar-laravel navbar-bg-color menu-navbar d-none d-sm-block">
                 <div class="container ml-0">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->

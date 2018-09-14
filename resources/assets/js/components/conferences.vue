@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-6 col-lg-8">
 
-                        <div v-if="ajaxData.conferenceData.data.data && !noData" class="p-4 bg-white conference-content-box"
+                        <div v-if="ajaxData.conferenceData.data.data && !noData && !singleDate" class="p-4 bg-white conference-content-box"
                             v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
                             <h3 class="show-details-dates">
                                 <div @click="redirectToConference(conference.conference_date)">{{conference.conference_date}}</div>
@@ -16,6 +16,16 @@
                             <div>
                                 <p style="margin: 0;">{{conference.session}}</p>
                                 <span>{{conference.time_period}}</span>
+                            </div>
+                        </div>
+
+                        <div v-if="singleDate && !noData" class="p-4 bg-white conference-content-box">
+                            <h3 class="show-details-dates">
+                                <div @click="redirectToConference(ajaxData.conferenceData.data.data.conference_date)">{{ajaxData.conferenceData.data.data.conference_date}}</div>
+                            </h3>
+                            <div>
+                                <p style="margin: 0;">{{ajaxData.conferenceData.data.data.session}}</p>
+                                <span>{{ajaxData.conferenceData.data.data.time_period}}</span>
                             </div>
                         </div>
                         <div class="col-12 mt-5" style="padding-left: 2.5rem;">
@@ -308,9 +318,8 @@
                     this.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
                     axios.get(this.$root.host + '/api/v1/conference/date/' + this.singleDate)
                         .then(function (response) {
-                            console.log(response)
                             if (response.status == 200 && response.statusText == "OK") {
-                                if (response.data.data.length > 0) {
+                                if (response.data.data != null) {
                                     self.noData = false
                                     self.ajaxData.conferenceData = response
                                 } else {
