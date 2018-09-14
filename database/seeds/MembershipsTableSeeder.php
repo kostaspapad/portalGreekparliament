@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Membership;
+use App\Models\Membership;
 
 class MembershipsTableSeeder extends Seeder
 {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\api\v1;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Speaker;
+use App\Models\Speaker;
 use App\Helpers\ApiHelper;
 
 class SpeakersController extends Controller

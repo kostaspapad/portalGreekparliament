@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use FullTextSearch;
 use Illuminate\Database\Eloquent\Model;

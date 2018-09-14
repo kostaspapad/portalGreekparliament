@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Conference;
+use App\Models\Conference;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

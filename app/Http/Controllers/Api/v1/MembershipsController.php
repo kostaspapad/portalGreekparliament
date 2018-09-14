@@ -5,7 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-use App\Membership;
+use App\Models\Membership;
 use App\Helpers\ApiHelper;
 
 class MembershipsController extends Controller

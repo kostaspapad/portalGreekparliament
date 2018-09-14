@@ -5,8 +5,8 @@ namespace App\Http\Controllers\api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\ApiHelper;
-use App\Party;
-use App\Speaker;
+use App\Models\Party;
+use App\Models\Speaker;
 
 
 class PartiesController extends Controller

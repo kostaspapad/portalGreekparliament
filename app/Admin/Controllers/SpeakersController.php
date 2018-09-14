@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Speaker;
+use App\Models\Speaker;
 use Illuminate\Support\Facades\DB;
 
 use Encore\Admin\Form;

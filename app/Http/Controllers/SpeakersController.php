@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Speaker;
+use App\Models\Speaker;
 
 class SpeakersController extends Controller
 {

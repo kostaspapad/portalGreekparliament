@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
-use App\Conference;
+use App\Models\Conference;
 
 class ConferencesController extends Controller {
 
@@ -65,7 +65,7 @@ class ConferencesController extends Controller {
         } else {
             $conferences = $conferences->paginate(20);
         }
-        
+        dd($conferences);
         return $this->apiHelper::returnResource('Conference', $conferences);
     }
 

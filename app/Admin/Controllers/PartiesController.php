@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Party;
+use App\Models\Party;
 
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

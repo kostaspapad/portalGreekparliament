@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\PartyColor;
+use App\Models\PartyColor;
 
 class PartyColorTableSeeder extends Seeder
 {

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Speaker;
+use App\Models\Speaker;
 
 
 class SpeakersSeeder extends Seeder

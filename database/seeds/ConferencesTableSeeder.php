@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Conference;
+use App\Models\Conference;
 
 class ConferencesTableSeeder extends Seeder
 {
