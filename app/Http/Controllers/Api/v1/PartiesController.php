@@ -80,19 +80,4 @@ class PartiesController extends Controller
         
         return $this->apiHelper::returnResource('Party', $party);
     }
-    // public function getPartySpeakers($party_id) {
-        
-    //     $speakers = Party::join('memberships as m', 'parties.party_id', '=' ,'m.on_behalf_of_id')
-    //         ->join('speakers as s', 'm.person_id', '=', 's.speaker_id')
-    //         ->select([
-    //             's.speaker_id',
-    //             's.greek_name', 
-    //             's.english_name',
-    //             's.image'])
-    //         ->where('parties.party_id', '=', $party_id)
-    //         ->groupBy('s.speaker_id')
-    //         ->paginate(20);
-         
-    //     return $this->apiHelper::returnResource('Speaker', $speakers);
-    // }
 }

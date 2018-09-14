@@ -25,9 +25,11 @@ class Membership extends Model
     {
        return $this->hasMany('App\Models\Party', 'id_name', 'on_behalf_of_id');
     }
+    
     public function speakers()
     {
        // return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
        return $this->hasMany('App\Models\Speaker', 'speaker_id', 'person_id');
     }
+
 }

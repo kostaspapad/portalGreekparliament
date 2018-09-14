@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\PartyColor;
+use App\Models\Membership;
 
 class Party extends Model
 {
@@ -20,8 +21,7 @@ class Party extends Model
         "fullname_el",
         "fullname_en",
         "image",
-        "url",
-        "members"
+        "url"
     ];
 
     public function memberships()
@@ -34,7 +34,8 @@ class Party extends Model
      */
     public function party_colors()
     {
-        return $this->hasMany('App\Models\PartyColor', 'party_id', 'party_id');
+        // return $this->hasMany('App\Models\PartyColor', 'party_id', 'party_id');
+        return $this->hasOne('App\Models\PartyColor');
     }
 
 
@@ -43,6 +44,15 @@ class Party extends Model
      */
     public function speakers()
     {
-        return $this->hasManyThrough('App\Models\Speaker', 'App\Membership');
+        // return $this->hasManyThrough('App\Models\Speaker', 'App\Models\Membership');
+        // return $this->hasManyThrough(    <----- LATHOS
+        //     'App\Models\Speaker',
+        //     'App\Models\Membership',
+        //     'party_id', // Foreign key on Membership table...
+        //     'speaker_id', // Foreign key on Speaker table...
+        //     'party_id', // Local key on countries table...
+        //     'id' // Local key on Membership table...
+        // );
     }
+    
 }

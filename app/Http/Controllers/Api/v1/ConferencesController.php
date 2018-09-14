@@ -108,33 +108,30 @@ class ConferencesController extends Controller
 
     public function getConferencesByDateRange($start, $end) 
     {
-        // Check if string for safety
-        if (is_string($start) && is_string($end)) {
-            if (isset($start) && isset($end)) {
+        if (isset($start) && isset($end)) {
 
-                // Convert str to date obj
-                $start = date($start);
-                $end = date($end);
+            // Convert str to date obj
+            $start = date($start);
+            $end = date($end);
 
-                // Check if valid range
-                if ($start <= $end) {
-                    $conferences = Conference::with('speeches')
-                        ->has('speeches')
-                        ->select([
-                            'conferences.id', 
-                            'conferences.conference_date',
-                            'conferences.session',
-                            'conferences.time_period'
-                        ])
-                        ->withCount('speeches')
-                        ->groupBy('conferences.id');
+            // Check if valid range
+            if ($start <= $end) {
+                $conferences = Conference::with('speeches')
+                    ->has('speeches')
+                    ->select([
+                        'conferences.id', 
+                        'conferences.conference_date',
+                        'conferences.session',
+                        'conferences.time_period'
+                    ])
+                    ->withCount('speeches')
+                    ->groupBy('conferences.id');
 
-                    if ($this->order_field && $this->order_orientation) {
-                        $conferences->orderBy($this->order_field, $this->order_orientation);
-                    }
-
-                    $conferences = $conferences->paginate(10);
+                if ($this->order_field && $this->order_orientation) {
+                    $conferences->orderBy($this->order_field, $this->order_orientation);
                 }
+
+                $conferences = $conferences->paginate(10);
             }
             
             return $this->apiHelper::returnResource('Conference', $conferences);
