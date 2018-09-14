@@ -49,23 +49,25 @@ class ConferencesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $conferences = Conference::join('speeches as sp', 'sp.speech_conference_date', '=', 'conferences.conference_date')
-                            ->select([
-                                'conferences.id', 
-                                'conferences.conference_date',
-                                'conferences.session',
-                                'conferences.time_period',
-                                DB::raw('COUNT(sp.speech_conference_date) as speech_count')
-                            ])
-                            ->groupBy('conferences.id');
+        $conferences = Conference::with('speeches')
+            ->has('speeches')
+            ->select([
+                'conferences.id', 
+                'conferences.conference_date',
+                'conferences.session',
+                'conferences.time_period'
+            ])
+            ->withCount('speeches')
+            ->groupBy('conferences.id');
 
-        if ($this->order_field && $this->order_orientation) {
-            $conferences = $conferences->orderBy($this->order_field, $this->order_orientation)
+            if ($this->order_field && $this->order_orientation) {
+                $conferences = $conferences->orderBy($this->order_field, $this->order_orientation)
                 ->paginate(20);
-        } else {
-            $conferences = $conferences->paginate(20);
-        }
-        dd($conferences);
+                
+            } else {
+                $conferences = $conferences->paginate(20);
+            }
+        
         return $this->apiHelper::returnResource('Conference', $conferences);
     }
 
@@ -144,15 +146,15 @@ class ConferencesController extends Controller {
 
                 // Check if valid range
                 if ($start <= $end) {
-                    $conferences = Conference::join('speeches as sp', 'sp.speech_conference_date', '=', 'conferences.conference_date')
+                    $conferences = Conference::with('speeches')
+                        ->has('speeches')
                         ->select([
                             'conferences.id', 
                             'conferences.conference_date',
                             'conferences.session',
-                            'conferences.time_period',
-                            DB::raw('COUNT(sp.speech_conference_date) as speech_count')
+                            'conferences.time_period'
                         ])
-                        ->whereBetween('conference_date', [$start, $end])
+                        ->withCount('speeches')
                         ->groupBy('conferences.id');
 
                     if ($this->order_field && $this->order_orientation) {

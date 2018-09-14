@@ -27,7 +27,7 @@ class Conference extends JsonResource
             'pdf_name' => $this->pdf_name,
             'time_period' => $this->time_period,
             // 'downloaded' => $this->downloaded
-            'speech_count' => $this->speech_count
+            'speeches_count' => $this->speeches_count
         ];
         
         // array_filter without second argument removes null elements of entry array
