@@ -60,6 +60,7 @@ Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () 
     Route::get('conference/start/{startDate}/end/{endDate}', 'Api\v1\ConferencesController@conferencesByDateRange');
 
     // Conference->Speeches
+    // http://127.0.0.1:8000/api/v1/conference/2010-05-28/speeches
     Route::get('conference/{date}/speeches', 'Api\v1\Conferences\SpeechesController@speechesByConferenceDate');
 
     // Memberships->Speaker
