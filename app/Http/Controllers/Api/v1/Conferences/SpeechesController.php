@@ -50,7 +50,18 @@ class SpeechesController extends Controller
                 ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
                 ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
                 ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
-                ->select(['conf.conference_date', 'sp.greek_name', 'sp.english_name', 'speeches.speech_id', 'speeches.speech', 'sp.image', 'm.on_behalf_of_id', 'parties.fullname_el'])
+                ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
+                ->select([
+                    'conf.conference_date', 
+                    'sp.greek_name', 
+                    'sp.english_name', 
+                    'speeches.speech_id', 
+                    'speeches.speech', 
+                    'sp.image', 
+                    'm.on_behalf_of_id', 
+                    'parties.fullname_el',
+                    'party_colors.color'
+                ])
                 ->groupBy('speeches.speech_id')
                 ->where([
                     ['conf.conference_date', '=', $date],
