@@ -34,7 +34,8 @@ class Speech extends JsonResource
             'twitter' => $this->twitter,
             'website' => $this->website,
             'on_behalf_of_id' => $this->on_behalf_of_id,
-            'fullname_el' => $this->fullname_el
+            'fullname_el' => $this->fullname_el,
+            'party_color' => $this->color
         ];
         
         // array_filter without second argument removes null elements of entry array
