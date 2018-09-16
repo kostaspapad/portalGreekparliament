@@ -24,4 +24,8 @@ class Speech extends Model
         // return $this->belongsTo('App\Post', 'foreign_key', 'other_key');
         return $this->belongsTo('App\Models\Conference', 'speech_conference_date', 'conference_date');
     }
+
+    public function favorites(){
+        return $this->belongsToMany('App\User', 'favorites', 'speech_id', 'user_id');
+    }
 }

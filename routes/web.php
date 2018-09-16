@@ -53,4 +53,8 @@ Route::group(['middleware' => ['throttle:30,1']], function () {
         \Session::put('locale', $locale);
         return redirect()->back();
     });
+
+    // Favorites
+    Route::post('/speech/{speech_id}/favorite', 'SpeechesController@postFavoriteSpeech');
+    Route::delete('/speech/{speech_id}/favorite', 'SpeechesController@deleteFavoriteSpeech');
 });

@@ -4,9 +4,8 @@
             <div v-if="ajaxDoneConfInfo">
                 <div class="conference-title-box py-4">
                     <h2 class="font-weight-bold">Conference · {{conf_date}}</h2>
-                        <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
-                        <div>{{ajaxData.conferenceInfo.data.data.time_period}}</div>
-                    
+                    <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
+                    <div>{{ajaxData.conferenceInfo.data.data.time_period}}</div>
                 </div>
                 <div class="col-12 pt-3">
                     <span v-if="ajaxData.conferenceInfo">
@@ -18,34 +17,9 @@
                         </a>
                     </span>
                 </div>
-                <!--<div v-if="ajaxData.conferenceData.data.length" class="col-12 col-sm-12 col-md-12 col-lg-12">-->
                 <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12">
-                    <!--<div class="card conversation" v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
-                
-                        <div class="mt-2">
-                            <img :src="path + '/' + conference.image" class="img-fluid speech_speaker_img card-img-top ml-2 mb-2"/>
-                            <h2 class="speech_speaker_name ml-2">
-                                <a :href="/speaker/ + conference.greek_name" class="" style="margin-top:8px;">{{conference.greek_name}}</a>
-                            </h2>
-                            <h4 class="speech_speaker_name ml-2">{{conference.fullname_el | capitalize}} ({{conference.on_behalf_of_id}})</h4>
-                        </div>
-                        <hr/>
-                        <div class="card-body speech mb-2">
-                            <read-more more-str="read more" :text="conference.speech" link="#" less-str="read less" :max-chars="2000"></read-more>
-                        </div>
-           
-                    </div>
-                </div>-->
                     <div v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
-                        <speech 
-                            :speechID="conference.speech_id"
-                            :speechText="conference.speech" 
-                            :greekName="conference.greek_name"
-                            :imagePath="conference.image"
-                            :fullnameEl="conference.fullname_el"
-                            :onBehalfOfId="conference.on_behalf_of_id"
-                            :partyColor="conference.party_color">
-                        </speech>
+                        <speech :speech="conference"></speech>
                     </div>
                 </div>
                 <div v-else>
@@ -53,11 +27,8 @@
                 </div>
             </div>
             <div v-else class="col-12 col-sm-12 col-md-12 col-lg-12">
-                
                 <img :src="path + '/Spinner.gif' "/>
             </div>
-            
-            
         </div>
     </div>
 </template>
@@ -109,7 +80,7 @@
             conf_date: null,
             path: String
         },
-        data(){
+        data() {
             return {
                 ajaxData: {
                     conferenceData: [],

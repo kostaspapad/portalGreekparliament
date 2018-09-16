@@ -30,6 +30,7 @@ import conference from './components/conference.vue';
 import modal from './components/modal.vue';
 import searchInput from './components/searchInput.vue';
 import search from './components/searchSpeaker.vue';
+import speech from './components/speech.vue';
 
 Vue.use(VueRouter);
 Vue.use(ToggleButton);
@@ -48,7 +49,9 @@ Vue.component('modal', modal);
 Vue.component('custom-multiselect', MultiSelect);
 Vue.component('datepicker', datepicker);
 Vue.component('search-input', searchInput)
-Vue.component('search-plugin', search)
+Vue.component('search-plugin', search);
+Vue.component('speech', speech);
+Vue.component('favorite', require('./components/favorite.vue'));
 
 Vue.filter('capitalize', function (value) {
     if (!value) return ''

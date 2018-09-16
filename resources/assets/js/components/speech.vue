@@ -1,24 +1,31 @@
 <template>
-    <div v-if="speechText && greekName" class="speech-container pl-4 py-2">
+    <div v-if="speech.speech_id && speech.greek_name" class="speech-container pl-4 py-2">
         <div class="speech-data-container p-2">
             <div class="row">
                 <div class="speaker-image-container">
-                    <div v-if="imagePath">
-                        <img :src="'/img/' + imagePath" class="speech_speaker_img"/>
+                    <div v-if="speech.image">
+                        <img :src="'/img/' + speech.image" class="speech_speaker_img"/>
                     </div>
                 </div>
                 <div class="speech-container-speaker">
                     <h4 class="speech_speaker_name ml-2">
-                        <a :href="/speaker/ + greekName" class="" style="margin-top:8px;">{{greekName}}</a>
+                        <a :href="/speaker/ + speech.greek_name" class="" style="margin-top:8px;">{{speech.greek_name}}</a>
                     </h4>
                     <div class="speech_speaker_party ml-2" v-bind:style="getPartyColor">
-                        <h5>{{fullnameEl | capitalize}} ({{onBehalfOfId}})</h5>
+                        <h5>{{speech.fullname_el | capitalize}} ({{speech.on_behalf_of_id}})</h5>
                     </div>
                 </div>
             </div>
             <div class="speech-container-speech ml-2 pt-2">
-                <read-more more-str="read more" :text="speechText" link="#" less-str="read less" :max-chars="2000"></read-more>
+                <read-more more-str="read more" :text="speech.speech" link="#" less-str="read less" :max-chars="2000"></read-more>
             </div>
+            
+            
+            <favorite
+                :speech_id='speech.speech_id'
+                :favorited='false'
+            ></favorite>
+           
         </div>
     </div>
 </template>
@@ -43,13 +50,7 @@
 <script>
     export default {
         props: {
-            speechID: null,
-            speechText: String,
-            greekName: String,
-            imagePath: null,
-            fullnameEl: null,
-            onBehalfOfId: String,
-            partyColor: String
+            speech: null
         },
         data() {
             return {
@@ -62,7 +63,7 @@
         computed: {
             getPartyColor: function () {
                 return {
-                    'color': this.partyColor
+                    'color': this.speech.party_color
                 }
             }
         },
