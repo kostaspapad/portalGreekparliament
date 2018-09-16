@@ -24,6 +24,8 @@ class CreatePartyColorsTable extends Migration
 
                 // Set db engine type
                 $table->engine = 'InnoDB';
+                $table->charset = 'utf8';
+                $table->collation = 'utf8_unicode_ci';
             });
         } else {
             echo "parties table does not exist" . PHP_EOL;

@@ -67,8 +67,10 @@ class CreateMembershipsTable extends Migration {
                          */
                         $table->date("end_date")->nullable();
                         $table->engine = 'InnoDB';
-
+                        $table->charset = 'utf8';
+                        $table->collation = 'utf8_unicode_ci';
                     });
+                    
                 } else {
                     echo 'Speakers table does not exist' . PHP_EOL;
                     die;
