@@ -17,6 +17,7 @@
         "laravel-admin-ext/media-manager": "^1.0",
         "laravel-admin-ext/scheduling": "^1.0",
         "laravel/framework": "5.6.*",
+        "laravel/passport": "^7.0",
         "laravel/tinker": "^1.0",
         "mpociot/laravel-apidoc-generator": "^2.0",
         "rap2hpoutre/laravel-log-viewer": "^0.21.0",

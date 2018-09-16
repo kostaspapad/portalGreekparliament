@@ -13,14 +13,21 @@ use Illuminate\Http\Request;
  *
   */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
 
 // Throttle specifies how many requests per minute
 // Run tests with ./vendor/bin/phpunit (Install phpunit with composer)
 Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () {
     
+        Route::post('login', 'Api\v1\ApiAuthController@login');
+        Route::post('register', 'Api\v1\ApiAuthController@signup');
+      
+        Route::middleware('auth:api')->group(function(){
+            Route::post('details', 'Api\v1\ApiAuthController@getDetails');
+        });
     /**
      *   Speeches
      */
@@ -83,4 +90,10 @@ Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () 
     // Parties->Speeches
     // http://localhost:8000/api/v1/speeches/party/syriza
     // Route::get('party/{party_id}/speeches', 'Api\v1\Parties\SpeechesController@speechesByPartyId');
+
+    // // Favorites
+    // Route::post('/speech/{speech_id}/favorite', 'Api\v1\SpeechesController@postFavoriteSpeech');
+    // Route::delete('/speech/{id}/favorite', 'Api\v1\SpeechesController@deleteLikeSpeech');
 });
+
+//->middleware('auth:api');
