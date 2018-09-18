@@ -16,17 +16,20 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:api');
 
 // Throttle specifies how many requests per minute
 // Run tests with ./vendor/bin/phpunit (Install phpunit with composer)
 Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () {
     
         Route::post('login', 'Api\v1\ApiAuthController@login');
-        Route::post('register', 'Api\v1\ApiAuthController@signup');
+        Route::post('register', 'Api\v1\ApiAuthController@register');
       
         Route::middleware('auth:api')->group(function(){
-            Route::post('details', 'Api\v1\ApiAuthController@getDetails');
+            Route::get('/get-user', 'Api\v1\ApiAuthController@getUser');
+            Route::post('logout', 'Api\v1\ApiAuthController@logout');
         });
     /**
      *   Speeches

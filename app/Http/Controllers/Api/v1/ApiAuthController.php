@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use DB;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Carbon\Carbon;
+use Hash;
 class ApiAuthController extends Controller
 {
  
@@ -25,35 +27,66 @@ class ApiAuthController extends Controller
      */
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            'remember_me' => 'boolean'
-        ]);
-
-        $credentials = request(['email', 'password']);
-
-        if(!Auth::attempt($credentials))
+        // Check if a user with the specified email exists
+        $user = User::whereEmail(request('username'))->first();
+        
+        if (!$user) {
             return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+                'message' => 'Wrong email or password',
+                'status' => 422
+            ], 422);
+        }
+        
+        // If a user with the email was found - check if the specified password
+        // belongs to this user
+        if (!Hash::check(request('password'), $user->password)) {
+            return response()->json([
+                'message' => 'Wrong email or password',
+                'status' => 422
+            ], 422);
+        }
+        
+        // Send an internal API request to get an access token
+        $client = DB::table('oauth_clients')
+            ->where('password_client', true)
+            ->first();
 
-        $user = $request->user();
+        // Make sure a Password Client exists in the DB
+        if (!$client) {
+            return response()->json([
+                'message' => 'Laravel Passport is not setup properly.',
+                'status' => 500
+            ], 500);
+        }
+        
+        $data = [
+            'grant_type' => 'password',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'username' => request('username'),
+            'password' => request('password'),
+        ];
 
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
+        $request = Request::create('/oauth/token', 'POST', $data);
+        
+        $response = app()->handle($request);
+        
+        // Check if the request was successful
+        if ($response->getStatusCode() != 200) {
+            return response()->json([
+                'message' => 'Wrong email or password',
+                'status' => 422
+            ], 422);
+        }
 
-        if ($request->remember_me)
-            $token->expires_at = Carbon::now()->addWeeks(1);
+        // Get the data from the response
+        $data = json_decode($response->getContent());
 
-        $token->save();
-
+        // Format the final response in a desirable format
         return response()->json([
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
+            'token' => $data->access_token,
+            'user' => $user,
+            'status' => 200
         ]);
     }
  
@@ -66,28 +99,35 @@ class ApiAuthController extends Controller
      * @param  [string] password_confirmation
      * @return [string] message
      */
-    public function signup(Request $request)
+    public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [ 
-            'name' => 'required', 
-            'email' => 'required|email', 
-            'password' => 'required', 
+        User::create([
+            'name' => request('name'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password'))
         ]);
+    
+        return response()->json(['status' => 201]);
+        // $validator = Validator::make($request->all(), [ 
+        //     'name' => 'required', 
+        //     'email' => 'required|email', 
+        //     'password' => 'required', 
+        // ]);
         
-        if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()]);
-        }
+        // if ($validator->fails()) { 
+        //     return response()->json(['error'=>$validator->errors()]);
+        // }
 
-        $postArray = $request->all(); 
-        $postArray['password'] = bcrypt($postArray['password']); 
-        $user = User::create($postArray); 
-        $success['token'] =  $user->createToken('gp-api')->accessToken; 
-        $success['name'] =  $user->name;
+        // $postArray = $request->all(); 
+        // $postArray['password'] = bcrypt($postArray['password']); 
+        // $user = User::create($postArray); 
+        // $success['token'] =  $user->createToken('gp-api')->accessToken; 
+        // $success['name'] =  $user->name;
 
-        return response()->json([
-            'status' => 'success',
-            'data' => $success,
-        ]); 
+        // return response()->json([
+        //     'status' => 'success',
+        //     'data' => $success,
+        // ]); 
     }
  
     /**
@@ -97,11 +137,23 @@ class ApiAuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();
+        $accessToken = auth()->user()->token();
 
-        return response()->json([
-            'message' => 'Successfully logged out'
-        ]);
+        $refreshToken = DB::table('oauth_refresh_tokens')
+            ->where('access_token_id', $accessToken->id)
+            ->update([
+                'revoked' => true
+            ]);
+
+        // Set revoked flag to 1
+        $accessToken->revoke();
+                
+        return response()->json(['status' => 200]);
+        // $request->user()->token()->revoke();
+
+        // return response()->json([
+        //     'message' => 'Successfully logged out'
+        // ]);
     }
    
     /**
@@ -109,9 +161,8 @@ class ApiAuthController extends Controller
      *
      * @return [json] user object
      */
-    public function getDetails(Request $request)
-    {
-        $user = Auth::user(); 
-        return response()->json(['success' => $user]); 
-    }
+     public function getUser()
+     {
+        return auth()->user();
+     }
 }
