@@ -73,39 +73,34 @@ class ApiHelper {
 
         if (isset($data) && !empty($data)) {
             if ($resource_type == 'Speech') {
-                if ($baseClass == 'LengthAwarePaginator') {
-                    return SpeechResource::collection($data);
-
-                } else if ($baseClass == 'Speech') {
+                if ($baseClass == 'Speech') {
                     return new SpeechResource($data);
+                } else {
+                    return SpeechResource::collection($data);
                 }
             } else if ($resource_type == 'Speaker') {
-                if ($baseClass == 'LengthAwarePaginator') {
-                    return SpeakerResource::collection($data);
-
-                } else if ($baseClass == 'Speaker') {
+                if ($baseClass == 'Speaker') {
                     return new SpeakerResource($data);
+                } else {
+                    return SpeakerResource::collection($data);
                 }
             } else if ($resource_type == 'Conference') {
-                if ($baseClass == 'LengthAwarePaginator') {
-                    return ConferenceResource::collection($data);
-
-                } else if ($baseClass == 'Conference') {
+                if ($baseClass == 'Conference') {
                     return new ConferenceResource($data);
+                } else {
+                    return ConferenceResource::collection($data);
                 }
             } else if ($resource_type == 'Membership') {
-                if ($baseClass == 'LengthAwarePaginator') {
-                    return MembershipResource::collection($data);
-
-                } else if ($baseClass == 'Membership') {
+                if ($baseClass == 'Membership') {
                     return new MembershipResource($data);
+                } else {
+                    return MembershipResource::collection($data);
                 }
             } else if ($resource_type == 'Party') {
-                if ($baseClass == 'LengthAwarePaginator') {
-                    return PartyResource::collection($data);
-
-                } else if ($baseClass == 'Party') {
+                if ($baseClass == 'Party') {
                     return new PartyResource($data);
+                } else {
+                    return PartyResource::collection($data);
                 }
             }
         }
