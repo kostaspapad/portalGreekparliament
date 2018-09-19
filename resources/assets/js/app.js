@@ -11,6 +11,9 @@ import router from './routes.js';
 import VueRouter from 'vue-router';
 import Api from './api.js';
 import Auth from './auth.js';
+import search from './components/searchSpeaker.vue';
+import MultiSelect from './multiselect_custom';
+import laravelVuePagination from 'laravel-vue-pagination';
 
 // must be before auth
 window.api = new Api();
@@ -19,7 +22,21 @@ window.auth = new Auth()
 
 Vue.component('vue-layout', require('./views/Layout.vue'));
 Vue.component('conferences', require('./views/Conferences.vue'));
+Vue.component('search-plugin', search);
+Vue.component('custom-multiselect', MultiSelect);
+Vue.component('pagination', laravelVuePagination);
 Vue.use(VueRouter);
+
+Vue.filter('capitalize', function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+})
+Vue.filter('capitalizeAll', function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.toUpperCase()
+})
 
 window.Event = new Vue;
 
@@ -82,16 +99,7 @@ const app = new Vue({
 // Vue.component('speech', speech);
 // Vue.component('favorite', require('./components/favorite.vue'));
 
-// Vue.filter('capitalize', function (value) {
-//     if (!value) return ''
-//     value = value.toString()
-//     return value.charAt(0).toUpperCase() + value.slice(1)
-// })
-// Vue.filter('capitalizeAll', function (value) {
-//     if (!value) return ''
-//     value = value.toString()
-//     return value.toUpperCase()
-// })
+
 //router
 // const router = new VueRouter({
 //     mode: 'history',

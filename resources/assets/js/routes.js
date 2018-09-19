@@ -16,10 +16,19 @@ let routes = [
     {
         path: '/conferences',
         component: require('./views/Conferences.vue')
-    },    
+    },
+    {
+        path: '/speakers',
+        component: require('./components/speakers.vue')
+    },
+    {
+        path: '/speaker/:speaker_name',
+        component: require('./components/speaker.vue')
+    },
 ];
 
 const router = new VueRouter({
+    mode: 'history',
     routes
 });
 

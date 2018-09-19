@@ -11,7 +11,7 @@
                         <span v-if="order_field == 'greek_name' ">Name</span>
                         <span v-else>Party</span>
                         <span>({{order_orientation | capitalizeAll}})</span>
-                        <span @click=sortBy(order_field,order_orientation)><i class="fas fa-sort pointer"></i></span>
+                        <span @click=sortBy(order_field,order_orientation)><i class="fa fa-sort pointer"></i></span>
                     </li>
                     <li v-if="order_field == 'greek_name' ">
                         <span>Sort by </span>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-12 speaker"  v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.id" style="margin-bottom: 15px;">
                         <a :href="/speaker/ + speaker.greek_name" class="person-link">
-                            <img :src="path + '/' + printImg(speaker.image) " class="person-img">
+                            <img :src=" 'img' + '/' + printImg(speaker.image) " class="person-img">
                             <h2 class="person-name text-left">{{speaker.greek_name}}</h2>
                             <p class="person-membership text-left">
                                 <span class="party-name">{{speaker.party_fullname}}</span>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div v-else>
-            <img :src="path + '/Spinner.gif' "/>
+            <img :src=" 'img' + '/Spinner.gif' " class="m-auto d-block"/>
         </div>
     </div>
 </template>

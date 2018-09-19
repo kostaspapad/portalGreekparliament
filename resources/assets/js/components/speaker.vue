@@ -8,7 +8,7 @@
                     <div class="container-fluid speaker-data">
                         <div class="speaker-info">
                             <div class="speaker-img">
-                                <img :src="path + '/' + ajaxData.speakerData.image " class="img-fluid" style="margin: 5px 0 5px 0;">
+                                <img :src=" 'img' + '/' + ajaxData.speakerData.image " class="img-fluid" style="margin: 5px 0 5px 0;">
                             </div>
                             <div class="speaker-name">
                                 <div class="speaker-name-info">
@@ -37,9 +37,9 @@
                                 </a>
                             </span> -->
                             <div class="row">
-                            <div v-if="ajaxData.speakerData.wiki_el"><span class="text-success">(el)</span><a :href="`${ajaxData.speakerData.wiki_el}`"><span class="fab fa-wikipedia-w iconsFont iconsColor"></span></a></div>
-                            <div v-if="ajaxData.speakerData.wiki_en"><span class="text-success">(en)</span><a :href="`${ajaxData.speakerData.wiki_en}`"><span class="fab fa-wikipedia-w iconsFont iconsColor"></span></a></div>
-                            <div v-if="ajaxData.speakerData.twitter"><a :href="`${ajaxData.speakerData.twitter}`"><span class="fab fa-twitter iconsFont iconsColor"></span></a></div>
+                            <div v-if="ajaxData.speakerData.wiki_el"><span class="text-success">(el)</span><a :href="`${ajaxData.speakerData.wiki_el}`"><span class="fa fa-wikipedia-w iconsFont iconsColor"></span></a></div>
+                            <div v-if="ajaxData.speakerData.wiki_en"><span class="text-success">(en)</span><a :href="`${ajaxData.speakerData.wiki_en}`"><span class="fa fa-wikipedia-w iconsFont iconsColor"></span></a></div>
+                            <div v-if="ajaxData.speakerData.twitter"><a :href="`${ajaxData.speakerData.twitter}`"><span class="fa fa-twitter iconsFont iconsColor"></span></a></div>
                             </div>·
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div v-else>
-                <img :src="path + '/Spinner.gif' " />
+                <img :src=" 'img' + '/Spinner.gif' " />
             </div>
         </div>
     </div>
@@ -338,8 +338,7 @@
                 }
             },
             getSpeakerSpeeches() {
-                const self = this;
-
+                const self = this
                 setTimeout(() => {
                     axios.get(this.$root.host + '/api/v1/speaker/name/' + this.finalName + '/speeches')
                         .then(function (response) {
@@ -352,8 +351,8 @@
                             self.ajaxDoneSpeeches = true
 
                         }).catch(function (error) {
-                            console.log(error);
-                        });
+                            console.log(error)
+                        })
 
                 }, 1000)
             },
@@ -383,8 +382,9 @@
         },
         created() {
             this.loading = false
-            this.finalName = decodeURIComponent(this.name)
-            this.finalName = this.finalName.replace(/\+/g, " ")
+            // this.finalName = decodeURIComponent(this.name)
+            // this.finalName = this.finalName.replace(/\+/g, " ")
+            this.finalName = this.$route.params.speaker_name
             this.getSpeakerSpeeches()
             this.getSpeakerData()
         }
