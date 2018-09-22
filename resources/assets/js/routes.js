@@ -15,7 +15,11 @@ let routes = [
     },
     {
         path: '/conferences',
-        component: require('./views/Conferences.vue')
+        component: require('./components/conferences.vue')
+    },
+    {
+        path: '/conference/:conference_date/speeches',
+        component: require('./components/conference.vue')
     },
     {
         path: '/speakers',

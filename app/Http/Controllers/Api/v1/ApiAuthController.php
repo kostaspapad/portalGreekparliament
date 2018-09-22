@@ -138,7 +138,7 @@ class ApiAuthController extends Controller
     public function logout(Request $request)
     {
         $accessToken = auth()->user()->token();
-
+        
         $refreshToken = DB::table('oauth_refresh_tokens')
             ->where('access_token_id', $accessToken->id)
             ->update([
@@ -163,6 +163,6 @@ class ApiAuthController extends Controller
      */
      public function getUser()
      {
-        return auth()->user();
+        return auth()->user()->token();
      }
 }

@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div v-else class="col-12 col-sm-12 col-md-12 col-lg-12">
-                <img :src="path + '/Spinner.gif' "/>
+                <img :src=" '../../img' + '/Spinner.gif' " class="m-auto d-block"/>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
 <script>
     export default {
         props: {
-            conf_date: null,
+            //conf_date: null,
             path: String
         },
         data() {
@@ -86,6 +86,7 @@
                     conferenceData: [],
                     conferenceInfo: null
                 },
+                conf_date: null,
                 defaultImg: 'default_speaker_icon.png',
                 startUrl: 'https://www.hellenicparliament.gr',
                 ajaxDoneConfInfo: false,
@@ -149,6 +150,7 @@
             
         },
         created() {
+            this.$route.params.conference_date ? this.conf_date = this.$route.params.conference_date : null          
             this.getConferenceInfo()
             this.getConferenceSpeeches()
         }

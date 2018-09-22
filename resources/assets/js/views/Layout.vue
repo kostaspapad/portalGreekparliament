@@ -47,7 +47,7 @@
                                 <span class="caret"></span>
                             </router-link>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <router-link to="/logout" class="dropdown-item">Logout</router-link>
+                                <span @click="userLogout" class="dropdown-item pointer">Logout</span>
                                 <!-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form> -->
@@ -124,12 +124,21 @@ export default {
             user: auth.user
         };
     },
-
+    methods:{
+        userLogout() {
+            auth.logout()
+        }
+    },
     mounted() {
         Event.$on('userLoggedIn', () => {
             this.authenticated = true;
             this.user = auth.user;
-        });
+        })
+
+        Event.$on('userLoggedOut', () => {
+            this.authenticated = false;
+            this.user = null;
+        })
     },
 }
 </script>

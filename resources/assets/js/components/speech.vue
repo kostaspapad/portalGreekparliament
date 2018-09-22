@@ -1,7 +1,7 @@
 <template>
-    <div v-if="speech.speech_id && speech.greek_name" class="speech-container pl-4 py-2">
+    <div v-if="speech.speech_id && speech.greek_name" class="speech-container py-2">
         <div class="speech-data-container p-2">
-            <div class="row">
+            <div class="">
                 <div class="speaker-image-container">
                     <div v-if="speech.image">
                         <img :src="'/img/' + speech.image" class="speech_speaker_img"/>

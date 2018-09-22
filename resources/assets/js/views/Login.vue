@@ -38,7 +38,7 @@ export default {
                 .then(({data}) => {
                     auth.login(data.token, data.user);
 
-                    this.$router.push('/home');
+                    this.$router.push('/');
                 })  
                 .catch(({response}) => {                    
                     alert(response.data.message);

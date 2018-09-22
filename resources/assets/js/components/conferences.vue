@@ -9,9 +9,9 @@
                     <div class="col-12 col-sm-6 col-md-6 col-lg-8">
 
                         <div v-if="ajaxData.conferenceData.data.data && !noData && !singleDate" class="p-4 bg-white conference-content-box"
-                            v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
+                            v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id" @click="redirectToConference(conference.conference_date)">
                             <h3 class="show-details-dates">
-                                <div @click="redirectToConference(conference.conference_date)">{{conference.conference_date}}</div>
+                                <div>{{conference.conference_date}}</div>
                             </h3>
                             <div>
                                 <p style="margin: 0;">{{conference.session}}</p>
@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div v-else>
-                <img :src="path + '/Spinner.gif' " />
+                <img :src=" 'img' + '/Spinner.gif' " class="m-auto d-block"/>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
                     <div class="container-fluid speaker-data">
                         <div class="speaker-info">
                             <div class="speaker-img">
-                                <img :src=" 'img' + '/' + ajaxData.speakerData.image " class="img-fluid" style="margin: 5px 0 5px 0;">
+                                <img :src=" '../img' + '/' + ajaxData.speakerData.image " class="img-fluid" style="margin: 5px 0 5px 0;">
                             </div>
                             <div class="speaker-name">
                                 <div class="speaker-name-info">
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div v-else>
-                <img :src=" 'img' + '/Spinner.gif' " />
+                <img :src=" '../img' + '/Spinner.gif' " class="m-auto d-block"/>
             </div>
         </div>
     </div>

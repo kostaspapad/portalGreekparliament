@@ -22,13 +22,14 @@ Route::get('/user', function (Request $request) {
 
 // Throttle specifies how many requests per minute
 // Run tests with ./vendor/bin/phpunit (Install phpunit with composer)
-Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () {
+//Route::group(['middleware' => ['throttle:30,1'], 'prefix' => 'v1'], function () {
+    Route::group(['middleware', 'prefix' => 'v1'], function () {
     
         Route::post('login', 'Api\v1\ApiAuthController@login');
         Route::post('register', 'Api\v1\ApiAuthController@register');
       
         Route::middleware('auth:api')->group(function(){
-            Route::get('/get-user', 'Api\v1\ApiAuthController@getUser');
+            Route::get('/getUser', 'Api\v1\ApiAuthController@getUser');
             Route::post('logout', 'Api\v1\ApiAuthController@logout');
         });
     /**
