@@ -33,8 +33,8 @@ class ApiAuthController extends Controller
         if (!$user) {
             return response()->json([
                 'message' => 'Wrong email or password',
-                'status' => 422
-            ], 422);
+                'status' => 400
+            ], 400);
         }
         
         // If a user with the email was found - check if the specified password
@@ -42,8 +42,8 @@ class ApiAuthController extends Controller
         if (!Hash::check(request('password'), $user->password)) {
             return response()->json([
                 'message' => 'Wrong email or password',
-                'status' => 422
-            ], 422);
+                'status' => 400
+            ], 400);
         }
         
         // Send an internal API request to get an access token
@@ -75,8 +75,8 @@ class ApiAuthController extends Controller
         if ($response->getStatusCode() != 200) {
             return response()->json([
                 'message' => 'Wrong email or password',
-                'status' => 422
-            ], 422);
+                'status' => 400
+            ], 400);
         }
 
         // Get the data from the response
@@ -101,33 +101,89 @@ class ApiAuthController extends Controller
      */
     public function register(Request $request)
     {
-        User::create([
-            'name' => request('name'),
-            'email' => request('email'),
-            'password' => bcrypt(request('password'))
-        ]);
-    
-        return response()->json(['status' => 201]);
-        // $validator = Validator::make($request->all(), [ 
-        //     'name' => 'required', 
-        //     'email' => 'required|email', 
-        //     'password' => 'required', 
-        // ]);
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $confirm_password = $request->input('confirm_password');
+
+        if (!isset($name) || empty($name)) {
+            return response()->json([
+                'message' => 'No name was specified.',
+                'status' => 400
+            ], 400);
+        }
+
+        if (!isset($email) || empty($email)) {
+            return response()->json([
+                'message' => 'No email was specified.',
+                'status' => 400
+            ], 400);
+        }
+
+        if (!isset($password) || empty($password)) {
+            return response()->json([
+                'message' => 'No password was specified.',
+                'status' => 400
+            ], 400);
+        }
+
+        if (!isset($confirm_password) || empty($confirm_password)) {
+            return response()->json([
+                'message' => 'No password confirmation was specified.',
+                'status' => 400
+            ], 400);
+        }
+
+        if ($password !== $confirm_password) {
+            return response()->json([
+                'message' => 'Passwords are not the same.',
+                'status' => 400
+            ], 400);
+        }
         
-        // if ($validator->fails()) { 
-        //     return response()->json(['error'=>$validator->errors()]);
-        // }
+        if ( strlen($password) <= '8' ) {
+            return response()->json([
+                'message' => "Your Password Must Contain At Least 8 Characters!",
+                'status' => 400
+            ], 400);
+        } elseif ( !preg_match("#[0-9]+#",$password) ) {
+            return response()->json([
+                'message' => "Your Password Must Contain At Least 1 Number!",
+                'status' => 400
+            ], 400);
+        } elseif ( !preg_match("#[A-Z]+#",$password )) {
+            return response()->json([
+                'message' => "Your Password Must Contain At Least 1 Capital Letter!",
+                'status' => 400
+            ], 400);
+        } elseif ( !preg_match("#[a-z]+#",$password )) {
+            return response()->json([
+                'message' => "Your Password Must Contain At Least 1 Lowercase Letter!",
+                'status' => 400
+            ], 400);
+        }
 
-        // $postArray = $request->all(); 
-        // $postArray['password'] = bcrypt($postArray['password']); 
-        // $user = User::create($postArray); 
-        // $success['token'] =  $user->createToken('gp-api')->accessToken; 
-        // $success['name'] =  $user->name;
+        if (User::where('email', '=', $email)->first() == null){
+            $user = User::create([
+                        'name' => request('name'),
+                        'email' => request('email'),
+                        'password' => bcrypt(request('password'))
+                    ]);
+                
+            $data['token'] =  $user->createToken('gp-api')->accessToken;
+            $data['user'] = $user->name;
 
-        // return response()->json([
-        //     'status' => 'success',
-        //     'data' => $success,
-        // ]); 
+            return response()->json([
+                'status' => 201,
+                'data' => $data
+            ]);
+            
+        } else {
+            return response()->json([
+                'message' => 'A user with the same email already exists.',
+                'status' => 400
+            ], 400);
+        }
     }
  
     /**
