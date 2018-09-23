@@ -21,6 +21,8 @@ import datepicker from 'vuejs-datepicker'
 import moment from 'moment'
 import ToggleButton from 'vue-js-toggle-button'
 import ReadMore from 'vue-read-more'
+import Vuelidate from 'vuelidate'
+
 
 //components
 import navbar from './components/navbar.vue'
@@ -43,6 +45,7 @@ window.auth = new Auth()
 Vue.use(VueRouter)
 Vue.use(ToggleButton)
 Vue.use(ReadMore)
+Vue.use(Vuelidate)
 
 // register globally
 Vue.component('pagination', laravelVuePagination)

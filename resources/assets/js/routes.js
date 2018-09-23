@@ -14,6 +14,10 @@ let routes = [
         component: require('./views/Login.vue')
     },
     {
+        path: '/register',
+        component: require('./views/Register.vue')
+    },
+    {
         path: '/conferences',
         component: require('./components/conferences.vue')
     },

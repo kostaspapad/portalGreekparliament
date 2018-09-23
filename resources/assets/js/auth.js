@@ -29,7 +29,6 @@ class Auth {
     logout () {
         api.call('post', '/api/v1/logout')
         .then(({data}) => {
-            console.log(data)
             if( data.status == 200 ){
                 this.token = null
                 this.user = null
@@ -47,7 +46,7 @@ class Auth {
     }
 
     getUser() {
-        api.call('get', '/api/v1/getUser')
+        api.call('get', '/api/v1/get-user')
         .then(({data}) => {
             this.user = data
         })

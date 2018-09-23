@@ -29,7 +29,7 @@ Route::get('/user', function (Request $request) {
         Route::post('register', 'Api\v1\ApiAuthController@register');
       
         Route::middleware('auth:api')->group(function(){
-            Route::get('/getUser', 'Api\v1\ApiAuthController@getUser');
+            Route::get('/get-user', 'Api\v1\ApiAuthController@getUser');
             Route::post('logout', 'Api\v1\ApiAuthController@logout');
         });
     /**

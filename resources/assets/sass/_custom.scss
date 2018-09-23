@@ -40,6 +40,9 @@ html, body {
 .pointer{
     cursor: pointer;
 }
+.not-allowed{
+    cursor: not-allowed;
+}
 .navbar-laravel {
     background-color: $topNavBgColor;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -193,7 +196,24 @@ html, body {
     margin-bottom: 30px;
 } 
 
+.asterisk-color{
+    color: #dc3545;
+    font-size: 0.5rem;
+}
 
+/*errors style */
+.error{
+    color: #f57f6c;
+    font-size: 0.75rem;
+    line-height: 1;
+    margin: 0.5rem 0 0 1rem;
+}
+.border-color-error{
+    border: 1px solid #f57f6c;
+}
+.border-color-error:focus{
+    box-shadow: none;
+}
 
 
 hr.divider { 
