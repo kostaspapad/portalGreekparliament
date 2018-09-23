@@ -73,9 +73,9 @@ class PartiesController extends Controller
         // ASCII = english name
         // UTF-8 = greek name
         if (mb_detect_encoding($party_name) == 'ASCII') {
-            $party = Party::where('fullname_en', 'like', $party_name)->first();
+            $party = Party::where('fullname_en', 'like', '%'.$party_name.'%')->first();
         } else if (mb_detect_encoding($party_name) == 'UTF-8') {
-            $party = Party::where('fullname_el', 'like', $party_name)->first();
+            $party = Party::where('fullname_el', 'like', '%'.$party_name.'%')->first();
         }
         
         return $this->apiHelper::returnResource('Party', $party);
