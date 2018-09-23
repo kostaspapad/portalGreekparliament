@@ -103,8 +103,8 @@
                         <p class="mt-1">Fields with <i class="fas fa-asterisk asterisk-color"></i> is required</p>
                         <p class="info">Password must contain at least 1 capital and lowercase letter.</p>
                         <!-- <p class="error" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
-                        <p class="pending" v-if="submitStatus === 'PENDING'">Loggin in...</p>
-                        <p class="error">{{error_msg}}</p> -->
+                        <p class="pending" v-if="submitStatus === 'PENDING'">Loggin in...</p>-->
+                        <p class="error">{{error_msg}}</p>
                     </div>
                 </div>
             </div>
@@ -124,6 +124,7 @@
     export default {
         data(){
             return {
+                error_msg: null,
                 registerData:{
                     name: '',
                     email: '',
@@ -163,7 +164,7 @@
                     })
                     .catch( (error) => {
                         if( error.data.status == 400 ){
-                            console.log(error)
+                            this.error_msg = error.data.message
                         }
                     })
                 }, 500)

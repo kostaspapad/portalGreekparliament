@@ -107,8 +107,8 @@
                             this.$router.push('/');
                         })
                         .catch( (error) => {
-                            console.log(error)
-                            if( error.data.message == "Wrong email or password" && error.data.status == 422 ){
+                            if( error.data.status == 400 ){
+                                console.log(error)
                                 this.error_msg = "Wrong email or password"
                             }
                         })
