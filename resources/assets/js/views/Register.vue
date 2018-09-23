@@ -61,6 +61,15 @@
                                     <div class="error" v-if="!$v.registerData.password.minLength">
                                         Password must have at least {{$v.registerData.password.$params.minLength.min}} letters.
                                     </div>
+                                    <div class="error" v-if="!$v.registerData.password.number">
+                                        Password must have at least one number.
+                                    </div>
+                                    <div class="error" v-if="!$v.registerData.password.uppercaseLetter">
+                                        Password must have at least uppercase letter.
+                                    </div>
+                                    <div class="error" v-if="!$v.registerData.password.lowercaseLetter">
+                                        Password must have at least lowercase letter.
+                                    </div>
                                 </div>
                             </div>
 
@@ -108,7 +117,10 @@
 </style>
 
 <script>
-    import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
+    import { required, minLength, email, sameAs, helpers } from 'vuelidate/lib/validators'
+    const number = helpers.regex('number', /[0-9]+/);
+    const uppercaseLetter = helpers.regex('uppercaseLetter', /[A-Z]+/)
+    const lowercaseLetter = helpers.regex('lowercaseLetter', /[a-z]+/)
     export default {
         data(){
             return {
@@ -131,7 +143,10 @@
                 },
                 password: {
                     required,
-                    minLength: minLength(8)
+                    minLength: minLength(8),
+                    number,
+                    uppercaseLetter,
+                    lowercaseLetter,
                 },
                 confirm_password:{
                     sameAsPassword: sameAs('password')
@@ -140,7 +155,18 @@
         },
         methods: {
             register(){
-                 
+                setTimeout(() => {
+                    this.submitStatus = 'OK'
+                    api.call('post', '/api/v1/register', this.registerData)
+                    .then(({data}) => {
+                        this.$router.push('/login');
+                    })
+                    .catch( (error) => {
+                        if( error.data.status == 400 ){
+                            console.log(error)
+                        }
+                    })
+                }, 500)
             }
         },
         computed:{
