@@ -46,7 +46,6 @@ if (token) {
 
 
 let bearer = Cookies.get('access_token');
-console.log('bearer: '+bearer);
 if (bearer) {
     window.axios.defaults.headers.common['Authorization'] = bearer
 }
