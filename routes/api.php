@@ -30,6 +30,7 @@ Route::get('/user', function (Request $request) {
       
         Route::middleware('auth:api')->group(function(){
             Route::get('/get-user', 'Api\v1\ApiAuthController@getUser');
+            Route::get('/favorites', 'Api\v1\SpeechesController@getFavoriteSpeeches');
             Route::post('logout', 'Api\v1\ApiAuthController@logout');
         });
     /**
@@ -58,7 +59,7 @@ Route::get('/user', function (Request $request) {
     // Speaker->Speeches
     Route::get('speaker/{speaker_id}/speeches', 'Api\v1\Speakers\SpeechesController@speechesBySpeakerId');
     Route::get('speaker/name/{speaker_name}/speeches', 'Api\v1\Speakers\SpeechesController@speechesBySpeakerName');
-    
+    Route::post('speaker/speeches/search', 'Api\v1\Speakers\SpeechesController@searchSpeakerSpeeches');
     /**
      *   Conference
      */

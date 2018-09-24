@@ -2,8 +2,6 @@
     <div class="container">
         <div class="speaker-container">
             <div v-if="ajaxDoneSpeaker" class="row mr-0">
-                <!-- <div class="col-12 col-sm-4 col-md-4 col-lg-3 mt-2"> -->
-                <!-- <div class="w-100 bg-img" :style="{ backgroundColor: ajaxData.speakerData.color }"> -->
                 <div class="w-100 bg-img">
                     <div class="container-fluid speaker-data">
                         <div class="speaker-info">
@@ -12,30 +10,12 @@
                             </div>
                             <div class="speaker-name">
                                 <div class="speaker-name-info">
-                                    <h1 class="text-left">{{ajaxData.speakerData.greek_name}}
-                                        <!-- <span v-if="ajaxData.speakerData.greek_name != '' && ajaxData.speakerData.english_name != '' ">/</span> 
-                                        {{ajaxData.speakerData.english_name}} -->
-                                    </h1>
+                                    <h1 class="text-left">{{ajaxData.speakerData.greek_name}}</h1>
                                     <p>{{ajaxData.speakerData.email}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="float-left">
-                            <!-- <span v-if="ajaxData.speakerData.wiki_el != ''">
-                                <a :href="ajaxData.speakerData.wiki_el">
-                                    <i class="fab fa-wikipedia-w iconsFont iconsColor"></i>
-                                </a>(EL)
-                            </span>
-                            <span v-if="ajaxData.speakerData.wiki_en != ''">
-                                <a :href="ajaxData.speakerData.wiki_en">
-                                    <i class="fab fa-wikipedia-w iconsFont iconsColor"></i>
-                                </a>(EN)
-                            </span>
-                            <span v-if="ajaxData.speakerData.twitter" class="twitter">
-                                <a :href="ajaxData.speakerData.twitter">
-                                    <i class="fab fa-twitter iconsFont iconsColor"></i>
-                                </a>
-                            </span> -->
                             <div class="row">
                             <div v-if="ajaxData.speakerData.wiki_el"><span class="text-success">(el)</span><a :href="`${ajaxData.speakerData.wiki_el}`"><span class="fa fa-wikipedia-w iconsFont iconsColor"></span></a></div>
                             <div v-if="ajaxData.speakerData.wiki_en"><span class="text-success">(en)</span><a :href="`${ajaxData.speakerData.wiki_en}`"><span class="fa fa-wikipedia-w iconsFont iconsColor"></span></a></div>
@@ -46,7 +26,11 @@
                     <div class="col-12 pr-5 mb-4 mt-4 float-right">
                         <div class="float-right">
                             <div class="input-group search-div">
-                                <input class="form-control" type="search" placeholder="Search this speaker's speeches">
+                                <input class="form-control" 
+                                    v-model.trim="search_string" 
+                                    @keypress.enter="searchSpeakerSpeeches" 
+                                    type="text" 
+                                    placeholder="Search this speaker's speeches">
                                 <span class="input-group-append">
                                     <i class="fa fa-search"></i>
                                 </span>
@@ -54,7 +38,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-12 col-sm-8 col-md-8 col-lg-9 mt-2"> -->
                 <div class="container">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -68,10 +51,9 @@
                         </div>
                     </nav>
                     <div class="tab-content py-3" id="nav-tabContent">
-                        <!-- <div class="tab-pane fade show active" id="nav-information" role="tabpanel" aria-labelledby="nav-information-tab">
-                            
-                        </div> -->
-                        <div class="p-3 tab-pane fade show speeches-container active" id="nav-speeches" role="tabpanel"
+                        <div id="nav-speeches" 
+                            class="p-3 tab-pane fade show speeches-container active" 
+                            role="tabpanel"
                             aria-labelledby="nav-speeches-tab">
                             <div v-if="ajaxDoneSpeeches && noDataSpeeches == false">
                                 <div v-for="speech in ajaxData.speechesData.data.data" :key="speech.speech_id" class="speeches py-2">
@@ -273,7 +255,8 @@
                 noDataSpeeches: true,
                 loading: true,
                 order_field: 'conference_date',
-                order_orientation: 'asc'
+                order_orientation: 'asc',
+                search_string: null
             }
         },
         methods: {
@@ -339,6 +322,7 @@
             },
             getSpeakerSpeeches() {
                 const self = this
+                
                 setTimeout(() => {
                     axios.get(this.$root.host + '/api/v1/speaker/name/' + this.finalName + '/speeches')
                         .then(function (response) {
@@ -349,11 +333,7 @@
                                 self.noDataSpeeches = true
                             }
                             self.ajaxDoneSpeeches = true
-
-                        }).catch(function (error) {
-                            console.log(error)
                         })
-
                 }, 1000)
             },
             getSpeakerData() {
@@ -369,16 +349,35 @@
                                 self.noDataSpeaker = true
                             }
                             self.ajaxDoneSpeaker = true
-
-                        }).catch(function (error) {
-                            console.log(error);
-                        });
-
+                        })
                 }, 1000)
+            },
+            searchSpeakerSpeeches() {
+                const self = this
+
+                var search_data = {
+                    'input': self.search_string,
+                    'speaker_id': self.ajaxData.speakerData.speaker_id
+                }
+
+                setTimeout(() => {
+                    api.call('post', '/api/v1/speaker/speeches/search/', search_data)
+                        .then(function (response) {
+                            if (response.status == 200) {
+                                self.noDataSpeeches = false
+                                self.ajaxData.speechesData = response
+
+                            } else {
+                                self.noDataSpeeches = true
+                            }
+
+                            self.ajaxDoneSpeeches = true
+                        })
+                }, 500)
             }
         },
         computed: {
-
+            
         },
         created() {
             this.loading = false

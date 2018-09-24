@@ -139,4 +139,55 @@ class SpeechesController extends Controller
                 
         return $this->apiHelper::returnResource('Speech', $speeches);
     }
+
+    public function searchSpeakerSpeeches(Request $request) 
+    {
+        
+        // Id of speaker
+        $speaker_id = $request->input('speaker_id');
+        
+        // Search string
+        $input = $request->input('input');
+
+        // validation
+        $speaker_id = $this->apiHelper::test_input($speaker_id);
+
+        $input = $this->apiHelper::test_input($input);
+
+        if (!$this->apiHelper::validate_speaker_id($speaker_id)) {
+            return response()->json([
+                'message' => "Bad request.",
+                'status' => 400
+            ], 400);
+        }
+        
+        if (isset($input) && is_string($input)) {
+            $exp = explode(' ', $input);
+
+            $s = '';
+            $c = 1;
+            foreach ($exp AS $e)
+            {
+                $s .= "+$e*";
+
+                if ($c + 1 == count($exp))
+                    $s .= ' ';
+
+                $c++;
+            }
+
+            $query = "MATCH (speech) AGAINST ('$s' IN BOOLEAN MODE)";
+            // $query looks like 
+            // + is for AND 
+            // - is for NOT
+            // MATCH (speech) AGAINST ('+Μνημόνιο* +Σύριζα*' IN BOOLEAN MODE)
+
+            $speeches = Speech::where('speaker_id', '=', $speaker_id)
+                ->groupBy('speeches.speech_id')
+                ->whereRaw($query)
+                ->paginate(25);
+            
+            return $this->apiHelper::returnResource('Speech', $speeches);
+        }
+    }
 }

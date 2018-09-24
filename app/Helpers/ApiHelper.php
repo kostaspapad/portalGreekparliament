@@ -33,17 +33,30 @@ class ApiHelper {
     //     }
     // }
 
-    public static function test_input($data) {
+    public static function test_input($data) 
+    {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         return $data;
     }
 
+    public static function validate_speaker_id($speaker_id) 
+    {
+        if (preg_match('@[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}@', $speaker_id)) {
+            return true;
+        } else {
+            return false;
+        }
+        // cbc3c1b1-4543-49d1-8d64-e7934286a81f
+    }
+
     /**
      * Validate query parameters if exist.
      */
-    public static function validate_query_params($order_field, $allowed_order_fields, $order_orientation) {
+    public static function validate_query_params($order_field, 
+        $allowed_order_fields, $order_orientation) 
+    {
         // Query parameter validation
         if ($order_field && !in_array($order_field, $allowed_order_fields)) {
             return ['Error' => 'Invalid order field'];
