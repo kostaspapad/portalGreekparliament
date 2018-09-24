@@ -20,12 +20,12 @@
                 <read-more more-str="read more" :text="speech.speech" link="#" less-str="read less" :max-chars="2000"></read-more>
             </div>
             
-            
-            <favorite
-                :speech_id='speech.speech_id'
-                :favorited='false'
-            ></favorite>
-           
+            <!--<div v-if="this.$root.user">
+                <favorite
+                    :speech_id='speech.speech_id'
+                    :favorited='false'
+                ></favorite>
+           </div>-->
         </div>
     </div>
 </template>
@@ -58,17 +58,20 @@
             }
         },
         methods: {
-           
+            
         },
         computed: {
-            getPartyColor: function () {
+            getPartyColor() {
                 return {
                     'color': this.speech.party_color
                 }
+            },
+            isFavorited() {
+
             }
         },
         created() {
-
+console.log(this.$vuelayout.user)
         }
     }
 </script>

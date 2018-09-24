@@ -217,8 +217,8 @@ class ApiAuthController extends Controller
      *
      * @return [json] user object
      */
-     public function getUser()
-     {
+    public function getUser()
+    {
         return auth()->user()->token();
-     }
+    }
 }

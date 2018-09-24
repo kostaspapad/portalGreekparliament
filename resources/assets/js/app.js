@@ -25,17 +25,18 @@ import Vuelidate from 'vuelidate'
 
 
 //components
-import navbar from './components/navbar.vue'
+// import navbar from './components/navbar.vue'
 import speakers from './components/speakers.vue'
 import parties from './components/parties.vue'
 import party from './components/party.vue'
 import speaker from './components/speaker.vue'
 import conferences from './components/conferences.vue'
 import conference from './components/conference.vue'
-import modal from './components/modal.vue'
 import searchInput from './components/searchInput.vue'
 import search from './components/searchSpeaker.vue'
 import speech from './components/speech.vue'
+import Vuex from 'vuex'
+import 'es6-promise/auto'
 
 // must be before auth
 window.api = new Api()
@@ -46,17 +47,17 @@ Vue.use(VueRouter)
 Vue.use(ToggleButton)
 Vue.use(ReadMore)
 Vue.use(Vuelidate)
+Vue.use(Vuex)
 
 // register globally
 Vue.component('pagination', laravelVuePagination)
-Vue.component('navbar', navbar)
+// Vue.component('navbar', navbar)
 Vue.component('parties', parties)
 Vue.component('party', party)
 Vue.component('speakers', speakers)
 Vue.component('speaker', speaker)
 Vue.component('conferences', conferences)
 Vue.component('conference', conference)
-Vue.component('modal', modal)
 Vue.component('custom-multiselect', MultiSelect)
 Vue.component('datepicker', datepicker)
 Vue.component('search-input', searchInput)
@@ -78,12 +79,7 @@ Vue.filter('capitalizeAll', function (value) {
 })
 
 window.Event = new Vue;
-//console.log(auth.token)
-// if (auth.token) {
-//     //axios.defaults.headers.common['Authorization'] = 'Bearer ' + auth.token
 
-//     auth.getUser()
-// }
 
 const app = new Vue({
     el: '#app',

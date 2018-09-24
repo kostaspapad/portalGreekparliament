@@ -7,6 +7,9 @@ use App\Models\Speech;
 use DB;
 use App\Models\Conference;
 use App\Helpers\ApiHelper;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Api\v1\ApiAuthController;
 
 class SpeechesController extends Controller
 {
@@ -43,32 +46,65 @@ class SpeechesController extends Controller
      */
     public function speechesByConferenceDate($date)
     {
+        $user = auth('api')->user();
         if (isset($date) && is_string($date)) {
+
+            // Convert string to date object
             $date = date($date);
-            // One speaker can be in many parties (check it later)
-            $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
-                ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
-                ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
-                ->select([
-                    'conf.conference_date', 
-                    'sp.greek_name', 
-                    'sp.english_name', 
-                    'speeches.speech_id', 
-                    'speeches.speech', 
-                    'sp.image', 
-                    'm.on_behalf_of_id', 
-                    'parties.fullname_el',
-                    'party_colors.color'
-                ])
-                ->groupBy('speeches.speech_id')
-                ->where([
-                    ['conf.conference_date', '=', $date],
-                    // ['m.start_date', '>', $date],
-                    // ['m.end_date', '<=', $date]
-                ])
-                ->paginate(25);
+
+            if ($user) {
+                // One speaker can be in many parties (check it later)
+                $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
+                    ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
+                    ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
+                    ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
+                    ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
+                    ->join('favorites', 'favorites.speech_id', '=', 'speeches.speech_id')
+                    ->select([
+                        'conf.conference_date', 
+                        'sp.greek_name', 
+                        'sp.english_name', 
+                        'speeches.speech_id', 
+                        'speeches.speech', 
+                        'sp.image', 
+                        'm.on_behalf_of_id', 
+                        'parties.fullname_el',
+                        'party_colors.color',
+                        'favorites.user_id'
+                    ])
+                    ->groupBy('speeches.speech_id')
+                    ->where([
+                        ['conf.conference_date', '=', $date],
+                        ['favorites.user_id', '=', $user->id]
+                    ])
+                    ->paginate(25);
+
+            } else {
+                // One speaker can be in many parties (check it later)
+                $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
+                    ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
+                    ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
+                    ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
+                    ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
+                    ->select([
+                        'conf.conference_date', 
+                        'sp.greek_name', 
+                        'sp.english_name', 
+                        'speeches.speech_id', 
+                        'speeches.speech', 
+                        'sp.image', 
+                        'm.on_behalf_of_id', 
+                        'parties.fullname_el',
+                        'party_colors.color'
+                    ])
+                    ->groupBy('speeches.speech_id')
+                    ->where([
+                        ['conf.conference_date', '=', $date],
+                        // ['m.start_date', '>', $date],
+                        // ['m.end_date', '<=', $date]
+                    ])
+                    ->paginate(25);
+            }
 
             return $this->apiHelper::returnResource('Speech', $speeches);
         }
