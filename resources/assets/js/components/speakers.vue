@@ -137,7 +137,7 @@
         props: {
             path: String
         },
-        data(){
+        data() {
             return {
                 ajaxData: {
                     speakersData: [],
@@ -155,29 +155,30 @@
                 order_orientation: 'asc'
             }
         },
-        methods:{
-            sortBy(sortField, sortOrientation = null){
-                if(sortField){
+        methods: {
+            sortBy(sortField, sortOrientation = null) {
+                if (sortField) {
                     this.order_field = sortField
                 }
-                if(sortOrientation == 'asc'){
+                if (sortOrientation == 'asc') {
                     this.order_orientation = 'desc'
-                }else{
+                } else {
                     this.order_orientation = 'asc'
                 }
-                if(this.order_field && this.order_orientation){
+                if (this.order_field && this.order_orientation) {
                     this.getSpeakers()
                 }
             },
-            findSpeaker(){
+            findSpeaker() {
                 var self = this;
+
                 axios.get(this.$root.host+'/api/v1/speakers/search/'+self.search_msg)
                 .then(function(response){
-                    if(response.status == 200 && response.data.data.length > 0){
+                    if (response.status == 200 && response.data.data.length > 0) {
                         self.ajaxData.search_data = response;
                         self.search_result_msg = "Search Results";
                         self.showResults = true;
-                    }else{
+                    } else {
                         self.search_result_msg = 'No results found';
                         self.showResults = false;
                     }
@@ -186,29 +187,19 @@
                     console.log(error);
                 }); 
             },
-            changePage(page){
+            changePage(page) {
                 var self = this;
+                
                 axios.get(this.$root.host+'/api/v1/speakers?page=' + page + '&order_field='+this.order_field+'&orientation=asc')
-                .then(function(response){
+                .then(function(response) {
                     self.ajaxData.speakersData = response;
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
             },
-            isJsonString(str) {
-                var json;
-                try {
-                    json = JSON.parse(str);
-                } catch (e) {
-                    return false;
-                }
-                return json;
-            },
-            getSpeakers(){
+            getSpeakers() {
                 var self = this;
                 this.loading = true
-                setTimeout( () =>{
+
+                setTimeout( () => {
                     axios.get(this.$root.host+'/api/v1/speakers?order_field='+this.order_field+'&orientation='+this.order_orientation)
                     .then(function(response){
                         if(response.status == 200 && response.data.data){
@@ -216,25 +207,15 @@
                             self.ajaxData.speakersData = response
                         }
                     })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
                 }, 1000)
             },
-            printImg(img){
-                if(img == 'default-speaker.jpg' || img == null){
+            printImg(img) {
+                if (img == 'default-speaker.jpg' || img == null) {
                     return this.defaultImg;
-                }else{
+                } else {
                     return img;
                 }
             },
-            checkLinks(speaker){
-                if(speaker.wiki_el != '' || speaker.wiki_en != '' || speaker.website != '' || speaker.twitter != ''){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
         },
         computed:{
             
