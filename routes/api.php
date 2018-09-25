@@ -31,6 +31,8 @@ Route::get('/user', function (Request $request) {
         Route::middleware('auth:api')->group(function(){
             Route::get('/get-user', 'Api\v1\ApiAuthController@getUser');
             Route::get('/favorites', 'Api\v1\SpeechesController@getFavoriteSpeeches');
+            Route::post('/speech/favorite', 'Api\v1\Favorites\SpeechesController@store');
+            Route::delete('/speech/favorite', 'Api\v1\Favorites\SpeechesController@destroy');
             Route::post('logout', 'Api\v1\ApiAuthController@logout');
         });
     /**
@@ -95,10 +97,7 @@ Route::get('/user', function (Request $request) {
     // Parties->Speeches
     // http://localhost:8000/api/v1/speeches/party/syriza
     // Route::get('party/{party_id}/speeches', 'Api\v1\Parties\SpeechesController@speechesByPartyId');
-
-    // // Favorites
-    // Route::post('/speech/{speech_id}/favorite', 'Api\v1\SpeechesController@postFavoriteSpeech');
-    // Route::delete('/speech/{id}/favorite', 'Api\v1\SpeechesController@deleteLikeSpeech');
+    
 });
 
 //->middleware('auth:api');

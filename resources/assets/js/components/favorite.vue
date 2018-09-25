@@ -26,19 +26,41 @@
             },
         },
         methods: {
-            favorite(speech_id) {
-                const self = this;
-    
-                axios.post('/speech/' + self.speech_id + '/favorite')
-                    .then(response => this.isFavorited = true)
-                    .catch(response => console.log(response.data));
-            },
-            unFavorite(speech_id) {
+            favorite() {
                 const self = this;
 
-                axios.delete('/speech/' + self.speech_id + '/favorite')
-                    .then(response => this.isFavorited = false)
-                    .catch(response => console.log(response.data));
+                setTimeout(() => {
+                    api.call('post', '/api/v1/speech/favorite', {
+                        'speech_id': self.speech_id
+                    })
+                    .then(({data}) => {
+                        this.isFavorited = true
+                    })
+                    // .catch( (error) => {
+                    //     if( error.data.status == 400 ){
+                    //         console.log(error)
+                    //         this.error_msg = "Could not favorite this speech"
+                    //     }
+                    // })
+                }, 500)
+            },
+            unFavorite() {
+                const self = this;
+               
+                setTimeout(() => {
+                    api.call('delete', '/api/v1/speech/favorite', {
+                        'speech_id': self.speech_id
+                    })
+                    .then(({data}) => {
+                        this.isFavorited = false
+                    })
+                    // .catch( (error) => {
+                    //     if( error.data.status == 400 ){
+                    //         console.log(error)
+                    //         this.error_msg = "Could not favorite this speech"
+                    //     }
+                    // })
+                }, 500)
             }
         },
         mounted() {

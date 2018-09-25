@@ -19,13 +19,13 @@
             <div class="speech-container-speech ml-2 pt-2">
                 <read-more more-str="read more" :text="speech.speech" link="#" less-str="read less" :max-chars="2000"></read-more>
             </div>
-            <div>{{ user.name }}</div>
-            <!--<div v-if="this.$root.user">
+            
+            <div v-if="user.name">
                 <favorite
                     :speech_id='speech.speech_id'
-                    :favorited='false'
+                    :favorited='isFavorited'
                 ></favorite>
-           </div>-->
+           </div>
         </div>
     </div>
 </template>
@@ -68,7 +68,12 @@
                 }
             },
             isFavorited() {
-
+                // console.log(this.user)
+                if (this.speech.favorite === this.user.id) {
+                    return true
+                } else {
+                    return false
+                }
             },
             ...mapState([
                 'title'

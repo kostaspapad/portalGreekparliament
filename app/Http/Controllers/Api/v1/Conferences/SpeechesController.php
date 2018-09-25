@@ -77,6 +77,7 @@ class SpeechesController extends Controller
                         ['conf.conference_date', '=', $date],
                         ['favorites.user_id', '=', $user->id]
                     ])->orWhere('favorites.speech_id', '=', NULL)
+                    ->orWhere('favorites.speech_id', '!=', NULL)
                     ->paginate(25);
 
             } else {
