@@ -237,8 +237,7 @@
                 return json;
             },
             redirectToConference(conference_date) {
-                console.log(1);
-                window.location = '/conference/' + conference_date + '/speeches'
+                this.$router.push({ path: '/conference/' + conference_date + '/speeches' })
             },
             printImg(img) {
                 //check if deafault img has different name then return our default img

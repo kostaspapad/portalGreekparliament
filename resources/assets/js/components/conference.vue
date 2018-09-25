@@ -38,7 +38,7 @@
         background-color: #ffffff;
     }
     .conferences-container {
-        background-color: lightgrey;
+        background-color: white;
         border-radius: 5px;
     }
 

@@ -31,15 +31,19 @@
                             <span slot="next-nav">&gt;</span>
                         </pagination>
                     </div>
-                    <div class="col-12 speaker"  v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.id" style="margin-bottom: 15px;">
-                        <a :href="/speaker/ + speaker.greek_name" class="person-link">
+                    <div class="col-12 speaker"
+                        v-for="speaker in ajaxData.speakersData.data.data" 
+                        :key="speaker.id" 
+                        style="margin-bottom: 15px;"
+                        @click="redirectToSpeaker(speaker.greek_name)">
+                        <div class="person-div">
                             <img :src=" 'img' + '/' + printImg(speaker.image) " class="person-img">
                             <h2 class="person-name text-left">{{speaker.greek_name}}</h2>
                             <p class="person-membership text-left">
                                 <span class="party-name">{{speaker.party_fullname}}</span>
                                 <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
                             </p>
-                        </a>
+                        </div>
                     </div>
                     <div class="col-12" style="padding-left: 2.5rem;">
                         <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
@@ -89,7 +93,9 @@
     .speakers-bg{
         background-color: #ffffff;
     }
-    .person-link{
+    .person-div{
+        cursor: hand;
+        cursor: pointer;
         display: block;
         padding: 1.2em 0 1.2em 60px;
         border-top: 1px solid #f3f1eb;
@@ -194,6 +200,9 @@
                 .then(function(response) {
                     self.ajaxData.speakersData = response;
                 })
+            },
+            redirectToSpeaker(speaker_name) {
+                this.$router.push({ path: '/speaker/' + speaker_name })
             },
             getSpeakers() {
                 var self = this;
