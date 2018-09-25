@@ -117,28 +117,36 @@
     </div>
 </template>
 <script>
-export default {
-    data() {
-        return {
-            authenticated: auth.check(),
-            user: auth.user
-        };
-    },
-    methods:{
-        userLogout() {
-            auth.logout()
-        }
-    },
-    mounted() {
-        Event.$on('userLoggedIn', () => {
-            this.authenticated = true;
-            this.user = auth.user;
-        })
+    import { mapMutations } from 'vuex'
+    export default {
+        data() {
+            return {
+                authenticated: auth.check(),
+                user: auth.user
+            };
+        },
+        methods:{
+            userLogout() {
+                auth.logout()
+            },
+            ...mapMutations([
+                'SAVE_USER'
+            ])
+        },
+        mounted() {
+            Event.$on('userLoggedIn', () => {
+                this.authenticated = true
+                this.user = auth.user
+                console.log('TCL: mounted -> user', this.user)
+                if(this.user){
+                    this.SAVE_USER(this.user)
+                }
+            })
 
-        Event.$on('userLoggedOut', () => {
-            this.authenticated = false;
-            this.user = null;
-        })
-    },
-}
+            Event.$on('userLoggedOut', () => {
+                this.authenticated = false;
+                this.user = null;
+            })
+        },
+    }
 </script>

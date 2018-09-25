@@ -13,6 +13,7 @@ import VueRouter from 'vue-router'
 import Api from './api'
 import Auth from './auth'
 import router from './routes'
+import store from './store'
 import axios from 'axios'
 import laravelVuePagination from 'laravel-vue-pagination'
 //import MultiSelect from 'vue-multiselect'
@@ -35,7 +36,6 @@ import conference from './components/conference.vue'
 import searchInput from './components/searchInput.vue'
 import search from './components/searchSpeaker.vue'
 import speech from './components/speech.vue'
-import Vuex from 'vuex'
 import 'es6-promise/auto'
 
 // must be before auth
@@ -47,7 +47,6 @@ Vue.use(VueRouter)
 Vue.use(ToggleButton)
 Vue.use(ReadMore)
 Vue.use(Vuelidate)
-Vue.use(Vuex)
 
 // register globally
 Vue.component('pagination', laravelVuePagination)
@@ -84,6 +83,7 @@ window.Event = new Vue;
 const app = new Vue({
     el: '#app',
     router,
+    store,
     data: {
         host: process.env.NODE_ENV == 'production' ? 'http://95.85.38.123' : 'http://127.0.0.1:8000'
     }
