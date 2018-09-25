@@ -59,7 +59,7 @@ class SpeechesController extends Controller
                     ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
                     ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
                     ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
-                    ->join('favorites', 'favorites.speech_id', '=', 'speeches.speech_id')
+                    ->leftJoin('favorites', 'favorites.speech_id', '=', 'speeches.speech_id')
                     ->select([
                         'conf.conference_date', 
                         'sp.greek_name', 
@@ -76,7 +76,7 @@ class SpeechesController extends Controller
                     ->where([
                         ['conf.conference_date', '=', $date],
                         ['favorites.user_id', '=', $user->id]
-                    ])
+                    ])->orWhere('favorites.speech_id', '=', NULL)
                     ->paginate(25);
 
             } else {

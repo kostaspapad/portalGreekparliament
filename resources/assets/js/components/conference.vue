@@ -2,7 +2,7 @@
     <div class="container">
         <div class="conferences-container">
             <div v-if="ajaxDoneConfInfo">
-                <div class="conference-title-box py-4">
+                <div class="conference-title-box py-4 pl-4">
                     <h2 class="font-weight-bold">Conference · {{conf_date}}</h2>
                     <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
                     <div>{{ajaxData.conferenceInfo.data.data.time_period}}</div>
