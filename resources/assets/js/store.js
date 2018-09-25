@@ -11,6 +11,11 @@ export default new Vuex.Store({
     mutations: {
         SAVE_USER: (state,user) => {
             state.user = user
+        },
+        CHECK_USER: state => {
+            if( window.localStorage.getItem('user') ){
+                state.user = JSON.parse(window.localStorage.getItem('user'))
+            }
         }
     },
     actions: {
