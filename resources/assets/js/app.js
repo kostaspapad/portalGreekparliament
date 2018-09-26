@@ -23,6 +23,7 @@ import moment from 'moment'
 import ToggleButton from 'vue-js-toggle-button'
 import ReadMore from 'vue-read-more'
 import Vuelidate from 'vuelidate'
+import TextareaAutogrow from 'vue-textarea-autogrow'
 
 
 //components
@@ -36,6 +37,7 @@ import conference from './components/conference.vue'
 import searchInput from './components/searchInput.vue'
 import search from './components/searchSpeaker.vue'
 import speech from './components/speech.vue'
+import comments from './components/comments.vue'
 import 'es6-promise/auto'
 
 // must be before auth
@@ -64,6 +66,8 @@ Vue.component('search-plugin', search)
 Vue.component('speech', speech)
 Vue.component('favorite', require('./components/favorite.vue'))
 Vue.component('vue-layout', require('./views/Layout.vue'))
+Vue.component('comments', comments)
+Vue.component('TextareaAutogrow', TextareaAutogrow)
 
 //filters
 Vue.filter('capitalize', function (value) {

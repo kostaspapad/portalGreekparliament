@@ -137,7 +137,6 @@
             Event.$on('userLoggedIn', () => {
                 this.authenticated = true
                 this.user = auth.user
-                console.log('TCL: mounted -> user', this.user)
                 if(this.user){
                     this.SAVE_USER(this.user)
                 }

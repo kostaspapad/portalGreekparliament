@@ -25,11 +25,26 @@
                     :speech_id='speech.speech_id'
                     :favorited='isFavorited'
                 ></favorite>
+                <div class="d-inline-block comment-text pointer" @click="isCommentOn = !isCommentOn" :class="isCommentOn ? 'hide-text' : 'show-text'">
+                    <span v-if="!isCommentOn" class="show-letters">Show comments</span>
+                    <span v-else class="hide-letters">Hide comments</span>
+                </div>
+                <transition name="slide-fade">
+                    <div v-if="isCommentOn">
+                        <comments></comments>
+                    </div>
+                </transition>
            </div>
         </div>
     </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
+    .slide-fade-enter-active, .slide-fade-leave-active {
+        transition: opacity .6s ease;
+    }
+    .slide-fade-enter, .slide-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
     .speech-container {
         text-align: left;
     }
@@ -45,7 +60,61 @@
     .speech-container-options {
         text-align: right;
     }
+    .comment-text {
+        padding: 1vh;
+        background: #33a8ff63;
+        border-radius: 50px;
+        color: #4e5356;
+        position: relative;
+        top: -4px;
+        transition: background .8s ease;
+    }
+    .comment-text.show-text {
+        // animation-direction: alternate;
+        // animation: showText 2s both;
 
+        // @keyframes showText {
+        //     0% {
+        //         transform: rotateY(180deg);
+        //     }
+        //     100% {
+        //         transform: rotateY(0deg);
+        //     }
+        // }
+    }
+    .comment-text.hide-text {
+        background: salmon;
+        color: white;
+        // transform: rotate(360deg);
+        //transform: rotateY(180deg);
+        // animation-direction: alternate;
+        // animation: hideText 2s both;
+
+        // @keyframes hideText {
+        //     0% {
+        //         transform: rotateY(0);
+        //     }
+        //     100% {
+        //         transform: rotateY(180deg);
+        //     }
+        // }
+    }
+    .show-text > .show-letters {
+        backface-visibility: hidden;
+    }
+    .hide-text > .hide-letters{
+        // animation-direction: alternate;
+        // animation: letters 2s both;
+        backface-visibility: hidden;
+        // @keyframes letters {
+        //     0% {
+        //         transform: rotateY(0);
+        //     }
+        //     100% {
+        //         transform: rotateY(360deg);
+        //     }
+        // }
+    }
 </style>
 <script>
     import { mapState, mapGetters } from 'vuex'
@@ -55,7 +124,7 @@
         },
         data() {
             return {
-                
+                isCommentOn: false
             }
         },
         methods: {
@@ -83,7 +152,7 @@
             })
         },
         created() {
-            //console.log(this.$vuelayout.user)
+
         }
     }
 </script>
