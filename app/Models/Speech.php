@@ -28,4 +28,8 @@ class Speech extends Model
     public function favorites(){
         return $this->belongsToMany('App\User', 'favorites', 'speech_id', 'user_id');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment' , 'speech_id' , 'speech_id');
+    }
 }

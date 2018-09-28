@@ -33,6 +33,10 @@ Route::get('/user', function (Request $request) {
             Route::get('/favorites', 'Api\v1\SpeechesController@getFavoriteSpeeches');
             Route::post('/speech/favorite', 'Api\v1\Favorites\SpeechesController@store');
             Route::delete('/speech/favorite', 'Api\v1\Favorites\SpeechesController@destroy');
+            //comments route
+            Route::post('comments/create', 'Api\v1\CommentsController@store');
+            Route::get('comments/{speech_id}', 'Api\v1\CommentsController@show');
+
             Route::post('logout', 'Api\v1\ApiAuthController@logout');
         });
     /**

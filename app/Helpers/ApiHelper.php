@@ -6,6 +6,7 @@ use App\Http\Resources\Speech as SpeechResource;
 use App\Http\Resources\Speaker as SpeakerResource;
 use App\Http\Resources\Membership as MembershipResource;
 use App\Http\Resources\Party as PartyResource;
+use App\Http\Resources\Comment as CommentResource;
 
 class ApiHelper {
 
@@ -80,7 +81,7 @@ class ApiHelper {
             throw new InvalidArgumentException('Resource type is not a string');
         }
 
-        if (!in_array($resource_type, ['Speech', 'Speaker', 'Conference', 'Membership', 'Party'])) {
+        if (!in_array($resource_type, ['Speech', 'Speaker', 'Conference', 'Membership', 'Party', 'Comment'])) {
             throw new InvalidArgumentException('Resource type is not a valid resource');
         }
 
@@ -119,6 +120,12 @@ class ApiHelper {
 
                 } else if ($baseClass == 'Party') {
                     return new PartyResource($data);
+                }
+            } else if ($resource_type == 'Comment') {
+                if ($baseClass == 'Collection') {
+                    return CommentResource::collection($data);
+                }else{
+                    return new CommentResource($data);
                 }
             }
         }
