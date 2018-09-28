@@ -179,6 +179,7 @@
 
 <script>
     import moment from 'moment';
+    import { mapState, mapGetters } from 'vuex'
     export default {
         props: {
             conferences: null,
@@ -210,13 +211,13 @@
                 var self = this
                 let url = null
                 if (this.startDate && this.endDate) {
-                    url = '/api/v1/conference/start/' + this.startDate + '/end/' + this.endDate + '?page=' + page
+                    url = 'conference/start/' + this.startDate + '/end/' + this.endDate + '?page=' + page
                 } else {
-                    url = '/api/v1/conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' +
+                    url = 'conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' +
                         this.orientation
                 }
 
-                axios.get(this.$root.host + url)
+                axios.get(this.api_path + url)
                     .then(function (response) {
                         if (response.status == 200 && response.statusText == "OK") {
                             self.ajaxData.conferenceData = response
@@ -250,8 +251,8 @@
             getLatestConferences() {
                 const self = this
                 setTimeout(() => {
-                    axios.get(this.$root.host +
-                            '/api/v1/conferences?order_field=conference_date&orientation=desc')
+                    axios.get(this.api_path +
+                            'conferences?order_field=conference_date&orientation=desc')
                         .then(function (response) {
                             if (response.status == 200 && response.statusText == "OK") {
                                 if (response.data.data.length > 0) {
@@ -276,7 +277,7 @@
                     this.startDate = moment(this.startDate).format('YYYY-MM-DD')
                     this.endDate = moment(this.endDate).format('YYYY-MM-DD')
 
-                    axios.get(this.$root.host + '/api/v1/conference/start/' + this.startDate + '/end/' + this.endDate)
+                    axios.get(this.api_path + 'conference/start/' + this.startDate + '/end/' + this.endDate)
                         .then(function (response) {
 
                             if (response.status == 200 && response.statusText == "OK") {
@@ -315,7 +316,7 @@
                 const self = this
                 if (this.singleDate) {
                     this.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
-                    axios.get(this.$root.host + '/api/v1/conference/date/' + this.singleDate)
+                    axios.get(this.api_path + 'conference/date/' + this.singleDate)
                         .then(function (response) {
                             if (response.status == 200 && response.statusText == "OK") {
                                 if (response.data.data != null) {
@@ -367,7 +368,10 @@
                         return true;
                     }
                 }
-            }
+            },
+            ...mapGetters({
+                api_path: 'get_api_path'
+            })
         },
         created() {
             this.loading = false

@@ -20,7 +20,7 @@
                 <read-more more-str="read more" :text="speech.speech" link="#" less-str="read less" :max-chars="2000"></read-more>
             </div>
             
-            <div v-if="user.name">
+            <div v-if="user">
                 <favorite
                     :speech_id='speech.speech_id'
                     :favorited='isFavorited'
@@ -31,7 +31,7 @@
                 </div>
                 <transition name="slide-fade">
                     <div v-if="isCommentOn">
-                        <comments></comments>
+                        <comments :speech_id="speech.speech_id"></comments>
                     </div>
                 </transition>
            </div>
@@ -83,6 +83,7 @@
         // }
     }
     .comment-text.hide-text {
+        // background: #CD5C5C;
         background: salmon;
         color: white;
         // transform: rotate(360deg);
@@ -144,9 +145,6 @@
                     return false
                 }
             },
-            ...mapState([
-                'title'
-            ]),
             ...mapGetters({
                 user: 'get_user'
             })

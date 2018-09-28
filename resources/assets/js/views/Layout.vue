@@ -112,7 +112,7 @@
             </div>
         </nav>
         <div style="margin-top: 2rem">
-            <router-view></router-view>
+            <router-view :key="$route.fullPath"></router-view>
         </div>
     </div>
 </template>

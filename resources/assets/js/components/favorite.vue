@@ -10,6 +10,7 @@
 </template>
 
 <script>
+    import { mapState, mapGetters } from 'vuex'
     export default {
         props: [
             'speech_id',
@@ -30,7 +31,7 @@
                 const self = this;
 
                 setTimeout(() => {
-                    api.call('post', '/api/v1/speech/favorite', {
+                    api.call('post', this.api_path + 'speech/favorite', {
                         'speech_id': self.speech_id
                     })
                     .then(({data}) => {
@@ -42,12 +43,17 @@
                 const self = this;
                
                 setTimeout(() => {
-                    api.call('delete', '/api/v1/speech/favorite?speech_id='+this.speech_id)
+                    api.call('delete', this.api_path + 'speech/favorite?speech_id='+this.speech_id)
                     .then(({data}) => {
                         this.isFavorited = false
                     })
                 }, 500)
             }
+        },
+        computed: {
+            ...mapGetters({
+                api_path: 'get_api_path'
+            })
         },
         mounted() {
             this.isFavorited = this.isFavorite ? true : false;

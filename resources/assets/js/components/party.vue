@@ -113,6 +113,7 @@
 </style>
 
 <script>
+    import { mapState, mapGetters } from 'vuex'
     export default {
         props: {
             name: String,
@@ -162,7 +163,7 @@
             },
             getPartySpeeches(){
                 var self = this;
-                axios.get(this.$root.host+'/api/v1/speeches/party/party_id/'+this.finalName)
+                axios.get(this.api_path+'speeches/party/party_id/'+this.finalName)
                 .then(function(response){
                     if(response.status == 200 && response.data.data){
                         self.ajaxData.speechesData = response.data.data
@@ -174,7 +175,7 @@
             },
             getPartyData(){
                 var self = this
-                axios.get(this.$root.host+'/api/v1/party/'+this.finalName)
+                axios.get(this.api_path+'party/'+this.finalName)
                 .then(function(response){
                     if(response.status == 200 && response.data.data){
                         self.ajaxData.partyData = response.data.data
@@ -186,13 +187,15 @@
             }
         },
         computed:{
-            
+            ...mapGetters({
+                api_path: 'get_api_path'
+            })
         },
         created() {
-            console.log(decodeURIComponent(this.name))
+            //console.log(decodeURIComponent(this.name))
             this.finalName = decodeURIComponent(this.name)
             this.finalName = this.finalName.replace(/\+/g, " ")
-            console.log(this.finalName)
+            //console.log(this.finalName)
             // this.getPartySpeeches()
             this.getPartyData()
         }

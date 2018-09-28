@@ -158,6 +158,7 @@
 </template>
 
 <script>
+    import { mapState, mapGetters } from 'vuex'
     export default {
         props: {
             //Parties: Object,
@@ -184,7 +185,7 @@
             },
             findParty(){
                 var self = this;
-                axios.get(self.$parent.host+'/api/v1/parties/search/'+self.search_msg)
+                axios.get(this.api_path + 'parties/search/'+self.search_msg)
                 .then(function(response){
                     
                     if(response.status == 200 && response.data.data.length > 0){
@@ -202,7 +203,7 @@
             },
             changePage(page){
                 var self = this;
-                axios.get(this.$root.host+'/api/v1/parties?page=' + page)
+                axios.get(this.api_path+'parties?page=' + page)
                 .then(function(response){
                     self.ajaxData.partiesData = response;
                 })
@@ -212,7 +213,7 @@
             },
             changePageParty(page){
                 var self = this;
-                axios.get(this.$root.host+'/api/v1/parties?page=' + page+'&fullname_el='+this.search_msg)
+                axios.get(this.api_path+'parties?page=' + page+'&fullname_el='+this.search_msg)
                 .then(function(response){
                     self.ajaxData.search_data = response;
                 })
@@ -231,7 +232,7 @@
             },
             getParties(){
                 var self = this;
-                axios.get(this.$root.host+'/api/v1/parties')
+                axios.get(this.api_path+'parties')
                 .then(function(response){
                     self.ajaxData.partiesData = response;
                 })
@@ -279,7 +280,10 @@
                         return false;
                     }
                 }
-            }
+            },
+            ...mapGetters({
+                api_path: 'get_api_path'
+            })
         },
         created() {
             this.getParties();

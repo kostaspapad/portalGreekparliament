@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        title: 'Hello 2',
+        api_path: '',
         user: null
     },
     mutations: {
@@ -16,6 +16,9 @@ export default new Vuex.Store({
             if( window.localStorage.getItem('user') ){
                 state.user = JSON.parse(window.localStorage.getItem('user'))
             }
+        },
+        GET_PATH: state => {
+            state.api_path = process.env.NODE_ENV == 'production' ? 'http://95.85.38.123/api/v1/' : 'http://127.0.0.1:8000/api/v1/'
         }
     },
     actions: {
@@ -24,6 +27,9 @@ export default new Vuex.Store({
     getters: {
         get_user: state => {
             return state.user
+        },
+        get_api_path: state => {
+            return state.api_path
         }
     }
 })

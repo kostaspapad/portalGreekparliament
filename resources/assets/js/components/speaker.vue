@@ -233,6 +233,7 @@
 </style>
 
 <script>
+    import { mapState, mapGetters } from 'vuex'
     export default {
         props: {
             name: String,
@@ -279,10 +280,10 @@
                 let url = null
 
                 if (this.finalName) {
-                    url = '/api/v1/speaker/name/' + this.finalName + '/speeches' + '?page=' + page
+                    url = 'speaker/name/' + this.finalName + '/speeches' + '?page=' + page
                 }
 
-                axios.get(this.$root.host + url)
+                axios.get(this.api_path + url)
                     .then(function (response) {
                         if (response.status == 200 && response.statusText == "OK") {
                             self.ajaxData.speechesData = response
@@ -324,7 +325,7 @@
                 const self = this
                 
                 setTimeout(() => {
-                    axios.get(this.$root.host + '/api/v1/speaker/name/' + this.finalName + '/speeches')
+                    axios.get(this.api_path + 'speaker/name/' + this.finalName + '/speeches')
                         .then(function (response) {
                             if (response.status == 200 && response.data.data.length > 0) {
                                 self.noDataSpeeches = false
@@ -340,7 +341,7 @@
                 const self = this
 
                 setTimeout(() => {
-                    axios.get(this.$root.host + '/api/v1/speaker/name/' + this.finalName)
+                    axios.get(this.api_path + 'speaker/name/' + this.finalName)
                         .then(function (response) {
                             if (response.status == 200 && response) {
                                 self.noDataSpeaker = false
@@ -361,7 +362,7 @@
                 }
 
                 setTimeout(() => {
-                    api.call('post', '/api/v1/speaker/speeches/search/', search_data)
+                    api.call('post', this.api_path + 'speaker/speeches/search/', search_data)
                         .then(function (response) {
                             if (response.status == 200) {
                                 self.noDataSpeeches = false
@@ -377,7 +378,9 @@
             }
         },
         computed: {
-            
+            ...mapGetters({
+                api_path: 'get_api_path'
+            })
         },
         created() {
             this.loading = false

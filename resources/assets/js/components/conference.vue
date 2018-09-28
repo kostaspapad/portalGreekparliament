@@ -75,6 +75,7 @@
 </style>
 
 <script>
+    import { mapState, mapGetters } from 'vuex'
     export default {
         props: {
             //conf_date: null,
@@ -110,7 +111,7 @@
                 var self = this;
 
                 setTimeout( () => {
-                    axios.get(this.$root.host+'/api/v1/conference/'+ this.conf_date +'/speeches')
+                    axios.get(this.api_path + 'conference/'+ this.conf_date +'/speeches')
                     .then(function(response){
                         if(response.status == 200 && response.statusText == "OK"){
                             self.noDataConfSpeeches = false
@@ -129,7 +130,7 @@
                 var self = this;
                 
                 setTimeout( () => {
-                    axios.get(this.$root.host+'/api/v1/conference/date/'+ this.conf_date)
+                    axios.get(this.api_path + 'conference/date/'+ this.conf_date)
                     .then(function(response){
                         if(response.status == 200 && response.statusText == "OK"){
                             self.noDataConfInfo = false
@@ -147,7 +148,9 @@
             }
         },
         computed:{
-            
+            ...mapGetters({
+                api_path: 'get_api_path'
+            })
         },
         created() {
             this.$route.params.conference_date ? this.conf_date = this.$route.params.conference_date : null          

@@ -1,8 +1,10 @@
 <template>
-    <div >
-        <div class="comments-area">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem laudantium placeat nam iure repudiandae aperiam quae, laboriosam possimus, corporis tempore perspiciatis veritatis cumque illo neque quia magni, rem voluptates corrupti.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem laudantium placeat nam iure repudiandae aperiam quae, laboriosam possimus, corporis tempore perspiciatis veritatis cumque illo neque quia magni, rem voluptates corrupti.</p>
+    <div v-if="ajaxData.comments">
+        <div class="comments-area" :class="{ 'comments-scroll' : ajaxData.comments.length > 6 }">
+            <div v-for="comment in ajaxData.comments" :key="comment.comment_id" class="comment">
+                <p class="m-0">{{comment.comment}}</p>
+                <small>{{myFormattedDate(comment.created_at.date)}} - {{comment.user_name}}</small>
+            </div>
         </div>
         <div class="comment-textarea">
             <TextareaAutogrow 
@@ -10,6 +12,11 @@
                 placeholder="Type your comment"
                 classes="form-control form-control-line textarea"
             />
+        </div>
+        <div class="send-comment text-right mt-1 mr-1">
+            <button @click="sendComment" :disabled="isDisabled" :class="{ 'not-allowed': isDisabled }" class="btn comment-send-button">
+                Send <i class="fas fa-paper-plane"></i> 
+            </button>
         </div>
     </div>
 </template>
@@ -23,14 +30,91 @@
         border-radius: 20px;
         resize: none;
     }
+    .comment-send-button {
+        // background-color: #CD5C5C;
+        // background-color: salmon;
+        background: #1ABC9C;
+        color: white;
+    }
+    .comments-scroll {
+        height: 350px;
+        overflow-y: scroll;
+    }
+    .comments-area {
+        word-break: break-all;
+    }
+    .comment > p {
+        font-size: 1.3rem;
+    }
 </style>
 
 <script>
+    import { mapState, mapGetters } from 'vuex'
+    import moment from 'moment'
     export default {
+        props: {
+            speech_id:{
+                type: String,
+                required: true
+            }
+        },
         data() {
             return {
-                comment: ''
+                ajaxData: {
+                    comments: []
+                },
+                comment: '',
+                comment_height: null
             }
-        }   
+        },
+        methods: {
+            sendComment(){
+
+                //initialize data to send
+                let data = {
+                    speech_id: this.speech_id,
+                    comment: this.comment
+                };
+                api.call('post',this.api_path + 'comments/create',data)
+                .then( data => {
+                    if(data.data.msg == "Comment Sent" && data.statusText == "Created" && data.status == 201){
+                        this.clearVariables()
+                        if(data.data){
+                            this.ajaxData.comments.push(data.data.data)
+                        }
+                        //this.getCommentsOfSpeech()
+                    }
+                })
+            },
+            getCommentsOfSpeech(){
+                api.call('get', this.api_path + 'comments/' + this.speech_id)
+                .then(  data => {
+                    if( data.data && data.statusText == "OK" && data.status == 200 ){
+                        this.ajaxData.comments = data.data.data
+                    }
+                })
+            },
+            myFormattedDate(date) {
+                return moment(date).format('DD/MM/YYYY H:mm');
+            },
+            clearVariables(){
+                this.comment = ''
+            }
+        },
+        computed: {
+            isDisabled(){
+                return this.comment ? false : true
+            },
+            ...mapGetters({
+                api_path: 'get_api_path'
+            })
+        },
+        created(){
+            this.getCommentsOfSpeech()
+        },
+        mounted(){
+            // var x = document.getElementById('comments_area')
+            // console.log(x.he)
+        }
     }
 </script>

@@ -89,7 +89,8 @@ const app = new Vue({
     router,
     store,
     beforeCreate() {
-		this.$store.commit('CHECK_USER')
+        this.$store.commit('CHECK_USER')
+        this.$store.commit('GET_PATH')
 	},
     data: {
         host: process.env.NODE_ENV == 'production' ? 'http://95.85.38.123' : 'http://127.0.0.1:8000'

@@ -139,6 +139,7 @@
 </style>
 
 <script>
+    import { mapState, mapGetters } from 'vuex'
     export default {
         props: {
             path: String
@@ -178,7 +179,7 @@
             findSpeaker() {
                 var self = this;
 
-                axios.get(this.$root.host+'/api/v1/speakers/search/'+self.search_msg)
+                axios.get(this.api_path+'speakers/search/'+self.search_msg)
                 .then(function(response){
                     if (response.status == 200 && response.data.data.length > 0) {
                         self.ajaxData.search_data = response;
@@ -196,7 +197,7 @@
             changePage(page) {
                 var self = this;
                 
-                axios.get(this.$root.host+'/api/v1/speakers?page=' + page + '&order_field='+this.order_field+'&orientation=asc')
+                axios.get(this.api_path+'speakers?page=' + page + '&order_field='+this.order_field+'&orientation=asc')
                 .then(function(response) {
                     self.ajaxData.speakersData = response;
                 })
@@ -209,7 +210,7 @@
                 this.loading = true
 
                 setTimeout( () => {
-                    axios.get(this.$root.host+'/api/v1/speakers?order_field='+this.order_field+'&orientation='+this.order_orientation)
+                    axios.get(this.api_path+'speakers?order_field='+this.order_field+'&orientation='+this.order_orientation)
                     .then(function(response){
                         if(response.status == 200 && response.data.data){
                             self.loading = false
@@ -227,7 +228,9 @@
             },
         },
         computed:{
-            
+            ...mapGetters({
+                api_path: 'get_api_path'
+            })
         },
         created() {
             this.getSpeakers();
