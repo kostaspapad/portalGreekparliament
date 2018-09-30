@@ -47,6 +47,7 @@
                                 <span class="caret"></span>
                             </router-link>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <router-link to="/dashboard" class="dropdown-item">Dashboard</router-link>
                                 <span @click="userLogout" class="dropdown-item pointer">Logout</span>
                                 <!-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf

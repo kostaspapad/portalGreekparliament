@@ -18,6 +18,10 @@ let routes = [
         component: require('./views/Register.vue')
     },
     {
+        path: '/dashboard',
+        component: require('./views/Dashboard.vue')
+    },
+    {
         path: '/conferences',
         component: require('./components/conferences.vue')
     },
@@ -32,6 +36,10 @@ let routes = [
     {
         path: '/speaker/:speaker_name',
         component: require('./components/speaker.vue')
+    },
+    {
+        path: '/speech/:speech_id',
+        component: require('./components/speech.vue')
     },
 ];
 

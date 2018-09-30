@@ -1,6 +1,6 @@
 <template>
     <span>
-        <a href="#" v-if="isFavorited" @click.prevent="unFavorite">
+        <a href="#" v-if="favorited" @click.prevent="unFavorite">
             <i class="fa fa-star fa-2x" aria-hidden="true" style="color:#fff645"></i>
         </a>
         <a href="#" v-else @click.prevent="favorite">
@@ -28,24 +28,21 @@
         },
         methods: {
             favorite() {
-                const self = this;
-
+                let data = {
+                    'speech_id': this.speech_id
+                }
                 setTimeout(() => {
-                    api.call('post', this.api_path + 'speech/favorite', {
-                        'speech_id': self.speech_id
-                    })
+                    api.call('post', this.api_path + 'speech/favorite', data)
                     .then(({data}) => {
-                        this.isFavorited = true
+                        this.favorited = 1
                     })
                 }, 500)
             },
             unFavorite() {
-                const self = this;
-               
                 setTimeout(() => {
-                    api.call('delete', this.api_path + 'speech/favorite?speech_id='+this.speech_id)
+                    api.call('delete', this.api_path + 'speech/favorite?speech_id=' + this.speech_id)
                     .then(({data}) => {
-                        this.isFavorited = false
+                        this.favorited = 0
                     })
                 }, 500)
             }

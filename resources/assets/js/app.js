@@ -24,7 +24,7 @@ import ToggleButton from 'vue-js-toggle-button'
 import ReadMore from 'vue-read-more'
 import Vuelidate from 'vuelidate'
 import TextareaAutogrow from 'vue-textarea-autogrow'
-
+import VueChatScroll from 'vue-chat-scroll'
 
 //components
 // import navbar from './components/navbar.vue'
@@ -49,6 +49,7 @@ Vue.use(VueRouter)
 Vue.use(ToggleButton)
 Vue.use(ReadMore)
 Vue.use(Vuelidate)
+Vue.use(VueChatScroll)
 
 // register globally
 Vue.component('pagination', laravelVuePagination)

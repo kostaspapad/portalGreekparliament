@@ -1,6 +1,6 @@
 <template>
     <div v-if="ajaxData.comments">
-        <div class="comments-area" :class="{ 'comments-scroll' : ajaxData.comments.length > 6 }">
+        <div v-chat-scroll class="comments-area" :class="{ 'comments-scroll' : ajaxData.comments.length > 6 }">
             <div v-for="comment in ajaxData.comments" :key="comment.comment_id" class="comment">
                 <p class="m-0">{{comment.comment}}</p>
                 <small>{{myFormattedDate(comment.created_at.date)}} - {{comment.user_name}}</small>
@@ -69,7 +69,6 @@
         },
         methods: {
             sendComment(){
-
                 //initialize data to send
                 let data = {
                     speech_id: this.speech_id,
@@ -95,7 +94,7 @@
                 })
             },
             myFormattedDate(date) {
-                return moment(date).format('DD/MM/YYYY H:mm');
+                return moment(date).format('DD/MM/YYYY HH:mm');
             },
             clearVariables(){
                 this.comment = ''
@@ -113,8 +112,7 @@
             this.getCommentsOfSpeech()
         },
         mounted(){
-            // var x = document.getElementById('comments_area')
-            // console.log(x.he)
+            
         }
     }
 </script>

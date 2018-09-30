@@ -1,40 +1,42 @@
 <template>
-    <div v-if="speech.speech_id && speech.greek_name" class="speech-container py-2">
-        <div class="speech-data-container p-2">
-            <div class="row" style="margin-right: 0;">
-                <div class="speaker-image-container">
-                    <div v-if="speech.image">
-                        <img :src="'/img/' + speech.image" class="speech_speaker_img"/>
+    <div v-if="isDone">
+        <div v-if="speech_data.speech_id && speech_data.greek_name" class="speech-container py-2">
+            <div class="speech-data-container p-2">
+                <div class="row" style="margin-right: 0;">
+                    <div class="speaker-image-container">
+                        <div v-if="speech_data.image">
+                            <img :src="'/img/' + speech_data.image" class="speech_speaker_img"/>
+                        </div>
+                    </div>
+                    <div class="speech-container-speaker">
+                        <h4 class="speech_speaker_name ml-2">
+                            <a :href="/speaker/ + speech_data.greek_name" class="" style="margin-top:8px;">{{speech_data.greek_name}}</a>
+                        </h4>
+                        <div class="speech_speaker_party ml-2" v-bind:style="getPartyColor">
+                            <h5>{{speech_data.fullname_el | capitalize}} ({{speech_data.on_behalf_of_id}})</h5>
+                        </div>
                     </div>
                 </div>
-                <div class="speech-container-speaker">
-                    <h4 class="speech_speaker_name ml-2">
-                        <a :href="/speaker/ + speech.greek_name" class="" style="margin-top:8px;">{{speech.greek_name}}</a>
-                    </h4>
-                    <div class="speech_speaker_party ml-2" v-bind:style="getPartyColor">
-                        <h5>{{speech.fullname_el | capitalize}} ({{speech.on_behalf_of_id}})</h5>
+                <div class="speech-container-speech ml-2 pt-2">
+                    <read-more more-str="read more" :text="speech_data.speech" link="#" less-str="read less" :max-chars="2000"></read-more>
+                </div>
+                
+                <div v-if="user">
+                    <favorite
+                        :speech_id='speech_data.speech_id'
+                        :favorited='speech_data.isFavorite'
+                    ></favorite>
+                    <div class="d-inline-block comment-text pointer" @click="isCommentOn = !isCommentOn" :class="isCommentOn ? 'hide-text' : 'show-text'">
+                        <span v-if="!isCommentOn" class="show-letters">Show comments</span>
+                        <span v-else class="hide-letters">Hide comments</span>
                     </div>
+                    <transition name="slide-fade">
+                        <div v-if="isCommentOn">
+                            <comments :speech_id="speech_data.speech_id"></comments>
+                        </div>
+                    </transition>
                 </div>
             </div>
-            <div class="speech-container-speech ml-2 pt-2">
-                <read-more more-str="read more" :text="speech.speech" link="#" less-str="read less" :max-chars="2000"></read-more>
-            </div>
-            
-            <div v-if="user">
-                <favorite
-                    :speech_id='speech.speech_id'
-                    :favorited='isFavorited'
-                ></favorite>
-                <div class="d-inline-block comment-text pointer" @click="isCommentOn = !isCommentOn" :class="isCommentOn ? 'hide-text' : 'show-text'">
-                    <span v-if="!isCommentOn" class="show-letters">Show comments</span>
-                    <span v-else class="hide-letters">Hide comments</span>
-                </div>
-                <transition name="slide-fade">
-                    <div v-if="isCommentOn">
-                        <comments :speech_id="speech.speech_id"></comments>
-                    </div>
-                </transition>
-           </div>
         </div>
     </div>
 </template>
@@ -125,7 +127,9 @@
         },
         data() {
             return {
-                isCommentOn: false
+                isCommentOn: false,
+                speech_data: null,
+                isDone: false
             }
         },
         methods: {
@@ -134,12 +138,12 @@
         computed: {
             getPartyColor() {
                 return {
-                    'color': this.speech.party_color
+                    'color': this.speech_data.party_color
                 }
             },
             isFavorited() {
                 // console.log(this.user)
-                if (this.speech.favorite === this.user.id) {
+                if (this.speech_data.favorite === this.user.id) {
                     return true
                 } else {
                     return false
@@ -147,10 +151,24 @@
             },
             ...mapGetters({
                 user: 'get_user'
+            }),
+            ...mapGetters({
+                api_path: 'get_api_path'
             })
         },
-        created() {
-
+        mounted() {
+            if(!this.speech){
+                api.call('get', this.api_path + 'speech/' + this.$route.params.speech_id)
+                .then( data => {
+                    if( data.status == 200 && data.statusText == "OK" && data.data ){
+                        this.speech_data = data.data.data
+                        this.isDone = true
+                    }
+                })
+            }else{
+                this.speech_data = this.speech
+                this.isDone = true
+            }
         }
     }
 </script>

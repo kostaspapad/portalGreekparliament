@@ -37,6 +37,9 @@ Route::get('/user', function (Request $request) {
             Route::post('comments/create', 'Api\v1\CommentsController@store');
             Route::get('comments/{speech_id}', 'Api\v1\CommentsController@show');
 
+            //dashboard route
+            Route::get('dashboard', 'Api\v1\DashboardController@getData');
+
             Route::post('logout', 'Api\v1\ApiAuthController@logout');
         });
     /**
