@@ -12,7 +12,8 @@ class PagesController extends Controller
     }
 
     public function index(Route $route){
-        return view('pages.home');
+        return view('layouts.app');
+        //return view('pages.home');
     }
 
     public function home(Route $route){

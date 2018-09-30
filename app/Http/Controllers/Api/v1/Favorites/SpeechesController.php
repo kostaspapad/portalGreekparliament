@@ -9,13 +9,13 @@ use App\Models\Speech;
 use App\Models\Speaker;
 use App\Http\Resources\Speech as SpeechResource;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class SpeechesController extends Controller
 {
     public function store( Request $request )
     {
         $speech_id = $request->input('speech_id');
-
         // Get speech
         $speech = Speech::where('speech_id', '=', $speech_id)->first();
 
@@ -23,29 +23,51 @@ class SpeechesController extends Controller
             If the user doesn't already favorite the speech, 
             attaches the speech to the user's favorites
         */
-        if ($speech->favorites->whereNotIn('id', '=', Auth::user()->id)){
-            $speech->favorites()->attach( Auth::user()->id, [
-                'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s')
-            ]);
-
+        // dd(
+        //     //$speech->favorites()->where('user_id', '=', Auth::user()->id)->toSql()
+        // );
+        if($speech->favorites()->where('user_id', '=', Auth::user()->id)->first()){
+            DB::table('favorites')
+            ->where([
+                ['user_id', '=' , Auth::user()->id],
+                ['speech_id', '=', $speech_id]
+            ])
+            ->update(['isFavorite' => 1]);
             return response()->json( ['speech_favorited' => true], 201 );
+        }else{
 
-        } else {
-            return response()->json([
-                'speech_favorited' => false,
-                'reason' => 'Allready favorited'
-            ], 202 );
+            if ($speech->favorites->whereNotIn('id', '=', Auth::user()->id)){
+                $speech->favorites()->attach( Auth::user()->id, [
+                    'created_at'    => date('Y-m-d H:i:s'),
+                    'updated_at'    => date('Y-m-d H:i:s'),
+                    'isFavorite'    => 1
+                ]);
+    
+                return response()->json( ['speech_favorited' => true], 201 );
+    
+            } else {
+                return response()->json([
+                    'speech_favorited' => false,
+                    'reason' => 'Allready favorited'
+                ], 202 );
+            }
         }
+        
     }
 
     public function destroy( Request $request )
     {
         $speech_id = $request->input('speech_id');
         
-        $speech = Speech::where('speech_id', '=', $speech_id)->first();
-        
-        $speech->favorites()->detach( Auth::user()->id );
+        // $speech = Speech::where('speech_id', '=', $speech_id)->first();
+        // $speech->favorites->where('user_id', '=', Auth::user()->id);
+        DB::table('favorites')
+        ->where([
+            ['user_id', '=' , Auth::user()->id],
+            ['speech_id', '=', $speech_id]
+        ])
+        ->update(['isFavorite' => 0]);
+        //$speech->favorites()->detach( Auth::user()->id );
         
         return response(null, 204);
     }

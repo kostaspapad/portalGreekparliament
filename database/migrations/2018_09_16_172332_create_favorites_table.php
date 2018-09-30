@@ -20,6 +20,7 @@ class CreateFavoritesTable extends Migration
             $table->foreign('speech_id')->references('speech_id')->on('speeches');
             $table->primary(['user_id', 'speech_id']);
             $table->timestamps();
+            $table->boolean('isFavorite')->default(0);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';

@@ -64,8 +64,39 @@ class SpeechesController extends Controller
      */
     public function getSpeechById($id)
     {
-        $speech = Speech::findorfail($id);
-
+        // $speech = Speech::findorfail($id);
+        $user = auth('api')->user();
+        if ($user) {
+            // One speaker can be in many parties (check it later)
+            $speech = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
+                ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
+                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
+                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
+                ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
+                ->leftJoin('favorites', 'favorites.speech_id', '=', 'speeches.speech_id')
+                ->select([
+                    'conf.conference_date', 
+                    'sp.greek_name', 
+                    'sp.english_name', 
+                    'speeches.speech_id', 
+                    'speeches.speech', 
+                    'sp.image', 
+                    'm.on_behalf_of_id', 
+                    'parties.fullname_el',
+                    'party_colors.color',
+                    'favorites.user_id as favorite_user_id',
+                    'favorites.isFavorite'
+                ])
+                ->groupBy('speeches.speech_id')
+                ->where([
+                    ['speeches.speech_id', '=', $id]
+                    //,['favorites.user_id', '=', $user->id]
+                ])
+                // ->orWhere('favorites.speech_id', '=', NULL)
+                // ->orWhere('favorites.speech_id', '!=', NULL)
+                ->first();
+        } 
+        
         return $this->apiHelper::returnResource('Speech', $speech);
     }
 

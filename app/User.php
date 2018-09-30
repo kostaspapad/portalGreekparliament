@@ -31,4 +31,8 @@ class User extends Authenticatable
     public function favorites(){
         return $this->belongsToMany( 'App\Models\Speech', 'favorites', 'user_id', 'speech_id');
     }
+
+    public function comments(){
+        return $this->belongsToMany( 'App\Models\Comment', 'comments', 'id', 'user_id');
+    }
 }

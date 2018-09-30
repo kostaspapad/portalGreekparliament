@@ -21,13 +21,13 @@ class CommentsController extends Controller
     }
 
     public function store( Request $request ){
-        
-        //get the speech id we want to add the comment
-        //$speech_id = $request->input('speech_id');
-        
+
         $comment = new Comment();
         $comment->comment = $request->comment;
+        
+        //get the speech id we want to add the comment
         $comment->speech_id = $request->speech_id;
+
         //check and save user_id
         $comment->user_id = $this->check_user_id();
 
@@ -37,7 +37,15 @@ class CommentsController extends Controller
         
         return response()->json([
             'msg' => 'Comment Sent',
-            'data' => $this->afterSaveGetRow($comment->id)
+            'data' => [
+                'comment_id' => $comment->id,
+                'comment' => $comment->comment,
+                'speech_id' => $comment->speech_id,
+                'user_id' => $comment->user_id,
+                'created_at' => $comment->created_at,
+                'user_name' => Auth::user()->name
+            ]
+            // 'data' => $this->afterSaveGetRow($comment->id)
         ], 201 );
     }
 
@@ -58,17 +66,18 @@ class CommentsController extends Controller
     }
 
     public function afterSaveGetRow($comment_id) {
-        $comment = Comment::join('users','comments.user_id', '=', 'users.id')
-            ->select([
-                'comments.id as comment_id',
-                'comments.comment',
-                'comments.speech_id',
-                'comments.user_id',
-                'comments.created_at',
-                'users.name as user_name'
-            ])
-            ->where('comments.id', '=', $comment_id)->first();
-        return $this->apiHelper::returnResource('Comment', $comment);
+
+        // $comment = Comment::join('users','comments.user_id', '=', 'users.id')
+        //     ->select([
+        //         'comments.id as comment_id',
+        //         'comments.comment',
+        //         'comments.speech_id',
+        //         'comments.user_id',
+        //         'comments.created_at',
+        //         'users.name as user_name'
+        //     ])
+        //     ->where('comments.id', '=', $comment_id)->first();
+        // return $this->apiHelper::returnResource('Comment', $comment);
     }
 
     public function check_user_id(){

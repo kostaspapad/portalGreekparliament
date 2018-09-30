@@ -70,14 +70,16 @@ class SpeechesController extends Controller
                         'm.on_behalf_of_id', 
                         'parties.fullname_el',
                         'party_colors.color',
-                        'favorites.user_id'
+                        'favorites.user_id as favorite_user_id',
+                        'favorites.isFavorite'
                     ])
                     ->groupBy('speeches.speech_id')
                     ->where([
-                        ['conf.conference_date', '=', $date],
-                        ['favorites.user_id', '=', $user->id]
-                    ])->orWhere('favorites.speech_id', '=', NULL)
-                    ->orWhere('favorites.speech_id', '!=', NULL)
+                        ['conf.conference_date', '=', $date]
+                        //,['favorites.user_id', '=', $user->id]
+                    ])
+                    // ->orWhere('favorites.speech_id', '=', NULL)
+                    // ->orWhere('favorites.speech_id', '!=', NULL)
                     ->paginate(25);
 
             } else {
