@@ -48,10 +48,14 @@ export default {
           return 'myFontColor'
         }
       },
-      customBgColor(index,option){
+      customBgColor(index,option, isDesktop = null){
         let color 
         color = option.color
-        if(index === this.pointer && this.showPointer){
+        if(isDesktop){
+          if(index === this.pointer && this.showPointer){
+            return color
+          }
+        }else{
           return color
         }
       },

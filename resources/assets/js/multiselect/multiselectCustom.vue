@@ -88,16 +88,32 @@
             </li>
             <template v-if="!max || internalValue.length < max">
               <li class="multiselect__element" v-for="(option, index) of filteredOptions" :key="index">
+                <!-- For tablet and mobile -->
                 <span
                   v-if="!(option && (option.$isLabel || option.$isDisabled))"
-                  :style="{ backgroundColor: customBgColor(index,option) }"
+                  @click.stop="select(option)"
+                  @mouseenter.self="pointerSet(index)"
+                  :data-select="option && option.isTag ? tagPlaceholder : selectLabelText"
+                  :data-selected="selectedLabelText"
+                  :data-deselect="deselectLabelText"
+                  :class="optionHighlight(index,option)"
+                  class="multiselect__option myColor d-lg-none d-xl-none font-small-device">
+                    <slot name="option" :option="option" :search="search">
+                      <span>{{ getOptionLabel(option) }}</span>
+                    </slot>
+                    <span class="party-indicator float-right" :style="{ backgroundColor: customBgColor(index,option) }"></span>
+                </span>
+                <!-- For desktop -->
+                <span
+                  v-if="!(option && (option.$isLabel || option.$isDisabled))"
+                  :style="{ backgroundColor: customBgColor(index,option,true) }"
                   :class="fontColor(index, option)"
                   @click.stop="select(option)"
                   @mouseenter.self="pointerSet(index)"
                   :data-select="option && option.isTag ? tagPlaceholder : selectLabelText"
                   :data-selected="selectedLabelText"
                   :data-deselect="deselectLabelText"
-                  class="multiselect__option myColor">
+                  class="multiselect__option myColor d-none d-sm-none d-md-none d-lg-block d-xl-block">
                     <slot name="option" :option="option" :search="search">
                       <span>{{ getOptionLabel(option) }}</span>
                     </slot>
@@ -341,6 +357,9 @@ fieldset[disabled] .multiselect {
 .myFontColor{
   outline: none;
   color: white;
+}
+.font-small-device {
+  font-size: 14px;
 }
 .multiselect__spinner {
   position: absolute;
@@ -669,11 +688,12 @@ fieldset[disabled] .multiselect {
 
 /* .multiselect__option--highlight {
   background: #41B883;
+  background: #495057ad;
   outline: none;
   color: white;
-}
+} */
 
-.multiselect__option--highlight:after {
+/* .multiselect__option--highlight:after {
   content: attr(data-select);
   background: #41B883;
   color: white;

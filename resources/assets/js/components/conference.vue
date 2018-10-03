@@ -1,6 +1,35 @@
 <template>
     <div class="container">
         <div class="conferences-container">
+            <div class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
+                <!-- <button class="btn mb-2 chart-btn"  style="background-color: #acd9ff;"> -->
+                    <span v-if="!showChart">Show chart</span>
+                    <span v-else class="hide-letters">Hide Chart</span>
+                <!-- </button> -->
+            </div>
+            <transition name="slide-fade">
+                <div class=" m-auto" v-if="showChart">
+                    <!-- <vue-frappe
+                        v-if="isLoaded"
+                        id="my-chart-id"
+                        title="Frappe"
+                        type="pie"
+                        :labels="ajaxData.party_count_speeches.party_names"
+                        :lineOptions="{regionFill: 1}"
+                        :colors="ajaxData.party_count_speeches.party_colors"
+                        :dataSets="[{values: ajaxData.party_count_speeches.party_count}]"
+                        :maxSlices="10"
+                    ></vue-frappe> -->
+                    <pie-chart 
+                        v-if="isLoaded"
+                        :chart-data="ajaxData.party_count_speeches.party_count" 
+                        :chart-labels="ajaxData.party_count_speeches.party_names"
+                        :chart-bg-colors="ajaxData.party_count_speeches.party_colors"
+                        :width="325"
+                    >
+                    </pie-chart>
+                </div>
+            </transition>
             <div v-if="ajaxDoneConfInfo">
                 <div class="conference-title-box py-4 pl-4">
                     <h2 class="font-weight-bold">Conference · {{conf_date}}</h2>
@@ -33,7 +62,6 @@
     </div>
 </template>
 <style scoped>
-
     .conferences-bg {
         background-color: #ffffff;
     }
@@ -85,7 +113,12 @@
             return {
                 ajaxData: {
                     conferenceData: [],
-                    conferenceInfo: null
+                    conferenceInfo: null,
+                    party_count_speeches: {
+                        party_names: [],
+                        party_count: [],
+                        party_colors: []
+                    }
                 },
                 conf_date: null,
                 defaultImg: 'default_speaker_icon.png',
@@ -94,6 +127,8 @@
                 ajaxDoneConfSpeeches: false,
                 noDataConfInfo: true,
                 noDataConfSpeeches: true,
+                isLoaded: false,
+                showChart: false
             }
         },
         methods:{
@@ -145,6 +180,20 @@
                         console.log(error);
                     });
                 }, 1000)
+            },
+            getPartyCountByConference() {
+                api.call('get', this.api_path + 'conferences/count-party-speeches/' + this.conf_date)
+                .then( response => {
+                    if(response.status == 200 && response.statusText == "OK" && response.data){
+                        response.data.forEach( element => {
+                            this.ajaxData.party_count_speeches.party_names.push(element.fullname_el)
+                            this.ajaxData.party_count_speeches.party_count.push(element.party_count)
+                            this.ajaxData.party_count_speeches.party_colors.push(element.color)
+                            this.isLoaded = true
+                        })
+                    }
+
+                })
             }
         },
         computed:{
@@ -156,6 +205,7 @@
             this.$route.params.conference_date ? this.conf_date = this.$route.params.conference_date : null          
             this.getConferenceInfo()
             this.getConferenceSpeeches()
+            this.getPartyCountByConference()
         }
     }
 </script>

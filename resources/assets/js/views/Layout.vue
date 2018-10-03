@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-md py-0 px-4 navbar-light navbar-laravel navbar-bg-color">
             <div class="container-fluid ml-0">
                 <div class="navbar-brand logo">
-                    <router-link to="/">Greekparliament.info</router-link>
+                    <router-link to="/" style="color:inherit;">Greekparliament.info</router-link>
                 </div>
             
                 <button class="navbar-toggler" type="button" data-toggle="collapse" 
@@ -42,13 +42,13 @@
                         </li>
 
                         <li v-if="user" class="nav-item dropdown">
-                            <router-link id="navbarDropdown" class="nav-link dropdown-toggle" to="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ user.name }} 
                                 <span class="caret"></span>
-                            </router-link>
+                            </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <router-link to="/dashboard" class="dropdown-item">Dashboard</router-link>
-                                <span @click="userLogout" class="dropdown-item pointer">Logout</span>
+                                <router-link to="/dashboard" class="dropdown-item myHoverBg">Dashboard</router-link>
+                                <span @click="userLogout" class="dropdown-item pointer myHoverBg">Logout</span>
                                 <!-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form> -->
@@ -117,6 +117,7 @@
         </div>
     </div>
 </template>
+
 <script>
     import { mapMutations } from 'vuex'
     export default {

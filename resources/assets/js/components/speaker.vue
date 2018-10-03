@@ -1,5 +1,23 @@
 <template>
     <div class="container">
+        <div class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
+            <span v-if="!showChart">Show chart</span>
+            <span v-else class="hide-letters">Hide Chart</span>
+        </div>
+        <transition name="slide-fade">
+            <div class="small m-auto" v-if="showChart">
+                <line-chart 
+                    v-if="ajaxData.isLoaded"
+                    :chart-data="ajaxData.memberships.start_dates" 
+                    :chart-labels="ajaxData.memberships.start_dates"
+                    :chart-bg-colors="ajaxData.memberships.party_colors"
+                    :chart-party-labels="ajaxData.memberships.party_name_en"
+                    :height="325"
+                >
+                        
+                </line-chart>
+            </div>
+        </transition>
         <div class="speaker-container">
             <div v-if="ajaxDoneSpeaker" class="row mr-0">
                 <div class="w-100 bg-img">
@@ -25,7 +43,13 @@
                     </div>
                     <div class="col-12 pr-5 mb-4 mt-4 float-right">
                         <div class="float-right">
-                            <div class="input-group search-div">
+                             <vs-input 
+                                vs-icon="search" 
+                                placeholder="Search this speaker's speeches" 
+                                v-model.trim="search_string"
+                                @keypress.enter="searchSpeakerSpeeches"
+                            />
+                            <!-- <div class="input-group search-div">
                                 <input class="form-control" 
                                     v-model.trim="search_string" 
                                     @keypress.enter="searchSpeakerSpeeches" 
@@ -34,14 +58,53 @@
                                 <span class="input-group-append">
                                     <i class="fa fa-search"></i>
                                 </span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="container">
-                    <nav>
+                    <vs-tabs vs-color='#17a2b8'>
+                        <vs-tab vs-label="Speeches">
+                            <div class="p-3 tab-pane fade show speeches-container mb-0">
+                                <div v-if="ajaxDoneSpeeches && noDataSpeeches == false">
+                                    <div v-for="speech in ajaxData.speechesData.data.data" :key="speech.speech_id" class="speeches py-2">
+                                        <div class="row">
+                                            <div v-if="speech.greek_name == ajaxData.speechesData.data.data.greek_name">
+                                                <small>
+                                                    <p><ins><a :href="`/speaker/${speech.greek_name}`" class="text-info">{{speech.greek_name}}</a></ins></p>
+                                                    · {{speech.speech_conference_date}}
+                                                </small>
+                                            </div>
+                                            <div v-else>
+                                                <small><a :href="`/speaker/${speech.greek_name}`" class="text-info">{{speech.greek_name}}</a>
+                                                    · {{speech.speech_conference_date}}</small>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <p class="text-left">{{speech.speech}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-5" style="padding-left: 2.5rem;">
+                                        <pagination :data="ajaxData.speechesData.data.meta" @pagination-change-page="changePage"
+                                            :limit=1>
+                                            <span slot="prev-nav">&lt;</span>
+                                            <span slot="next-nav">&gt;</span>
+                                        </pagination>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <h5>No speeches found</h5>
+                                </div>
+                            </div>
+                        </vs-tab>
+                        <vs-tab vs-label="Membership">
+                            <div class="spiros mb-0">
+                                Membership
+                            </div>
+                        </vs-tab>
+                    </vs-tabs>
+                    <!-- <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <!-- <a @click="currentTab = 'Information' " class="nav-item nav-link active" id="nav-information-tab" data-toggle="tab" href="#nav-information" role="tab" aria-controls="nav-information" aria-selected="true">Information</a> -->
                             <a @click="currentTab = 'Speeches' " class="nav-item nav-link active" id="nav-speeches-tab"
                                 data-toggle="tab" href="#nav-speeches" role="tab" aria-controls="nav-speeches"
                                 aria-selected="true">Speeches</a>
@@ -86,7 +149,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-membership" role="tabpanel" aria-labelledby="nav-membership-tab">{{currentTab}}</div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div v-else>
@@ -234,6 +297,7 @@
 
 <script>
     import { mapState, mapGetters } from 'vuex'
+    import moment from 'moment'
     export default {
         props: {
             name: String,
@@ -242,8 +306,16 @@
         data() {
             return {
                 ajaxData: {
+                    isLoaded: false,
                     speechesData: [],
-                    speakerData: []
+                    speakerData: [],
+                    memberships: {
+                        party_colors: [],
+                        start_dates: [],
+                        end_dates: [],
+                        party_name_en: [],
+                        party_name_el: []
+                    }
                 },
                 finalName: null,
                 conferenceDate: null,
@@ -257,7 +329,8 @@
                 loading: true,
                 order_field: 'conference_date',
                 order_orientation: 'asc',
-                search_string: null
+                search_string: null,
+                showChart: false
             }
         },
         methods: {
@@ -282,11 +355,12 @@
                 if (this.finalName) {
                     url = 'speaker/name/' + this.finalName + '/speeches' + '?page=' + page
                 }
-
-                axios.get(this.api_path + url)
-                    .then(function (response) {
+                this.ajaxData.isLoaded = false
+                api.call('get',this.api_path + url)
+                    .then( response => {
                         if (response.status == 200 && response.statusText == "OK") {
                             self.ajaxData.speechesData = response
+                            self.ajaxData.isLoaded = true
                         }
                     })
                     .catch(function (error) {
@@ -323,13 +397,14 @@
             },
             getSpeakerSpeeches() {
                 const self = this
-                
+                this.ajaxData.isLoaded = false
                 setTimeout(() => {
-                    axios.get(this.api_path + 'speaker/name/' + this.finalName + '/speeches')
-                        .then(function (response) {
+                    api.call('get',this.api_path + 'speaker/name/' + this.finalName + '/speeches')
+                        .then( response => {
                             if (response.status == 200 && response.data.data.length > 0) {
                                 self.noDataSpeeches = false
                                 self.ajaxData.speechesData = response
+                                self.ajaxData.isLoaded = true
                             } else {
                                 self.noDataSpeeches = true
                             }
@@ -339,13 +414,14 @@
             },
             getSpeakerData() {
                 const self = this
-
+                this.ajaxData.isLoaded = false
                 setTimeout(() => {
-                    axios.get(this.api_path + 'speaker/name/' + this.finalName)
-                        .then(function (response) {
+                    api.call('get',this.api_path + 'speaker/name/' + this.finalName)
+                        .then( response => {
                             if (response.status == 200 && response) {
                                 self.noDataSpeaker = false
                                 self.ajaxData.speakerData = response.data.data
+                                self.ajaxData.isLoaded = true
                             } else {
                                 self.noDataSpeaker = true
                             }
@@ -360,19 +436,45 @@
                     'input': self.search_string,
                     'speaker_id': self.ajaxData.speakerData.speaker_id
                 }
-
+                this.ajaxData.isLoaded = false
                 setTimeout(() => {
                     api.call('post', this.api_path + 'speaker/speeches/search/', search_data)
-                        .then(function (response) {
+                        .then( response => {
                             if (response.status == 200) {
                                 self.noDataSpeeches = false
                                 self.ajaxData.speechesData = response
-
+                                self.ajaxData.isLoaded = true
                             } else {
                                 self.noDataSpeeches = true
                             }
 
                             self.ajaxDoneSpeeches = true
+                        })
+                }, 500)
+            },
+            getSpeakerMembership() {
+                this.ajaxData.isLoaded = false
+                let momentStart,momentEnd,diff
+                setTimeout(() => {
+                    api.call('get', this.api_path + 'speaker/name/' + this.finalName + '/memberships')
+                        .then( response => {
+                            console.log(response.data)
+                            if(response.status == 200 & response.statusText == "OK" && response.data){
+                                response.data.forEach( element => {
+                                    momentStart = moment(element.start_date)
+                                    momentEnd = moment(element.end_date)
+                                    diff = momentEnd.diff(momentStart, 'weeks')
+                                    console.log({momentStart, momentEnd,diff})
+                                    this.ajaxData.memberships.party_name_en.push(element.on_behalf_of_id)
+                                    this.ajaxData.memberships.party_name_el.push(element.fullname_el)
+                                    if(diff){
+                                        this.ajaxData.memberships.start_dates.push(diff)
+                                    }
+                                    this.ajaxData.memberships.end_dates.push(element.end_date)
+                                    this.ajaxData.memberships.party_colors.push(element.color)
+                                    this.ajaxData.isLoaded = true
+                                })
+                            }
                         })
                 }, 500)
             }
@@ -389,6 +491,7 @@
             this.finalName = this.$route.params.speaker_name
             this.getSpeakerSpeeches()
             this.getSpeakerData()
+            this.getSpeakerMembership()
         }
     }
 </script>

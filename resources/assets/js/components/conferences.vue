@@ -3,13 +3,17 @@
         <div class="conferences-container">
             <div v-if="ajaxDone">
                 <div class="conference-title-box mb-4">
-                    <h2 class="font-weight-bold">Latest conferences</h2>
+                    <h2 class="font-weight-bold text-center">Latest conferences</h2>
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-6 col-lg-8">
-
-                        <div v-if="ajaxData.conferenceData.data.data && !noData && !singleDate" class="p-4 bg-white conference-content-box"
-                            v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id" @click="redirectToConference(conference.conference_date)">
+                        <div 
+                            v-if="ajaxData.conferenceData.data.data && !noData && !singleDate" 
+                            class="p-4 bg-white conference-content-box"
+                            v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id" 
+                            @click="redirectToConference(conference.conference_date)"
+                            @click.middle="redirectToConference(conference.conference_date,true)"
+                        >
                             <h3 class="show-details-dates">
                                 <div>{{conference.conference_date}}</div>
                             </h3>
@@ -52,8 +56,12 @@
                             </div>
                         </transition>
                         <div style="text-align:left;">
-                            <toggle-button id="changed-font" v-model="isMultipleFilter" color="#82C7EB" :labels="{checked: 'Range of Dates', unchecked: 'Single Date'}"
-                                :width="140" />
+                            <!-- <toggle-button id="changed-font" v-model="isMultipleFilter" color="#82C7EB" :labels="{checked: 'Range of Dates', unchecked: 'Single Date'}"
+                                :width="140" /> -->
+                            <vs-switch vs-color="#82C7EB" v-model="isMultipleFilter">
+                                <span slot="on" class="switch-font">Range of Dates</span>
+                                <span slot="off" class="switch-font">Single Date</span>
+                            </vs-switch>
                         </div>
                         <div v-if="isMultipleFilter" style="background-color: ;">
                             <!-- <multiselect 
@@ -142,6 +150,10 @@
         cursor: hand;
         cursor: pointer;
         opacity: .9;
+    }
+
+    .switch-font {
+        font-size: 15px;
     }
 
     .datepicker {
@@ -237,8 +249,13 @@
                 }
                 return json;
             },
-            redirectToConference(conference_date) {
-                this.$router.push({ path: '/conference/' + conference_date + '/speeches' })
+            redirectToConference(conference_date,middle_click = null) {
+                if(middle_click){
+                    let routeData = this.$router.resolve({path: '/conference/' + conference_date + '/speeches'});
+                    window.open(routeData.href, '_blank');
+                }else{
+                    this.$router.push({ path: '/conference/' + conference_date + '/speeches' })
+                }
             },
             printImg(img) {
                 //check if deafault img has different name then return our default img

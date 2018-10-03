@@ -64,7 +64,7 @@
     .sort-ul{
         font-size: 0.9em;
         color: #6c6b68;
-        margin-left: -2.3em;
+        /* margin-left: -2.3em; */
         margin-bottom: 0;
     }
     .sort-ul li{
@@ -78,17 +78,6 @@
     }
     .speaker-search, .speaker{
         padding-left: 2rem;
-    }
-    .party-indicator{
-        content: "";
-        display: inline-block;
-        height: 0.6em;
-        width: 0.6em;
-        -moz-border-radius: 0.6em;
-        -webkit-border-radius: 0.6em;
-        border-radius: 0.6em;
-        margin-right: 0.3em;
-        vertical-align: 0.05em;
     }
     .speakers-bg{
         background-color: #ffffff;

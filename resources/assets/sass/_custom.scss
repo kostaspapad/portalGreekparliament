@@ -215,6 +215,21 @@ html, body {
     box-shadow: none;
 }
 
+.myHoverBg:hover {
+    background-color: rgba(0, 123, 255, 0.25);
+}
+
+.party-indicator{
+    content: "";
+    display: inline-block;
+    height: 0.6em;
+    width: 0.6em;
+    -moz-border-radius: 0.6em;
+    -webkit-border-radius: 0.6em;
+    border-radius: 0.6em;
+    margin-right: 0.3em;
+    vertical-align: 0.05em;
+}
 
 hr.divider { 
     margin: 0em;
@@ -352,4 +367,31 @@ hr.divider {
 .logo {
     background-color: $logoColor;
     padding: 10px;
+}
+
+//Button:focus to remove border when selected
+button:focus {
+    outline: none;
+}
+
+//remove ul-tabs margin-bottom
+.con-vs-tabs .con-ul-tabs .ul-tabs {
+    margin-bottom: 0;
+}
+
+.small {
+    width: 300px;
+}
+.chart-btn-div {
+    padding: 0.5vh;
+    background: #33a8ff63;
+    border-radius: 4px;
+    color: #4e5356;
+    position: relative;
+    top: 4px;
+    transition: background .8s ease;
+}
+.chart-btn-div.hide-text {
+    background: salmon;
+    color: white;
 }

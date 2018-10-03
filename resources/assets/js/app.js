@@ -38,7 +38,14 @@ import searchInput from './components/searchInput.vue'
 import search from './components/searchSpeaker.vue'
 import speech from './components/speech.vue'
 import comments from './components/comments.vue'
+import PieChart from './Chart_Components/pie_chart.js'
+import LineChart from './Chart_Components/line_chart.js'
 import 'es6-promise/auto'
+import Vuesax from 'vuesax'
+import VueFrappe from 'vue2-frappe';
+
+import 'vuesax/dist/vuesax.css' //Vuesax styles
+import 'material-icons/iconfont/material-icons.css';
 
 // must be before auth
 window.api = new Api()
@@ -50,6 +57,8 @@ Vue.use(ToggleButton)
 Vue.use(ReadMore)
 Vue.use(Vuelidate)
 Vue.use(VueChatScroll)
+Vue.use(Vuesax)
+Vue.use(VueFrappe)
 
 // register globally
 Vue.component('pagination', laravelVuePagination)
@@ -69,6 +78,8 @@ Vue.component('favorite', require('./components/favorite.vue'))
 Vue.component('vue-layout', require('./views/Layout.vue'))
 Vue.component('comments', comments)
 Vue.component('TextareaAutogrow', TextareaAutogrow)
+Vue.component('pie-chart', PieChart)
+Vue.component('line-chart', LineChart)
 
 //filters
 Vue.filter('capitalize', function (value) {
