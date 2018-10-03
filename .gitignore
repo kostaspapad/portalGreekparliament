@@ -14,3 +14,7 @@ yarn-error.log
 .env
 /storage/debugbar/
 /storage/api-docs/
+/public/css/app.css
+/public/js/app.js
+public/mix-manifest/.json
+public/
