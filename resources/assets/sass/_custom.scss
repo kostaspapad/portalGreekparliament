@@ -12,7 +12,7 @@ $imageContainerColor: #33a8ff;
 // .navbar-bg-color{ background-color: green!important }
 html {height: 100%;}
 body {
-    display: table;
+    // display: table;
     height: 100%;
     width: 100%;
 }
@@ -111,9 +111,6 @@ html, body {
     border: none;
 }
 
-.multiselect__option--highlight{
-    //background-color: rgb(186, 218, 251)!important;
-}
 .custom__tag {
     display: inline-block;
     padding: 3px 7px;
@@ -285,23 +282,23 @@ hr.divider {
     color: white;
 }
 
-.search {
-    position: absolute;
-    top: 90%;
-    left: 47.5%;
-    transform: translate(-50%, -50%);
-}
+// .search {
+//     position: absolute;
+//     top: 90%;
+//     left: 47.5%;
+//     transform: translate(-50%, -50%);
+// }
 
 //footer
-.page-footer{
-    // position: absolute;
-    // bottom: 0;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-    background-color: #fff;
-    display: table-footer-group;
-    height: 1px;
-}
+// .page-footer{
+//     // position: absolute;
+//     // bottom: 0;
+//     width: 100%;
+//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+//     background-color: #fff;
+//     display: table-footer-group;
+//     height: 1px;
+// }
 
 //scrollbar
 /* width */

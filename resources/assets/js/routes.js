@@ -45,6 +45,10 @@ let routes = [
         path: '/party/:party_name',
         component: require('./components/party.vue')
     },
+    {
+        path: '/speech/:speech_id',
+        component: require('./components/speech.vue')
+    },
 ];
 
 const router = new VueRouter({

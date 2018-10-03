@@ -48,6 +48,8 @@
                                 placeholder="Search this speaker's speeches" 
                                 v-model.trim="search_string"
                                 @keypress.enter="searchSpeakerSpeeches"
+                                style="width: 235px;color:inherit;"
+                                
                             />
                             <!-- <div class="input-group search-div">
                                 <input class="form-control" 

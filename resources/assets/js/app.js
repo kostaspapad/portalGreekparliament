@@ -26,6 +26,10 @@ import Vuelidate from 'vuelidate'
 import TextareaAutogrow from 'vue-textarea-autogrow'
 import VueChatScroll from 'vue-chat-scroll'
 
+import 'es6-promise/auto'
+import Vuesax from 'vuesax'
+import VueFrappe from 'vue2-frappe';
+
 //components
 // import navbar from './components/navbar.vue'
 import speakers from './components/speakers.vue'
@@ -40,9 +44,8 @@ import speech from './components/speech.vue'
 import comments from './components/comments.vue'
 import PieChart from './Chart_Components/pie_chart.js'
 import LineChart from './Chart_Components/line_chart.js'
-import 'es6-promise/auto'
-import Vuesax from 'vuesax'
-import VueFrappe from 'vue2-frappe';
+import DashboardTableBody from './components/dashboard_table_body.vue'
+
 
 import 'vuesax/dist/vuesax.css' //Vuesax styles
 import 'material-icons/iconfont/material-icons.css';
@@ -80,6 +83,7 @@ Vue.component('comments', comments)
 Vue.component('TextareaAutogrow', TextareaAutogrow)
 Vue.component('pie-chart', PieChart)
 Vue.component('line-chart', LineChart)
+Vue.component('expand-table-data', DashboardTableBody)
 
 //filters
 Vue.filter('capitalize', function (value) {
