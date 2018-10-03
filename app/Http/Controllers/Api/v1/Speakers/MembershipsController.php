@@ -42,31 +42,55 @@ class MembershipsController extends Controller
 
     public function membershipsBySpeakerName($speaker_name) 
     {
-        $speaker_name = '%'.$speaker_name.'%';
+        //$speaker_name = '%'.$speaker_name.'%';
+        $speaker_name = "'".$speaker_name."'";
         $name_lang = '';
         
         // ASCII = english name
         // UTF-8 = greek name
         if (mb_detect_encoding($speaker_name) == 'ASCII') {
-            $name_lang = 's.english_name';
+            $name_lang = 'speakers.english_name';
         } else if (mb_detect_encoding($speaker_name) == 'UTF-8') {
-            $name_lang = 's.greek_name';
+            $name_lang = 'speakers.greek_name';
         }
 
-        $membership = Membership::join('speakers as s', 's.speaker_id', '=', 'memberships.person_id')
-            ->select([
-                'memberships.area_id',
-                'memberships.legislative_period_id',
-                'memberships.on_behalf_of_id',
-                'memberships.organization_id',
-                'memberships.role',
-                'memberships.start_date',
-                'memberships.end_date'
-            ])
-            ->where($name_lang, 'like', $speaker_name);
+        // $membership = Membership::join('speakers as s', 's.speaker_id', '=', 'memberships.person_id')
+        //     ->select([
+        //         'memberships.area_id',
+        //         'memberships.legislative_period_id',
+        //         'memberships.on_behalf_of_id',
+        //         'memberships.organization_id',
+        //         'memberships.role',
+        //         'memberships.start_date',
+        //         'memberships.end_date'
+        //     ])
+        //     ->where($name_lang, 'like', $speaker_name);
 
-        $membership = $membership->paginate(50);
-        
+        // $membership = $membership->paginate(50);
+        $membership = DB::select(
+            DB::raw('
+                SELECT 
+                    speakers.greek_name,
+                    memberships.on_behalf_of_id,
+                    memberships.start_date,
+                    memberships.end_date,
+                    parties.fullname_el,
+                    party_colors.color
+                FROM
+                    memberships
+                        INNER JOIN
+                    speakers speakers ON speakers.speaker_id = memberships.person_id
+                        INNER JOIN
+                    parties ON memberships.on_behalf_of_id = parties.party_id
+                        INNER JOIN
+                    party_colors ON parties.party_id = party_colors.party_id
+                WHERE '.$name_lang.' = '.$speaker_name.'
+                GROUP BY speakers.greek_name , memberships.on_behalf_of_id , memberships.start_date , memberships.end_date
+                ORDER BY speakers.greek_name, memberships.start_date
+            ')
+        );
+        //dd($membership);
+        return $membership;
         return $this->apiHelper::returnResource('Membership', $membership);
     }
 }

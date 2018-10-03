@@ -41,16 +41,26 @@ class DashboardController extends Controller
         if($this->user){
             $count = DB::select(
                     DB::raw('
-                        SELECT comments.comment,conferences.conference_date,favorites.isFavorite,speeches.speech_id,COUNT(*) total_comments from comments
-                            INNER JOIN
-                        speeches ON comments.speech_id = speeches.speech_id
-                            INNER JOIN
-                        conferences ON speeches.speech_conference_date = conferences.conference_date
-                            LEFT JOIN 
-                        favorites ON comments.speech_id = favorites.speech_id
-                        WHERE 
-                            comments.user_id = '. $this->user->id .'
-                        GROUP BY comments.speech_id
+                    SELECT *,COUNT(user_comments_favorites.comment) total_comments
+                    FROM
+                        (SELECT 
+                            comments.comment,
+                            conferences.conference_date,
+                            favorites.isFavorite,
+                            speeches.speech_id
+                        FROM
+                            speeches
+                                INNER JOIN
+                            conferences ON speeches.speech_conference_date = conferences.conference_date
+                                LEFT JOIN
+                            favorites ON speeches.speech_id = favorites.speech_id
+                                LEFT JOIN
+                            comments ON comments.speech_id = speeches.speech_id
+                        WHERE
+                            favorites.user_id = '. $this->user->id .'
+                        GROUP BY speeches.speech_id
+                        ORDER BY conferences.conference_date DESC) user_comments_favorites
+                    GROUP BY user_comments_favorites.speech_id
                     ')
                 );
             //dd($count);

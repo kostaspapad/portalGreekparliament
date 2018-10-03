@@ -137,4 +137,13 @@ class ConferencesController extends Controller
             return $this->apiHelper::returnResource('Conference', $conferences);
         }
     }
+
+    public function getPartyCountByConference(Request $request, $conf_date)
+    {
+        $count_party_speeches = DB::select(
+            'SELECT * FROM count_party_speeches_by_conference WHERE conference_date = :conf_date',['conf_date' => $conf_date]
+        );
+        return $count_party_speeches;
+        //dd($count_party_speeches);
+    }
 }

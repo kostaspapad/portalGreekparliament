@@ -40,6 +40,9 @@ Route::get('/user', function (Request $request) {
             //dashboard route
             Route::get('dashboard', 'Api\v1\DashboardController@getData');
 
+            //getPartyCountByConference
+            Route::get('conferences/count-party-speeches/{conf_date}', 'Api\v1\ConferencesController@getPartyCountByConference');
+
             Route::post('logout', 'Api\v1\ApiAuthController@logout');
         });
     /**
