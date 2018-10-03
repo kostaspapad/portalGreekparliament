@@ -58,17 +58,20 @@ class SpeechesController extends Controller
     public function destroy( Request $request )
     {
         $speech_id = $request->input('speech_id');
-        
-        // $speech = Speech::where('speech_id', '=', $speech_id)->first();
-        // $speech->favorites->where('user_id', '=', Auth::user()->id);
-        DB::table('favorites')
-        ->where([
-            ['user_id', '=' , Auth::user()->id],
-            ['speech_id', '=', $speech_id]
-        ])
-        ->update(['isFavorite' => 0]);
-        //$speech->favorites()->detach( Auth::user()->id );
-        
-        return response(null, 204);
+        dd($speech_id);
+        if ($speech_id) {
+
+            $speech = Speech::where('speech_id', '=', $speech_id)->first();
+            
+            $speech->favorites()->detach( Auth::user()->id );
+            
+            return response(null, 204);
+            
+        } else {
+            return response()->json([
+                'speech_deleted' => false,
+                'reason' => 'No speech id specified'
+            ], 401 );
+        }
     }
 }

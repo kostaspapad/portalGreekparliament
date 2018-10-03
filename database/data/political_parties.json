@@ -9,7 +9,7 @@
 	"party_id": "anexartitoiellines",
 	"fullname_el": "Ανεξάρτητοι Έλληνες",
 	"fullname_en": "Independent Greeks",
-	"image": "",
+	"image": "Anellogo.png",
 	"url": "http://www.anexartitoiellines.gr/"
 	},
 	{
@@ -23,14 +23,14 @@
 	"party_id": "coalitionoftheleftandprogress",
 	"fullname_el": "Συνασπισμός",
 	"fullname_en": "Synaspismos",
-	"image": "",
+	"image": "synaspismos.png",
 	"url": "http://www.syn.gr/"
 	},
 	{
 	"party_id": "communistpartyofgreece",
 	"fullname_el": "Κομμουνιστικό Κόμμα Ελλάδας Εσωτερικού",
 	"fullname_en": "Communist Party of Greece of the Internal",
-	"image": "",
+	"image": "kke.png",
 	"url": ""
 	},
 	{
@@ -44,7 +44,7 @@
 	"party_id": "dhmar",
 	"fullname_el": "Δημοκρατική Αριστερά",
 	"fullname_en": "Democratic Left",
-	"image": "",
+	"image": "dhmar.jpg",
 	"url": "http://www.dim-ar.gr/"
 	},
 	{
@@ -58,7 +58,7 @@
 	"party_id": "dikki",
 	"fullname_el": "Δημοκρατικό Κοινωνικό Κίνημα",
 	"fullname_en": "Democratic Social Movement",
-	"image": "",
+	"image": "dhkki.jpg",
 	"url": "http://www.dikki.org/"
 	},
 	{
@@ -72,7 +72,7 @@
 	"party_id": "edik",
 	"fullname_el": "Ένωση Δημοκρατικού Κέντρου",
 	"fullname_en": "Union of the Democratic Centre",
-	"image": "",
+	"image": "logoedik.jpg",
 	"url": "http://edik.gr/"
 	},
 	{
@@ -93,7 +93,7 @@
 	"party_id": "kke",
 	"fullname_el": "Κομμουνιστικό Κόμμα Ελλάδας",
 	"fullname_en": "Communist Party of Greece",
-	"image": "",
+	"image": "kke.png",
 	"url": ""
 	},
 
@@ -101,7 +101,7 @@
 	"party_id": "laikienotita",
 	"fullname_el": "Λαϊκή Ενότητα",
 	"fullname_en": "Popular Unity",
-	"image": "",
+	"image": "laiki_enotita.jpg",
 	"url": "http://laiki-enotita.gr"
 	},
 	{
@@ -115,7 +115,7 @@
 	"party_id": "nd",
 	"fullname_el": "Νέα Δημοκρατία",
 	"fullname_en": "New Democracy",
-	"image": "",
+	"image": "politanoixi.jpg",
 	"url": "http://www.nd.gr/"
 	},
 	{
@@ -136,28 +136,28 @@
 	"party_id": "pasok",
 	"fullname_el": "Πανελλήνιο Σοσιαλιστικό Κίνημα",
 	"fullname_en": "Panhellenic Socialist Movement",
-	"image": "/static/greekparliament/pasok.svg",
+	"image": "pasok.jpg",
 	"url": "http://www.pasok.gr/portal/"
 	},
 	{
 	"party_id": "pola",
 	"fullname_el": "Πολιτική Άνοιξη",
 	"fullname_en": "Political Spring",
-	"image": "",
+	"image": "politanoixi.jpg",
 	"url": ""
 	},
 	{
 	"party_id": "syriza",
 	"fullname_el": "Συνασπισμός Ριζοσπαστικής Αριστεράς",
 	"fullname_en": "SYRIZA",
-	"image": "/static/greekparliament/syriza.svg",
+	"image": "syriza.svg",
 	"url": "http://www.syriza.gr"
 	},
 	{
 	"party_id": "topotami",
 	"fullname_el": "Το Ποτάμι",
 	"fullname_en": "The River",
-	"image": "To_Potami_logo.svg.png",
+	"image": "To_Potami_logo.jpg",
 	"url": "http://topotami.gr/"
 	},
 	{
@@ -171,7 +171,7 @@
 	"party_id": "unionofthedemocraticcentre",
 	"fullname_el": "Ένωση Δημοκρατικού Κέντρου",
 	"fullname_en": "Union of Centrists",
-	"image": "",
+	"image": "enosi_kentroon.jpg",
 	"url": "http://edik.gr/"
 	},
 	{

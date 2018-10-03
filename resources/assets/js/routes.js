@@ -38,8 +38,12 @@ let routes = [
         component: require('./components/speaker.vue')
     },
     {
-        path: '/speech/:speech_id',
-        component: require('./components/speech.vue')
+        path: '/parties',
+        component: require('./components/parties.vue')
+    },
+    {
+        path: '/party/:party_name',
+        component: require('./components/party.vue')
     },
 ];
 
