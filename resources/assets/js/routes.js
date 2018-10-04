@@ -49,6 +49,22 @@ let routes = [
         path: '/speech/:speech_id',
         component: require('./components/speech.vue')
     },
+    {
+        path: '/news',
+        component: require('./views/News.vue')
+    },
+    {
+        path: '/contact',
+        component: require('./views/Contact.vue')
+    },
+    // {
+    //     path: '/donate',
+    //     component: require('./views/Donate.vue')
+    // },
+    {
+        path: '/policy',
+        component: require('./views/Policy.vue')
+    },
 ];
 
 const router = new VueRouter({
