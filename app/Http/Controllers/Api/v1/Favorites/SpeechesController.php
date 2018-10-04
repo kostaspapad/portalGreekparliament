@@ -58,7 +58,7 @@ class SpeechesController extends Controller
     public function destroy( Request $request )
     {
         $speech_id = $request->input('speech_id');
-        dd($speech_id);
+        //dd($speech_id);
         if ($speech_id) {
 
             $speech = Speech::where('speech_id', '=', $speech_id)->first();

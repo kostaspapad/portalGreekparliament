@@ -1,6 +1,6 @@
 <template>
     <span>
-        <a href="#" v-if="favorited" @click.prevent="unFavorite">
+        <a href="#" v-if="isFavorited" @click.prevent="unFavorite">
             <i class="fa fa-star fa-2x" aria-hidden="true" style="color:#fff645"></i>
         </a>
         <a href="#" v-else @click.prevent="favorite">
@@ -34,7 +34,7 @@
                 setTimeout(() => {
                     api.call('post', this.api_path + 'speech/favorite', data)
                     .then(({data}) => {
-                        this.favorited = 1
+                        this.isFavorited = 1
                     })
                 }, 500)
             },
@@ -42,7 +42,7 @@
                 setTimeout(() => {
                     api.call('delete', this.api_path + 'speech/favorite?speech_id=' + this.speech_id)
                     .then(({data}) => {
-                        this.favorited = 0
+                        this.isFavorited = 0
                     })
                 }, 500)
             }
@@ -53,7 +53,8 @@
             })
         },
         mounted() {
-            this.isFavorited = this.isFavorite ? true : false;
+            //this.favorited comes from db
+            this.isFavorited = this.favorited
         },
     }
 </script>
