@@ -34,16 +34,15 @@
                     <div class="col-12 speaker"
                         v-for="speaker in ajaxData.speakersData.data.data" 
                         :key="speaker.id" 
-                        style="margin-bottom: 15px;"
-                        @click="redirectToSpeaker(speaker.greek_name)">
-                        <div class="person-div">
+                        style="margin-bottom: 15px;">
+                        <router-link :to="'/speaker/' + speaker.greek_name" class="person-link">
                             <img :src=" 'img' + '/' + printImg(speaker.image) " class="person-img">
                             <h2 class="person-name text-left">{{speaker.greek_name}}</h2>
                             <p class="person-membership text-left">
                                 <span class="party-name">{{speaker.party_fullname}}</span>
                                 <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
                             </p>
-                        </div>
+                        </router-link>
                     </div>
                     <div class="col-12" style="padding-left: 2.5rem;">
                         <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
@@ -82,7 +81,7 @@
     .speakers-bg{
         background-color: #ffffff;
     }
-    .person-div{
+    .person-link{
         cursor: hand;
         cursor: pointer;
         display: block;

@@ -31,7 +31,11 @@
         </tr>
         <tr class="expand-data">
             <td class="border-0 p-0" colspan="6">
-                <div v-if="expand">Hello</div>
+                <transition-expand>
+                    <div v-if="expand" class="expand-content">
+                        <h4>Hello</h4>
+                    </div>
+                </transition-expand>
             </td>
         </tr>
     </tbody>
@@ -44,9 +48,11 @@
     .link_to_speech:hover {
         color: salmon;
     }
+    
     tr.expand-data:hover {
         background-color: transparent;
     }
+    
 </style>
 
 

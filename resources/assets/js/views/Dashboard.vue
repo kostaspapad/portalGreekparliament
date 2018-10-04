@@ -47,23 +47,6 @@
                     </vs-td>
                 </vs-tr>
             </template>
-            <template slot-scope="{data}">
-                <vs-tr :key="indextr" v-for="(tr, indextr) in ajaxData.info_data" >
-                    <vs-td :data="ajaxData.info_data[indextr].email">
-                        {{data[indextr].conference_date}}
-                    </vs-td>
-                    <vs-td :data="ajaxData.info_data[indextr].username">
-                        {{data[indextr].speech_id}}
-                    </vs-td>
-                    <vs-td :data="ajaxData.info_data[indextr].id">
-                        {{data[indextr].total_comments}}
-                    </vs-td>
-                    <vs-td :data="ajaxData.info_data[indextr].id">
-                        <span v-if="data[indextr].isFavorite"><i class="fa fa-star fa-2x" aria-hidden="true" style="color:#fff645"></i></span>
-                        <span v-else><i class="fa fa-star-o fa-2x" aria-hidden="true" style="color:#fff645"></i></span>
-                    </vs-td>
-                </vs-tr>
-            </template>
         </vs-table> -->
     </div>
 </template>
