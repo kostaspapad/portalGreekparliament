@@ -100,9 +100,19 @@
                             </div>
                         </vs-tab>
                         <vs-tab vs-label="Membership">
-                            <div class="spiros mb-0">
-                                Membership
+                            <div class="d-none d-md-block d-lg-block mb-0">
+                                <timeline 
+                                    :data="ajaxData.timelineData" 
+                                    :colors="ajaxData.memberships.party_colors"
+                                ></timeline>
                             </div>
+                            <!--<div class="d-block d-sm-block d-md-none d-lg-none">
+                                <ul>
+                                    <li v-for="(data, index) in ajaxData.timelineData" :key="data.fullname_el">
+                                        <span>{{data[index]}}</span>
+                                    </li>
+                                </ul>
+                            </div> -->
                         </vs-tab>
                     </vs-tabs>
                     <!-- <nav>
@@ -317,7 +327,8 @@
                         end_dates: [],
                         party_name_en: [],
                         party_name_el: []
-                    }
+                    },
+                    timelineData: []
                 },
                 finalName: null,
                 conferenceDate: null,
@@ -332,7 +343,7 @@
                 order_field: 'conference_date',
                 order_orientation: 'asc',
                 search_string: null,
-                showChart: false
+                showChart: false,
             }
         },
         methods: {
@@ -369,22 +380,6 @@
                         console.log(error)
                     });
             },
-            IsJsonString(str) {
-                var json;
-                try {
-                    json = JSON.parse(str);
-                } catch (e) {
-                    return false;
-                }
-                return json;
-            },
-            printImg(img) {
-                if (img == 'default-speaker.jpg' || img == null) {
-                    return this.defaultImg;
-                } else {
-                    return img;
-                }
-            },
             checkDate(conf_date) {
                 if (this.conferenceDate == null) {
                     this.conferenceDate = conf_date
@@ -400,6 +395,7 @@
             getSpeakerSpeeches() {
                 const self = this
                 this.ajaxData.isLoaded = false
+                
                 setTimeout(() => {
                     api.call('get',this.api_path + 'speaker/name/' + this.finalName + '/speeches')
                         .then( response => {
@@ -454,30 +450,27 @@
                         })
                 }, 500)
             },
-            getSpeakerMembership() {
-                this.ajaxData.isLoaded = false
-                let momentStart,momentEnd,diff
+            onlyUnique(value, index, self) { 
+                return self.indexOf(value) === index;
+            },
+            getTimelineMembershipData() {
                 setTimeout(() => {
-                    api.call('get', this.api_path + 'speaker/name/' + this.finalName + '/memberships')
-                        .then( response => {
-                            console.log(response.data)
-                            if(response.status == 200 & response.statusText == "OK" && response.data){
-                                response.data.forEach( element => {
-                                    momentStart = moment(element.start_date)
-                                    momentEnd = moment(element.end_date)
-                                    diff = momentEnd.diff(momentStart, 'weeks')
-                                    console.log({momentStart, momentEnd,diff})
-                                    this.ajaxData.memberships.party_name_en.push(element.on_behalf_of_id)
-                                    this.ajaxData.memberships.party_name_el.push(element.fullname_el)
-                                    if(diff){
-                                        this.ajaxData.memberships.start_dates.push(diff)
-                                    }
-                                    this.ajaxData.memberships.end_dates.push(element.end_date)
-                                    this.ajaxData.memberships.party_colors.push(element.color)
-                                    this.ajaxData.isLoaded = true
-                                })
-                            }
-                        })
+                    api.call('get', this.api_path + 'speaker/name/' + this.finalName + '/timeline')
+                    .then( response => {
+                        if(response.status == 200 && response.statusText == "OK" && response.data){
+                            response.data.forEach( element => {
+                                if (element.end_date) {
+                                    this.ajaxData.timelineData.push([element.fullname_el, element.start_date, element.end_date])
+                                } else {
+                                    this.ajaxData.timelineData.push([element.fullname_el, element.start_date, '2018-10-4'])
+                                }
+
+                                // Make colors unique
+                                this.ajaxData.memberships.party_colors.push(element.color)
+                                this.ajaxData.memberships.party_colors = Array.from(new Set(this.ajaxData.memberships.party_colors))
+                            })
+                        }
+                    })
                 }, 500)
             }
         },
@@ -493,7 +486,7 @@
             this.finalName = this.$route.params.speaker_name
             this.getSpeakerSpeeches()
             this.getSpeakerData()
-            this.getSpeakerMembership()
+            this.getTimelineMembershipData()
         }
     }
 </script>

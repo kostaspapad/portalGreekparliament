@@ -40,7 +40,7 @@ class MembershipsController extends Controller
         return $this->apiHelper::returnResource('Membership', $membership);
     }
 
-    public function membershipsBySpeakerName($speaker_name) 
+    public function membershipsTimelineBySpeakerName($speaker_name) 
     {
         //$speaker_name = '%'.$speaker_name.'%';
         $speaker_name = "'".$speaker_name."'";

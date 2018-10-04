@@ -49,6 +49,7 @@ import DashboardTableBody from './components/dashboard_table_body.vue'
 
 import 'vuesax/dist/vuesax.css' //Vuesax styles
 import 'material-icons/iconfont/material-icons.css';
+import VueChartkick from 'vue-chartkick'
 
 // must be before auth
 window.api = new Api()
@@ -62,6 +63,7 @@ Vue.use(Vuelidate)
 Vue.use(VueChatScroll)
 Vue.use(Vuesax)
 Vue.use(VueFrappe)
+Vue.use(VueChartkick)
 
 // register globally
 Vue.component('pagination', laravelVuePagination)
