@@ -45,6 +45,7 @@ import comments from './components/comments.vue'
 import PieChart from './Chart_Components/pie_chart.js'
 import LineChart from './Chart_Components/line_chart.js'
 import DashboardTableBody from './components/dashboard_table_body.vue'
+import TransitionExpand from './other_components/transition-expand.vue'
 
 
 import 'vuesax/dist/vuesax.css' //Vuesax styles
@@ -86,6 +87,7 @@ Vue.component('TextareaAutogrow', TextareaAutogrow)
 Vue.component('pie-chart', PieChart)
 Vue.component('line-chart', LineChart)
 Vue.component('expand-table-data', DashboardTableBody)
+Vue.component('transition-expand', TransitionExpand)
 
 //filters
 Vue.filter('capitalize', function (value) {
