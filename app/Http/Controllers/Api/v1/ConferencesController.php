@@ -7,6 +7,7 @@ use DB;
 use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Conference;
+use Illuminate\Support\Facades\Cache;
 
 class ConferencesController extends Controller 
 {
@@ -53,24 +54,25 @@ class ConferencesController extends Controller
      */
     public function index() 
     {
-        $conferences = Conference::with('speeches')
-            ->has('speeches')
-            ->select([
-                'conferences.id', 
-                'conferences.conference_date',
-                'conferences.session',
-                'conferences.time_period'
-            ])
-            ->withCount('speeches')
-            ->groupBy('conferences.id');
 
-            if ($this->order_field && $this->order_orientation) {
-                $conferences = $conferences->orderBy($this->order_field, $this->order_orientation)
+        $conferences =  Cache::remember('conferencesIndex', 22*60, function() {
+        
+            return Conference::with('speeches')
+                ->when($this->order_field && $this->order_orientation, function ($query) {
+                    $query->orderBy($this->order_field, $this->order_orientation);
+                })
+                ->has('speeches')
+                ->select([
+                    'conferences.id', 
+                    'conferences.conference_date',
+                    'conferences.session',
+                    'conferences.time_period'
+                ])
+                ->withCount('speeches')
+                ->groupBy('conferences.id')
                 ->paginate(20);
-                
-            } else {
-                $conferences = $conferences->paginate(20);
-            }
+                    
+        });
         
         return $this->apiHelper::returnResource('Conference', $conferences);
     }
@@ -118,20 +120,19 @@ class ConferencesController extends Controller
             if ($start <= $end) {
                 $conferences = Conference::with('speeches')
                     ->has('speeches')
+                    ->when($this->order_field && $this->order_orientation, function ($query) {
+                        $query->orderBy($this->order_field, $this->order_orientation);
+                    })
                     ->select([
                         'conferences.id', 
                         'conferences.conference_date',
                         'conferences.session',
                         'conferences.time_period'
                     ])
+                    ->whereBetween('conferences.conference_date', array($start, $end))
                     ->withCount('speeches')
-                    ->groupBy('conferences.id');
-
-                if ($this->order_field && $this->order_orientation) {
-                    $conferences->orderBy($this->order_field, $this->order_orientation);
-                }
-
-                $conferences = $conferences->paginate(10);
+                    ->groupBy('conferences.id')
+                    ->paginate(10);
             }
             
             return $this->apiHelper::returnResource('Conference', $conferences);

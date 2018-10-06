@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+/public/css/*
+/public/js/*
 /storage/*.key
 /vendor
 /public/img/
@@ -14,7 +16,10 @@ yarn-error.log
 .env
 /storage/debugbar/
 /storage/api-docs/
+<<<<<<< HEAD
 /public/css/app.css
 /public/js/app.js
 public/mix-manifest/.json
 public/
+=======
+>>>>>>> develop_final
