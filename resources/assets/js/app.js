@@ -113,6 +113,6 @@ const app = new Vue({
         this.$store.commit('GET_PATH')
 	},
     data: {
-        host: process.env.NODE_ENV == 'production' ? 'http://95.85.38.123' : 'http://127.0.0.1:8000'
+        host: process.env.NODE_ENV == 'production' ? 'https://greekparliament.info' : 'http://127.0.0.1:8000'
     }
 })

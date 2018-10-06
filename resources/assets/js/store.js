@@ -18,7 +18,7 @@ export default new Vuex.Store({
             }
         },
         GET_PATH: state => {
-            state.api_path = process.env.NODE_ENV == 'production' ? 'http://95.85.38.123/api/v1/' : 'http://127.0.0.1:8000/api/v1/'
+            state.api_path = process.env.NODE_ENV == 'production' ? 'https://greekparliament.info/api/v1/' : 'http://127.0.0.1:8000/api/v1/'
         }
     },
     actions: {
