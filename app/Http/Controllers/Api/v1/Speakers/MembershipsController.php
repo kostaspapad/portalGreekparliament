@@ -91,6 +91,6 @@ class MembershipsController extends Controller
         );
         //dd($membership);
         return $membership;
-        return $this->apiHelper::returnResource('Membership', $membership);
+        // return $this->apiHelper::returnResource('Membership', $membership);
     }
 }
