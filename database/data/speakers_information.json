@@ -79,7 +79,7 @@
     {
         "speaker_id": "01392a26-4e42-4e7b-bdd1-535441cd0c99",
         "english_name": "",
-        "image": "gennia georgia_1.jpg",
+        "image": "gennia_georgia_1.jpg",
         "email": "g.gennia@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -585,7 +585,7 @@
     {
         "speaker_id": "079bcfdc-603f-493a-95db-5505d927ea7e",
         "english_name": "Theodoros Papatheodorou",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Θεόδωρος_Παπαθεοδώρου",
         "twitter": "",
@@ -860,7 +860,7 @@
     {
         "speaker_id": "0c6d41cf-9d8a-4a35-afc7-a83f5abd6ca4",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Χρήστος_Κατσώτης",
         "twitter": "",
@@ -871,7 +871,7 @@
     {
         "speaker_id": "0c953708-7180-4cd2-8ef7-6f898b009d91",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "https://twitter.com/spyroslappas",
@@ -1157,7 +1157,7 @@
     {
         "speaker_id": "112b497d-25a4-4470-881f-8aa8d809b270",
         "english_name": "Kostas Zouraris",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Κώστας_Ζουράρις",
         "twitter": "",
@@ -1179,7 +1179,7 @@
     {
         "speaker_id": "11f67522-fe67-4a70-a4a0-a1b970bc67cd",
         "english_name": "Ioannis Aivatidis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "i.aivatidis@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Γιάννης_Αϊβατίδης",
         "twitter": "",
@@ -1487,7 +1487,7 @@
     {
         "speaker_id": "1714606a-af1e-4c96-b4dc-70e4c48bec4c",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "d.emmanouilidis@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -1520,7 +1520,7 @@
     {
         "speaker_id": "178ebfc5-039f-439c-89df-f2a07c829c67",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -1696,7 +1696,7 @@
     {
         "speaker_id": "1a6d80a1-bd8a-4dd8-8b36-b9ac9bf2c218",
         "english_name": "Fofi Gennimata",
-        "image": "genimata fofi_1.jpg",
+        "image": "genimata_fofi_1.jpg",
         "email": "f.gennimata@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Φώφη_Γεννηματά",
         "twitter": "https://twitter.com/FofiGennimata",
@@ -2114,7 +2114,7 @@
     {
         "speaker_id": "1fd7d9a2-bd4e-42e9-86ca-cd01af0a6d51",
         "english_name": "",
-        "image": "danellis spyros_2.jpg",
+        "image": "danellis_spyros_2.jpg",
         "email": "s.danellis@parliament.gr",
         "wiki_el": "",
         "twitter": "https://twitter.com/SpyrosDanellis",
@@ -2455,7 +2455,7 @@
     {
         "speaker_id": "24a55174-bada-4330-b5ca-74accbcf805f",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "a.kastoris@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -2598,7 +2598,7 @@
     {
         "speaker_id": "25e7d85e-94f6-46f2-abd2-0087f64151de",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -2697,7 +2697,7 @@
     {
         "speaker_id": "26d91fd6-4909-42b9-be90-1d4a51840e35",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -3335,7 +3335,7 @@
     {
         "speaker_id": "2f0bfa38-c734-4df7-b360-98de384f1d4b",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -3665,7 +3665,7 @@
     {
         "speaker_id": "35020257-b191-4093-8d4c-0b5ca47d834f",
         "english_name": "",
-        "image": "stefos ioannis_1.jpg",
+        "image": "stefos_ioannis_1.jpg",
         "email": "stefgianni1@gmail.com",
         "wiki_el": "",
         "twitter": "",
@@ -3720,7 +3720,7 @@
     {
         "speaker_id": "357a216f-955b-4978-8060-cfd2c5a845a0",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "lab_giorgos@hotmail.gr",
         "wiki_el": "",
         "twitter": "",
@@ -3973,7 +3973,7 @@
     {
         "speaker_id": "38a0935f-f293-447d-ba30-dd387a46da80",
         "english_name": "Aichan Kara Giousouf",
-        "image": "aichan kara giousouf_1_2.jpg",
+        "image": "aichan_kara_giousouf_1_2.jpg",
         "email": "aykaradent@yahoo.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Αϊχάν_Καρά_Γιουσούφ",
         "twitter": "https://twitter.com/AyhanKarayusuf",
@@ -4017,7 +4017,7 @@
     {
         "speaker_id": "393a9426-7564-499e-b069-317c532b7230",
         "english_name": "Olga Kefalogianni",
-        "image": "foto kefalogianni olga_1.jpg",
+        "image": "foto_kefalogianni_olga_1.jpg",
         "email": "ol.kefalogianni@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Όλγα_Κεφαλογιάννη",
         "twitter": "https://twitter.com/olgakef",
@@ -4039,7 +4039,7 @@
     {
         "speaker_id": "39801167-19c0-473c-82d9-c5e1b66f129b",
         "english_name": "",
-        "image": "spartinos kwstas_1.jpg",
+        "image": "spartinos_kwstas_1.jpg",
         "email": "k.spartinos@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -4336,7 +4336,7 @@
     {
         "speaker_id": "3c572dbb-73d1-4c7b-89a4-da81d526dd6f",
         "english_name": "Dimítrios Konstantópoulos",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -4941,7 +4941,7 @@
     {
         "speaker_id": "43ba0553-02d7-4655-874b-319187a92334",
         "english_name": "Andreas Xanthos",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Ανδρέας_Ξανθός",
         "twitter": "https://twitter.com/andreasxanthos",
@@ -5194,7 +5194,7 @@
     {
         "speaker_id": "4645208f-8a90-4281-8cd9-af2ee44f6455",
         "english_name": "Christophoros Vernardakis",
-        "image": "default-speaker_2.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Χριστόφορος_Βερναρδάκης",
         "twitter": "",
@@ -5282,7 +5282,7 @@
     {
         "speaker_id": "4723ebbc-d1a4-41c4-b6ee-d2c7bda12426",
         "english_name": "",
-        "image": "wodefault-speaker.jpg",
+        "image": "wodefault_speaker_icon.png",
         "email": "s.vlachou@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -5447,7 +5447,7 @@
     {
         "speaker_id": "4942133e-0b46-4fd8-9353-9c687e09a46b",
         "english_name": "",
-        "image": "ballis symeon_1.jpg",
+        "image": "ballis_symeon_1.jpg",
         "email": "makbal@otenet.gr",
         "wiki_el": "",
         "twitter": "",
@@ -6019,7 +6019,7 @@
     {
         "speaker_id": "50fee64e-e008-4547-8ded-154257d5165a",
         "english_name": "Ioannis Theonas",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "yanthe@otenet.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Γιάννης_Θεωνάς",
         "twitter": "",
@@ -6129,7 +6129,7 @@
     {
         "speaker_id": "51adf2a2-c477-446d-aeeb-cdc75e949020",
         "english_name": "",
-        "image": "pappas nikolaos_1.jpg",
+        "image": "pappas_nikolaos_1.jpg",
         "email": "",
         "wiki_el": "",
         "twitter": "https://twitter.com/nikospappas16",
@@ -6206,7 +6206,7 @@
     {
         "speaker_id": "52ab8dad-ccf5-4cee-9c9e-7ad615b78269",
         "english_name": "",
-        "image": "stylios giorgos_1.jpg",
+        "image": "stylios_giorgos_1.jpg",
         "email": "",
         "wiki_el": "",
         "twitter": "https://twitter.com/gstylios",
@@ -6899,7 +6899,7 @@
     {
         "speaker_id": "5b235d28-174e-4678-8cc4-92e791cdafb6",
         "english_name": "",
-        "image": "katrougalos giorgos_1_2.jpg",
+        "image": "katrougalos_giorgos_1_2.jpg",
         "email": "g.katrougkalos@parliament.gr",
         "wiki_el": "",
         "twitter": "https://twitter.com/gkatr",
@@ -7196,7 +7196,7 @@
     {
         "speaker_id": "5f7a20bf-02fc-49dc-a0b6-2f0ff6447f2f",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "https://twitter.com/k0stopanagiotou",
@@ -7350,7 +7350,7 @@
     {
         "speaker_id": "610531f9-0fb7-4a0b-b8d6-e78f6cf14593",
         "english_name": "",
-        "image": "sifakis ioannis_1.png",
+        "image": "sifakis_ioannis_1.png",
         "email": "sifakis17@gmail.com",
         "wiki_el": "",
         "twitter": "",
@@ -7471,7 +7471,7 @@
     {
         "speaker_id": "6236e0c2-18db-4187-ac8e-55444e8849ca",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -7504,7 +7504,7 @@
     {
         "speaker_id": "629abcf8-4a1f-4f86-99c3-651050defe4f",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "c.chatzisavvas@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -7548,7 +7548,7 @@
     {
         "speaker_id": "62ea1487-2b34-4763-bf93-252535f285ce",
         "english_name": "Vasilis Leventis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Βασίλης_Λεβέντης",
         "twitter": "",
@@ -7658,7 +7658,7 @@
     {
         "speaker_id": "63b94d30-3080-46ef-8c5a-5477e888bf96",
         "english_name": "",
-        "image": "stamatis dimitris_1.jpg",
+        "image": "stamatis_dimitris_1.jpg",
         "email": "d.stamatis@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -7669,7 +7669,7 @@
     {
         "speaker_id": "63c6237f-1aa1-4036-871c-dcb26a8b5961",
         "english_name": "",
-        "image": "mardas dimitris_1.jpg",
+        "image": "mardas_dimitris_1.jpg",
         "email": "d.mardas@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -7845,7 +7845,7 @@
     {
         "speaker_id": "654186bc-2847-4abf-9add-58e1f2e261d3",
         "english_name": "",
-        "image": "konstantinos morfidis_1.jpg",
+        "image": "konstantinos_morfidis_1.jpg",
         "email": "k.morfidis@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -8208,7 +8208,7 @@
     {
         "speaker_id": "68e73959-5a79-4e5f-9971-f7a45d65eedc",
         "english_name": "",
-        "image": "fokas aristideis_1.jpg",
+        "image": "fokas_aristideis_1.jpg",
         "email": "aristeidisfokas1@gmail.com",
         "wiki_el": "",
         "twitter": "",
@@ -8230,7 +8230,7 @@
     {
         "speaker_id": "691b8f06-afa2-4b8a-a4b2-0c39c52bf13d",
         "english_name": "Athanasios Vardalis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -8417,7 +8417,7 @@
     {
         "speaker_id": "6b337d97-a087-474e-b241-282571eb3417",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -8659,7 +8659,7 @@
     {
         "speaker_id": "6f5cee17-63d3-415c-a968-1f25758dba84",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -9022,7 +9022,7 @@
     {
         "speaker_id": "744adb0f-262d-4ad0-8a91-d86b97b675a3",
         "english_name": "Giorgos Germenis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "g.germenis@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Γιώργος_Γερμενής",
         "twitter": "https://twitter.com/GermenisGiorgos",
@@ -9088,7 +9088,7 @@
     {
         "speaker_id": "75525a89-efda-44f5-a508-09208a830d5a",
         "english_name": "",
-        "image": "kozompoli panagiota_1.jpg",
+        "image": "kozompoli_panagiota_1.jpg",
         "email": "pkozoboli@gmail.com",
         "wiki_el": "",
         "twitter": "",
@@ -9671,7 +9671,7 @@
     {
         "speaker_id": "7abca9d1-9c79-4ac9-8d7c-e8b4d61e0c7c",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -9891,7 +9891,7 @@
     {
         "speaker_id": "7dcf2f2e-1f4f-43d5-a30c-fda9e0b3338a",
         "english_name": "",
-        "image": "wodefault-speaker.jpg",
+        "image": "wodefault_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -10144,7 +10144,7 @@
     {
         "speaker_id": "810d3e8c-dc9b-4b04-a71c-4126c57fed38",
         "english_name": "Dimitrios Sevastakis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "https://twitter.com/dsevastakis",
@@ -10375,7 +10375,7 @@
     {
         "speaker_id": "840be09b-3dcf-4f49-b1fd-2cb0a55a96ca",
         "english_name": "",
-        "image": "theoxaris xaris_1.jpg",
+        "image": "theoxaris_xaris_1.jpg",
         "email": "t.theocharis@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -10606,7 +10606,7 @@
     {
         "speaker_id": "873c1670-ae20-4261-be82-28fe66b419e2",
         "english_name": "",
-        "image": "katsikis kwnstantinos_1.jpg",
+        "image": "katsikis_kwnstantinos_1.jpg",
         "email": "katsikiskostas1960@yahoo.gr",
         "wiki_el": "",
         "twitter": "",
@@ -10683,7 +10683,7 @@
     {
         "speaker_id": "878c5392-7685-4f5a-92a5-592635854ea1",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -10705,7 +10705,7 @@
     {
         "speaker_id": "879c714b-9be2-463d-9858-57bf980a4901",
         "english_name": "",
-        "image": "arahovitis stavros_1.jpg",
+        "image": "arahovitis_stavros_1.jpg",
         "email": "s.arachovitis@parliament.gr",
         "wiki_el": "",
         "twitter": "https://twitter.com/SArahovitis",
@@ -11057,7 +11057,7 @@
     {
         "speaker_id": "8c288eb1-905a-43be-8469-1ebe76a7562b",
         "english_name": "",
-        "image": "mpgialas christos_1.jpg",
+        "image": "mpgialas_christos_1.jpg",
         "email": "cbgialas@gmail.com",
         "wiki_el": "",
         "twitter": "",
@@ -11244,7 +11244,7 @@
     {
         "speaker_id": "8e6598df-b36a-43e3-812d-07e2dcf3d484",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -11266,7 +11266,7 @@
     {
         "speaker_id": "8ed05a1b-0d36-43bb-870e-c7945a42cfb8",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -11409,7 +11409,7 @@
     {
         "speaker_id": "919bde3f-5855-4962-9568-a5ec24d14de0",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -11673,7 +11673,7 @@
     {
         "speaker_id": "942f5a3a-0794-4e45-bbeb-039b505bc857",
         "english_name": "",
-        "image": "saridis iwannis_1.jpg",
+        "image": "saridis_iwannis_1.jpg",
         "email": "i.saridis@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -11706,7 +11706,7 @@
     {
         "speaker_id": "94a16c0b-0df5-46fc-9802-0c733efb7fd3",
         "english_name": "",
-        "image": "davakis athanasios_1.jpg",
+        "image": "davakis_athanasios_1.jpg",
         "email": "a.davakis@parliament.gr",
         "wiki_el": "",
         "twitter": "https://twitter.com/adavakis",
@@ -11750,7 +11750,7 @@
     {
         "speaker_id": "9591845f-2768-4d81-8b44-983f55e577b0",
         "english_name": "Nikolaos Michaloliakos",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Νίκος_Μιχαλολιάκος",
         "twitter": "",
@@ -11805,7 +11805,7 @@
     {
         "speaker_id": "96a4588b-631d-4e6a-8378-e0d27b1320ab",
         "english_name": "",
-        "image": "psixogios giorgos_1.jpg",
+        "image": "psixogios_giorgos_1.jpg",
         "email": "g.psychogios@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -11816,7 +11816,7 @@
     {
         "speaker_id": "96ce492d-7fed-478a-930a-cfe09ec65e3f",
         "english_name": "Evangelos Apostolou",
-        "image": "apostolou euaggelos.jpg",
+        "image": "apostolou_euaggelos.jpg",
         "email": "evagelosapostolou@gmail.com",
         "wiki_el": "https://el.wikipedia.org/wiki/Βαγγέλης_Αποστόλου",
         "twitter": "",
@@ -11849,7 +11849,7 @@
     {
         "speaker_id": "977349be-8835-437d-ae10-f7253fee7c38",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -12014,7 +12014,7 @@
     {
         "speaker_id": "9aab2493-b46e-4bf6-b897-d8115283354f",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "e.karakostas@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -12333,7 +12333,7 @@
     {
         "speaker_id": "9e228b6c-4bad-4538-a72f-0fbf1e41539c",
         "english_name": "",
-        "image": "papadopoulos nikos_1.jpg",
+        "image": "papadopoulos_nikos_1.jpg",
         "email": "nik.papadopoulos@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -12377,7 +12377,7 @@
     {
         "speaker_id": "9e980415-1ed6-49c7-9057-e0d2df8c015f",
         "english_name": "Nikolaos Panagiotopoulos",
-        "image": "panagiotopoulos nikolaos_1.jpg",
+        "image": "panagiotopoulos_nikolaos_1.jpg",
         "email": "nikos.i.panagiotopoulos@gmail.com",
         "wiki_el": "https://el.wikipedia.org/wiki/Νικόλαος_Παναγιωτόπουλος",
         "twitter": "https://twitter.com/npanagioto",
@@ -12399,7 +12399,7 @@
     {
         "speaker_id": "9ec2e059-b974-4ace-b445-35f732cbc683",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -12630,7 +12630,7 @@
     {
         "speaker_id": "a2235ad7-0b3e-4ac7-969b-637ad09f4492",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "s.lykoudis@parliament.gr",
         "wiki_el": "",
         "twitter": "https://twitter.com/SpyrosLykoudis",
@@ -12751,7 +12751,7 @@
     {
         "speaker_id": "a4040487-2f8c-4436-bbf6-1e73769d018e",
         "english_name": "Ilias Kasidiaris",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Ηλίας_Κασιδιάρης",
         "twitter": "https://twitter.com/IliasKasidiaris",
@@ -12762,7 +12762,7 @@
     {
         "speaker_id": "a45103a4-36b4-4e38-9832-e0b8172ff791",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "boukoros.office@gmail.com",
         "wiki_el": "",
         "twitter": "https://twitter.com/chboukoros1",
@@ -13015,7 +13015,7 @@
     {
         "speaker_id": "a6ffc9d7-deef-44bf-a9bd-4d8a6377349f",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "dimitris@kyriazidis.com",
         "wiki_el": "",
         "twitter": "https://twitter.com/kyriazidisdim",
@@ -13026,7 +13026,7 @@
     {
         "speaker_id": "a71245d8-54e8-405e-91b4-d59139f08941",
         "english_name": "Eleni Zaroulia",
-        "image": "wodefault-speaker.jpg",
+        "image": "wodefault_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Ελένη_Ζαρούλια",
         "twitter": "https://twitter.com/EleniZaroulia",
@@ -13180,7 +13180,7 @@
     {
         "speaker_id": "aa94d97a-cfdd-4228-a53a-5999b166cb50",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "rizoulisandreas@gmail.com",
         "wiki_el": "",
         "twitter": "",
@@ -13257,7 +13257,7 @@
     {
         "speaker_id": "ac193b70-3dd5-4948-be73-dbb064787bb1",
         "english_name": "",
-        "image": "papadopoulos sakis_1.jpg",
+        "image": "papadopoulos_sakis_1.jpg",
         "email": "apapadopoulos@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -13323,7 +13323,7 @@
     {
         "speaker_id": "acf4f793-1e60-4b0a-a1c5-4cf613719a75",
         "english_name": "Costas Douzinas",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "c.douzinas@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Κώστας_Δουζίνας",
         "twitter": "",
@@ -13400,7 +13400,7 @@
     {
         "speaker_id": "ae669ca3-26bb-417d-a58c-96c161907539",
         "english_name": "",
-        "image": "famellos sokratis_1.jpg",
+        "image": "famellos_sokratis_1.jpg",
         "email": "s.famellos@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -13477,7 +13477,7 @@
     {
         "speaker_id": "aec0060e-95a4-42c1-8bd9-d93af0539078",
         "english_name": "",
-        "image": "mixelis athanasios_1.jpg",
+        "image": "mixelis_athanasios_1.jpg",
         "email": "a.michelis@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -13565,7 +13565,7 @@
     {
         "speaker_id": "b0791ea7-82f7-4487-a5f1-352660933107",
         "english_name": "",
-        "image": "kafantari xara_1.jpg",
+        "image": "kafantari_xara_1.jpg",
         "email": "kafantari@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -13917,7 +13917,7 @@
     {
         "speaker_id": "b4eb7a8f-d1c2-462f-9f4a-83515ceb1a47",
         "english_name": "Pavlos Polakis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "pavlos.polakis@gmail.com",
         "wiki_el": "https://el.wikipedia.org/wiki/Παύλος_Πολάκης",
         "twitter": "",
@@ -13994,7 +13994,7 @@
     {
         "speaker_id": "b64271ad-0baf-4814-b38e-7acc220ddf33",
         "english_name": "Nikos Filis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Νίκος_Φίλης",
         "twitter": "https://twitter.com/nikosfilis1",
@@ -14181,7 +14181,7 @@
     {
         "speaker_id": "b91ee2ec-98f5-4a62-a1ec-e253014261a5",
         "english_name": "Moustafá Moustafá",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Μουσταφά_Μουσταφά",
         "twitter": "",
@@ -14313,7 +14313,7 @@
     {
         "speaker_id": "bac1a50e-f9bb-4cc6-8e1e-456ab8a60d21",
         "english_name": "Alekos Flambouraris",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Αλέκος_Φλαμπουράρης",
         "twitter": "",
@@ -14357,7 +14357,7 @@
     {
         "speaker_id": "bb7386fa-6835-4bdd-a740-58b93ed51e3c",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "e.giannakidis@parliament.gr",
         "wiki_el": "",
         "twitter": "",
@@ -14456,7 +14456,7 @@
     {
         "speaker_id": "bd26404b-c180-407c-86df-00378900f9e9",
         "english_name": "",
-        "image": "wodefault-speaker.jpg",
+        "image": "wodefault_speaker_icon.png",
         "email": "kasimati@parliament.gr",
         "wiki_el": "",
         "twitter": "https://twitter.com/ninemesis",
@@ -14544,7 +14544,7 @@
     {
         "speaker_id": "be017ee4-a12b-4714-86c1-3959029aab32",
         "english_name": "Theodoros Parastatidis",
-        "image": "parastatidis theodoros_1.jpg",
+        "image": "parastatidis_theodoros_1.jpg",
         "email": "th.parastatidis@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Θεόδωρος_Παραστατίδης",
         "twitter": "https://twitter.com/tparastatidis",
@@ -15204,7 +15204,7 @@
     {
         "speaker_id": "c5f258f6-ca46-4999-93f3-a2152a399a4c",
         "english_name": "Georgios Varemenos",
-        "image": "varemenos giorgos_1.jpg",
+        "image": "varemenos_giorgos_1.jpg",
         "email": "gvaremenos@gmail.com",
         "wiki_el": "",
         "twitter": "",
@@ -15413,7 +15413,7 @@
     {
         "speaker_id": "c87cee20-1667-46cc-89cb-3d0a705b892a",
         "english_name": "Ilias Panagiotaros",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Ηλίας_Παναγιώταρος",
         "twitter": "",
@@ -15435,7 +15435,7 @@
     {
         "speaker_id": "c97df20e-6f63-420e-a876-dd5ac6180776",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -15534,7 +15534,7 @@
     {
         "speaker_id": "cb1b46c9-5253-412d-8d07-4a26cd18d802",
         "english_name": "Giannis Tsironis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Γιάννης_Τσιρώνης",
         "twitter": "",
@@ -15545,7 +15545,7 @@
     {
         "speaker_id": "cb3145b2-d9b0-482b-a7d0-5b5a5bc2decd",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -15710,7 +15710,7 @@
     {
         "speaker_id": "ce0ec914-ed28-4fc1-9c04-7f638ecb6d37",
         "english_name": "",
-        "image": "simorelis christos_1.jpg",
+        "image": "simorelis_christos_1.jpg",
         "email": "x.simorelis@gmail.com",
         "wiki_el": "",
         "twitter": "",
@@ -15897,7 +15897,7 @@
     {
         "speaker_id": "cfcbe415-90c7-49a9-a850-1c9b68eb4ee2",
         "english_name": "",
-        "image": "dritseli panagiota_1.jpg",
+        "image": "dritseli_panagiota_1.jpg",
         "email": "pandritseli@parliament.gr",
         "wiki_el": "",
         "twitter": "https://twitter.com/p_dritseli",
@@ -15974,7 +15974,7 @@
     {
         "speaker_id": "d05d4954-fd42-47bc-8e25-9179b9bee388",
         "english_name": "Kostas Gavroglu",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "k.gavroglou@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Κώστας_Γαβρόγλου",
         "twitter": "",
@@ -16029,7 +16029,7 @@
     {
         "speaker_id": "d133f7aa-b14d-42d6-b913-dd215718b2b7",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "https://twitter.com/syrmal2000",
@@ -16117,7 +16117,7 @@
     {
         "speaker_id": "d2391cc7-c7f2-41d8-8f23-8befe18c9c2f",
         "english_name": "",
-        "image": "kaisas georgios_1.jpg",
+        "image": "kaisas_georgios_1.jpg",
         "email": "kaisasgeo@windowslive.com",
         "wiki_el": "",
         "twitter": "https://twitter.com/kaisasgeo",
@@ -16546,7 +16546,7 @@
     {
         "speaker_id": "d8a53a48-c841-4d34-abd8-38047f072667",
         "english_name": "",
-        "image": "wodefault-speaker.jpg",
+        "image": "wodefault_speaker_icon.png",
         "email": "i.kavvadia@parliament.gr",
         "wiki_el": "",
         "twitter": "https://twitter.com/annetakavadia",
@@ -16799,7 +16799,7 @@
     {
         "speaker_id": "db85c329-bcfc-4580-ae6b-ddc7cfd6f40a",
         "english_name": "Dimitris Koutsoumpas",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Δημήτρης_Κουτσούμπας",
         "twitter": "",
@@ -17008,7 +17008,7 @@
     {
         "speaker_id": "dcdb674d-de9f-4c3d-9bbe-3581bd533178",
         "english_name": "Ioannis Lagos",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Γιάννης_Λαγός",
         "twitter": "",
@@ -17129,7 +17129,7 @@
     {
         "speaker_id": "dee8fcb9-0881-466d-aaf7-84d66fd76785",
         "english_name": "Eleni Avlonitou",
-        "image": "avlonitou photo_3.jpg",
+        "image": "avlonitou_photo_3.jpg",
         "email": "e.avlonitou@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Ελένη_Αυλωνίτου",
         "twitter": "https://twitter.com/EleniAvlonitou",
@@ -17239,7 +17239,7 @@
     {
         "speaker_id": "e035bfa8-3216-475f-94fa-c49227085e89",
         "english_name": "",
-        "image": "karanastasis apostolis.jpg",
+        "image": "karanastasis_apostolis.jpg",
         "email": "apostolis.karanastasis@gmail.com",
         "wiki_el": "",
         "twitter": "https://twitter.com/akaranastasis",
@@ -17261,7 +17261,7 @@
     {
         "speaker_id": "e0800219-94d7-487b-90e4-51e2b767bc80",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -17470,7 +17470,7 @@
     {
         "speaker_id": "e41f2336-b36f-409d-bdc5-aa82e7150b5f",
         "english_name": "Ioannis Sachinidis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "i.sachinidis@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Ιωάννης_Σαχινίδης",
         "twitter": "",
@@ -17514,7 +17514,7 @@
     {
         "speaker_id": "e4e7a860-c3bd-4eff-bee7-c5c4772fb31f",
         "english_name": "Maria Triantafyllou",
-        "image": "wodefault-speaker.jpg",
+        "image": "wodefault_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -17745,7 +17745,7 @@
     {
         "speaker_id": "e6f15f96-cb95-47e8-b644-f0e6a54dfcc1",
         "english_name": "",
-        "image": "theopeftatou afroditi.jpg",
+        "image": "theopeftatou_afroditi.jpg",
         "email": "atheop@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Αφροδίτη_Θεοπεφτάτου",
         "twitter": "",
@@ -17877,7 +17877,7 @@
     {
         "speaker_id": "e8a63e7c-db77-4ff1-bec4-7b6429de7a45",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -17921,7 +17921,7 @@
     {
         "speaker_id": "e9a378ab-031d-4f7a-8465-e2b3e90e1adf",
         "english_name": "",
-        "image": "kamateros hlias_3.jpg",
+        "image": "kamateros_hlias_3.jpg",
         "email": "i.kamateros@gmail.com",
         "wiki_el": "",
         "twitter": "",
@@ -17932,7 +17932,7 @@
     {
         "speaker_id": "e9a7be6c-bcc0-4725-996f-4b8f86ed063f",
         "english_name": "",
-        "image": "triantafillidis alexandros_1.jpg",
+        "image": "triantafillidis_alexandros_1.jpg",
         "email": "talek1@otenet.gr",
         "wiki_el": "",
         "twitter": "https://twitter.com/tr_alexandros",
@@ -18119,7 +18119,7 @@
     {
         "speaker_id": "eb6ad6cb-8937-446b-b13f-3566314a53a4",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "",
@@ -18284,7 +18284,7 @@
     {
         "speaker_id": "ed659311-c5fd-4b8e-a304-05ecf39ee96f",
         "english_name": "Evangelos Venizelos",
-        "image": "venizelos evagelos_1.png",
+        "image": "venizelos_evagelos_1.png",
         "email": "ev.venizelos@gmail.com",
         "wiki_el": "https://el.wikipedia.org/wiki/Ευάγγελος_Βενιζέλος",
         "twitter": "https://twitter.com/EVenizelos",
@@ -18493,7 +18493,7 @@
     {
         "speaker_id": "f0970019-2092-495a-b574-3e10de681ec0",
         "english_name": "Efstáthios Panagoúlis",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Στάθης_Παναγούλης",
         "twitter": "https://twitter.com/STATHISPANAGOUL",
@@ -18559,7 +18559,7 @@
     {
         "speaker_id": "f1a86e89-f8ef-4100-a36c-63960ad198cc",
         "english_name": "Panos Skourletis",
-        "image": "skourletis panos_1.jpg",
+        "image": "skourletis_panos_1.jpg",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Πάνος_Σκουρλέτης",
         "twitter": "https://twitter.com/pskourl",
@@ -18691,7 +18691,7 @@
     {
         "speaker_id": "f39c9d06-6be5-42a2-b6b0-99dd38d30996",
         "english_name": "Christos Pappas",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "chr.pappas@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Χρήστος_Παππάς",
         "twitter": "https://twitter.com/PappasXA",
@@ -18944,7 +18944,7 @@
     {
         "speaker_id": "f5ea85de-562b-4cb9-b269-77e4a93140f3",
         "english_name": "",
-        "image": "skoufa elissavet_1.jpg",
+        "image": "skoufa_elissavet_1.jpg",
         "email": "bettyskoufa@gmail.com",
         "wiki_el": "https://el.wikipedia.org/wiki/Μπέττυ_Σκούφα",
         "twitter": "",
@@ -19021,7 +19021,7 @@
     {
         "speaker_id": "f6a4ec38-a8c6-4f4c-a884-93d5b87800ba",
         "english_name": "Olympia Teligioridou",
-        "image": "wodefault-speaker.jpg",
+        "image": "wodefault_speaker_icon.png",
         "email": "telioly@yahoo.gr",
         "wiki_el": "",
         "twitter": "",
@@ -19054,7 +19054,7 @@
     {
         "speaker_id": "f71ededa-4e09-4c23-8756-4ed9fbf76bfb",
         "english_name": "",
-        "image": "wodefault-speaker.jpg",
+        "image": "wodefault_speaker_icon.png",
         "email": "katerina.papanatsiou@gmail.com",
         "wiki_el": "https://el.wikipedia.org/wiki/Κατερίνα_Παπανάτσιου",
         "twitter": "",
@@ -19065,7 +19065,7 @@
     {
         "speaker_id": "f7d67ce2-36e1-4c89-ad3d-dde97a573fd5",
         "english_name": "Georgios Akriotis",
-        "image": "akrioti giorgo_1.jpg",
+        "image": "akrioti_giorgo_1.jpg",
         "email": "g.akriotis@parliament.gr",
         "wiki_el": "https://el.wikipedia.org/wiki/Γιώργος_Ακριώτης",
         "twitter": "https://twitter.com/geakriotis",
@@ -19153,7 +19153,7 @@
     {
         "speaker_id": "f9012ca8-f111-4e0f-b795-162bf7a72590",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "",
         "twitter": "https://twitter.com/Barbarousis",
@@ -19417,7 +19417,7 @@
     {
         "speaker_id": "fc55f201-5aff-4896-9b0a-0dd21b9510cb",
         "english_name": "",
-        "image": "default-speaker.jpg",
+        "image": "default_speaker_icon.png",
         "email": "",
         "wiki_el": "https://el.wikipedia.org/wiki/Αναστάσιος_Μεγαλομύστακας",
         "twitter": "",
