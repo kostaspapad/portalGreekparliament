@@ -6,7 +6,12 @@
                     <div class="container-fluid party-data">
                         <div class="party-info">
                             <div class="party-img">
-                                <img :src=" '../img/parties/' + ajaxData.partyData.data.data.image " class="img-fluid" style="margin: 5px 0 5px 0;">
+                                <div v-if="ajaxData.partyData.data.data.image">
+                                    <img :src=" '../img/parties/' + ajaxData.partyData.data.data.image" class="img-fluid" style="margin: 5px 0 5px 0;">
+                                </div>
+                                <div v-else>
+                                    <img :src="'../img/parties/polical_party_default_image.png'" class="img-fluid" style="margin: 5px 0 5px 0;">
+                                </div>
                             </div>
                             <div class="party-name">
                                 <div class="party-name-info">
@@ -16,7 +21,37 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="container">
+                    <vs-tabs vs-color='#17a2b8'>
+                        <vs-tab vs-label="Speakers">
+                            <div class="p-3 tab-pane fade show speakers-container mb-0">
+                                <div v-if="ajaxDoneSpeakers && noDataSpeakers == false">
+                                    <div v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.speaker_id" class="speakers py-2">
+                                        <div class="row">
+                                            <router-link :to="'/speaker/' + speaker.greek_name" class="person-link">
+                                                <img :src=" '/img/' + printImg(speaker.image) " class="person-img">
+                                                <p class="person-name text-left">{{speaker.greek_name}}</p>
+                                            </router-link>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-5" style="padding-left: 2.5rem;">
+                                        <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage"
+                                            :limit=1>
+                                            <span slot="prev-nav">&lt;</span>
+                                            <span slot="next-nav">&gt;</span>
+                                        </pagination>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <h5>No speakers found</h5>
+                                </div>
+                            </div>
+                        </vs-tab>
+                        <!-- <vs-tab vs-label="Membership">
+                            
+                        </vs-tab> -->
+                    </vs-tabs>
+                </div>
             </div>
             <div v-else>
                 <img :src=" '../img' + '/Spinner.gif' " class="m-auto d-block"/>
@@ -108,7 +143,44 @@
             background-size: auto;
         }
     }
-
+    .person-link{
+        cursor: hand;
+        cursor: pointer;
+        display: block;
+        padding: 1.2em 0 1.2em 60px;
+        border-top: 1px solid #f3f1eb;
+        position: relative;
+        color: inherit;
+        width: fit-content;
+    }
+    .person-img {
+        position: absolute;
+        top: 1.2em;
+        left: 0;
+        width: 45px;
+    }
+    .person-name{
+        color: inherit;
+        margin: 0;
+        line-height: 1.2em;
+        font-size: 1.4rem;
+    }
+    .person-name:hover{
+        color:#62b356;
+    }
+    .person-link:hover, .person-link:focus {
+        text-decoration: none;
+        color: inherit;
+    }
+    .person-link:hover .person-name, .person-link:focus .person-name {
+        color: #62b356;
+        text-decoration: underline;
+    }
+    @media (max-width: 460px) {
+        .person-name{
+            font-size: 1.2rem;
+        }
+    }
 </style>
 
 <script>
@@ -121,40 +193,37 @@
         data(){
             return {
                 ajaxData: {
-                    speechesData: [],
+                    speakersData: [],
                     partyData: []
                 },
                 finalName: null,
                 conferenceDate: null,
                 showDate: true,
-                currentTab: 'Information',
+                currentTab: 'Speakers',
                 defaultImg: 'polical_party_default_image.png',
-                noDataSpeeches: true,
-                noDataParties: true,
+                noDataSpeakers: true,
+                noDataParty: true,
                 loading: true,
                 ajaxDoneParty: false,
-                ajaxDoneSpeeches: false,
+                ajaxDoneSpeakers: false,
             }
         },
         methods:{
-            // printImg(img){
-            //     if(img == 'polical_party_default_image.png' || img == null || img != ''){
-            //         return this.defaultImg;
-            //     }else{
-            //         return img;
-            //     }
-            // },
-            checkDate(conf_date){
-                if(this.conferenceDate == null){
-                    this.conferenceDate = conf_date
-                }else{
-                    if(this.conferenceDate == conf_date){
-                        this.showDate = false
-                    }else{
-                        this.conferenceDate = conf_date
-                        this.showDate = true
-                    }
+            printImg(img) {
+                console.log(img)
+                if (img == 'default_speaker_icon.png' || img == null) {
+                    return 'default_speaker_icon.png';
+
+                } else {
+                    return img;
                 }
+            },
+            changePage(page) {
+                var self = this;
+                axios.get(this.api_path+'party/'+this.ajaxData.partyData.data.data.party_id+'/speakers?page='+page)
+                .then(function(response) {
+                    self.ajaxData.speakersData = response;
+                })
             },
             getPartySpeeches(){
                 var self = this;
@@ -172,6 +241,7 @@
                             self.ajaxDoneSpeeches = true
                         })
                 }, 500)
+
             },
             getPartyData(){
                 var self = this
@@ -180,13 +250,32 @@
                     api.call('get', this.api_path+'party/name/'+this.finalName)
                         .then(function (response) {
                             if (response.status == 200) {
-                                self.noDataParties = false
+                                self.noDataParty = false
                                 self.ajaxData.partyData = response
+                                
+                                self.getPartySpeakers()
 
                             } else {
-                                self.noDataParties = true
+                                self.noDataParty = true
                             }
                             self.ajaxDoneParty = true
+                        })
+                }, 500)
+                
+            },
+            getPartySpeakers() {
+                var self = this
+
+                setTimeout(() => {
+                    api.call('get', this.api_path+'party/'+this.ajaxData.partyData.data.data.party_id+'/speakers')
+                        .then(function (response) {
+                            if (response.status == 200) {
+                                self.noDataSpeakers = false
+                                self.ajaxData.speakersData = response
+                            } else {
+                                self.noDataSpeakers = true
+                            }
+                            self.ajaxDoneSpeakers = true
                         })
                 }, 500)
             },
@@ -201,10 +290,10 @@
         },
         created() {
             this.loading = false
-            //console.log(decodeURIComponent(this.name))
+            
             this.finalName = this.$route.params.party_name
             this.finalName = this.finalName.replace(/\+/g, " ")
-            console.log(this.finalName)
+            
             // this.getPartySpeeches()
             this.getPartyData()
         }
