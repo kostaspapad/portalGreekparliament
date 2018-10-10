@@ -198,6 +198,9 @@
         },
         computed:{
             ...mapGetters({
+                user: 'get_user'
+            }),
+            ...mapGetters({
                 api_path: 'get_api_path'
             })
         },
@@ -205,7 +208,9 @@
             this.$route.params.conference_date ? this.conf_date = this.$route.params.conference_date : null          
             this.getConferenceInfo()
             this.getConferenceSpeeches()
-            this.getPartyCountByConference()
+            if(this.user){
+                this.getPartyCountByConference()
+            }
         }
     }
 </script>
