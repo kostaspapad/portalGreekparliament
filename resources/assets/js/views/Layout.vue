@@ -117,49 +117,37 @@
             <router-view :key="$route.fullPath"></router-view>
         </div>
 
-        <footer class="footer page-footer font-small pt-4">
-            <!-- Footer Links -->
+        <div class="footer page-footer font-small pt-4">
             <div class="container-footer text-center text-md-left">
-                <!-- Grid row -->
-                <div class="row">
-                    <!-- Grid column -->
-                    <div class="col-md-12 mt-md-0 mt-3">
-                        <!-- Content -->
-                        <h5 class="font-weight-bold">Greekparliament.info</h5>
-                        <!-- <p>{{ __('footer.about_text') }}</p> -->
-
-                    </div>
-                    <!-- Grid column -->
-                    <hr class="clearfix w-100 d-md-none pb-3">
-                    <!-- Grid column -->
-                    <div class="col-md-1 mb-md-0 mb-3">
-                        <ul class="list-unstyled">
-                            <li>
-                                <router-link class="nav-link" to="/about">About</router-link>
-                            </li>
-                            <li>
-                                <router-link class="nav-link" to="/news">News</router-link>
-                            </li>
-                            <li>
-                                <router-link class="nav-link" to="/contact">Contact</router-link>
-                            </li>
-                            <!-- <li>
-                                <router-link class="nav-link" to="/donate">Donate</router-link>
-                            </li> --> 
-                            <li>
-                                <router-link class="nav-link" to="/policy">Policy</router-link>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="col-md-12 mt-md-0 mt-3">
+                    <h5 class="font-weight-bold">Greekparliament.info</h5>
+                </div>
+                <hr class="clearfix w-100 d-md-none pb-3">
+                <div class="col-md-1 mb-md-0 mb-3">
+                    <ul class="list-unstyled">
+                        <li>
+                            <router-link class="nav-link" to="/about">About</router-link>
+                        </li>
+                        <li>
+                            <router-link class="nav-link" to="/news">News</router-link>
+                        </li>
+                        <li>
+                            <router-link class="nav-link" to="/contact">Contact</router-link>
+                        </li>
+                        <!-- <li>
+                            <router-link class="nav-link" to="/donate">Donate</router-link>
+                        </li> --> 
+                        <li>
+                            <router-link class="nav-link" to="/policy">Policy</router-link>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <!-- Footer Links -->
-
             <!-- Copyright -->
             <!-- <div class="footer-copyright text-center py-3">© 2018 Copyright: -->
             <!-- </div> -->
             <!-- Copyright -->
-        </footer>
+        </div>
     </div>
 </template>
 
