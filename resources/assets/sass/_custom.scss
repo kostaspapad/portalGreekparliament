@@ -292,6 +292,19 @@ hr.divider {
 .container-footer {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
     background-color: #fff;
+
+    ul {
+        li {
+            display: inline-block;
+
+            a {
+                color: rgba(0, 0, 0, 0.5);
+            }
+            a:hover {
+                color: #33a8ff;
+            }
+        }
+    }
 }
 
 //scrollbar

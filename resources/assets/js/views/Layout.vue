@@ -115,39 +115,40 @@
         
         <div style="margin-top: 2rem">
             <router-view :key="$route.fullPath"></router-view>
+            <div class="footer page-footer font-small pt-4">
+                <div class="container-footer text-center ">
+                    <div class="col-md-12 mt-md-0 mt-3">
+                        <h5 class="font-weight-bold p-3">Greekparliament.info</h5>
+                    </div>
+                    <!-- <hr class="clearfix w-100 d-md-none pb-3"> -->
+                    <div class="mb-md-0 mb-3 text-center">
+                        <ul class="list-unstyled">
+                            <li>
+                                <router-link class="nav-link" to="/about">About</router-link>
+                            </li>
+                            <li>
+                                <router-link class="nav-link" to="/news">News</router-link>
+                            </li>
+                            <li>
+                                <router-link class="nav-link" to="/contact">Contact</router-link>
+                            </li>
+                            <!-- <li>
+                                <router-link class="nav-link" to="/donate">Donate</router-link>
+                            </li> --> 
+                            <li>
+                                <router-link class="nav-link" to="/policy">Policy</router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Copyright -->
+                <!-- <div class="footer-copyright text-center py-3">© 2018 Copyright: -->
+                <!-- </div> -->
+                <!-- Copyright -->
+            </div>
         </div>
 
-        <div class="footer page-footer font-small pt-4">
-            <div class="container-footer text-center text-md-left">
-                <div class="col-md-12 mt-md-0 mt-3">
-                    <h5 class="font-weight-bold">Greekparliament.info</h5>
-                </div>
-                <hr class="clearfix w-100 d-md-none pb-3">
-                <div class="col-md-1 mb-md-0 mb-3">
-                    <ul class="list-unstyled">
-                        <li>
-                            <router-link class="nav-link" to="/about">About</router-link>
-                        </li>
-                        <li>
-                            <router-link class="nav-link" to="/news">News</router-link>
-                        </li>
-                        <li>
-                            <router-link class="nav-link" to="/contact">Contact</router-link>
-                        </li>
-                        <!-- <li>
-                            <router-link class="nav-link" to="/donate">Donate</router-link>
-                        </li> --> 
-                        <li>
-                            <router-link class="nav-link" to="/policy">Policy</router-link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Copyright -->
-            <!-- <div class="footer-copyright text-center py-3">© 2018 Copyright: -->
-            <!-- </div> -->
-            <!-- Copyright -->
-        </div>
+        
     </div>
 </template>
 
