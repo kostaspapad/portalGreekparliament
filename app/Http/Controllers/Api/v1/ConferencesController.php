@@ -55,9 +55,9 @@ class ConferencesController extends Controller
     public function index() 
     {
 
-        $conferences =  Cache::remember('conferencesIndex', 22*60, function() {
+        // $conferences =  Cache::remember('conferencesIndex', 22*60, function() {
         
-            return Conference::with('speeches')
+            $conferences = Conference::with('speeches')
                 ->when($this->order_field && $this->order_orientation, function ($query) {
                     $query->orderBy($this->order_field, $this->order_orientation);
                 })
@@ -70,9 +70,9 @@ class ConferencesController extends Controller
                 ])
                 ->withCount('speeches')
                 ->groupBy('conferences.id')
-                ->paginate(20);
+                ->paginate(10);
                     
-        });
+        // });
         
         return $this->apiHelper::returnResource('Conference', $conferences);
     }

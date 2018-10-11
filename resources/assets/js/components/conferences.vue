@@ -223,10 +223,11 @@
                 var self = this
                 let url = null
                 if (this.startDate && this.endDate) {
-                    url = 'conference/start/' + this.startDate + '/end/' + this.endDate + '?page=' + page
+                    url = 'conference/start/' + this.startDate + '/end/' + this.endDate + '?page=' + page + '&order_field=' + this.order_field 
+                            + '&orientation=' + this.order_orientation
                 } else {
                     url = 'conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' +
-                        this.orientation
+                        this.order_orientation
                 }
 
                 axios.get(this.api_path + url)
