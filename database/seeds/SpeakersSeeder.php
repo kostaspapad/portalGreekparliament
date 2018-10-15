@@ -28,6 +28,7 @@ class SpeakersSeeder extends Seeder
                 'wiki_el' => $obj->wiki_el,
                 'twitter' => $obj->twitter,
                 'greek_name' => $obj->greek_name,
+                'simple_name' => $obj->simple_name,
                 'wiki_en' => $obj->wiki_en,
                 'website' => $obj->website
             ));
