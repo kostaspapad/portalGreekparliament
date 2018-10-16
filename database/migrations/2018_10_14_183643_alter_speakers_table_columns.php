@@ -15,6 +15,8 @@ class AlterSpeakersTableColumns extends Migration
     {
         Schema::table('speakers', function (Blueprint $table) {
             $table->string('simple_name')->after('greek_name');
+            $table->index(['simple_name', 'speaker_id']);
+            $table->index(['greek_name', 'speaker_id']);
         });
     }
 
