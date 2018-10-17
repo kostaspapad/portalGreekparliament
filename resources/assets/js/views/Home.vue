@@ -1,5 +1,5 @@
 <template>
-    <div class="container-imagebox">
+    <div class="container-imagebox" style="margin-top: -2rem;">
         <div class="row" style="margin-right: 0;">
             <div class="image-container col-12 col-sm-6 col-md-4" style="    padding-left: 20px;">
                 <img src="/img/justice2.jpg" class="img-fluid">
