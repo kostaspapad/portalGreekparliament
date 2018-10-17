@@ -1,11 +1,37 @@
 // Layout
 
 $topNavBgColor: white;
-$menuNavBgColor: #33a8ff;
+// $menuNavBgColor: #33a8ff;
+$menuNavBgColor: #FFE8C2;
 $mainContentBgColor: green;
 $footerBgColor: yellow;
-$logoColor: #dbf0ff;
+// $logoColor: #dbf0ff;
+$logoColor: rgba(0, 0, 0, 0.05);
 $imageContainerColor: #33a8ff;
+
+//tou kwsta
+// $color1: rgba(56, 61, 59, 1);
+// $color2: rgba(238, 229, 233, 1);
+// $color3: rgba(124, 124, 124, 1);
+// $color4: rgba(146, 220, 229, 1);
+// $color5: rgba(82, 222, 229, 1);
+
+//tis vasso
+$DazzledBlue: rgba(38, 84, 124, 1);
+$SlateGray: rgba(115, 130, 144, 1);
+$wildBlue: rgba(161, 181, 216, 1);
+$CaribbeanGreen: rgba(6, 214, 160, 1);
+$BabyPowder: rgba(252, 252, 252, 1);
+
+$bodyBgColor: #f3f1eb;
+
+// $topNavBgColor: $SlateGray;
+// $menuNavBgColor: $SlateGray;
+// $mainContentBgColor: green;
+// $footerBgColor: $BabyPowder;
+// $logoColor: #dbf0ff;
+// $imageContainerColor: #33a8ff;
+// $bodyBgColor: $BabyPowder;
 
 //to background whole page , add the variable inside body BgColor
 // .content-bg-color{ background-color: red!important }
@@ -17,7 +43,7 @@ body {
     width: 100%;
 }
 html, body {
-    background-color: #f3f1eb;
+    background-color: $bodyBgColor;
     color: #636b6f;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
@@ -49,10 +75,20 @@ html, body {
   }
 .menu-navbar{
     background-color: $menuNavBgColor;
-    border-top: 1px solid rgba(0, 0, 0, 0.1)
-}
-.navbar-nav .nav-item:hover{
-    background-color: rgba(0, 123, 255, 0.25);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    .navbar-nav .nav-item:hover{
+        // background-color: rgba(0, 123, 255, 0.25);
+        background-color: #ccba9d;
+    }
+    .navbar-nav .nav-item .nav-link{
+        font-weight: 700;
+        transition: all .2s ease;
+    }
+    .navbar-nav .nav-item .nav-link:hover{
+        color: white!important;
+    }
+
 }
 .active{
     background-color: rgba(0, 123, 255, 0.25);
@@ -310,7 +346,7 @@ hr.divider {
 //scrollbar
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
 }
 
 /* Track */
