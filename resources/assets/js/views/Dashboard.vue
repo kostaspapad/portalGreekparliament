@@ -1,6 +1,6 @@
 <template>
     <div class="text-center col-12" v-if="ajaxData.isDone">
-        <table class="table table-hover table-sm table-responsive my-table">
+        <table v-if="ajaxData.info_data.length" class="table table-hover table-sm table-responsive my-table">
             <thead>
                 <tr>
                     <th scope="col">Conference Date</th>
@@ -18,6 +18,9 @@
             </expand-table-data>
             
         </table>
+        <div v-else>
+            <h3>You don't have do any comments or favorite a speech!</h3>
+        </div>
 
         <!-- Must remove bootstrap.scss to work correctly -->
         <!-- <vs-table :data="ajaxData.info_data" :notSpacer="true">
