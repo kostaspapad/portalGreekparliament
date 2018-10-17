@@ -36,7 +36,6 @@ class Speech extends JsonResource
             'on_behalf_of_id' => $this->on_behalf_of_id,
             'fullname_el' => $this->fullname_el,
             'party_color' => $this->color,
-            'favorite_user_id' => $this->favorite_user_id,
             'isFavorite' => $this->isFavorite
         ];
         

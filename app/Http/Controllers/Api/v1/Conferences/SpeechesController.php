@@ -51,15 +51,20 @@ class SpeechesController extends Controller
 
             // Convert string to date object
             $date = date($date);
-
             if ($user) {
+                
+                $user_id = $user->id;
+                
                 // One speaker can be in many parties (check it later)
                 $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                     ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
                     ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
                     ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
                     ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
-                    ->leftJoin('favorites', 'favorites.speech_id', '=', 'speeches.speech_id')
+                    ->leftJoin('favorites', function($join) use ($user_id){
+                        $join->on('favorites.speech_id', '=', 'speeches.speech_id')
+                             ->where('favorites.user_id', '=', $user_id);
+                    })
                     ->select([
                         'conf.conference_date', 
                         'sp.greek_name', 
@@ -70,18 +75,14 @@ class SpeechesController extends Controller
                         'm.on_behalf_of_id', 
                         'parties.fullname_el',
                         'party_colors.color',
-                        'favorites.user_id as favorite_user_id',
                         'favorites.isFavorite'
                     ])
                     ->groupBy('speeches.speech_id')
                     ->where([
                         ['conf.conference_date', '=', $date]
-                        //,['favorites.user_id', '=', $user->id]
                     ])
-                    // ->orWhere('favorites.speech_id', '=', NULL)
-                    // ->orWhere('favorites.speech_id', '!=', NULL)
                     ->paginate(25);
-
+                
             } else {
                 // One speaker can be in many parties (check it later)
                 $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
@@ -103,8 +104,6 @@ class SpeechesController extends Controller
                     ->groupBy('speeches.speech_id')
                     ->where([
                         ['conf.conference_date', '=', $date],
-                        // ['m.start_date', '>', $date],
-                        // ['m.end_date', '<=', $date]
                     ])
                     ->paginate(25);
             }
@@ -113,4 +112,3 @@ class SpeechesController extends Controller
         }
     }
 }
-    

@@ -84,7 +84,6 @@ class SpeechesController extends Controller
                     'm.on_behalf_of_id', 
                     'parties.fullname_el',
                     'party_colors.color',
-                    'favorites.user_id as favorite_user_id',
                     'favorites.isFavorite'
                 ])
                 ->groupBy('speeches.speech_id')
