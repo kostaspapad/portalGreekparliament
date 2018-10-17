@@ -15,6 +15,8 @@ export default new Vuex.Store({
         CHECK_USER: state => {
             if( window.localStorage.getItem('user') ){
                 state.user = JSON.parse(window.localStorage.getItem('user'))
+            }else{
+                state.user = null
             }
         },
         GET_PATH: state => {

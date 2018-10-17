@@ -103,8 +103,8 @@
                         this.submitStatus = 'OK'
                         api.call('post', '/api/v1/login', data)
                         .then(({data}) => {
-                            auth.login(data.token, data.user);
-                            this.$router.push('/');
+                            auth.login(data.token, data.user)
+                            this.$router.push('/')
                         })
                         .catch( (error) => {
                             if( error.data.status == 400 ){

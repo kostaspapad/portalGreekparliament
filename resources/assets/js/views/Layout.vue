@@ -166,7 +166,8 @@
                 auth.logout()
             },
             ...mapMutations([
-                'SAVE_USER'
+                'SAVE_USER',
+                'CHECK_USER'
             ])
         },
         mounted() {
@@ -179,8 +180,10 @@
             })
 
             Event.$on('userLoggedOut', () => {
-                this.authenticated = false;
-                this.user = null;
+                this.authenticated = false
+                this.user = null
+                this.CHECK_USER()
+                this.$router.push('/')
             })
         },
     }

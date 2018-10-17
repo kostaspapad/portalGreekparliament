@@ -1,13 +1,13 @@
 <template>
     <div class="container">
         <div class="conferences-container">
-            <div class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
+            <div v-if="user" class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
                 <!-- <button class="btn mb-2 chart-btn"  style="background-color: #acd9ff;"> -->
                     <span v-if="!showChart">Show chart</span>
                     <span v-else class="hide-letters">Hide Chart</span>
                 <!-- </button> -->
             </div>
-            <transition name="slide-fade">
+            <transition v-if="user" name="slide-fade">
                 <div class=" m-auto" v-if="showChart">
                     <!-- <vue-frappe
                         v-if="isLoaded"
