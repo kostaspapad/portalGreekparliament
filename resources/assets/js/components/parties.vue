@@ -26,14 +26,15 @@
                         :key="party.party_id"
                         @click="redirectToParty(party.fullname_el)"
                         style="margin-bottom: 15px">
-                        <a :href="/party/ + party.fullname_el" class="party-link">
+                        <router-link :to="/party/ + party.fullname_el" class="party-link">
+                        <!-- <a :href="/party/ + party.fullname_el" class="party-link"> -->
                         <img :src=" '/img/parties/' + printImg(party.image) " class="party-img">
                         <h2 class="party-name text-left">{{party.fullname_el}}</h2>
                             <!--<p class="party-membership text-left">
                                 <span class="party-name">{{party.party_fullname}}</span>
                                 <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
                             </p>-->
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </div> <!-- Parties loop -->
