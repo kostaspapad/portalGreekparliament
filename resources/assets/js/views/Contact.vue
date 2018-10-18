@@ -1,56 +1,63 @@
 <template>
     <div>
         <div class="row justify-content-center mr-0">
-            <div class="col-md-8">
+            <!-- <div class="col-md-8"> -->
+            <div style="width: 750px;">
                 <div class="card">
                     <div class="card-header text-center">Contact us</div>
                     <div class="card-body">
                         <form v-on:submit.prevent="contact" aria-label="contact">
-
-                            <div class="form-group row">
-                                <label for="name" class="col-sm-4 col-form-label text-md-right">Name</label>
-                                <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- <label for="name" class="col-sm-4 col-form-label text-md-right">{{$t("contact.input_name")}}</label> -->
+                                <div class="col-md-6 m-auto">
                                     <input 
                                         v-model.trim="$v.name.$model" 
                                         id="name`" 
                                         type="name" 
                                         class="form-control"
                                         name="name" 
-                                        required>
+                                        required
+                                        :placeholder="$t('contact.input_name')"
+                                    >
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label>
-                                <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label> -->
+                                <div class="col-md-6 m-auto">
                                     <input 
                                         v-model.trim="$v.email.$model" 
                                         id="email" 
                                         type="email" 
                                         class="form-control"
                                         name="email" 
-                                        required>
+                                        required
+                                        placeholder="Email"
+                                    >
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="message" class="col-md-4 col-form-label text-md-right">Message</label>
-                                <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- <label for="message" class="col-md-4 col-form-label text-md-right">{{$t("contact.input_message")}}</label> -->
+                                <div class="col-md-6 m-auto">
                                     <!-- <input v-model.trim="$v.password.$model" id="password" type="password" class="form-control" name="password" required> -->
                                     <textarea 
                                         v-model.trim="$v.message.$model"
                                         id="message"
                                         class="form-control"
-                                        rows="3">
+                                        rows="3"
+                                        :placeholder="$t('contact.input_message')"
+                                        required
+                                    >
                                     </textarea>
                                 </div>
                             </div>
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
+                            <div class="text-center">
+                                <!-- <div class="col-md-8 offset-md-4"> -->
                                     <button type="submit" class="btn btn-info" :disabled="!$v.email.email" :class="{ 'not-allowed': !$v.email.email }">
                                         Submit
                                     </button>
-                                </div>
+                                <!-- </div> -->
                             </div>
                         </form>
                         <div class="error" v-if="!$v.email.email">Email is not valid (e.g , test@mail.com)</div>
