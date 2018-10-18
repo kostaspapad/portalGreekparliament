@@ -35,10 +35,10 @@
                         
                         <!-- @guest -->
                         <li class="nav-item" v-if="!user">
-                            <router-link to="/login" class="nav-link">Login</router-link>
+                            <router-link to="/login" class="nav-link">{{$t("auth.login")}}</router-link>
                         </li>
                         <li class="nav-item" v-if="!user">
-                            <router-link to="/register" class="nav-link">Register</router-link>
+                            <router-link to="/register" class="nav-link">{{$t("auth.register")}}</router-link>
                         </li>
 
                         <li v-if="user" class="nav-item dropdown">
@@ -48,26 +48,25 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <router-link to="/dashboard" class="dropdown-item myHoverBg">Dashboard</router-link>
-                                <span @click="userLogout" class="dropdown-item pointer myHoverBg">Logout</span>
+                                <span @click="userLogout" class="dropdown-item pointer myHoverBg">{{$t("auth.logout")}}</span>
                                 <!-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form> -->
                             </div>
                         </li>
                         <!-- @endguest -->
-                        <!-- <li class="nav-item dropdown">
+                        <!-- LOCALE -->
+                        <!-- <li class="nav-item dropdown mb-2">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @if (app()->getLocale() === 'en')
-                                    <img src="/img/flags/flag_uk.png" alt="{{__('navbar.lang')}}">
-                                @elseif (app()->getLocale() === 'el')
-                                    <img src="/img/flags/flag_gr.png" alt="{{__('navbar.lang')}}">
-                                @endif
+                                    <img v-if="$i18n.locale == 'en' " src="/img/flags/flag_uk.png">
+                                    <img v-if="$i18n.locale == 'el'" src="/img/flags/flag_gr.png">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="/locale/en">{{ __('navbar.lang_en') }}</a>
-                                <a class="dropdown-item" href="/locale/el">{{ __('navbar.lang_el') }}</a>
+                                <span class="dropdown-item pointer myHoverBg"  @click="$i18n.locale = 'el' ">{{$t("navbar.lang_el")}}</span>
+                                <span class="dropdown-item pointer myHoverBg"  @click="$i18n.locale = 'en' ">{{$t("navbar.lang_en")}}</span>
                             </div>
                         </li> -->
+                        <!-- END OF LOCALE -->
                     </ul>
                 </div>
             </div>
@@ -94,19 +93,19 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <!-- <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">{{ __('navbar.conferences') }}</a> -->
-                            <router-link class="nav-link" to="/conferences">Conferences</router-link>
+                            <router-link class="nav-link" to="/conferences">{{ $t("navbar.conferences")}}</router-link>
                         </li>
                         <li class="nav-item">
                             <!-- <a class="nav-link {{ Request::path() === 'parties' ? 'active' : null }}" href="/parties">{{ __('navbar.political_parties') }}</a> -->
-                            <router-link class="nav-link" to="/parties">Parties</router-link>
+                            <router-link class="nav-link" to="/parties">{{ $t("navbar.political_parties")}}</router-link>
                         </li>
                         <li class="nav-item">
                             <!-- <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">{{ __('navbar.speakers') }}</a> -->
-                            <router-link class="nav-link" to="/speakers">Speakers</router-link>
+                            <router-link class="nav-link" to="/speakers">{{ $t("navbar.speakers")}}</router-link>
                         </li>
                         <li class="nav-item">
                             <!-- <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">{{ __('navbar.about') }}</a> -->
-                            <router-link class="nav-link" to="/about">About</router-link>
+                            <router-link class="nav-link" to="/about">{{ $t("navbar.about")}}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -115,7 +114,7 @@
         
         <div style="margin-top: 2rem">
             <router-view :key="$route.fullPath"></router-view>
-            <div class="footer page-footer font-small pt-4">
+            <footer class="footer page-footer font-small pt-4">
                 <div class="container-footer text-center ">
                     <div class="col-md-12 mt-md-0 mt-3">
                         <h5 class="font-weight-bold p-3">Greekparliament.info</h5>
@@ -124,19 +123,19 @@
                     <div class="mb-md-0 mb-3 text-center">
                         <ul class="list-unstyled">
                             <li>
-                                <router-link class="nav-link" to="/about">About</router-link>
+                                <router-link class="nav-link" to="/about">{{ $t("footer.about_us")}}</router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="/news">News</router-link>
+                                <router-link class="nav-link" to="/news">{{ $t("footer.news")}}</router-link>
                             </li>
                             <li>
-                                <router-link class="nav-link" to="/contact">Contact</router-link>
+                                <router-link class="nav-link" to="/contact">{{ $t("footer.contact")}}</router-link>
                             </li>
                             <!-- <li>
                                 <router-link class="nav-link" to="/donate">Donate</router-link>
                             </li> --> 
                             <li>
-                                <router-link class="nav-link" to="/policy">Policy</router-link>
+                                <router-link class="nav-link" to="/policy">{{ $t("footer.policy")}}</router-link>
                             </li>
                         </ul>
                     </div>
@@ -145,7 +144,7 @@
                 <!-- <div class="footer-copyright text-center py-3">© 2018 Copyright: -->
                 <!-- </div> -->
                 <!-- Copyright -->
-            </div>
+            </footer>
         </div>
 
         

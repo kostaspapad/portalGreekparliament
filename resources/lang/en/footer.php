@@ -6,5 +6,5 @@ return [
     'news' => 'News',
     'contact' => 'Contact',
     'donate' => 'Donate',
-    'privacy_policy' => 'Privacy policy',
+    'policy' => 'Privacy policy',
 ];

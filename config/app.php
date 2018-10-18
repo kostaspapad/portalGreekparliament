@@ -78,7 +78,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // 'locale' => 'en',
+    'locale' => 'el',
 
     /*
     |--------------------------------------------------------------------------
@@ -91,7 +92,8 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    // 'fallback_locale' => 'en',
+    'fallback_locale' => 'el',
 
     /*
     |--------------------------------------------------------------------------
@@ -160,6 +162,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
+
+        //Localization
+        MartinLindhe\VueInternationalizationGenerator\GeneratorProvider::class
     ],
 
     /*

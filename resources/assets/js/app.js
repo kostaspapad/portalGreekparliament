@@ -52,6 +52,9 @@ import 'vuesax/dist/vuesax.css' //Vuesax styles
 import 'material-icons/iconfont/material-icons.css';
 import VueChartkick from 'vue-chartkick'
 
+import VueInternationalization from 'vue-i18n';
+import Locale from './vue-i18n-locales.generated';
+
 // must be before auth
 window.api = new Api()
 
@@ -65,6 +68,7 @@ Vue.use(VueChatScroll)
 Vue.use(Vuesax)
 Vue.use(VueFrappe)
 Vue.use(VueChartkick)
+Vue.use(VueInternationalization);
 
 // register globally
 Vue.component('pagination', laravelVuePagination)
@@ -103,11 +107,20 @@ Vue.filter('capitalizeAll', function (value) {
 
 window.Event = new Vue;
 
+const lang = document.documentElement.lang.substr(0, 2); 
+// or however you determine your current app locale
+
+const i18n = new VueInternationalization({
+    locale: lang,
+    messages: Locale
+});
+
 
 const app = new Vue({
     el: '#app',
     router,
     store,
+    i18n,
     beforeCreate() {
         this.$store.commit('CHECK_USER')
         this.$store.commit('GET_PATH')
