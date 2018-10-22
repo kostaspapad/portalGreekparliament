@@ -49,18 +49,32 @@ class CommentsController extends Controller
         ], 201 );
     }
 
-    public function show( Request $request , $speech_id){
+    public function show( Request $request , $conference_date){
 
+        // $comments = Comment::join('users','comments.user_id', '=', 'users.id')
+        //     ->select([
+        //         'comments.id as comment_id',
+        //         'comments.comment',
+        //         'comments.speech_id',
+        //         'comments.user_id',
+        //         'comments.created_at',
+        //         'users.name as user_name'
+        //     ])
+        //     ->where('speech_id', '=', $speech_id)->get();
         $comments = Comment::join('users','comments.user_id', '=', 'users.id')
-            ->select([
-                'comments.id as comment_id',
-                'comments.comment',
-                'comments.speech_id',
-                'comments.user_id',
-                'comments.created_at',
-                'users.name as user_name'
-            ])
-            ->where('speech_id', '=', $speech_id)->get();
+                    ->join('speeches', 'comments.speech_id', '=', 'speeches.speech_id')
+                    ->join('conferences', 'speeches.speech_conference_date', '=', 'conferences.conference_date')
+                    ->select([
+                        'comments.id as comment_id',
+                        'comments.comment',
+                        'comments.speech_id',
+                        'comments.user_id',
+                        'comments.created_at',
+                        'users.name as user_name'
+                    ])
+                    ->groupBy('speeches.speech_id', 'conferences.conference_date' , 'comments.comment')
+                    ->where('conferences.conference_date' , '=', $conference_date)
+                    ->get();
         
         return $this->apiHelper::returnResource('Comment', $comments);
     }

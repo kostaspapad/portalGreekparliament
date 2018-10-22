@@ -103,7 +103,7 @@
 </style>
 
 <script>
-    import { mapState, mapGetters } from 'vuex'
+    import { mapState, mapGetters, mapActions } from 'vuex'
     export default {
         props: {
             //conf_date: null,
@@ -194,7 +194,10 @@
                     }
 
                 })
-            }
+            },
+            ...mapActions([
+                'GET_COMMENTS_CONFERENCE'
+            ])
         },
         computed:{
             ...mapGetters({
@@ -210,6 +213,11 @@
             this.getConferenceSpeeches()
             if(this.user){
                 this.getPartyCountByConference()
+                
+                //put interval HERE
+                setInterval( () => {
+                 },5000);
+                this.GET_COMMENTS_CONFERENCE(this.conf_date)
             }
         }
     }
