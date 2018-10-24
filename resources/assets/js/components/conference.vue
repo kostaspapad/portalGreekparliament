@@ -128,7 +128,8 @@
                 noDataConfInfo: true,
                 noDataConfSpeeches: true,
                 isLoaded: false,
-                showChart: false
+                showChart: false,
+                startInterval: false
             }
         },
         methods:{
@@ -207,6 +208,15 @@
                 api_path: 'get_api_path'
             })
         },
+        watch: {
+            startInterval: function(newVal) {
+                if(newVal){
+                    setInterval( () => {
+                        this.GET_COMMENTS_CONFERENCE(this.conf_date)
+                    },15000);
+                }
+            }
+        },
         created() {
             this.$route.params.conference_date ? this.conf_date = this.$route.params.conference_date : null          
             this.getConferenceInfo()
@@ -215,9 +225,9 @@
                 this.getPartyCountByConference()
                 
                 //put interval HERE
-                setInterval( () => {
-                 },5000);
                 this.GET_COMMENTS_CONFERENCE(this.conf_date)
+                this.startInterval = true
+                
             }
         }
     }

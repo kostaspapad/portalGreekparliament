@@ -1,7 +1,7 @@
 <template>
-    <div v-if="ajaxData.comments">
-        <div v-chat-scroll class="comments-area" :class="{ 'comments-scroll' : ajaxData.comments.length > 6 }">
-            <div v-for="comment in ajaxData.comments" :key="comment.comment_id" class="comment">
+    <div v-if="speech_comments">
+        <div v-chat-scroll class="comments-area" :class="{ 'comments-scroll' : speech_comments.length > 6 }">
+            <div v-for="comment in speech_comments" :key="comment.comment_id" class="comment">
                 <!-- <div v-if="">
 
                 </div> -->
@@ -82,17 +82,8 @@
                     if(data.data.msg == "Comment Sent" && data.statusText == "Created" && data.status == 201){
                         this.clearVariables()
                         if(data.data){
-                            this.ajaxData.comments.push(data.data.data)
+                            this.speech_comments.push(data.data.data)
                         }
-                        //this.getCommentsOfSpeech()
-                    }
-                })
-            },
-            getCommentsOfSpeech(){
-                api.call('get', this.api_path + 'comments/' + this.speech_id)
-                .then(  data => {
-                    if( data.data && data.statusText == "OK" && data.status == 200 ){
-                        this.ajaxData.comments = data.data.data
                     }
                 })
             },
@@ -108,22 +99,16 @@
                 return this.comment ? false : true
             },
             ...mapGetters({
-                api_path: 'get_api_path',
-                speech_comments: 'get_conference_speech_comments'
-            })
-        },
-        created(){
-            //this.getCommentsOfSpeech()
-            if(this.speech_comments){
-                const comments_of_speech = this.speech_comments.filter(obj => 
+                api_path: 'get_api_path'
+                // speech_comments: 'get_conference_speech_comments'
+            }),
+            speech_comments(){
+                return this.$store.getters.get_conference_speech_comments.filter(obj => 
                     obj.speech_id === this.speech_id
                 );
-
-                if(comments_of_speech.length){
-                    this.ajaxData.comments = comments_of_speech
-                }
-
             }
+        },
+        created(){
 
         },
         mounted(){

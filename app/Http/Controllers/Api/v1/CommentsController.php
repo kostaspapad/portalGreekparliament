@@ -72,7 +72,7 @@ class CommentsController extends Controller
                         'comments.created_at',
                         'users.name as user_name'
                     ])
-                    ->groupBy('speeches.speech_id', 'conferences.conference_date' , 'comments.comment')
+                    ->groupBy('speeches.speech_id', 'conferences.conference_date' , 'comments.id')
                     ->where('conferences.conference_date' , '=', $conference_date)
                     ->get();
         
