@@ -14,7 +14,6 @@
                     :chart-party-labels="ajaxData.memberships.party_name_en"
                     :height="325"
                 >
-                        
                 </line-chart>
             </div>
         </transition>
@@ -43,24 +42,13 @@
                     </div>
                     <div class="col-12 pr-5 mb-4 mt-4 float-right">
                         <div class="float-right">
-                             <vs-input 
+                             <vs-input
                                 vs-icon="search" 
-                                placeholder="Search this speaker's speeches" 
+                                placeholder="Αναζήτηση" 
                                 v-model.trim="search_string"
                                 @keypress.enter="searchSpeakerSpeeches"
                                 style="width: 235px;color:inherit;"
-                                
                             />
-                            <!-- <div class="input-group search-div">
-                                <input class="form-control" 
-                                    v-model.trim="search_string" 
-                                    @keypress.enter="searchSpeakerSpeeches" 
-                                    type="text" 
-                                    placeholder="Search this speaker's speeches">
-                                <span class="input-group-append">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -106,62 +94,8 @@
                                     :colors="ajaxData.memberships.party_colors"
                                 ></timeline>
                             </div>
-                            <!--<div class="d-block d-sm-block d-md-none d-lg-none">
-                                <ul>
-                                    <li v-for="(data, index) in ajaxData.timelineData" :key="data.fullname_el">
-                                        <span>{{data[index]}}</span>
-                                    </li>
-                                </ul>
-                            </div> -->
                         </vs-tab>
                     </vs-tabs>
-                    <!-- <nav>
-                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a @click="currentTab = 'Speeches' " class="nav-item nav-link active" id="nav-speeches-tab"
-                                data-toggle="tab" href="#nav-speeches" role="tab" aria-controls="nav-speeches"
-                                aria-selected="true">Speeches</a>
-                            <a @click="currentTab = 'Membership' " class="nav-item nav-link" id="nav-membership-tab"
-                                data-toggle="tab" href="#nav-membership" role="tab" aria-controls="nav-membership"
-                                aria-selected="false">Membership</a>
-                        </div>
-                    </nav>
-                    <div class="tab-content py-3" id="nav-tabContent">
-                        <div id="nav-speeches" 
-                            class="p-3 tab-pane fade show speeches-container active" 
-                            role="tabpanel"
-                            aria-labelledby="nav-speeches-tab">
-                            <div v-if="ajaxDoneSpeeches && noDataSpeeches == false">
-                                <div v-for="speech in ajaxData.speechesData.data.data" :key="speech.speech_id" class="speeches py-2">
-                                    <div class="row">
-                                        <div v-if="speech.greek_name == ajaxData.speechesData.data.data.greek_name">
-                                            <small>
-                                                <p><ins><a :href="`/speaker/${speech.greek_name}`" class="text-info">{{speech.greek_name}}</a></ins></p>
-                                                · {{speech.speech_conference_date}}
-                                            </small>
-                                        </div>
-                                        <div v-else>
-                                            <small><a :href="`/speaker/${speech.greek_name}`" class="text-info">{{speech.greek_name}}</a>
-                                                · {{speech.speech_conference_date}}</small>
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <p class="text-left">{{speech.speech}}</p>
-                                    </div>
-                                </div>
-                                <div class="col-12 mt-5" style="padding-left: 2.5rem;">
-                                    <pagination :data="ajaxData.speechesData.data.meta" @pagination-change-page="changePage"
-                                        :limit=1>
-                                        <span slot="prev-nav">&lt;</span>
-                                        <span slot="next-nav">&gt;</span>
-                                    </pagination>
-                                </div>
-                            </div>
-                            <div v-else>
-                                <h5>No speeches found</h5>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="nav-membership" role="tabpanel" aria-labelledby="nav-membership-tab">{{currentTab}}</div>
-                    </div> -->
                 </div>
             </div>
             <div v-else>
@@ -196,17 +130,6 @@
         // overflow-y: scroll;
     }
 
-    // .speeches-container {
-    //     height: 630px;
-    //     overflow-y: scroll;
-    // }
-
-    /* .speeches-container .speeches:not(:last-child){
-        border-bottom: 1px dashed #17a2b8;
-    }*/
-    /* .speeches:last-child{
-        border-bottom: none;
-    } */
     .speaker-info {
         display: table;
     }
