@@ -90,6 +90,7 @@ Route::get('/user', function (Request $request) {
     // Conference->Speeches
     // http://127.0.0.1:8000/api/v1/conference/2010-05-28/speeches
     Route::get('conference/{date}/speeches', 'Api\v1\Conferences\SpeechesController@speechesByConferenceDate');
+    Route::get('conference/{date}/speeches/search/{text}', 'Api\v1\Conferences\SpeechesController@fulltextSearchSpeechesByConferenceDate');
 
     // Memberships->Speaker
     // http://localhost:8000/api/v1/speaker/002483ab-3653-4458-b410-6b0ee380cc76/memberships
