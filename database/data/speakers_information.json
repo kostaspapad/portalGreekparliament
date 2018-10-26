@@ -1,5 +1,41 @@
 [
     {
+        "speaker_id": "00000000-0000-0000-0000-000000000000",
+        "english_name": "",
+        "image": "default_speaker_icon.png",
+        "email": "",
+        "wiki_el": "",
+        "twitter": "",
+        "greek_name": "ΠΟΛΛΟΙ ΒΟΥΛΕΥΤΕΣ",
+        "simple_name": "ΠΟΛΛΟΙ ΒΟΥΛΕΥΤΕΣ",
+        "wiki_en": "",
+        "website": ""
+    },
+    {
+        "speaker_id": "00000000-0000-0000-0000-000000000001",
+        "english_name": "",
+        "image": "default_speaker_icon.png",
+        "email": "",
+        "wiki_el": "",
+        "twitter": "",
+        "greek_name": "ΜΕΡΙΚΟΙ ΒΟΥΛΕΥΤΕΣ",
+        "simple_name": "ΜΕΡΙΚΟΙ ΒΟΥΛΕΥΤΕΣ",
+        "wiki_en": "",
+        "website": ""
+    },
+    {
+        "speaker_id": "00000000-0000-0000-0000-000000000002",
+        "english_name": "",
+        "image": "default_speaker_icon.png",
+        "email": "",
+        "wiki_el": "",
+        "twitter": "",
+        "greek_name": "ΟΛΟΙ ΟΙ ΒΟΥΛΕΥΤΕΣ",
+        "simple_name": "ΟΛΟΙ ΟΙ ΒΟΥΛΕΥΤΕΣ",
+        "wiki_en": "",
+        "website": ""
+    },
+    {
         "speaker_id": "002483ab-3653-4458-b410-6b0ee380cc76",
         "english_name": "",
         "image": "default_speaker_icon.png",
@@ -139,7 +175,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Γκαρά Γεωργίου Αναστασία (Νατάσα)",
- "simple_name": "Γκαρά Αναστασία",
+        "simple_name": "Γκαρά Αναστασία",
         "wiki_en": "",
         "website": ""
     },
@@ -1039,7 +1075,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Ζούνη Λάμπρου Παναγιώτα (Πέμη)",
- "simple_name": "Ζούνη Παναγιώτα",
+        "simple_name": "Ζούνη Παναγιώτα",
         "wiki_en": "",
         "website": ""
     },
@@ -1204,10 +1240,10 @@
         "english_name": "",
         "image": "default_speaker_icon.png",
         "email": "",
-        "wiki_el": "",
+        "wiki_el": "https://el.wikipedia.org/wiki/%CE%86%CE%BA%CE%B7%CF%82_%CE%A4%CF%83%CE%BF%CF%87%CE%B1%CF%84%CE%B6%CF%8C%CF%80%CE%BF%CF%85%CE%BB%CE%BF%CF%82",
         "twitter": "",
         "greek_name": "Τσοχατζόπουλος Ευαγγέλου Απόστολος - Αθανάσιος",
-        "simple_name": "",
+        "simple_name": "Άκης Τσοχατζόπουλος",
         "wiki_en": "",
         "website": ""
     },
@@ -1219,7 +1255,7 @@
         "wiki_el": "https://el.wikipedia.org/wiki/Μάκης_Βορίδης",
         "twitter": "",
         "greek_name": "Μάκης Βορίδης",
-        "simple_name": "Μάκης Βορίδης",
+        "simple_name": "Μαυρουδής Βορίδης",
         "wiki_en": "https://en.wikipedia.org/wiki/Makis_Voridis",
         "website": "http://www.voridis.gr"
     },
@@ -1615,7 +1651,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Παπακώστα - Σιδηροπούλου Αγγέλου Αικατερίνη",
-        "simple_name": "",
+        "simple_name": "Κατερίνα Παπακώστα",
         "wiki_en": "",
         "website": "http://www.katerinapapakosta.gr"
     },
@@ -1783,7 +1819,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/tasoskourakis",
         "greek_name": "Κουράκης Στυλιανού Αναστάσιος (Τάσος)",
- "simple_name": "Κουράκης Αναστάσιος",
+        "simple_name": "Κουράκης Αναστάσιος",
         "wiki_en": "",
         "website": "http://www.kourakis.gr/"
     },
@@ -1891,7 +1927,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Αλφιέρη Αντωνίου Στυλιανή (Στέλλα)",
- "simple_name": "Αλφιέρη Στυλιανή",
+        "simple_name": "Αλφιέρη Στυλιανή",
         "wiki_en": "",
         "website": ""
     },
@@ -2035,7 +2071,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Αντωνίου Νικολάου Αντωνία (Τόνια)",
- "simple_name": "Αντωνίου Αντωνία",
+        "simple_name": "Αντωνίου Αντωνία",
         "wiki_en": "",
         "website": ""
     },
@@ -2875,7 +2911,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Νικολαϊδου Αρίσταρχου Βαρβάρα (Βέρα)",
- "simple_name": "Νικολαϊδου Βαρβάρα",
+        "simple_name": "Νικολαϊδου Βαρβάρα",
         "wiki_en": "",
         "website": ""
     },
@@ -3043,7 +3079,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Βρεττού Σπυρίδωνα Αγάθη (Ρόζα)",
- "simple_name": "Βρεττού Αγάθη",
+        "simple_name": "Βρεττού Αγάθη",
         "wiki_en": "",
         "website": ""
     },
@@ -3247,7 +3283,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/manoskonsolas",
         "greek_name": "Κόνσολας Νικία Εμμανουήλ (Μάνος)",
- "simple_name": "Κόνσολας Εμμανουήλ",
+        "simple_name": "Κόνσολας Εμμανουήλ",
         "wiki_en": "",
         "website": "http://www.konsolasmanos.gr"
     },
@@ -3727,7 +3763,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Τζαμτζής Συμεών Ιορδάνης (Δάνης)",
- "simple_name": "Τζαμτζής Ιορδάνης",
+        "simple_name": "Τζαμτζής Ιορδάνης",
         "wiki_en": "",
         "website": ""
     },
@@ -7336,10 +7372,10 @@
         "english_name": "",
         "image": "default_speaker_icon.png",
         "email": "",
-        "wiki_el": "",
+        "wiki_el": "https://el.wikipedia.org/wiki/%CE%A3%CE%B1%CE%B4%CE%AF%CE%BA_%CE%91%CF%87%CE%BC%CE%AD%CF%84",
         "twitter": "",
         "greek_name": "Σαδίκ Αμέτ Αμέτ Σαδήκ",
-        "simple_name": "",
+        "simple_name": "Αχμέτ Σαδίκ",
         "wiki_en": "",
         "website": ""
     },
@@ -7408,10 +7444,10 @@
         "english_name": "",
         "image": "default_speaker_icon.png",
         "email": "",
-        "wiki_el": "",
+        "wiki_el": "https://el.wikipedia.org/wiki/%CE%95%CE%BB%CE%AD%CE%BD%CE%B7_%CE%9C%CE%B1%CE%BA%CF%81%CE%AE_-_%CE%98%CE%B5%CE%BF%CE%B4%CF%8E%CF%81%CE%BF%CF%85",
         "twitter": "",
         "greek_name": "Μακρή Θεοδώρου Ευαγγέλου Ελένη",
-        "simple_name": "",
+        "simple_name": "Ελένη Μακρή",
         "wiki_en": "",
         "website": ""
     },
@@ -7663,7 +7699,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Κεφαλίδου Δημητρίου Χαρούλα (Χαρά)",
- "simple_name": "Κεφαλίδου Χαρούλα",
+        "simple_name": "Κεφαλίδου Χαρούλα",
         "wiki_en": "",
         "website": ""
     },
@@ -7795,7 +7831,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Μακρή Μιχαήλ Ζωή (Ζέττα)",
- "simple_name": "Μακρή Ζωή",
+        "simple_name": "Μακρή Ζωή",
         "wiki_en": "",
         "website": ""
     },
@@ -8215,7 +8251,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Βαμβακά Νικολάου Ευγενία (Τζένη)",
- "simple_name": "Βαμβακά Ευγενία",
+        "simple_name": "Βαμβακά Ευγενία",
         "wiki_en": "",
         "website": ""
     },
@@ -8275,7 +8311,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Κατσέλη Πελοπίδα Ελεωνόρα (Νόρα)",
- "simple_name": "Κατσέλη Ελεωνόρα",
+        "simple_name": "Κατσέλη Ελεωνόρα",
         "wiki_en": "",
         "website": ""
     },
@@ -8430,8 +8466,8 @@
         "email": "",
         "wiki_el": "",
         "twitter": "",
-        "greek_name": "Κασίμης Παναγιώτη Θεόδωρος",
-        "simple_name": "Κασίμης Θεόδωρος",
+        "greek_name": "Κασσίμης Παναγιώτη Θεόδωρος",
+        "simple_name": "Κασσίμης Θεόδωρος",
         "wiki_en": "",
         "website": ""
     },
@@ -8479,7 +8515,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Κοκελίδης Ιωάννη Θεόδωρος (Ρούλης)",
- "simple_name": "Κοκελίδης Θεόδωρος",
+        "simple_name": "Κοκελίδης Θεόδωρος",
         "wiki_en": "",
         "website": ""
     },
@@ -9403,7 +9439,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Σκουρολιάκος Λουκά Παναγιώτης (Πάνος)",
- "simple_name": "Σκουρολιάκος Παναγιώτης",
+        "simple_name": "Σκουρολιάκος Παναγιώτης",
         "wiki_en": "",
         "website": ""
     },
@@ -10255,7 +10291,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Λουλέ Κωνσταντίνου Ανδριανή (Νίτσα)",
- "simple_name": "Λουλέ Ανδριανή",
+        "simple_name": "Λουλέ Ανδριανή",
         "wiki_en": "",
         "website": ""
     },
@@ -10819,7 +10855,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/NikosDendias",
         "greek_name": "Δένδιας Σπυρίδωνος Νικόλαος - Γεώργιος",
-        "simple_name": "",
+        "simple_name": "Νικόλαος Δένδιας",
         "wiki_en": "",
         "website": "http://www.nikosdendias.gr"
     },
@@ -10843,7 +10879,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Κουρής Ανδρέα Γεράσιμος (Μάκης)",
- "simple_name": "Κουρής Γεράσιμος",
+        "simple_name": "Κουρής Γεράσιμος",
         "wiki_en": "",
         "website": ""
     },
@@ -10891,7 +10927,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Ασπραδάκης Μιχαήλ Παντελεήμων (Παντελής)",
- "simple_name": "Ασπραδάκης Παντελεήμων",
+        "simple_name": "Ασπραδάκης Παντελεήμων",
         "wiki_en": "",
         "website": ""
     },
@@ -10951,7 +10987,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Τσιόκας Δημητρίου Θεοχάρης (Χάρης)",
- "simple_name": "Τσιόκας Θεοχάρης",
+        "simple_name": "Τσιόκας Θεοχάρης",
         "wiki_en": "",
         "website": ""
     },
@@ -11059,7 +11095,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/ADimoschakis",
         "greek_name": "Δημοσχάκης Σπύρου Αναστάσιος (Τάσος)",
- "simple_name": "Δημοσχάκης Αναστάσιος",
+        "simple_name": "Δημοσχάκης Αναστάσιος",
         "wiki_en": "",
         "website": "http://www.dimoschakis.gr"
     },
@@ -11323,7 +11359,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Θεοχάρης Αθανασίου Θεοχάρης (Χάρης)",
- "simple_name": "Θεοχάρης Θεοχάρης",
+        "simple_name": "Θεοχάρης Θεοχάρης",
         "wiki_en": "",
         "website": "http://www.htheoharis.gr/"
     },
@@ -11863,7 +11899,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/fanis_Kourebes",
         "greek_name": "Κουρεμπές Σπυρίδωνος Θεοφάνης (Φάνης)",
- "simple_name": "Κουρεμπές Θεοφάνης",
+        "simple_name": "Κουρεμπές Θεοφάνης",
         "wiki_en": "",
         "website": ""
     },
@@ -12343,7 +12379,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Παπαγεωργόπουλος Κωνσταντίνου Παναγιώτης (Τάκης)",
- "simple_name": "Παπαγεωργόπουλος Παναγιώτης",
+        "simple_name": "Παπαγεωργόπουλος Παναγιώτης",
         "wiki_en": "",
         "website": ""
     },
@@ -13039,7 +13075,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Ασκητής Ευαγγέλου Αθανάσιος (Νάσος)",
- "simple_name": "Ασκητής Αθανάσιος",
+        "simple_name": "Ασκητής Αθανάσιος",
         "wiki_en": "",
         "website": ""
     },
@@ -13351,7 +13387,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Μερεντίτη Δημητρίου Αθανασία (Σούλα)",
- "simple_name": "Μερεντίτη Αθανασία",
+        "simple_name": "Μερεντίτη Αθανασία",
         "wiki_en": "",
         "website": ""
     },
@@ -13807,7 +13843,7 @@
         "wiki_el": "https://el.wikipedia.org/wiki/Άννα_Μπενάκη_-_Ψαρούδα",
         "twitter": "",
         "greek_name": "Άννα Μπενάκη-Ψαρούδα",
-        "simple_name": "",
+        "simple_name": "Άννα Μπενάκη",
         "wiki_en": "https://en.wikipedia.org/wiki/Anna_Benaki-Psarouda",
         "website": ""
     },
@@ -14167,7 +14203,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Κοταμανίδου Κωνσταντίνου Ευαγγελία (Εύα)",
- "simple_name": "Κοταμανίδου Ευαγγελία",
+        "simple_name": "Κοταμανίδου Ευαγγελία",
         "wiki_en": "",
         "website": ""
     },
@@ -14227,7 +14263,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/TektonidouVoula",
         "greek_name": "Τεκτονίδου Αναστασίου Κυριακή (Βούλα)",
- "simple_name": "Τεκτονίδου Κυριακή",
+        "simple_name": "Τεκτονίδου Κυριακή",
         "wiki_en": "",
         "website": ""
     },
@@ -14395,7 +14431,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Σταθάκης Παντελή Αριστοτέλης (Άρης)",
- "simple_name": "Σταθάκης Αριστοτέλης",
+        "simple_name": "Σταθάκης Αριστοτέλης",
         "wiki_en": "",
         "website": ""
     },
@@ -14467,7 +14503,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Παπαδόπουλος Αποστόλου Αθανάσιος (Σάκης)",
- "simple_name": "Παπαδόπουλος Αθανάσιος",
+        "simple_name": "Παπαδόπουλος Αθανάσιος",
         "wiki_en": "",
         "website": ""
     },
@@ -14767,7 +14803,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Μουτσινάς Ιωάννη Παρίσης (Πάρις)",
- "simple_name": "Μουτσινάς Παρίσης",
+        "simple_name": "Μουτσινάς Παρίσης",
         "wiki_en": "",
         "website": ""
     },
@@ -14803,7 +14839,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Καφαντάρη Φωτίου Χαρούλα (Χαρά)",
- "simple_name": "Καφαντάρη Χαρούλα",
+        "simple_name": "Καφαντάρη Χαρούλα",
         "wiki_en": "",
         "website": "http://kafantari.com"
     },
@@ -15511,7 +15547,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Έξαρχος Θεοφάνη Νικόλαος (Πάκος)",
- "simple_name": "Έξαρχος Νικόλαος",
+        "simple_name": "Έξαρχος Νικόλαος",
         "wiki_en": "",
         "website": ""
     },
@@ -15559,7 +15595,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Γιαννέλλης - Θεοδοσιάδης Ζαφειρίου Ιωάννης",
-        "simple_name": "",
+        "simple_name": "Ιωάννης Γιαννέλλης",
         "wiki_en": "",
         "website": ""
     },
@@ -15775,7 +15811,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/ninemesis",
         "greek_name": "Κασιμάτη Γεωργίου Ειρήνη (Νίνα)",
- "simple_name": "Κασιμάτη Ειρήνη",
+        "simple_name": "Κασιμάτη Ειρήνη",
         "wiki_en": "",
         "website": ""
     },
@@ -15859,7 +15895,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/FKarasarlidou",
         "greek_name": "Καρασαρλίδου Γεωργίου Ευφροσύνη (Φρόσω)",
- "simple_name": "Καρασαρλίδου Ευφροσύνη",
+        "simple_name": "Καρασαρλίδου Ευφροσύνη",
         "wiki_en": "",
         "website": "http://frosokarasarlidou.gr/"
     },
@@ -16279,7 +16315,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Πρατσόλης Κλεάνθη Αναστάσιος (Τάσος)",
- "simple_name": "Πρατσόλης Αναστάσιος",
+        "simple_name": "Πρατσόλης Αναστάσιος",
         "wiki_en": "",
         "website": ""
     },
@@ -16567,7 +16603,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/nmitarakis",
         "greek_name": "Μηταράκης Αντωνίου Παναγιώτης (Νότης)",
- "simple_name": "Μηταράκης Παναγιώτης",
+        "simple_name": "Μηταράκης Παναγιώτης",
         "wiki_en": "",
         "website": "http://www.mitarakis.gr/"
     },
@@ -17575,7 +17611,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Καρακώστα Ελευθερίου Ευαγγελία (Εύη)",
- "simple_name": "Καρακώστα Ευαγγελία",
+        "simple_name": "Καρακώστα Ευαγγελία",
         "wiki_en": "",
         "website": "http://evikarakosta.blogspot.gr"
     },
@@ -17692,10 +17728,10 @@
         "english_name": "",
         "image": "default_speaker_icon.png",
         "email": "",
-        "wiki_el": "",
+        "wiki_el": "https://el.wikipedia.org/wiki/%CE%9D%CF%84%CE%B9%CE%BD%CF%84%CE%AE_%CE%93%CE%B9%CE%B1%CE%BD%CE%BD%CE%BF%CF%80%CE%BF%CF%8D%CE%BB%CE%BF%CF%85",
         "twitter": "",
         "greek_name": "Γιαννοπούλου συζ. Ευαγγέλου Κωνσταντίνα",
-        "simple_name": "",
+        "simple_name": "Ντιντή Γιαννοπούλου",
         "wiki_en": "",
         "website": ""
     },
@@ -17911,7 +17947,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Παπαδημητρίου Θεοδώρου Γεσθημανή (Μάνια)",
- "simple_name": "Παπαδημητρίου Γεσθημανή",
+        "simple_name": "Παπαδημητρίου Γεσθημανή",
         "wiki_en": "",
         "website": ""
     },
@@ -18055,7 +18091,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/annetakavadia",
         "greek_name": "Καββαδία Σωκράτη Ιωαννέτα (Αννέτα)",
- "simple_name": "Καββαδία Ιωαννέτα",
+        "simple_name": "Καββαδία Ιωαννέτα",
         "wiki_en": "",
         "website": ""
     },
@@ -19135,7 +19171,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Γιαννακοπούλου Ιωάννη Κωνσταντίνα (Νάντια)",
- "simple_name": "Γιαννακοπούλου Κωνσταντίνα",
+        "simple_name": "Γιαννακοπούλου Κωνσταντίνα",
         "wiki_en": "",
         "website": ""
     },
@@ -19147,7 +19183,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Βρεττός Σπυρίδωνος Κωνσταντίνος (Ντίνος)",
- "simple_name": "Βρεττός Κωνσταντίνος",
+        "simple_name": "Βρεττός Κωνσταντίνος",
         "wiki_en": "",
         "website": ""
     },
@@ -19699,7 +19735,7 @@
         "wiki_el": "",
         "twitter": "https://twitter.com/s_leoutsakos",
         "greek_name": "Λεουτσάκος Πιέρρου Ευστάθιος (Στάθης)",
- "simple_name": "Λεουτσάκος Ευστάθιος",
+        "simple_name": "Λεουτσάκος Ευστάθιος",
         "wiki_en": "",
         "website": ""
     },
@@ -19831,7 +19867,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Νικολάου Βασιλείου Κωνσταντίνος (Κώστας)",
- "simple_name": "Νικολάου Κωνσταντίνος",
+        "simple_name": "Νικολάου Κωνσταντίνος",
         "wiki_en": "",
         "website": ""
     },
@@ -20095,7 +20131,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Καφαντάρη Ηλία Ευθαλία (Λίλα)",
- "simple_name": "Καφαντάρη Ευθαλία",
+        "simple_name": "Καφαντάρη Ευθαλία",
         "wiki_en": "",
         "website": ""
     },
@@ -20407,7 +20443,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Δημητρουλόπουλος Πανταζή Παναγιώτης (Τάκης)",
- "simple_name": "Δημητρουλόπουλος Παναγιώτης",
+        "simple_name": "Δημητρουλόπουλος Παναγιώτης",
         "wiki_en": "",
         "website": ""
     },
@@ -20707,7 +20743,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Βαγιωνάκη Νικολάου Ευαγγελία (Βάλια)",
- "simple_name": "Βαγιωνάκη Ευαγγελία",
+        "simple_name": "Βαγιωνάκη Ευαγγελία",
         "wiki_en": "",
         "website": "https://www.facebook.com/valia.vagionaki/"
     },
@@ -20959,7 +20995,7 @@
         "wiki_el": "",
         "twitter": "",
         "greek_name": "Γαληνός Μιχαήλ Σπυρίδων (Σπύρος)",
- "simple_name": "Γαληνός Σπυρίδων",
+        "simple_name": "Γαληνός Σπυρίδων",
         "wiki_en": "",
         "website": ""
     },
@@ -21040,10 +21076,10 @@
         "english_name": "",
         "image": "default_speaker_icon.png",
         "email": "",
-        "wiki_el": "",
+        "wiki_el": "https://el.wikipedia.org/wiki/%CE%95%CF%85%CE%AC%CE%B3%CE%B3%CE%B5%CE%BB%CE%BF%CF%82_%CE%91%CE%B2%CE%AD%CF%81%CF%89%CF%86",
         "twitter": "",
         "greek_name": "Αβέρωφ - Τοσίτσας Αναστασίου Ευάγγελος",
-        "simple_name": "",
+        "simple_name": "Ευάγγελος Αβέρωφ",
         "wiki_en": "",
         "website": ""
     },
