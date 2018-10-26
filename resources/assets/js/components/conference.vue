@@ -32,27 +32,48 @@
             </transition>
             <div v-if="ajaxDoneConfInfo">
                 <div class="conference-title-box py-4 pl-4">
-                    <h2 class="font-weight-bold">Conference · {{conf_date}}</h2>
+                    <h2 class="font-weight-bold">Συνεδρίαση · {{conf_date}}</h2>
                     <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
                     <div>{{ajaxData.conferenceInfo.data.data.time_period}}</div>
                 </div>
-                <div class="col-12 pt-3">
-                    <span v-if="ajaxData.conferenceInfo">
-                        <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.pdf_loc + '/' + ajaxData.conferenceInfo.data.data.pdf_name">
-                            Download PDF <i class="fas fa-file-pdf" style="color: #dc3545;"></i>
-                        </a>
-                        <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.doc_location + '/' + ajaxData.conferenceInfo.data.data.doc_name">
-                            Download word <i class="fas fa-file-word" style="color: #007bff;"></i>
-                        </a>
-                    </span>
-                </div>
-                <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12">
-                    <div v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
-                        <speech :speech="conference"></speech>
+                <div class="row w-100">
+                    <div class="col-12 pt-3">
+                        <span v-if="ajaxData.conferenceInfo">
+                            <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.pdf_loc + '/' + ajaxData.conferenceInfo.data.data.pdf_name">
+                                Αρχείο PDF <i class="fas fa-file-pdf" style="color: #dc3545;"></i>
+                            </a>
+                            <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.doc_location + '/' + ajaxData.conferenceInfo.data.data.doc_name">
+                                Αρχείο word <i class="fas fa-file-word" style="color: #007bff;"></i>
+                            </a>
+                        </span>
                     </div>
-                </div>
-                <div v-else>
-                    <h4>No speeches available</h4>
+                    <div class="col-12 pl-3">
+                        <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
+                            <span slot="prev-nav">&lt;</span>
+                            <span slot="next-nav">&gt;</span>
+                        </pagination>
+                        <vs-input
+                            vs-icon="search" 
+                            placeholder="Αναζήτηση" 
+                            v-model.trim="search_string"
+                            @keypress.enter="searchConferenceSpeeches"
+                            style="width: 235px;color:inherit;"
+                        />
+                    </div>
+                    <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
+                            <speech :speech="conference"></speech>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <h4>Δεν υπάρχουν διαθέσιμες ομιλίες</h4>
+                    </div>
+                    <div class="col-12" style="padding-left: 2.5rem;">
+                        <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
+                            <span slot="prev-nav">&lt;</span>
+                            <span slot="next-nav">&gt;</span>
+                        </pagination>
+                    </div>
                 </div>
             </div>
             <div v-else class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -129,10 +150,40 @@
                 noDataConfSpeeches: true,
                 isLoaded: false,
                 showChart: false,
-                startInterval: false
+                startInterval: false,
+                search_string: null,
             }
         },
         methods:{
+            searchConferenceSpeeches() {
+                const self = this
+
+                if(self.search_string === ''){
+                    self.getConferenceSpeeches();
+                }
+                this.ajaxData.isLoaded = false
+                setTimeout(() => {
+                    api.call('get', this.api_path + 'conference/' + self.conf_date + '/speeches/search/' + self.search_string)
+                        .then( response => {
+                            if (response.status == 200) {
+                                self.noDataConfSpeeches = false
+                                self.ajaxData.conferenceData = response
+                                self.ajaxData.isLoaded = true
+                            } else {
+                                self.noDataConfSpeeches = true
+                            }
+
+                            self.ajaxDoneConfSpeeches = true
+                        })
+                }, 500)
+            },
+            changePage(page) {
+                var self = this;
+                axios.get(this.api_path + 'conference/' + this.conf_date + '/speeches?page=' + page)
+                .then(function(response) {
+                    self.ajaxData.conferenceData = response;
+                })
+            },
             isJsonString(str) {
                 //decode JSON
                 var json;
