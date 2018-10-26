@@ -111,4 +111,44 @@ class SpeechesController extends Controller
             return $this->apiHelper::returnResource('Speech', $speeches);
         }
     }
+
+    public function fulltextSearchSpeechesByConferenceDate($date, $input)
+    {
+        if (isset($date) && is_string($date) && isset($input) && is_string($input)) {
+
+            // Convert string to date object
+            $date = date($date);
+
+            $exp = explode(' ', $input);
+
+            $s = '';
+            $c = 1;
+            foreach ($exp AS $e)
+            {
+                $s .= "+$e*";
+
+                if ($c + 1 == count($exp))
+                    $s .= ' ';
+
+                $c++;
+            }
+
+            $query = "MATCH (speech) AGAINST ('$s' IN BOOLEAN MODE)";
+            // $query looks like 
+            // + is for AND 
+            // - is for NOT
+            // MATCH (speech) AGAINST ('+Μνημόνιο* +Σύριζα*' IN BOOLEAN MODE)
+
+            $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
+                ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
+                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
+                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
+                ->select(['sp.speaker_id', 'conf.conference_date', 'sp.greek_name', 'sp.english_name', 'speeches.speech_id', 'speeches.speech', 'sp.image', 'm.on_behalf_of_id', 'parties.fullname_el'])
+                ->groupBy('speeches.speech_id')
+                ->whereRaw($query)
+                ->where('speeches.speech_conference_date', '=', $date)
+                ->paginate(25);
+        }
+        return $this->apiHelper::returnResource('Speech', $speeches);
+    }
 }
