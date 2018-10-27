@@ -2,10 +2,10 @@
     <div class="container">
         <div class="conferences-container">
             <div v-if="ajaxDone">
-                <div class="conference-title-box mb-4">
-                    <h2 class="font-weight-bold text-center">Latest conferences</h2>
-                </div>
-                <div class="row">
+                <!-- <div class="conference-title-box mb-4">
+                    <h2 class="font-weight-bold text-center">Συνεδριάσεις</h2>
+                </div> -->
+                <div class="row pt-2">
                     <div class="col-12 col-sm-6 col-md-6 col-lg-8">
                         <div 
                             v-if="ajaxData.conferenceData.data.data && !noData && !singleDate" 

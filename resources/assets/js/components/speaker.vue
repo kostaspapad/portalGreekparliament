@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <div class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
+        <!-- <div class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
             <span v-if="!showChart">Show chart</span>
             <span v-else class="hide-letters">Hide Chart</span>
-        </div>
-        <transition name="slide-fade">
+        </div> -->
+        <!-- <transition name="slide-fade">
             <div class="small m-auto" v-if="showChart">
                 <line-chart 
                     v-if="ajaxData.isLoaded"
@@ -16,7 +16,7 @@
                 >
                 </line-chart>
             </div>
-        </transition>
+        </transition> -->
         <div class="speaker-container">
             <div v-if="ajaxDoneSpeaker" class="row mr-0">
                 <div class="w-100 bg-img">
