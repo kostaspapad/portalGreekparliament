@@ -185,7 +185,7 @@
             changePage(page) {
                 var self = this;
                 
-                axios.get(this.api_path+'speakers?page=' + page + '&order_field='+this.order_field+'&orientation=asc')
+                axios.get(this.api_path+'speakers?page=' + page + '&order_field='+this.order_field+'&orientation='+this.order_orientation)
                 .then(function(response) {
                     self.ajaxData.speakersData = response;
                 })
