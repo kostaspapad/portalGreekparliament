@@ -9,17 +9,6 @@
             </div>
             <transition v-if="user" name="slide-fade">
                 <div class=" m-auto" v-if="showChart">
-                    <!-- <vue-frappe
-                        v-if="isLoaded"
-                        id="my-chart-id"
-                        title="Frappe"
-                        type="pie"
-                        :labels="ajaxData.party_count_speeches.party_names"
-                        :lineOptions="{regionFill: 1}"
-                        :colors="ajaxData.party_count_speeches.party_colors"
-                        :dataSets="[{values: ajaxData.party_count_speeches.party_count}]"
-                        :maxSlices="10"
-                    ></vue-frappe> -->
                     <pie-chart 
                         v-if="isLoaded"
                         :chart-data="ajaxData.party_count_speeches.party_count" 
@@ -152,6 +141,8 @@
                 showChart: false,
                 startInterval: false,
                 search_string: null,
+                order_orientation: 'desc',
+                order_field: 'conference_date'
             }
         },
         methods:{
@@ -179,7 +170,10 @@
             },
             changePage(page) {
                 var self = this;
-                axios.get(this.api_path + 'conference/' + this.conf_date + '/speeches?page=' + page)
+                axios.get(this.api_path + 
+                    'conference/' + this.conf_date + 
+                    '/speeches?page=' + page
+                )
                 .then(function(response) {
                     self.ajaxData.conferenceData = response;
                 })
@@ -272,6 +266,7 @@
             this.$route.params.conference_date ? this.conf_date = this.$route.params.conference_date : null          
             this.getConferenceInfo()
             this.getConferenceSpeeches()
+            
             if(this.user){
                 this.getPartyCountByConference()
                 

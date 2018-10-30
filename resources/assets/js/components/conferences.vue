@@ -7,7 +7,19 @@
                 </div> -->
                 <div class="row pt-2">
                     <div class="col-12 col-sm-6 col-md-6 col-lg-8">
-                        <div 
+                        <div v-if="ajaxData.conferenceData.data.data && !noData && !singleDate" class="p-4 bg-white conference-content-box"
+                            v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
+                            <router-link :to="'/conference/' + conference.conference_date + '/speeches'">
+                                <h3>
+                                    {{conference.conference_date}}
+                                </h3>
+                                <div>
+                                    <p style="margin: 0;">{{conference.session}}</p>
+                                    <span>{{conference.time_period}}</span>
+                                </div>
+                            </router-link>
+                        </div>
+                        <!-- <div 
                             v-if="ajaxData.conferenceData.data.data && !noData && !singleDate" 
                             class="p-4 bg-white conference-content-box"
                             v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id" 
@@ -21,7 +33,7 @@
                                 <p style="margin: 0;">{{conference.session}}</p>
                                 <span>{{conference.time_period}}</span>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div v-if="singleDate && !noData" class="p-4 bg-white conference-content-box">
                             <h3 class="show-details-dates">
@@ -40,10 +52,9 @@
                             </pagination>
                         </div>
                         <div v-show="noData" class="col-12 col-sm-6 col-md-6 col-lg-8">
-                            <h4>No data available</h4>
+                            <h4>Δεν υπάρχουν διαθέσιμες συνεδριάσεις</h4>
                         </div>
                     </div>
-
                     <div class="datepicker col-12 col-sm-6 col-md-6 col-lg-4">
                         <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" style="float:right;"><i class="fa fa-info-circle info-icon"></i></span>
                         <transition name="slide-fade">
@@ -51,60 +62,33 @@
                                 <button @click="showInfoDiv = !showInfoDiv" type="button" class="close" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <h4 class="alert-heading">Informations</h4>
-                                <p>You can choose to select between one date or a range of dates.</p>
+                                <h4 class="alert-heading">Αναζήτηση</h4>
+                                <p>Επιλέξτε ένα εύρος ημερομηνιών ή μια συγκεκριμένη ημερομηνία</p>
                             </div>
                         </transition>
                         <div style="text-align:left;">
-                            <!-- <toggle-button id="changed-font" v-model="isMultipleFilter" color="#82C7EB" :labels="{checked: 'Range of Dates', unchecked: 'Single Date'}"
-                                :width="140" /> -->
                             <vs-switch vs-color="#82C7EB" v-model="isMultipleFilter">
-                                <span slot="on" class="switch-font">Range of Dates</span>
-                                <span slot="off" class="switch-font">Single Date</span>
+                                <span slot="on" class="switch-font">Από έως</span>
+                                <span slot="off" class="switch-font">Ημερομηνία</span>
                             </vs-switch>
                         </div>
                         <div v-if="isMultipleFilter" style="background-color: ;">
-                            <!-- <multiselect 
-                            v-model="selected_date" 
-                            :options="ajaxData.conferenceData" 
-                            track-by="conference_date"
-                            label="conference_date"
-                            placeholder="Select Date"
-                            :multiple="true" 
-                            :close-on-select="false" 
-                            :clear-on-select="false" 
-                            :hide-selected="true" 
-                            :preserve-search="true"
-                            :closeOnSelect="true"
-                            @select="getDatesDp"
-                            @remove="removeOption"
-                        >
-                            <template slot="tag" slot-scope="props">
-                                <span class="custom__tag">
-                                    <span>{{ props.option.conference_date }}</span>
-                                    <span class="custom__remove" @click="props.remove(props.option)">❌</span>
-                                </span>
-                            </template>
-                        </multiselect> -->
-                            <!-- <div v-show="selected_date.length" style="text-align: left;">
-                            <button @click="resetDates" class="btn btn-sm reset-btn" style="margin-top: 5px;">Reset</button>
-                        </div> -->
-                            <label>Start Date</label>
+                            <label>Από</label>
                             <datepicker v-model="startDate" :format="myFormattedDate" :bootstrap-styling="true"
                                 wrapper-class="pickerDiv" placeholder="Select start date"></datepicker>
-                            <label>End Date</label>
+                            <label>Έως</label>
                             <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true"
                                 wrapper-class="pickerDiv" placeholder="Select end date"></datepicker>
                             <div style="text-align: left;">
-                                <button class="btn reset-btn" @click="getDates" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">Apply</button>
+                                <button class="btn reset-btn" @click="getDates" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">Καταχώριση</button>
                             </div>
                         </div>
                         <div v-else style="text-align: left;">
-                            <label>Select Date</label>
+                            <label>Επιλέξτε ημερομηνία</label>
                             <datepicker v-model="singleDate" :format="myFormattedDate" :bootstrap-styling="true"
                                 wrapper-class="pickerDiv" placeholder="Select date"></datepicker>
                             <div style="text-align: left;">
-                                <button class="btn reset-btn" @click="getDate" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">Apply</button>
+                                <button class="btn reset-btn" @click="getDate" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">Καταχώριση</button>
                             </div>
                         </div>
                     </div>
@@ -223,8 +207,11 @@
                 var self = this
                 let url = null
                 if (this.startDate && this.endDate) {
-                    url = 'conference/start/' + this.startDate + '/end/' + this.endDate + '?page=' + page + '&order_field=' + this.order_field 
-                            + '&orientation=' + this.order_orientation
+                    url = 'conference/start/' + this.startDate + 
+                          '/end/' + this.endDate + 
+                          '?page=' + page + 
+                          '&order_field=' + this.order_field +
+                          '&orientation=' + this.order_orientation
                 } else {
                     url = 'conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' +
                         this.order_orientation
