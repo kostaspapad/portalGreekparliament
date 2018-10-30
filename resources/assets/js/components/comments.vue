@@ -17,7 +17,7 @@
             />
         </div>
         <div class="send-comment text-right mt-1 mr-1">
-            <button @click="sendComment" :disabled="isDisabled" :class="{ 'not-allowed': isDisabled }" class="btn comment-send-button">
+            <button @click="sendComment" :disabled="isDisabled" :class="{ 'not-allowed': isDisabled }" class="btn send-button">
                 Send <i class="fas fa-paper-plane"></i> 
             </button>
         </div>
@@ -32,12 +32,6 @@
         width: 100%;
         border-radius: 20px;
         resize: none;
-    }
-    .comment-send-button {
-        // background-color: #CD5C5C;
-        // background-color: salmon;
-        background: #1ABC9C;
-        color: white;
     }
     .comments-scroll {
         height: 350px;

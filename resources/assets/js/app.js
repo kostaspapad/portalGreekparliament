@@ -43,9 +43,10 @@ import search from './components/searchSpeaker.vue'
 import speech from './components/speech.vue'
 import comments from './components/comments.vue'
 import PieChart from './Chart_Components/pie_chart.js'
-import LineChart from './Chart_Components/line_chart.js'
+// import LineChart from './Chart_Components/line_chart.js'
 import DashboardTableBody from './components/dashboard_table_body.vue'
 import TransitionExpand from './other_components/transition-expand.vue'
+import Modal from './components/modal.vue'
 
 
 import 'vuesax/dist/vuesax.css' //Vuesax styles
@@ -89,7 +90,8 @@ Vue.component('vue-layout', require('./views/Layout.vue'))
 Vue.component('comments', comments)
 Vue.component('TextareaAutogrow', TextareaAutogrow)
 Vue.component('pie-chart', PieChart)
-Vue.component('line-chart', LineChart)
+// Vue.component('line-chart', LineChart)
+Vue.component('modal', Modal)
 Vue.component('expand-table-data', DashboardTableBody)
 Vue.component('transition-expand', TransitionExpand)
 

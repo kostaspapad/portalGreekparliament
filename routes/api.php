@@ -42,6 +42,9 @@ Route::get('/user', function (Request $request) {
 
             //getPartyCountByConference
             Route::get('conferences/count-party-speeches/{conf_date}', 'Api\v1\ConferencesController@getPartyCountByConference');
+
+            //reports
+            Route::post('reports/create', 'Api\v1\ReportsController@store');
             
             Route::post('logout', 'Api\v1\ApiAuthController@logout');
         });

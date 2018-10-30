@@ -1,8 +1,8 @@
 <template>
     <transition name="modal">
         <div>
-            <div :class="'modal ' + modalClasses" tabindex="-1" role="dialog" aria-labelledby="Modal" style="display: block" @click.stop="closeBackdrop">
-                <div :class="'modal-dialog ' + modalSizeClasses" role="document" @click.stop="closeBackdrop">
+            <div :class="'modal ' + modalClasses" tabindex="-1" role="dialog" aria-labelledby="Modal" style="display: block">
+                <div :class="'modal-dialog ' + modalSizeClasses" role="document" >
                     <div class="modal-content">
 
                         <div class="modal-header" v-if="hasHeader">
@@ -14,6 +14,12 @@
                         </div>
 
                         <slot></slot>
+
+                        <div class="modal-bottom-content text-right p-3">
+                            <button type="button" class="btn btn-close" aria-label="Close" @click="close">
+                               Close
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -24,6 +30,13 @@
 </template>
 
 <style lang="scss" scoped>
+    .modal-bottom-content{
+        border-top: 1px solid #e9ecef;
+        .btn-close {
+            background-color: rgb(255, 71, 87);
+            color:  white;
+        }
+    }
     .modal {
         overflow-x: hidden;
         overflow-y: auto;
@@ -54,10 +67,10 @@
 <script type="text/babel">
     export default {
         props: {
-            "speaker": {
-                type: Object,
-                default: () => {}
-            },
+            // "speaker": {
+            //     type: Object,
+            //     default: () => {}
+            // },
             "title": {default: ""},
             "modalClasses": {default: ""},
             "isLarge": {default: false},
