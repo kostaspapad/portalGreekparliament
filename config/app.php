@@ -164,7 +164,10 @@ return [
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
 
         //Localization
-        MartinLindhe\VueInternationalizationGenerator\GeneratorProvider::class
+        MartinLindhe\VueInternationalizationGenerator\GeneratorProvider::class,
+
+        // Cors
+        Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*
