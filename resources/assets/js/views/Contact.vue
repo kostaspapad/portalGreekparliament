@@ -1,29 +1,24 @@
 <template>
     <div>
         <div class="row justify-content-center mr-0">
-            <!-- <div class="col-md-8"> -->
             <div style="width: 750px;">
                 <div class="card">
-                    <div class="card-header text-center">Contact us</div>
+                    <div class="card-header text-center">{{ $t("contact.title") }}</div>
                     <div class="card-body">
                         <form v-on:submit.prevent="contact" aria-label="contact">
                             <div class="form-group">
-                                <!-- <label for="name" class="col-sm-4 col-form-label text-md-right">{{$t("contact.input_name")}}</label> -->
                                 <div class="col-md-6 m-auto">
                                     <input 
-                                        v-model.trim="$v.name.$model" 
-                                        id="name`" 
-                                        type="name" 
-                                        class="form-control"
-                                        name="name" 
-                                        required
-                                        :placeholder="$t('contact.input_name')"
-                                    >
+                                    v-model.trim="$v.name.$model" 
+                                    id="name`" 
+                                    type="name" 
+                                    class="form-control"
+                                    name="name" 
+                                    required
+                                    :placeholder="$t('contact.input_name')">
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                <!-- <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label> -->
                                 <div class="col-md-6 m-auto">
                                     <input 
                                         v-model.trim="$v.email.$model" 
@@ -36,11 +31,8 @@
                                     >
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                <!-- <label for="message" class="col-md-4 col-form-label text-md-right">{{$t("contact.input_message")}}</label> -->
                                 <div class="col-md-6 m-auto">
-                                    <!-- <input v-model.trim="$v.password.$model" id="password" type="password" class="form-control" name="password" required> -->
                                     <textarea 
                                         v-model.trim="$v.message.$model"
                                         id="message"
@@ -53,16 +45,14 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <!-- <div class="col-md-8 offset-md-4"> -->
-                                    <button type="submit" class="btn btn-info" :disabled="!$v.email.email" :class="{ 'not-allowed': !$v.email.email }">
-                                        Submit
-                                    </button>
-                                <!-- </div> -->
+                                <button type="submit" class="btn btn-info" :disabled="!$v.email.email" :class="{ 'not-allowed': !$v.email.email }">
+                                    {{ $t("contact.submit") }}
+                                </button>
                             </div>
                         </form>
-                        <div class="error" v-if="!$v.email.email">Email is not valid (e.g , test@mail.com)</div>
-                        <p class="error" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
-                        <p class="ok" v-if="submitStatus === 'OK'">Message sent</p>
+                        <div class="error" v-if="!$v.email.email">{{ $t("contact.mail_example") }}</div>
+                        <p class="error" v-if="submitStatus === 'ERROR'">{{ $t("contact.form_err") }}</p>
+                        <p class="ok" v-if="submitStatus === 'OK'">{{ $t("contact.submit_ok") }}</p>
                         <p class="error">{{error_msg}}</p>
                     </div>
                 </div>
@@ -70,12 +60,6 @@
         </div>
     </div>
 </template>
-
-<style scoped>
-    
-</style>
-
-
 <script>
     import { required, minLength, email } from 'vuelidate/lib/validators'
     export default {
