@@ -32,4 +32,8 @@ class Speech extends Model
     public function comments(){
         return $this->hasMany('App\Models\Comment' , 'speech_id' , 'speech_id');
     }
+
+    public function reports(){
+        return $this->hasMany('App\Models\Report' , 'speech_id' , 'speech_id');
+    }
 }

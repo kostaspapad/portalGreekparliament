@@ -30,11 +30,30 @@
                         <span v-if="!isCommentOn" class="show-letters">Show comments</span>
                         <span v-else class="hide-letters">Hide comments</span>
                     </div>
+                    <div class="d-inline-block report-button">
+                        <vs-button color="rgb(255, 71, 87)" type="filled" @click="addReport" style="padding: 1vh;">Report</vs-button>
+                    </div>
                     <transition name="slide-fade">
                         <div v-if="isCommentOn">
                             <comments :speech_id="speech_data.speech_id"></comments>
                         </div>
                     </transition>
+                    <modal v-if="showModal" title="Make a report" @close="closeModal" isLarge="true">
+                        <slot>
+                            <div class="modal-report-area">
+                                <TextareaAutogrow 
+                                    v-model="report_text"
+                                    placeholder="Type your report"
+                                    classes="form-control form-control-line textarea"
+                                />
+                                <div class="mt-2 text-right">
+                                    <button @click="sendReport" :disabled="isDisabled" :class="{ 'not-allowed': isDisabled }" class="btn send-button">
+                                        Send <i class="fas fa-paper-plane"></i> 
+                                    </button>
+                                </div>
+                            </div>
+                        </slot>
+                    </modal>
                 </div>
             </div>
         </div>
@@ -118,6 +137,13 @@
         //     }
         // }
     }
+    .report-button{
+        position: absolute;
+        right: 24px;
+    }
+    .modal-report-area{
+        padding: 3em;
+    }
 </style>
 <script>
     import { mapState, mapGetters } from 'vuex'
@@ -129,13 +155,41 @@
             return {
                 isCommentOn: false,
                 speech_data: null,
-                isDone: false
+                isDone: false,
+                showModal: false,
+                report_text: ''
             }
         },
         methods: {
-            
+            addReport() {
+                this.showModal = true
+            },
+            closeModal(){
+                this.showModal = false
+            },
+            clearVariables() {
+                this.report_text = ''
+            },
+            sendReport(){
+                if(this.report_text){
+                    let data = {
+                        speech_id: this.speech_data.speech_id,
+                        issue: this.report_text
+                    }
+                    api.call('post',this.api_path + 'reports/create',data)
+                    .then( data => {
+                        if(data.data.msg == "Report Submitted" && data.statusText == "Created" && data.status == 201){
+                            this.closeModal()
+                            this.clearVariables()
+                        }
+                    })
+                }
+            }
         },
         computed: {
+            isDisabled(){
+                return this.report_text ? false : true
+            },
             getPartyColor() {
                 return {
                     'color': this.speech_data.party_color
