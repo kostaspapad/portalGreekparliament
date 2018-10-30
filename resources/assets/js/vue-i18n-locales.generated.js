@@ -19,8 +19,16 @@ export default {
         },
         "conferences": {
             "datepicker": {
-                
-            }
+                "select_date_ranges": "Επιλέξτε ένα εύρος ημερομηνιών ή μια συγκεκριμένη ημερομηνία",
+                "from": "Από",
+                "to": "Έως",
+                "from_to": "Από έως",
+                "date": "Ημερομηνία",
+                "select_single_date": "Επιλέξτε ημερομηνία",
+                "submit": "Καταχώριση"
+            },
+            "search": "Αναζήτηση",
+            "no_conferences_available": "Δεν υπάρχουν διαθέσιμες συνεδριάσεις",
         },
         "parties": {
             
