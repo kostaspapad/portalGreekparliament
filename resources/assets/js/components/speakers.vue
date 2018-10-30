@@ -7,19 +7,19 @@
             <div class="col-12 text-left mt-2 mb-2">
                 <ul class="sort-ul">
                     <li>
-                        <strong>Sorted by </strong>
-                        <span v-if="order_field == 'greek_name' ">Name</span>
-                        <span v-else>Party</span>
+                        <strong>{{ $t("speakers.sort_by") }}</strong>
+                        <span v-if="order_field == 'greek_name' ">{{ $t("speakers.name") }}</span>
+                        <span v-else>{{ $t("speakers.party") }}</span>
                         <span>({{order_orientation | capitalizeAll}})</span>
                         <span @click=sortBy(order_field,order_orientation)><i class="fa fa-sort pointer"></i></span>
                     </li>
                     <li v-if="order_field == 'greek_name' ">
-                        <span>Sort by </span>
-                        <span class="sort-text" @click="sortBy('fullname_el')">Party</span>
+                        <span>{{ $t("speakers.sort_by") }}</span>
+                        <span class="sort-text" @click="sortBy('fullname_el')">{{ $t("speakers.party") }}</span>
                     </li>
                     <li v-else>
-                        <span>Sort by </span>
-                        <span class="sort-text" @click="sortBy('greek_name')">Name</span>
+                        <span>{{ $t("speakers.sort_by") }}</span>
+                        <span class="sort-text" @click="sortBy('greek_name')">{{ $t("speakers.name") }}</span>
                     </li>
                 </ul>
             </div>
@@ -185,7 +185,11 @@
             changePage(page) {
                 var self = this;
                 
-                axios.get(this.api_path+'speakers?page=' + page + '&order_field='+this.order_field+'&orientation='+this.order_orientation)
+                axios.get(this.api_path + 
+                    'speakers?page=' + page + 
+                    '&order_field=' + this.order_field + 
+                    '&orientation='+this.order_orientation
+                )
                 .then(function(response) {
                     self.ajaxData.speakersData = response;
                 })

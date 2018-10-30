@@ -279,9 +279,9 @@
                         })
                 }, 500)
             },
-            searchPartySpeeches() {
-                return
-            }
+            // searchPartySpeeches() {
+            //     return
+            // }
         },
         computed:{
             ...mapGetters({

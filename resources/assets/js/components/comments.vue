@@ -18,7 +18,7 @@
         </div>
         <div class="send-comment text-right mt-1 mr-1">
             <button @click="sendComment" :disabled="isDisabled" :class="{ 'not-allowed': isDisabled }" class="btn send-button">
-                Send <i class="fas fa-paper-plane"></i> 
+                {{ $t("comments.submit") }} <i class="fas fa-paper-plane"></i> 
             </button>
         </div>
     </div>

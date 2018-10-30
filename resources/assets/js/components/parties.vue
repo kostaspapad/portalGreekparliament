@@ -1,24 +1,6 @@
 <template>
     <div class="container">
         <div v-if="!loading" class="row parties-bg">
-            <!-- Search box -->
-            <!--<div class="mt-5 col-12 col-md-6 party-search">
-                <div class="input-group mb-3" style="width:275px;">
-                    <input v-model.trim="search_msg" 
-                        @keypress.enter="findParty" 
-                        type="text" 
-                        class="form-control py-2 border-right-0 border" 
-                        placeholder="Search" 
-                        style="/*width:200px;*/"/>
-                    <div class="input-group-append">
-                        <span class="input-group-text bg-transparent"><i class="fa fa-search"></i></span>
-                    </div>
-                    <div style="margin: 2px 0 0 5px;">
-                        <button @click="findParty" class="btn" style="background-color:#17a2b8;color:white;">Search</button>
-                    </div>
-                </div>
-            </div>--> <!-- Search box -->
-
             <div class="row w-100"> <!-- Parties loop -->
                 <div class="row w-100">
                     <div class="col-12 party"
@@ -27,7 +9,6 @@
                         @click="redirectToParty(party.fullname_el)"
                         style="margin-bottom: 15px">
                         <router-link :to="/party/ + party.fullname_el" class="party-link">
-                        <!-- <a :href="/party/ + party.fullname_el" class="party-link"> -->
                         <img :src=" '/img/parties/' + printImg(party.image) " class="party-img">
                         <h2 class="party-name text-left">{{party.fullname_el}}</h2>
                             <!--<p class="party-membership text-left">

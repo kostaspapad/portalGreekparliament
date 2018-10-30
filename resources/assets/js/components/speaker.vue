@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
                                 <div v-else>
-                                    <h5>No speeches found</h5>
+                                    <h5>{{ $t("speakers.speaker.no_speeches_available") }}</h5>
                                 </div>
                             </div>
                         </vs-tab>

@@ -3,8 +3,8 @@
         <div class="conferences-container">
             <div v-if="user" class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
                 <!-- <button class="btn mb-2 chart-btn"  style="background-color: #acd9ff;"> -->
-                    <span v-if="!showChart">Show chart</span>
-                    <span v-else class="hide-letters">Hide Chart</span>
+                    <span v-if="!showChart">{{ $t("conferences.conference.show_chart") }}</span>
+                    <span v-else class="hide-letters">{{ $t("conferences.conference.hide_chart") }}</span>
                 <!-- </button> -->
             </div>
             <transition v-if="user" name="slide-fade">
@@ -21,7 +21,7 @@
             </transition>
             <div v-if="ajaxDoneConfInfo">
                 <div class="conference-title-box py-4 pl-4">
-                    <h2 class="font-weight-bold">Συνεδρίαση · {{conf_date}}</h2>
+                    <h2 class="font-weight-bold">{{ $t("conferences.conference.conference") }} · {{conf_date}}</h2>
                     <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
                     <div>{{ajaxData.conferenceInfo.data.data.time_period}}</div>
                 </div>
@@ -29,10 +29,10 @@
                     <div class="col-12 pt-3">
                         <span v-if="ajaxData.conferenceInfo">
                             <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.pdf_loc + '/' + ajaxData.conferenceInfo.data.data.pdf_name">
-                                Αρχείο PDF <i class="fas fa-file-pdf" style="color: #dc3545;"></i>
+                                {{ $t("conferences.conference.pdf") }} <i class="fas fa-file-pdf" style="color: #dc3545;"></i>
                             </a>
                             <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.doc_location + '/' + ajaxData.conferenceInfo.data.data.doc_name">
-                                Αρχείο word <i class="fas fa-file-word" style="color: #007bff;"></i>
+                                {{ $t("conferences.conference.word") }} <i class="fas fa-file-word" style="color: #007bff;"></i>
                             </a>
                         </span>
                     </div>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div v-else>
-                        <h4>Δεν υπάρχουν διαθέσιμες ομιλίες</h4>
+                        <h4>{{ $t("conferences.conference.no_speeches_avail") }}</h4>
                     </div>
                     <div class="col-12" style="padding-left: 2.5rem;">
                         <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>

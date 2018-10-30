@@ -2,7 +2,7 @@
     <div class="multiselect-div">
         <custom-multiselect 
         v-model="speaker_name" 
-        placeholder="Type to search" 
+        placeholder="Πληκτρολογίστε για αναζήτηση" 
         open-direction="bottom" 
         :options="ajaxData.search_data"
         track-by="speaker_id"
@@ -21,7 +21,7 @@
         selectLabel=""
         @search-change="asyncFind"
         @select="goToProfile">
-            <span slot="noResult">No speakers were found.</span>
+            <span slot="noResult">Δεν βρέθηκαν ομιλητές</span>
         </custom-multiselect>
     </div>
 </template>
