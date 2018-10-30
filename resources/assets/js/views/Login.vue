@@ -3,11 +3,11 @@
         <div class="row justify-content-center mr-0">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center">Log in</div>
+                    <div class="card-header text-center">{{ $t("login.login") }}</div>
                     <div class="card-body">
                         <form v-on:submit.prevent="login" aria-label="login">
                             <div class="form-group row">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label>
+                                <label for="email" class="col-sm-4 col-form-label text-md-right">{{ $t("login.email") }}</label>
                                 <div class="col-md-6">
                                     <input 
                                         v-model.trim="$v.email.$model" 
@@ -20,39 +20,26 @@
                                         autofocus>
                                 </div>
                             </div>
-
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ $t("login.pass") }}</label>
                                 <div class="col-md-6">
                                     <input v-model.trim="$v.password.$model" id="password" type="password" class="form-control" name="password" required>
                                 </div>
                             </div>
-
-                            <!-- <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('auth.remember_me') }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> -->
-
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-info" :disabled="!$v.email.email" :class="{ 'not-allowed': !$v.email.email }">
-                                        Log in
+                                        {{ $t("login.login") }}
                                     </button>
-
                                     <a class="btn btn-link" href="/forgot-password" style="color: #17a2b8;">
-                                        Forgot Password
+                                        {{ $t("login.forgot_pass") }}
                                     </a>
                                 </div>
                             </div>
                         </form>
-                        <div class="error" v-if="!$v.email.email">Email is not valid (e.g , test@mail.com)</div>
-                        <p class="error" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
-                        <p class="pending" v-if="submitStatus === 'PENDING'">Loggin in...</p>
+                        <div class="error" v-if="!$v.email.email">{{ $t("login.not_valid_mail") }}</div>
+                        <p class="error" v-if="submitStatus === 'ERROR'">{{ $t("login.form_err") }}</p>
+                        <!-- <p class="pending" v-if="submitStatus === 'PENDING'">Loggin in...</p> -->
                         <p class="error">{{error_msg}}</p>
                     </div>
                 </div>
@@ -60,12 +47,6 @@
         </div>
     </div>
 </template>
-
-<style scoped>
-    
-</style>
-
-
 <script>
     import { required, minLength, email } from 'vuelidate/lib/validators'
     export default {
