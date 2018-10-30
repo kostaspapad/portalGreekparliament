@@ -1,0 +1,329 @@
+export default {
+    "el": {
+        "contact": {
+            "title": "Επικοινωνία",
+            "input_name": "Όνομα",
+            "input_message": "Μήνυμα",
+            "submit": "Καταχώρηση",
+            "mail_example": "Το email δεν είναι έγκυρο (π.χ , test@mail.com)",
+            "form_err": "Συμπληρώστε τη φόρμα σωστα.",
+            "submit_ok": "OK"
+        },
+        "faq": {
+            "our_data": "Που αντλούμε τα δεδομένα μας",
+            "our_data_blob": "Τα δεδομένα σχετικά με τους ομηλιτές ..."
+        },
+        "home": {
+            "title": "Διαφάνεια μέσω δεδομένων",
+            "text": "Η σελίδα greekparliament.info αποτελεί τη προσπάθεια να δημιουργίας μιας πλατφόρμας με σκοπό την ευκολότερη πρόσβαση στα πρακτικά της Βουλής των Ελλήνων.",
+        },
+        "conferences": {
+            "datepicker": {
+                
+            }
+        },
+        "parties": {
+            
+        },
+        "speakers": {
+            
+        },
+        "about": {
+        },
+        "footer": {
+            "about_us": "Σχετικά με εμάς",
+            "news": "Νέα",
+            "contact": "Επικοινωνία",
+            "donate": "Υποστηρίξτε μας",
+            "policy": "Πολιτική απορρήτου"
+        },
+        "navbar": {
+            "lang": "Γλώσσα",
+            "lang_en": "Αγγλικά",
+            "lang_el": "Ελληνικά",
+            "conferences": "Συνεδριάσεις",
+            "political_parties": "Κομματικές παρατάξεις",
+            "speakers": "Ομιλητές",
+            "speeches": "Ομιλίες",
+            "about": "Πληροφορίες",
+            "search": "Αναζήτηση"
+        },
+        "auth": {
+            "failed": "Λάθος email ή λάθος κωδικός πρόσβασης.",
+            "throttle": "Πάρα πολλές αποτυχημένες προσπάθειες. Παρακαλώ δοκιμάστε αργότερα.",
+            "forgot_password": "Ξεχάσατε τον κωδικό σας;",
+            "remember_me": "Θυμήσου με",
+            "email": "Email",
+            "password": "Κωδικός",
+            "login": "Σύνδεση",
+            "logout": "Αποσύνδεση",
+            "register": "Εγγραφή"
+        },
+        "policy": [],
+        "admin": {
+            "online": "Online",
+            "login": "Σύνδεση",
+            "logout": "Αποσύνδεση",
+            "setting": "Ρύθμισεις",
+            "name": "Όνομα",
+            "username": "Όνομα χρήστη",
+            "password": "Κωδικός",
+            "password_confirmation": "Επαλήθευση κωδικού",
+            "remember_me": "Θυμήσου με"
+        },
+        "pagination": {
+            "previous": "&laquo; Πίσω",
+            "next": "Επόμενο &raquo;"
+        },
+    },
+    "en": {
+        "pagination": {
+            "previous": "&laquo; Previous",
+            "next": "Next &raquo;"
+        },
+        "contact": {
+            "input_name": "Name",
+            "input_message": "Message"
+        },
+        "footer": {
+            "about_text": "Online presentation of the Greek Parliament transcripts",
+            "about_us": "About us",
+            "news": "News",
+            "contact": "Contact",
+            "donate": "Donate",
+            "policy": "Privacy policy"
+        },
+        "passwords": {
+            "password": "Passwords must be at least six characters and match the confirmation.",
+            "reset": "Your password has been reset!",
+            "sent": "We have e-mailed your password reset link!",
+            "token": "This password reset token is invalid.",
+            "user": "We can't find a user with that e-mail address."
+        },
+        "navbar": {
+            "lang": "Language",
+            "lang_en": "English",
+            "lang_el": "Greek",
+            "conferences": "Conferences",
+            "political_parties": "Political Parties",
+            "speakers": "Speakers",
+            "speeches": "Speeches",
+            "about": "About",
+            "search": "Search"
+        },
+        "auth": {
+            "failed": "These credentials do not match our records.",
+            "throttle": "Too many login attempts. Please try again in {seconds} seconds.",
+            "forgot_password": "Forgot your password?",
+            "remember_me": "Remember me",
+            "email": "Email",
+            "password": "Password",
+            "login": "Login",
+            "logout": "Logout",
+            "register": "Join"
+        },
+        "policy": [],
+        "admin": {
+            "online": "Online",
+            "login": "Login",
+            "logout": "Logout",
+            "setting": "Setting",
+            "name": "Name",
+            "username": "Username",
+            "password": "Password",
+            "password_confirmation": "Password confirmation",
+            "remember_me": "Remember me",
+            "user_setting": "User setting",
+            "avatar": "Avatar",
+            "list": "List",
+            "new": "New",
+            "create": "Create",
+            "delete": "Delete",
+            "remove": "Remove",
+            "edit": "Edit",
+            "view": "View",
+            "browse": "Browse",
+            "reset": "Reset",
+            "export": "Export",
+            "batch_delete": "Batch delete",
+            "save": "Save",
+            "refresh": "Refresh",
+            "order": "Order",
+            "expand": "Expand",
+            "collapse": "Collapse",
+            "filter": "Filter",
+            "close": "Close",
+            "show": "Show",
+            "entries": "entries",
+            "captcha": "Captcha",
+            "action": "Action",
+            "title": "Title",
+            "description": "Description",
+            "back": "Back",
+            "back_to_list": "Back to List",
+            "submit": "Submit",
+            "menu": "Menu",
+            "input": "Input",
+            "succeeded": "Succeeded",
+            "failed": "Failed",
+            "delete_confirm": "Are you sure to delete this item ?",
+            "delete_succeeded": "Delete succeeded !",
+            "delete_failed": "Delete failed !",
+            "update_succeeded": "Update succeeded !",
+            "save_succeeded": "Save succeeded !",
+            "refresh_succeeded": "Refresh succeeded !",
+            "login_successful": "Login successful",
+            "choose": "Choose",
+            "choose_file": "Select file",
+            "choose_image": "Select image",
+            "more": "More",
+            "deny": "Permission denied",
+            "administrator": "Administrator",
+            "roles": "Roles",
+            "permissions": "Permissions",
+            "slug": "Slug",
+            "created_at": "Created At",
+            "updated_at": "Updated At",
+            "alert": "Alert",
+            "parent_id": "Parent",
+            "icon": "Icon",
+            "uri": "URI",
+            "operation_log": "Operation log",
+            "parent_select_error": "Parent select error",
+            "pagination": {
+                "range": "Showing {first} to {last} of {total} entries"
+            },
+            "role": "Role",
+            "permission": "Permission",
+            "route": "Route",
+            "confirm": "Confirm",
+            "cancel": "Cancel",
+            "http": {
+                "method": "HTTP method",
+                "path": "HTTP path"
+            },
+            "all_methods_if_empty": "All methods if empty",
+            "all": "All",
+            "current_page": "Current page",
+            "selected_rows": "Selected rows",
+            "upload": "Upload",
+            "new_folder": "New folder",
+            "time": "Time",
+            "size": "Size",
+            "listbox": {
+                "text_total": "Showing all {0}",
+                "text_empty": "Empty list",
+                "filtered": "{0} \/ {1}",
+                "filter_clear": "Show all",
+                "filter_placeholder": "Filter"
+            }
+        },
+        "validation": {
+            "accepted": "The {attribute} must be accepted.",
+            "active_url": "The {attribute} is not a valid URL.",
+            "after": "The {attribute} must be a date after {date}.",
+            "after_or_equal": "The {attribute} must be a date after or equal to {date}.",
+            "alpha": "The {attribute} may only contain letters.",
+            "alpha_dash": "The {attribute} may only contain letters, numbers, and dashes.",
+            "alpha_num": "The {attribute} may only contain letters and numbers.",
+            "array": "The {attribute} must be an array.",
+            "before": "The {attribute} must be a date before {date}.",
+            "before_or_equal": "The {attribute} must be a date before or equal to {date}.",
+            "between": {
+                "numeric": "The {attribute} must be between {min} and {max}.",
+                "file": "The {attribute} must be between {min} and {max} kilobytes.",
+                "string": "The {attribute} must be between {min} and {max} characters.",
+                "array": "The {attribute} must have between {min} and {max} items."
+            },
+            "boolean": "The {attribute} field must be true or false.",
+            "confirmed": "The {attribute} confirmation does not match.",
+            "date": "The {attribute} is not a valid date.",
+            "date_format": "The {attribute} does not match the format {format}.",
+            "different": "The {attribute} and {other} must be different.",
+            "digits": "The {attribute} must be {digits} digits.",
+            "digits_between": "The {attribute} must be between {min} and {max} digits.",
+            "dimensions": "The {attribute} has invalid image dimensions.",
+            "distinct": "The {attribute} field has a duplicate value.",
+            "email": "The {attribute} must be a valid email address.",
+            "exists": "The selected {attribute} is invalid.",
+            "file": "The {attribute} must be a file.",
+            "filled": "The {attribute} field must have a value.",
+            "gt": {
+                "numeric": "The {attribute} must be greater than {value}.",
+                "file": "The {attribute} must be greater than {value} kilobytes.",
+                "string": "The {attribute} must be greater than {value} characters.",
+                "array": "The {attribute} must have more than {value} items."
+            },
+            "gte": {
+                "numeric": "The {attribute} must be greater than or equal {value}.",
+                "file": "The {attribute} must be greater than or equal {value} kilobytes.",
+                "string": "The {attribute} must be greater than or equal {value} characters.",
+                "array": "The {attribute} must have {value} items or more."
+            },
+            "image": "The {attribute} must be an image.",
+            "in": "The selected {attribute} is invalid.",
+            "in_array": "The {attribute} field does not exist in {other}.",
+            "integer": "The {attribute} must be an integer.",
+            "ip": "The {attribute} must be a valid IP address.",
+            "ipv4": "The {attribute} must be a valid IPv4 address.",
+            "ipv6": "The {attribute} must be a valid IPv6 address.",
+            "json": "The {attribute} must be a valid JSON string.",
+            "lt": {
+                "numeric": "The {attribute} must be less than {value}.",
+                "file": "The {attribute} must be less than {value} kilobytes.",
+                "string": "The {attribute} must be less than {value} characters.",
+                "array": "The {attribute} must have less than {value} items."
+            },
+            "lte": {
+                "numeric": "The {attribute} must be less than or equal {value}.",
+                "file": "The {attribute} must be less than or equal {value} kilobytes.",
+                "string": "The {attribute} must be less than or equal {value} characters.",
+                "array": "The {attribute} must not have more than {value} items."
+            },
+            "max": {
+                "numeric": "The {attribute} may not be greater than {max}.",
+                "file": "The {attribute} may not be greater than {max} kilobytes.",
+                "string": "The {attribute} may not be greater than {max} characters.",
+                "array": "The {attribute} may not have more than {max} items."
+            },
+            "mimes": "The {attribute} must be a file of type: {values}.",
+            "mimetypes": "The {attribute} must be a file of type: {values}.",
+            "min": {
+                "numeric": "The {attribute} must be at least {min}.",
+                "file": "The {attribute} must be at least {min} kilobytes.",
+                "string": "The {attribute} must be at least {min} characters.",
+                "array": "The {attribute} must have at least {min} items."
+            },
+            "not_in": "The selected {attribute} is invalid.",
+            "not_regex": "The {attribute} format is invalid.",
+            "numeric": "The {attribute} must be a number.",
+            "present": "The {attribute} field must be present.",
+            "regex": "The {attribute} format is invalid.",
+            "required": "The {attribute} field is required.",
+            "required_if": "The {attribute} field is required when {other} is {value}.",
+            "required_unless": "The {attribute} field is required unless {other} is in {values}.",
+            "required_with": "The {attribute} field is required when {values} is present.",
+            "required_with_all": "The {attribute} field is required when {values} is present.",
+            "required_without": "The {attribute} field is required when {values} is not present.",
+            "required_without_all": "The {attribute} field is required when none of {values} are present.",
+            "same": "The {attribute} and {other} must match.",
+            "size": {
+                "numeric": "The {attribute} must be {size}.",
+                "file": "The {attribute} must be {size} kilobytes.",
+                "string": "The {attribute} must be {size} characters.",
+                "array": "The {attribute} must contain {size} items."
+            },
+            "string": "The {attribute} must be a string.",
+            "timezone": "The {attribute} must be a valid zone.",
+            "unique": "The {attribute} has already been taken.",
+            "uploaded": "The {attribute} failed to upload.",
+            "url": "The {attribute} format is invalid.",
+            "custom": {
+                "attribute-name": {
+                    "rule-name": "custom-message"
+                }
+            },
+            "attributes": []
+        }
+    }
+}
