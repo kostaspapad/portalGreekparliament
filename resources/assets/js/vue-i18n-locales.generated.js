@@ -49,6 +49,12 @@ export default {
             "no_speeches_available": "Δεν βρέθηκαν ομιλίες"
         }
       },
+      "speeches": {
+        "show_comments": "Εμφάνιση σχολίων",
+        "hide_comments": "Απόκρυψη σχολίων",
+        "report": "Αναφορά",
+        "submit": "Καταχώρηση",
+      },
       "comments": {
         "submit": "Καταχώρηση",
       },

@@ -27,11 +27,11 @@
                         :favorited='speech_data.isFavorite'
                     ></favorite>
                     <div class="d-inline-block comment-text pointer" @click="isCommentOn = !isCommentOn" :class="isCommentOn ? 'hide-text' : 'show-text'">
-                        <span v-if="!isCommentOn" class="show-letters">Show comments</span>
-                        <span v-else class="hide-letters">Hide comments</span>
+                        <span v-if="!isCommentOn" class="show-letters">{{ $t("speeches.show_comments") }}</span>
+                        <span v-else class="hide-letters">{{ $t("speeches.hide_comments") }}</span>
                     </div>
                     <div class="d-inline-block report-button">
-                        <vs-button color="rgb(255, 71, 87)" type="filled" @click="addReport" style="padding: 1vh;">Report</vs-button>
+                        <vs-button color="rgb(255, 71, 87)" type="filled" @click="addReport" style="padding: 1vh;">{{ $t("speeches.report") }}</vs-button>
                     </div>
                     <transition name="slide-fade">
                         <div v-if="isCommentOn">
@@ -48,7 +48,7 @@
                                 />
                                 <div class="mt-2 text-right">
                                     <button @click="sendReport" :disabled="isDisabled" :class="{ 'not-allowed': isDisabled }" class="btn send-button">
-                                        Send <i class="fas fa-paper-plane"></i> 
+                                        {{ $t("speeches.submit") }} <i class="fas fa-paper-plane"></i> 
                                     </button>
                                 </div>
                             </div>
