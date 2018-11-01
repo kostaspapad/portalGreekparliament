@@ -14,7 +14,7 @@
                                     {{conference.conference_date}}
                                 </h3>
                                 <div>
-                                    <p style="margin: 0;">{{conference.session}}</p>
+                                    <p class="session-margin">{{conference.session}}</p>
                                     <span>{{conference.time_period}}</span>
                                 </div>
                             </router-link>
@@ -24,11 +24,11 @@
                                 <div @click="redirectToConference(ajaxData.conferenceData.data.data.conference_date)">{{ajaxData.conferenceData.data.data.conference_date}}</div>
                             </h3>
                             <div>
-                                <p style="margin: 0;">{{ajaxData.conferenceData.data.data.session}}</p>
+                                <p class="session-margin">{{ajaxData.conferenceData.data.data.session}}</p>
                                 <span>{{ajaxData.conferenceData.data.data.time_period}}</span>
                             </div>
                         </div>
-                        <div class="col-12 mt-5" style="padding-left: 2.5rem;">
+                        <div class="col-12 mt-5 pagination-pad">
                             <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage"
                                 :limit=1>
                                 <span slot="prev-nav">&lt;</span>
@@ -40,7 +40,9 @@
                         </div>
                     </div>
                     <div class="datepicker col-12 col-sm-6 col-md-6 col-lg-4">
-                        <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" style="float:right;"><i class="fa fa-info-circle info-icon"></i></span>
+                        <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" class="datepkr-float">
+                            <i class="fa fa-info-circle info-icon"></i>
+                        </span>
                         <transition name="slide-fade">
                             <div v-if="showInfoDiv" class="alert alert-info" role="alert">
                                 <button @click="showInfoDiv = !showInfoDiv" type="button" class="close" aria-label="Close">
@@ -50,29 +52,29 @@
                                 <p>{{ $t("conferences.datepicker.select_date_ranges") }}</p>
                             </div>
                         </transition>
-                        <div style="text-align:left;">
+                        <div class="datepkr-toggle">
                             <vs-switch vs-color="#82C7EB" v-model="isMultipleFilter">
                                 <span slot="on" class="switch-font">{{ $t("conferences.datepicker.from_to") }}</span>
                                 <span slot="off" class="switch-font">{{ $t("conferences.datepicker.date") }}</span>
                             </vs-switch>
                         </div>
-                        <div v-if="isMultipleFilter" style="background-color: ;">
+                        <div v-if="isMultipleFilter">
                             <label>{{ $t("conferences.datepicker.from") }}</label>
                             <datepicker v-model="startDate" :format="myFormattedDate" :bootstrap-styling="true"
                                 wrapper-class="pickerDiv" placeholder="Select start date"></datepicker>
                             <label>{{ $t("conferences.datepicker.to") }}</label>
                             <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true"
                                 wrapper-class="pickerDiv" placeholder="Select end date"></datepicker>
-                            <div style="text-align: left;">
-                                <button class="btn reset-btn" @click="getDates" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">{{ $t("conferences.datepicker.submit") }}</button>
+                            <div class="datepkr-btn">
+                                <button class="btn reset-btn datepkr-btn-color" @click="getDates" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
                             </div>
                         </div>
-                        <div v-else style="text-align: left;">
+                        <div v-else class="datepkr-toggle">
                             <label>{{ $t("conferences.datepicker.select_single_date") }}</label>
                             <datepicker v-model="singleDate" :format="myFormattedDate" :bootstrap-styling="true"
                                 wrapper-class="pickerDiv" placeholder="Select date"></datepicker>
-                            <div style="text-align: left;">
-                                <button class="btn reset-btn" @click="getDate" :disabled="isDisabled" style="background-color:rgb(23, 162, 184)">{{ $t("conferences.datepicker.submit") }}</button>
+                            <div class="datepkr-btn">
+                                <button class="btn reset-btn datepkr-btn-color" @click="getDate" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
                             </div>
                         </div>
                     </div>

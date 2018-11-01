@@ -16,6 +16,26 @@
 .row-imagebox {
     margin-right: 0;
 }
+// Conferences
+.session-margin {
+    margin: 0;
+}
+.pagination-pad {
+    padding-left: 2.5rem;
+}
+// Conferences datepicker
+.datepkr-float {
+    float:right;
+}
+.datepkr-toggle {
+    text-align:left;
+}
+.datepkr-btn {
+    text-align: left;
+}
+.datepkr-btn-color {
+    background-color:rgb(23, 162, 184);
+}
 // Layout
 
 $topNavBgColor: white;
