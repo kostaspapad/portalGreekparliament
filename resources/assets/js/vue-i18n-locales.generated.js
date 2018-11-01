@@ -23,7 +23,7 @@ export default {
           "hide_chart": "Κλείσιμο γραφήματος",
           "conference": "Συνεδρίαση",
           "pdf": "Αρχείο pdf",
-          "word": "}Αρχείο word",
+          "word": "Αρχείο word",
           "no_speeches_avail": "Δεν υπάρχουν διαθέσιμες ομιλίες"
         },
         "datepicker": {

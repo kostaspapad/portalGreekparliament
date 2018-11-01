@@ -21,11 +21,13 @@
                     <read-more more-str="read more" :text="speech_data.speech" link="#" less-str="read less" :max-chars="2000"></read-more>
                 </div>
                 
-                <div v-if="user">
+                <div v-if="user" class="speech-actions mt-4">
+                    <!-- Favorite -->
                     <favorite
                         :speech_id='speech_data.speech_id'
                         :favorited='speech_data.isFavorite'
                     ></favorite>
+                    <!-- End of favorite -->
                     <div class="d-inline-block comment-text pointer" @click="isCommentOn = !isCommentOn" :class="isCommentOn ? 'hide-text' : 'show-text'">
                         <span v-if="!isCommentOn" class="show-letters">{{ $t("speeches.show_comments") }}</span>
                         <span v-else class="hide-letters">{{ $t("speeches.hide_comments") }}</span>
@@ -33,11 +35,14 @@
                     <div class="d-inline-block report-button">
                         <vs-button color="rgb(255, 71, 87)" type="filled" @click="addReport" style="padding: 1vh;">{{ $t("speeches.report") }}</vs-button>
                     </div>
+                    <!-- Comments -->
                     <transition name="slide-fade">
-                        <div v-if="isCommentOn">
+                        <div v-if="isCommentOn" class="comments-area mt-2">
                             <comments :speech_id="speech_data.speech_id"></comments>
                         </div>
                     </transition>
+                    <!-- End of Comments -->
+                    <!-- Modal -->
                     <modal v-if="showModal" title="Make a report" @close="closeModal" isLarge="true">
                         <slot>
                             <div class="modal-report-area">
@@ -54,6 +59,7 @@
                             </div>
                         </slot>
                     </modal>
+                    <!-- End of Modal -->
                 </div>
             </div>
         </div>
@@ -72,6 +78,19 @@
     .speech-data-container {
         background-color: ghostwhite;
         border-radius: 5px;
+    }
+    @media only screen and (min-width: 550px) {
+        .speech-data-container {
+            padding: 1rem !important;
+        }
+    }
+    @media only screen and (max-width: 340px) {
+        .report-button {
+            button {
+                padding: 7px!important;
+                font-size: .8em;
+            }
+        }
     }
     .speech_speaker_img{
         border-radius: 60px;

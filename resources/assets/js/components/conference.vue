@@ -21,7 +21,7 @@
             </transition>
             <div v-if="ajaxDoneConfInfo">
                 <div class="conference-title-box py-4 pl-4">
-                    <h2 class="font-weight-bold">{{ $t("conferences.conference.conference") }} · {{conf_date}}</h2>
+                    <h2 class="font-weight-bold conference-title">{{ $t("conferences.conference.conference") }} · {{conf_date}}</h2>
                     <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
                     <div>{{ajaxData.conferenceInfo.data.data.time_period}}</div>
                 </div>
@@ -36,7 +36,7 @@
                             </a>
                         </span>
                     </div>
-                    <div class="col-12 pl-3">
+                    <div v-if="ajaxData.isLoaded" class="col-12 pl-3 mt-2">
                         <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
                             <span slot="prev-nav">&lt;</span>
                             <span slot="next-nav">&gt;</span>
@@ -57,7 +57,7 @@
                     <div v-else>
                         <h4>{{ $t("conferences.conference.no_speeches_avail") }}</h4>
                     </div>
-                    <div class="col-12" style="padding-left: 2.5rem;">
+                    <div v-if="ajaxData.isLoaded" class="col-12" style="padding-left: 2.5rem;">
                         <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
                             <span slot="prev-nav">&lt;</span>
                             <span slot="next-nav">&gt;</span>
@@ -84,6 +84,11 @@
         background-color: #dbf0ff;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
+    }
+    @media only screen and (min-width: 320px) and (max-width: 400px) {
+        .conference-title {
+            font-size: 1.3rem;
+        }
     }
     .pickerDiv{
         margin-bottom: 10px;
@@ -128,7 +133,8 @@
                         party_names: [],
                         party_count: [],
                         party_colors: []
-                    }
+                    },
+                    isLoaded: false
                 },
                 conf_date: null,
                 defaultImg: 'default_speaker_icon.png',
@@ -147,35 +153,32 @@
         },
         methods:{
             searchConferenceSpeeches() {
-                const self = this
-
-                if(self.search_string === ''){
-                    self.getConferenceSpeeches();
+                if(this.search_string === ''){
+                    this.getConferenceSpeeches();
                 }
                 this.ajaxData.isLoaded = false
                 setTimeout(() => {
-                    api.call('get', this.api_path + 'conference/' + self.conf_date + '/speeches/search/' + self.search_string)
+                    api.call('get', this.api_path + 'conference/' + this.conf_date + '/speeches/search/' + this.search_string)
                         .then( response => {
                             if (response.status == 200) {
-                                self.noDataConfSpeeches = false
-                                self.ajaxData.conferenceData = response
-                                self.ajaxData.isLoaded = true
+                                this.noDataConfSpeeches = false
+                                this.ajaxData.conferenceData = response
+                                this.ajaxData.isLoaded = true
                             } else {
-                                self.noDataConfSpeeches = true
+                                this.noDataConfSpeeches = true
                             }
 
-                            self.ajaxDoneConfSpeeches = true
+                            this.ajaxDoneConfSpeeches = true
                         })
                 }, 500)
             },
             changePage(page) {
-                var self = this;
                 axios.get(this.api_path + 
                     'conference/' + this.conf_date + 
                     '/speeches?page=' + page
                 )
-                .then(function(response) {
-                    self.ajaxData.conferenceData = response;
+                .then(response => {
+                    this.ajaxData.conferenceData = response;
                 })
             },
             isJsonString(str) {
@@ -189,38 +192,36 @@
                 return json;
             },
             getConferenceSpeeches(){
-                var self = this;
-
                 setTimeout( () => {
+                    this.ajaxData.isLoaded = false
                     axios.get(this.api_path + 'conference/'+ this.conf_date +'/speeches')
-                    .then(function(response){
+                    .then(response => {
                         if(response.status == 200 && response.statusText == "OK"){
-                            self.noDataConfSpeeches = false
-                            self.ajaxData.conferenceData = response
+                            this.noDataConfSpeeches = false
+                            this.ajaxData.conferenceData = response
                         } else {
-                            self.noDataConfSpeeches = true
+                            this.noDataConfSpeeches = true
                         }
-                        self.ajaxDoneConfSpeeches = true
+                        this.ajaxDoneConfSpeeches = true
+                        this.ajaxData.isLoaded = true
                     })
-                    .catch(function (error) {
+                    .catch(error => {
                         console.log(error)
                     });
                 }, 1000)
             },
             getConferenceInfo(){
-                var self = this;
-                
                 setTimeout( () => {
                     axios.get(this.api_path + 'conference/date/'+ this.conf_date)
-                    .then(function(response){
+                    .then(response => {
                         if(response.status == 200 && response.statusText == "OK"){
-                            self.noDataConfInfo = false
+                            this.noDataConfInfo = false
                             //because we only get one conference we add [0] to get it
-                            self.ajaxData.conferenceInfo = response
+                            this.ajaxData.conferenceInfo = response
                         } else {
-                            self.noDataConfInfo = true
+                            this.noDataConfInfo = true
                         }
-                        self.ajaxDoneConfInfo = true
+                        this.ajaxDoneConfInfo = true
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -258,7 +259,7 @@
                 if(newVal){
                     setInterval( () => {
                         this.GET_COMMENTS_CONFERENCE(this.conf_date)
-                    },15000);
+                    },60000);
                 }
             }
         },
