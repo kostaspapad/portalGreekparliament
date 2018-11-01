@@ -3,9 +3,8 @@
         <nav class="navbar navbar-expand-md py-0 px-4 navbar-light navbar-laravel navbar-bg-color">
             <div class="container-fluid ml-0">
                 <div class="navbar-brand logo">
-                    <router-link to="/" style="color:inherit;">Greekparliament.info</router-link>
+                    <router-link to="/" class="logo-link">Greekparliament.info</router-link>
                 </div>
-            
                 <button class="navbar-toggler" type="button" data-toggle="collapse" 
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -14,25 +13,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        <li class="nav-item d-block d-sm-block d-md-none">
-                            <!-- <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">{{ __('navbar.conferences') }}</a> -->
-                            <router-link class="nav-link" to="/conferences">Conferences</router-link>
-                        </li>
-                        <li class="nav-item d-block d-sm-block d-md-none">
-                            <!-- <a class="nav-link {{ Request::path() === 'parties' ? 'active' : null }}" href="/parties">{{ __('navbar.political_parties') }}</a> -->
-                            <router-link class="nav-link" to="/parties">Parties</router-link>
-                        </li>
-                        <li class="nav-item d-block d-sm-block d-md-none">
-                            <!-- <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">{{ __('navbar.speakers') }}</a> -->
-                            <router-link class="nav-link" to="/speakers">Speakers</router-link>
-                        </li>
-                        <li class="nav-item d-block d-sm-block d-md-none">
-                            <!-- <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">{{ __('navbar.about') }}</a> -->
-                            <router-link class="nav-link" to="/about">About</router-link>
-                        </li>
-                        <hr class="divider">
-                        
                         <!-- @guest -->
                         <li class="nav-item" v-if="!user">
                             <router-link to="/login" class="nav-link">{{$t("auth.login")}}</router-link>
@@ -40,7 +20,6 @@
                         <li class="nav-item" v-if="!user">
                             <router-link to="/register" class="nav-link">{{$t("auth.register")}}</router-link>
                         </li>
-
                         <li v-if="user" class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ user.name }} 
@@ -70,21 +49,6 @@
                     </ul>
                 </div>
             </div>
-            <!-- <div>
-                <router-link to="/">Home</router-link>
-                <router-link to="/about">About</router-link>
-            </div>
-
-            <div>
-                <div v-if="authenticated && user">
-                    <p>Hello, {{ user.name }}</p>
-
-                    <router-link to="/logout">Logout</router-link>
-                </div>
-
-                <router-link to="/login" v-else>Login</router-link>
-            </div> -->
-
         </nav>
         <nav class="navbar navbar-expand-md py-0 px-4 navbar-light navbar-laravel navbar-bg-color menu-navbar d-none d-md-block">
             <div class="container ml-0">
@@ -92,27 +56,22 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <!-- <a class="nav-link {{ Request::path() === 'conferences' ? 'active' : null }}" href="/conferences">{{ __('navbar.conferences') }}</a> -->
                             <router-link class="nav-link" to="/conferences">{{ $t("navbar.conferences")}}</router-link>
                         </li>
                         <li class="nav-item">
-                            <!-- <a class="nav-link {{ Request::path() === 'parties' ? 'active' : null }}" href="/parties">{{ __('navbar.political_parties') }}</a> -->
                             <router-link class="nav-link" to="/parties">{{ $t("navbar.political_parties")}}</router-link>
                         </li>
                         <li class="nav-item">
-                            <!-- <a class="nav-link {{ Request::path() === 'speakers' ? 'active' : null }}" href="/speakers">{{ __('navbar.speakers') }}</a> -->
                             <router-link class="nav-link" to="/speakers">{{ $t("navbar.speakers")}}</router-link>
                         </li>
-                        <li class="nav-item">
-                            <!-- <a class="nav-link {{ Request::path() === 'about' ? 'active' : null }}" href="/about">{{ __('navbar.about') }}</a> -->
+                        <!-- <li class="nav-item">
                             <router-link class="nav-link" to="/about">{{ $t("navbar.about")}}</router-link>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
         </nav>
-        
-        <div style="margin-top: 2rem">
+        <div class="footer-top-div">
             <router-view :key="$route.fullPath"></router-view>
             <footer class="footer page-footer font-small pt-4">
                 <div class="container-footer text-center ">
@@ -125,9 +84,9 @@
                             <li>
                                 <router-link class="nav-link" to="/about">{{ $t("footer.about_us")}}</router-link>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <router-link class="nav-link" to="/news">{{ $t("footer.news")}}</router-link>
-                            </li>
+                            </li> -->
                             <li>
                                 <router-link class="nav-link" to="/contact">{{ $t("footer.contact")}}</router-link>
                             </li>
@@ -146,11 +105,8 @@
                 <!-- Copyright -->
             </footer>
         </div>
-
-        
     </div>
 </template>
-
 <script>
     import { mapMutations } from 'vuex'
     export default {

@@ -7,6 +7,9 @@
 
 //-----------------
 // HOME page
+.logo-link {
+    color: black;
+}
 .container-imagebox {
     margin-top: -2rem;
 }
@@ -346,6 +349,9 @@ hr.divider {
 //     transform: translate(-50%, -50%);
 // }
 
+.footer-top-div {
+    margin-top: 2rem;
+}
 .container-footer {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
     background-color: #fff;
