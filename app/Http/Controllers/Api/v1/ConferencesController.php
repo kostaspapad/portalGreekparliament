@@ -139,18 +139,37 @@ class ConferencesController extends Controller
         }
     }
 
-    public function getPartyCountByConference(Request $request, $conf_date)
+    public function getPartyCountByConference($conf_date)
     {
         $count_party_speeches = DB::select(
-            'SELECT sp.speech_conference_date, p.party_id, fullname_el, pc.color, COUNT(p.party_id) AS party_count
-            FROM portal.speeches sp
-            INNER JOIN portal.memberships mem ON mem.person_id = sp.speaker_id
-            INNER JOIN portal.parties p ON mem.on_behalf_of_id = p.party_id
-            INNER JOIN portal.party_colors pc ON p.party_id = pc.party_id
-            WHERE sp.speech_conference_date = :conf_date
-            GROUP BY p.party_id', ['conf_date' => $conf_date]
-        );
+            'SELECT 
+                conf_speeches.conference_date AS conference_date,
+                conf_speeches.on_behalf_of_id AS on_behalf_of_id,
+                conf_speeches.fullname_el AS fullname_el,
+                conf_speeches.color AS color,
+                COUNT(conf_speeches.on_behalf_of_id) AS party_count
+            FROM
+                (SELECT 
+                    conf.conference_date AS conference_date,
+                        m.on_behalf_of_id AS on_behalf_of_id,
+                        portal.parties.fullname_el AS fullname_el,
+                        portal.party_colors.color AS color
+                FROM
+                    (((((portal.speeches
+                JOIN portal.conferences conf ON (conf.conference_date = portal.speeches.speech_conference_date))
+                JOIN portal.speakers sp ON (sp.speaker_id = portal.speeches.speaker_id))
+                JOIN portal.memberships m ON (sp.speaker_id = m.person_id))
+                JOIN portal.parties ON (portal.parties.party_id = m.on_behalf_of_id))
+                JOIN portal.party_colors ON (portal.parties.party_id = portal.party_colors.party_id))
+                WHERE conf.conference_date = :conf_date1
+                GROUP BY portal.speeches.speech_id) conf_speeches
+            WHERE conference_date = :conf_date2
+            GROUP BY conf_speeches.conference_date , conf_speeches.on_behalf_of_id', [
+                'conf_date1' => $conf_date,
+                'conf_date2' => $conf_date
+            ]);
         
         return $count_party_speeches;
     }
 }
+
