@@ -92,7 +92,7 @@
                         </vs-tab>
                         <vs-tab vs-label="Θητεία">
                             <div class="d-none d-md-block d-lg-block mb-0">
-                                <h4 class="error"><b>{{ $t("speaker.data_alert") }}</b></h4>
+                                <h4 class="error mb-3"><b>{{ $t("speaker.data_alert") }}</b></h4>
                                 <timeline 
                                     :data="ajaxData.timelineData" 
                                     :colors="ajaxData.memberships.party_colors"
