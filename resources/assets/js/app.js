@@ -28,7 +28,7 @@ import VueChatScroll from 'vue-chat-scroll'
 
 import 'es6-promise/auto'
 import Vuesax from 'vuesax'
-import VueFrappe from 'vue2-frappe';
+// import VueFrappe from 'vue2-frappe';
 
 //components
 // import navbar from './components/navbar.vue'
@@ -67,7 +67,7 @@ Vue.use(ReadMore)
 Vue.use(Vuelidate)
 Vue.use(VueChatScroll)
 Vue.use(Vuesax)
-Vue.use(VueFrappe)
+// Vue.use(VueFrappe)
 Vue.use(VueChartkick)
 Vue.use(VueInternationalization);
 
