@@ -1,69 +1,72 @@
 <template>
     <div class="container">
         <div class="conferences-container">
-            <div v-if="user" class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
-                <!-- <button class="btn mb-2 chart-btn"  style="background-color: #acd9ff;"> -->
-                    <span v-if="!showChart">{{ $t("conferences.conference.show_chart") }}</span>
-                    <span v-else class="hide-letters">{{ $t("conferences.conference.hide_chart") }}</span>
-                <!-- </button> -->
-            </div>
-            <transition v-if="user" name="slide-fade">
-                <div class=" m-auto" v-if="showChart">
-                    <pie-chart 
-                        v-if="isLoaded"
-                        :chart-data="ajaxData.party_count_speeches.party_count" 
-                        :chart-labels="ajaxData.party_count_speeches.party_names"
-                        :chart-bg-colors="ajaxData.party_count_speeches.party_colors"
-                        :width="325"
-                    >
-                    </pie-chart>
-                </div>
-            </transition>
             <div v-if="ajaxDoneConfInfo">
                 <div class="conference-title-box py-4 pl-4">
-                    <h2 class="font-weight-bold conference-title">{{ $t("conferences.conference.conference") }} · {{conf_date}}</h2>
+                    <h2 class="font-weight-bold conference-title">{{ $t("conference.conference") }} · {{conf_date}}</h2>
                     <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
                     <div>{{ajaxData.conferenceInfo.data.data.time_period}}</div>
                 </div>
-                <div class="row w-100">
-                    <div class="col-12 pt-3">
-                        <span v-if="ajaxData.conferenceInfo">
-                            <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.pdf_loc + '/' + ajaxData.conferenceInfo.data.data.pdf_name">
-                                {{ $t("conferences.conference.pdf") }} <i class="fas fa-file-pdf" style="color: #dc3545;"></i>
-                            </a>
-                            <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.doc_location + '/' + ajaxData.conferenceInfo.data.data.doc_name">
-                                {{ $t("conferences.conference.word") }} <i class="fas fa-file-word" style="color: #007bff;"></i>
-                            </a>
-                        </span>
-                    </div>
-                    <div v-if="ajaxData.isLoaded" class="col-12 pl-3 mt-2">
-                        <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
-                            <span slot="prev-nav">&lt;</span>
-                            <span slot="next-nav">&gt;</span>
-                        </pagination>
-                        <vs-input
-                            vs-icon="search" 
-                            placeholder="Αναζήτηση" 
-                            v-model.trim="search_string"
-                            @keypress.enter="searchConferenceSpeeches"
-                            style="width: 235px;color:inherit;"
-                        />
-                    </div>
-                    <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12">
-                        <div v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
-                            <speech :speech="conference"></speech>
+                <vs-tabs vs-color='#17a2b8'>
+                    <vs-tab vs-label="Συνδεδρίαση">
+                        <div class="row w-100">
+                            <div class="col-12 pt-3">
+                                <span v-if="ajaxData.conferenceInfo">
+                                    <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.pdf_loc + '/' + ajaxData.conferenceInfo.data.data.pdf_name">
+                                        {{ $t("conference.pdf") }} <i class="fas fa-file-pdf" style="color: #dc3545;"></i>
+                                    </a>
+                                    <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.doc_location + '/' + ajaxData.conferenceInfo.data.data.doc_name">
+                                        {{ $t("conference.word") }} <i class="fas fa-file-word" style="color: #007bff;"></i>
+                                    </a>
+                                </span>
+                            </div>
+                            <div v-if="ajaxData.isLoaded" class="col-12 pl-3 mt-2">
+                                <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
+                                    <span slot="prev-nav">&lt;</span>
+                                    <span slot="next-nav">&gt;</span>
+                                </pagination>
+                                <vs-input
+                                    vs-icon="search" 
+                                    placeholder="Αναζήτηση" 
+                                    v-model.trim="search_string"
+                                    @keypress.enter="searchConferenceSpeeches"
+                                    style="width: 235px;color:inherit;"
+                                />
+                            </div>
+                            <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                <div v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
+                                    <speech :speech="conference"></speech>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <h4>{{ $t("conference.no_speeches_avail") }}</h4>
+                            </div>
+                            <div v-if="ajaxData.isLoaded" class="col-12" style="padding-left: 2.5rem;">
+                                <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
+                                    <span slot="prev-nav">&lt;</span>
+                                    <span slot="next-nav">&gt;</span>
+                                </pagination>
+                            </div>
                         </div>
-                    </div>
-                    <div v-else>
-                        <h4>{{ $t("conferences.conference.no_speeches_avail") }}</h4>
-                    </div>
-                    <div v-if="ajaxData.isLoaded" class="col-12" style="padding-left: 2.5rem;">
-                        <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
-                            <span slot="prev-nav">&lt;</span>
-                            <span slot="next-nav">&gt;</span>
-                        </pagination>
-                    </div>
-                </div>
+                    </vs-tab>
+                    <vs-tab vs-label="Δεδομένα">
+                        <!-- <div class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
+                            <span v-if="!showChart">{{ $t("conference.show_chart") }}</span>
+                            <span v-else class="hide-letters">{{ $t("conference.hide_chart") }}</span>
+                        </div> -->
+                        <!-- <transition v-if="user" name="slide-fade"> -->
+                        <!-- <transition name="slide-fade"> -->
+                        <!-- <div class="m-auto" v-if="showChart"> -->
+                        <h4 class="error"><b>{{ $t("conference.data_alert") }}</b></h4>
+                        <pie-chart 
+                            v-if="isLoaded"
+                            :chart-data="ajaxData.party_count_speeches.party_count" 
+                            :chart-labels="ajaxData.party_count_speeches.party_names"
+                            :chart-bg-colors="ajaxData.party_count_speeches.party_colors"
+                            :width="325">
+                        </pie-chart>
+                    </vs-tab>
+                </vs-tabs>
             </div>
             <div v-else class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <img :src=" '../../img' + '/Spinner.gif' " class="m-auto d-block"/>
@@ -268,13 +271,11 @@
             this.getConferenceInfo()
             this.getConferenceSpeeches()
             
+            this.getPartyCountByConference()
             if(this.user){
-                this.getPartyCountByConference()
-                
                 //put interval HERE
-                this.GET_COMMENTS_CONFERENCE(this.conf_date)
+                // this.GET_COMMENTS_CONFERENCE(this.conf_date)
                 this.startInterval = true
-                
             }
         }
     }
