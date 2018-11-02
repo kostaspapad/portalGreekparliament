@@ -40,8 +40,7 @@ Route::get('/user', function (Request $request) {
             //dashboard route
             Route::get('dashboard', 'Api\v1\DashboardController@getData');
 
-            //getPartyCountByConference
-            Route::get('conferences/count-party-speeches/{conf_date}', 'Api\v1\ConferencesController@getPartyCountByConference');
+            
 
             //reports
             Route::post('reports/create', 'Api\v1\ReportsController@store');
@@ -87,6 +86,9 @@ Route::get('/user', function (Request $request) {
     Route::get('conference/{id}', 'Api\v1\ConferencesController@conferenceById');
     Route::get('conference/date/{date}', 'Api\v1\ConferencesController@conferenceByDate');
 
+    //getPartyCountByConference
+    Route::get('conferences/count-party-speeches/{conf_date}', 'Api\v1\ConferencesController@getPartyCountByConference');
+    
     // http://localhost:8000/api/v1/conference/start/1989-07-03/end/1989-07-27
     Route::get('conference/start/{startDate}/end/{endDate}', 'Api\v1\ConferencesController@conferencesByDateRange');
 
