@@ -56,7 +56,7 @@
                     <vs-tabs vs-color='#17a2b8'>
                         <vs-tab vs-label="Ομιλίες">
                             <div class="p-3 tab-pane fade show speeches-container mb-0">
-                                <div v-if="ajaxDoneSpeeches && noDataSpeeches == false">
+                                <div v-if="ajaxDoneSpeeches && ajaxData.isLoaded && noDataSpeeches == false">
                                     <div v-for="speech in ajaxData.speechesData.data.data" :key="speech.speech_id" class="speeches py-2">
                                         <div class="row">
                                             <div v-if="speech.greek_name == ajaxData.speechesData.data.data.greek_name">
@@ -85,14 +85,17 @@
                                         </pagination>
                                     </div>
                                 </div>
-                                <div v-else>
+                                <div v-else-if="noDataSpeeches == true && ajaxData.isLoaded == false">
+                                    <h5>Loading <i class="fas fa-spinner fa-spin"></i></h5>
+                                </div>
+                                <div v-else-if="noDataSpeeches">
                                     <h5>{{ $t("speaker.no_speeches_available") }}</h5>
                                 </div>
                             </div>
                         </vs-tab>
                         <vs-tab vs-label="Θητεία">
                             <div class="d-none d-md-block d-lg-block mb-0">
-                                <h4 class="error"><b>{{ $t("speaker.data_alert") }}</b></h4>
+                                <h4 class="error mb-3"><b>{{ $t("speaker.data_alert") }}</b></h4>
                                 <timeline 
                                     :data="ajaxData.timelineData" 
                                     :colors="ajaxData.memberships.party_colors"
@@ -289,7 +292,6 @@
             },
             changePage(page) {
                 //for pagination
-                var self = this
                 let url = null
 
                 if (this.finalName) {
@@ -299,8 +301,8 @@
                 api.call('get',this.api_path + url)
                     .then( response => {
                         if (response.status == 200 && response.statusText == "OK") {
-                            self.ajaxData.speechesData = response
-                            self.ajaxData.isLoaded = true
+                            this.ajaxData.speechesData = response
+                            this.ajaxData.isLoaded = true
                         }
                     })
                     .catch(function (error) {
@@ -320,42 +322,37 @@
                 }
             },
             getSpeakerSpeeches() {
-                const self = this
                 this.ajaxData.isLoaded = false
                 
                 setTimeout(() => {
                     api.call('get',this.api_path + 'speaker/name/' + this.finalName + '/speeches')
                         .then( response => {
                             if (response.status == 200 && response.data.data.length > 0) {
-                                self.noDataSpeeches = false
-                                self.ajaxData.speechesData = response
-                                self.ajaxData.isLoaded = true
+                                this.noDataSpeeches = false
+                                this.ajaxData.speechesData = response
+                                this.ajaxData.isLoaded = true
                             } else {
-                                self.noDataSpeeches = true
+                                this.noDataSpeeches = true
                             }
-                            self.ajaxDoneSpeeches = true
+                            this.ajaxDoneSpeeches = true
                         })
                 }, 1000)
             },
             getSpeakerData() {
-                const self = this
-                this.ajaxData.isLoaded = false
                 setTimeout(() => {
                     api.call('get',this.api_path + 'speaker/name/' + this.finalName)
                         .then( response => {
                             if (response.status == 200 && response) {
-                                self.noDataSpeaker = false
-                                self.ajaxData.speakerData = response.data.data
-                                self.ajaxData.isLoaded = true
+                                this.noDataSpeaker = false
+                                this.ajaxData.speakerData = response.data.data
                             } else {
-                                self.noDataSpeaker = true
+                                this.noDataSpeaker = true
                             }
-                            self.ajaxDoneSpeaker = true
+                            this.ajaxDoneSpeaker = true
                         })
                 }, 1000)
             },
             searchSpeakerSpeeches() {
-                const self = this
 
                 var search_data = {
                     'input': self.search_string,
@@ -366,14 +363,14 @@
                     api.call('post', this.api_path + 'speaker/speeches/search/', search_data)
                         .then( response => {
                             if (response.status == 200) {
-                                self.noDataSpeeches = false
-                                self.ajaxData.speechesData = response
-                                self.ajaxData.isLoaded = true
+                                this.noDataSpeeches = false
+                                this.ajaxData.speechesData = response
+                                this.ajaxData.isLoaded = true
                             } else {
-                                self.noDataSpeeches = true
+                                this.noDataSpeeches = true
                             }
 
-                            self.ajaxDoneSpeeches = true
+                            this.ajaxDoneSpeeches = true
                         })
                 }, 500)
             },
@@ -411,8 +408,8 @@
             // this.finalName = decodeURIComponent(this.name)
             // this.finalName = this.finalName.replace(/\+/g, " ")
             this.finalName = this.$route.params.speaker_name
-            this.getSpeakerSpeeches()
             this.getSpeakerData()
+            this.getSpeakerSpeeches()
             this.getTimelineMembershipData()
         }
     }

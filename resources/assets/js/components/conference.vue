@@ -7,7 +7,7 @@
                     <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
                     <div>{{ajaxData.conferenceInfo.data.data.time_period}}</div>
                 </div>
-                <vs-tabs vs-color='#17a2b8'>
+                <vs-tabs color='#007bff'>
                     <vs-tab vs-label="Συνδεδρίαση">
                         <div class="row w-100">
                             <div class="col-12 pt-3">

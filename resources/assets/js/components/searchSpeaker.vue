@@ -2,7 +2,7 @@
     <div class="multiselect-div">
         <custom-multiselect 
         v-model="speaker_name" 
-        placeholder="Πληκτρολογίστε για αναζήτηση" 
+        placeholder="Αναζήτηση" 
         open-direction="bottom" 
         :options="ajaxData.search_data"
         track-by="speaker_id"
