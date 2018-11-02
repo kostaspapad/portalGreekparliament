@@ -41,7 +41,7 @@ export default {
         // responsive: true,
         title: {
           display: true,
-          text: 'Speeches number per party'
+          text: 'Αριθμός ομιλιών ανά πολιτική παράταξη'
         },
         maintainAspectRatio: false
       },
