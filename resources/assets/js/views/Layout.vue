@@ -64,9 +64,9 @@
                         <li class="nav-item">
                             <router-link class="nav-link" to="/speakers">{{ $t("navbar.speakers")}}</router-link>
                         </li>
-                        <!-- <li class="nav-item">
+                        <li class="nav-item">
                             <router-link class="nav-link" to="/about">{{ $t("navbar.about")}}</router-link>
-                        </li> -->
+                        </li>
                     </ul>
                 </div>
             </div>
