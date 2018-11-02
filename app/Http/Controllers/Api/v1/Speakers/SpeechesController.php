@@ -71,16 +71,16 @@ class SpeechesController extends Controller
         
         // Get speeches
         // [FUTURE] Show memberships defined by the date that the speech took place
-        $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
-                ->join('speakers as sp', 'speeches.speaker_id', '=', 'sp.speaker_id')
+        $speeches = Speech::join('speakers as sp', 'speeches.speaker_id', '=', 'sp.speaker_id')
                 ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
                 ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
-                ->select(['conf.conference_date as speech_conference_date', 'sp.greek_name', 'sp.english_name', 
+                ->select(['speeches.speech_conference_date', 'sp.greek_name', 'sp.english_name', 
                     'speeches.speech_id', 'speeches.speech', 'sp.image'
                     // 'm.on_behalf_of_id', 
                     // 'parties.fullname_el'
                 ])
                 ->groupBy('speeches.speech_id')
+                ->where('sp.speaker_id', '=', $speaker_id)
                 ->whereIn('speeches.speech_id', $conversation_ids)
                 ->paginate(20);
 
@@ -124,19 +124,19 @@ class SpeechesController extends Controller
         
         // Get speeches
         // [FUTURE] Show memberships defined by the date that the speech took place
-        $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
-                ->join('speakers as sp', 'speeches.speaker_id', '=', 'sp.speaker_id')
+        $speeches = Speech::join('speakers as sp', 'speeches.speaker_id', '=', 'sp.speaker_id')
                 ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
                 ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
-                ->select(['conf.conference_date as speech_conference_date', 'sp.greek_name', 'sp.english_name', 
+                ->select(['speeches.speech_conference_date', 'sp.greek_name', 'sp.english_name', 
                     'speeches.speech_id', 'speeches.speech', 'sp.image'
                     // 'm.on_behalf_of_id', 
                     // 'parties.fullname_el'
                 ])
                 ->groupBy('speeches.speech_id')
+                ->where('sp.greek_name', '=', $speaker_name)
                 ->whereIn('speeches.speech_id', $conversation_ids)
                 ->paginate(20);
-                
+        
         return $this->apiHelper::returnResource('Speech', $speeches);
     }
 
