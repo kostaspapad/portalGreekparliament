@@ -54,7 +54,7 @@
                 </div>
                 <div class="container">
                     <vs-tabs vs-color='#17a2b8'>
-                        <vs-tab vs-label="Speeches">
+                        <vs-tab vs-label="Ομιλίες">
                             <div class="p-3 tab-pane fade show speeches-container mb-0">
                                 <div v-if="ajaxDoneSpeeches && noDataSpeeches == false">
                                     <div v-for="speech in ajaxData.speechesData.data.data" :key="speech.speech_id" class="speeches py-2">
@@ -70,8 +70,11 @@
                                                     · {{speech.speech_conference_date}}</small>
                                             </div>
                                         </div>
-                                        <div class="">
+                                        <!-- <div class="">
                                             <p class="text-left">{{speech.speech}}</p>
+                                        </div> -->
+                                        <div class="speech-container-speech ml-2 pt-2">
+                                            <read-more more-str="περισσότερα" :text="speech.speech" link="#" less-str="λιγότερα" :max-chars="2000"></read-more>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-5" style="padding-left: 2.5rem;">
@@ -83,12 +86,13 @@
                                     </div>
                                 </div>
                                 <div v-else>
-                                    <h5>{{ $t("speakers.speaker.no_speeches_available") }}</h5>
+                                    <h5>{{ $t("speaker.no_speeches_available") }}</h5>
                                 </div>
                             </div>
                         </vs-tab>
-                        <vs-tab vs-label="Membership">
+                        <vs-tab vs-label="Θητεία">
                             <div class="d-none d-md-block d-lg-block mb-0">
+                                <h4 class="error"><b>{{ $t("speaker.data_alert") }}</b></h4>
                                 <timeline 
                                     :data="ajaxData.timelineData" 
                                     :colors="ajaxData.memberships.party_colors"
