@@ -113,6 +113,9 @@ html, body {
     background: #1ABC9C;
     color: white;
 }
+.send-button:hover{
+    color: white;
+}
 .navbar-laravel {
     background-color: $topNavBgColor;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
