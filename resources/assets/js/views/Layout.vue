@@ -13,6 +13,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                         <!-- Authentication Links -->
+                        <li class="nav-item d-block d-sm-block d-md-none">
+                            <router-link class="nav-link" to="/conferences">{{ $t("navbar.conferences")}}</router-link>
+                        </li>
+                        <li class="nav-item d-block d-sm-block d-md-none">
+                            <router-link class="nav-link" to="/parties">{{ $t("navbar.political_parties")}}</router-link>
+                        </li>
+                        <li class="nav-item d-block d-sm-block d-md-none">
+                            <router-link class="nav-link" to="/speakers">{{ $t("navbar.speakers")}}</router-link>
+                        </li>
+                        <li class="nav-item d-block d-sm-block d-md-none">
+                            <router-link class="nav-link" to="/about">{{ $t("navbar.about")}}</router-link>
+                        </li>
+                        <hr class="divider">
+                        
                         <!-- @guest -->
                         <li class="nav-item" v-if="!user">
                             <router-link to="/login" class="nav-link">{{$t("auth.login")}}</router-link>
