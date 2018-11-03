@@ -23,7 +23,7 @@
                     <div class="container-fluid speaker-data">
                         <div class="speaker-info">
                             <div class="speaker-img">
-                                <img :src=" '../img' + '/' + ajaxData.speakerData.image " class="img-fluid" style="margin: 5px 0 5px 0;">
+                                <img :src=" '/img' + '/' + ajaxData.speakerData.image " class="img-fluid" style="margin: 5px 0 5px 0;">
                             </div>
                             <div class="speaker-name">
                                 <div class="speaker-name-info">
@@ -94,7 +94,7 @@
                             </div>
                         </vs-tab>
                         <vs-tab vs-label="Θητεία">
-                            <div class="d-none d-md-block d-lg-block mb-0">
+                            <div class=" d-md-block d-lg-block mb-0">
                                 <h4 class="error mb-3"><b>{{ $t("speaker.data_alert") }}</b></h4>
                                 <timeline 
                                     :data="ajaxData.timelineData" 
