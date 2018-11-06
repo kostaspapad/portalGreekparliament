@@ -1,5 +1,14 @@
 <template>
     <div v-if="isDone">
+        <div v-if="speech_data.speech_id && speech_data.greek_name && speech_data.missing_prev">
+            <div class="speech-data-container p-2">
+                <div class="row" style="margin-right: 0;">
+                    <div class="speech-container-speech ml-2 pt-2">
+                        Η ομιλία δεν ειναι διαθέσιμη
+                    </div>
+                </div>
+            </div>
+        </div>
         <div v-if="speech_data.speech_id && speech_data.greek_name" class="speech-container py-2">
             <div class="speech-data-container p-2">
                 <div class="row" style="margin-right: 0;">

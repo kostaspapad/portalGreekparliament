@@ -15,6 +15,7 @@ class SpeechesController extends Controller
 {
     var $allowed_order_fields = ['conference_date', 'conference_indicator', 'session', 'time_period'];
     var $orientations = ['asc', 'desc'];
+    var $prev_speech_id = null;
 
     public function __construct(Request $request) 
     {
@@ -107,6 +108,28 @@ class SpeechesController extends Controller
                     ])
                     ->paginate(25);
             }
+
+            //check if is there a missing speech
+            $speeches->transform(function ($item, $key) {
+                $currentLast3Chars = substr($item->speech_id, -3);
+                $res = $currentLast3Chars + 001; //is integer
+                if($this->prev_speech_id){
+                    //if id is the next one ex: 000 -> 001
+                    if($this->prev_speech_id + 001 == $currentLast3Chars){
+                       
+                    }else{
+                        $item->missing_prev = true;
+                    }
+                    $this->prev_speech_id = $currentLast3Chars;
+                    //must return the current object
+                    return $item;
+                }else{
+                    $this->prev_speech_id = $currentLast3Chars;
+                    //must return the current object
+                    return $item;
+                }
+            });
+           // dd($speeches);
 
             return $this->apiHelper::returnResource('Speech', $speeches);
         }

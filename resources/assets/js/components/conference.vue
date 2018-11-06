@@ -57,9 +57,12 @@
                         <!-- <transition v-if="user" name="slide-fade"> -->
                         <!-- <transition name="slide-fade"> -->
                         <!-- <div class="m-auto" v-if="showChart"> -->
-                        <h4 class="error"><b>{{ $t("conference.data_alert") }}</b></h4>
+                        <div v-if="!user">
+                            Πρέπει να εγγραφείτε για να έχετε πρόσβαση στο γράφημα
+                        </div>
+                        <h4 class="error" v-if="isLoaded && user"><b>{{ $t("conference.data_alert") }}</b></h4>
                         <pie-chart 
-                            v-if="isLoaded"
+                            v-if="isLoaded && user"
                             :chart-data="ajaxData.party_count_speeches.party_count" 
                             :chart-labels="ajaxData.party_count_speeches.party_names"
                             :chart-bg-colors="ajaxData.party_count_speeches.party_colors"

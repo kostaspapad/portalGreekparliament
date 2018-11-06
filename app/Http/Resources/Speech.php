@@ -36,7 +36,8 @@ class Speech extends JsonResource
             'on_behalf_of_id' => $this->on_behalf_of_id,
             'fullname_el' => $this->fullname_el,
             'party_color' => $this->color,
-            'isFavorite' => $this->isFavorite
+            'isFavorite' => $this->isFavorite,
+            'missing_prev' => $this->missing_prev
         ];
         
         // array_filter without second argument removes null elements of entry array
