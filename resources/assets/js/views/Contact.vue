@@ -49,6 +49,9 @@
                                     {{ $t("contact.submit") }}
                                 </button>
                             </div>
+                            <div class="text-center mt-4" v-if="ajax.isLoaded">
+                                <h2>Sending <i class="fas fa-spinner fa-spin"></i></h2>
+                            </div>
                         </form>
                         <div class="error" v-if="!$v.email.email">{{ $t("contact.mail_example") }}</div>
                         <p class="error" v-if="submitStatus === 'ERROR'">{{ $t("contact.form_err") }}</p>
@@ -65,6 +68,9 @@
     export default {
         data() {
             return {
+                ajax: {
+                    isLoaded: false
+                },
                 name: null,
                 email: null,
                 message: null,
@@ -99,12 +105,12 @@
                     this.submitStatus = 'ERROR'
 
                 } else {
+                    this.ajax.isLoaded = true
                     setTimeout(() => {
                         api.call('post', '/api/v1/contact', data)
                         .then(({data}) => {
-                            console.log(data)
-                            console.table(data)
                             this.submitStatus = 'OK'
+                            this.clearVariables()
                         })
                         .catch( (error) => {
                             if( error.data.status == 400 ){
@@ -113,8 +119,15 @@
                                 this.error_msg = "Error"
                             }
                         })
-                    }, 500)
+                    }, 1000)
                 }
+            },
+            clearVariables() {
+                this.name = ''
+                this.email = ''
+                this.message = ''
+                this.submitStatus = null
+                this.ajax.isLoaded = false
             }
         }
     }
