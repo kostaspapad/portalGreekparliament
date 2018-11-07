@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'register' => 'Εγγραφή',
     'name' => 'Όνομα',
     'email' => 'Email',
     'not_valid_mail' => 'Το email δεν είναι έγκυρο',
