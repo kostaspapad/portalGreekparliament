@@ -93,4 +93,33 @@ class MembershipsController extends Controller
         return $membership;
         // return $this->apiHelper::returnResource('Membership', $membership);
     }
+    public function membershipsTimelineBySpeakerId($speaker_id) 
+    {
+        $speaker_id = "'" . $speaker_id . "'";
+        $membership = DB::select(
+            DB::raw('
+                SELECT 
+                    speakers.greek_name,
+                    memberships.on_behalf_of_id,
+                    memberships.start_date,
+                    memberships.end_date,
+                    parties.fullname_el,
+                    party_colors.color
+                FROM
+                    memberships
+                        INNER JOIN
+                    speakers speakers ON speakers.speaker_id = memberships.person_id
+                        INNER JOIN
+                    parties ON memberships.on_behalf_of_id = parties.party_id
+                        INNER JOIN
+                    party_colors ON parties.party_id = party_colors.party_id
+                WHERE speakers.speaker_id = '.$speaker_id.'
+                GROUP BY speakers.greek_name , memberships.on_behalf_of_id , memberships.start_date , memberships.end_date
+                ORDER BY speakers.greek_name, memberships.start_date
+            ')
+        );
+        //dd($membership);
+        return $membership;
+        // return $this->apiHelper::returnResource('Membership', $membership);
+    }
 }

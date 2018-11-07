@@ -75,13 +75,14 @@ class SpeechesController extends Controller
                 ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
                 ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
                 ->select(['speeches.speech_conference_date', 'sp.greek_name', 'sp.english_name', 
-                    'speeches.speech_id', 'speeches.speech', 'sp.image'
+                    'speeches.speech_id', 'speeches.speech', 'sp.image', 'sp.speaker_id'
                     // 'm.on_behalf_of_id', 
                     // 'parties.fullname_el'
                 ])
                 ->groupBy('speeches.speech_id')
                 ->where('sp.speaker_id', '=', $speaker_id)
                 ->whereIn('speeches.speech_id', $conversation_ids)
+                ->orderBy('speeches.speech_conference_date', 'desc')
                 ->paginate(20);
 
         return $this->apiHelper::returnResource('Speech', $speeches);
@@ -128,13 +129,14 @@ class SpeechesController extends Controller
                 ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
                 ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
                 ->select(['speeches.speech_conference_date', 'sp.greek_name', 'sp.english_name', 
-                    'speeches.speech_id', 'speeches.speech', 'sp.image'
+                    'speeches.speech_id', 'speeches.speech', 'sp.image','sp.speaker_id'
                     // 'm.on_behalf_of_id', 
                     // 'parties.fullname_el'
                 ])
                 ->groupBy('speeches.speech_id')
                 ->where('sp.greek_name', '=', $speaker_name)
                 ->whereIn('speeches.speech_id', $conversation_ids)
+                ->orderBy('speeches.speech_conference_date', 'desc')
                 ->paginate(20);
         
         return $this->apiHelper::returnResource('Speech', $speeches);

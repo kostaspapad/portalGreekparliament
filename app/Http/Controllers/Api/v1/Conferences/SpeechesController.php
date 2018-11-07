@@ -69,7 +69,8 @@ class SpeechesController extends Controller
                     ->select([
                         'conf.conference_date', 
                         'sp.greek_name', 
-                        'sp.english_name', 
+                        'sp.english_name',
+                        'sp.speaker_id', 
                         'speeches.speech_id', 
                         'speeches.speech', 
                         'sp.image', 
@@ -94,7 +95,8 @@ class SpeechesController extends Controller
                     ->select([
                         'conf.conference_date', 
                         'sp.greek_name', 
-                        'sp.english_name', 
+                        'sp.english_name',
+                        'sp.speaker_id', 
                         'speeches.speech_id', 
                         'speeches.speech', 
                         'sp.image', 
