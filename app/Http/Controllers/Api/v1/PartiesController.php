@@ -27,7 +27,7 @@ class PartiesController extends Controller
     public function index()
     {
         // Get speakers
-        $parties = Party::paginate(50);
+        $parties = Party::orderBy('fullname_el', 'asc')->paginate(50);
 
         return $this->apiHelper::returnResource('Party', $parties);
     }

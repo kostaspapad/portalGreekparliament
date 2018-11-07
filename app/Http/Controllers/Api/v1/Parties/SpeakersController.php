@@ -31,6 +31,7 @@ class SpeakersController extends Controller {
                 's.image'])
             ->where('parties.party_id', '=', $party_id)
             ->groupBy('s.speaker_id')
+            ->orderBy('s.greek_name', 'asc')
             ->paginate(20);
          
         return $this->apiHelper::returnResource('Speaker', $speakers);
