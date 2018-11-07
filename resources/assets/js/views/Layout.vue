@@ -108,9 +108,9 @@
                             <!-- <li>
                                 <router-link class="nav-link" to="/donate">Donate</router-link>
                             </li> --> 
-                            <li>
+                            <!-- <li>
                                 <router-link class="nav-link" to="/policy">{{ $t("footer.policy")}}</router-link>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -153,7 +153,9 @@
                 this.authenticated = false
                 this.user = null
                 this.CHECK_USER()
-                this.$router.push('/')
+                //this.$router.go(-10)
+                 this.$router.push('/')
+                 location.reload()
             })
         },
     }

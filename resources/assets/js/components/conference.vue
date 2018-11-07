@@ -277,8 +277,7 @@
             
             this.getPartyCountByConference()
             if(this.user){
-                //put interval HERE
-                // this.GET_COMMENTS_CONFERENCE(this.conf_date)
+                this.GET_COMMENTS_CONFERENCE(this.conf_date)
                 this.startInterval = true
             }
         }

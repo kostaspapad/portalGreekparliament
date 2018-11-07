@@ -56,15 +56,15 @@ let routes = [
     {
         path: '/contact',
         component: require('./views/Contact.vue')
-    },
+    }
     // {
     //     path: '/donate',
     //     component: require('./views/Donate.vue')
     // },
-    {
-        path: '/policy',
-        component: require('./views/Policy.vue')
-    },
+    // {
+    //     path: '/policy',
+    //     component: require('./views/Policy.vue')
+    // },
 ];
 
 const router = new VueRouter({
