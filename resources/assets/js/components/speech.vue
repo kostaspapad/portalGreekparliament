@@ -19,7 +19,7 @@
                     </div>
                     <div class="speech-container-speaker">
                         <h4 class="speech_speaker_name ml-2">
-                            <a :href="/speaker/ + speech_data.greek_name" class="" style="margin-top:8px;">{{speech_data.greek_name}}</a>
+                            <router-link :to="/speaker/ + speech_data.speaker_id" class="" style="margin-top:8px;">{{speech_data.greek_name}}</router-link>
                         </h4>
                         <div class="speech_speaker_party ml-2" v-bind:style="getPartyColor">
                             <h5>{{speech_data.fullname_el | capitalize}} ({{speech_data.on_behalf_of_id}})</h5>

@@ -34,7 +34,7 @@ let routes = [
         component: require('./components/speakers.vue')
     },
     {
-        path: '/speaker/:speaker_name',
+        path: '/speaker/:speaker_id',
         component: require('./components/speaker.vue')
     },
     {

@@ -35,7 +35,7 @@
                         v-for="speaker in ajaxData.speakersData.data.data" 
                         :key="speaker.id" 
                         style="margin-bottom: 15px;">
-                        <router-link :to="'/speaker/' + speaker.greek_name" class="person-link">
+                        <router-link :to="'/speaker/' + speaker.speaker_id" class="person-link">
                             <img :src=" 'img' + '/' + printImg(speaker.image) " class="person-img">
                             <h2 class="person-name text-left">{{speaker.greek_name}}</h2>
                             <p class="person-membership text-left">

@@ -28,7 +28,7 @@
                                 <div v-if="ajaxDoneSpeakers && noDataSpeakers == false">
                                     <div v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.speaker_id" class="speakers py-2">
                                         <div class="row">
-                                            <router-link :to="'/speaker/' + speaker.greek_name" class="person-link">
+                                            <router-link :to="'/speaker/' + speaker.speaker_id" class="person-link">
                                                 <img :src=" '/img/' + printImg(speaker.image) " class="person-img">
                                                 <p class="person-name text-left">{{speaker.greek_name}}</p>
                                             </router-link>

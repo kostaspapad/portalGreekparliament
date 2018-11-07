@@ -79,7 +79,7 @@
             goToProfile(selected){
                 //window.location = this.$root.host + '/speaker/' + selected.greek_name
                 this.$router.push({
-                    path: '/speaker/' + selected.greek_name 
+                    path: '/speaker/' + selected.speaker_id 
                 })
             }
         },

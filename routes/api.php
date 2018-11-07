@@ -102,6 +102,7 @@ Route::get('/user', function (Request $request) {
     Route::get('speaker/{speaker_id}/memberships', 'Api\v1\Speakers\MembershipsController@membershipsBySpeakerId');
     // http://localhost:8000/api/v1/speaker/name/Αλέξης Τσίπρας/memberships
     Route::get('speaker/name/{name}/timeline', 'Api\v1\Speakers\MembershipsController@membershipsTimelineBySpeakerName');
+    Route::get('speaker/{speaker_id}/timeline', 'Api\v1\Speakers\MembershipsController@membershipsTimelineBySpeakerId');
     
     /**
      *   Parties

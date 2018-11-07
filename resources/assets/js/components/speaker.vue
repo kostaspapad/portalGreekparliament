@@ -61,12 +61,12 @@
                                         <div class="row">
                                             <div v-if="speech.greek_name == ajaxData.speechesData.data.data.greek_name">
                                                 <small>
-                                                    <p><ins><a :href="`/speaker/${speech.greek_name}`" class="text-info">{{speech.greek_name}}</a></ins></p>
+                                                    <p><ins><router-link :to="/speaker/+speech.speaker_id" class="text-info">{{speech.greek_name}}</router-link></ins></p>
                                                     · {{speech.speech_conference_date}}
                                                 </small>
                                             </div>
                                             <div v-else>
-                                                <small><a :href="`/speaker/${speech.greek_name}`" class="text-info">{{speech.greek_name}}</a>
+                                                <small><router-link :to="/speaker/+speech.speaker_id" class="text-info">{{speech.greek_name}}</router-link>
                                                     · {{speech.speech_conference_date}}</small>
                                             </div>
                                         </div>
@@ -261,6 +261,7 @@
                     timelineData: []
                 },
                 finalName: null,
+                speaker_id: null,
                 conferenceDate: null,
                 showDate: true,
                 currentTab: 'Information',
@@ -294,8 +295,8 @@
                 //for pagination
                 let url = null
 
-                if (this.finalName) {
-                    url = 'speaker/name/' + this.finalName + '/speeches' + '?page=' + page
+                if (this.speaker_id) {
+                    url = 'speaker/' + this.speaker_id + '/speeches' + '?page=' + page
                 }
                 this.ajaxData.isLoaded = false
                 api.call('get',this.api_path + url)
@@ -325,7 +326,7 @@
                 this.ajaxData.isLoaded = false
                 
                 setTimeout(() => {
-                    api.call('get',this.api_path + 'speaker/name/' + this.finalName + '/speeches')
+                    api.call('get',this.api_path + 'speaker/' + this.speaker_id + '/speeches')
                         .then( response => {
                             if (response.status == 200 && response.data.data.length > 0) {
                                 this.noDataSpeeches = false
@@ -340,7 +341,7 @@
             },
             getSpeakerData() {
                 setTimeout(() => {
-                    api.call('get',this.api_path + 'speaker/name/' + this.finalName)
+                    api.call('get',this.api_path + 'speaker/' + this.speaker_id)
                         .then( response => {
                             if (response.status == 200 && response) {
                                 this.noDataSpeaker = false
@@ -379,7 +380,7 @@
             },
             getTimelineMembershipData() {
                 setTimeout(() => {
-                    api.call('get', this.api_path + 'speaker/name/' + this.finalName + '/timeline')
+                    api.call('get', this.api_path + 'speaker/' + this.speaker_id + '/timeline')
                     .then( response => {
                         if(response.status == 200 && response.statusText == "OK" && response.data){
                             response.data.forEach( element => {
@@ -407,7 +408,8 @@
             this.loading = false
             // this.finalName = decodeURIComponent(this.name)
             // this.finalName = this.finalName.replace(/\+/g, " ")
-            this.finalName = this.$route.params.speaker_name
+            //this.finalName = this.$route.params.speaker_name
+            this.speaker_id = this.$route.params.speaker_id
             this.getSpeakerData()
             this.getSpeakerSpeeches()
             this.getTimelineMembershipData()
