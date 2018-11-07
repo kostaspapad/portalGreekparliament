@@ -80,9 +80,9 @@ class SpeechesController extends Controller
                     // 'parties.fullname_el'
                 ])
                 ->groupBy('speeches.speech_id')
-                ->where('sp.speaker_id', '=', $speaker_id)
+                //->where('sp.speaker_id', '=', $speaker_id)
                 ->whereIn('speeches.speech_id', $conversation_ids)
-                ->orderBy('speeches.speech_conference_date', 'desc')
+                ->orderBy('speeches.speech_id', 'desc')
                 ->paginate(20);
 
         return $this->apiHelper::returnResource('Speech', $speeches);
