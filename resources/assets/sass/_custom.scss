@@ -101,6 +101,56 @@ html, body {
 @media (min-width: 768px){
     nav{ padding: 0!important;}
 }
+
+.vs-input--icon{
+    padding-right: 0!important;
+}
+.speaker-container{
+    .con-text-validation{
+        color: white;
+        background: #555555c2;
+        font-size: 0.8rem!important;
+        border-radius: 5px;
+    }
+}
+.conferences-container{
+    .con-text-validation{
+        font-size: 0.8rem!important;
+    }
+}
+
+// search input
+.search-clear-icon{
+    position: relative;
+    top: -60px;
+}
+.speech-search-input{
+    width: 220px!important;
+    color:inherit;
+}
+.speech-search-input-icon{
+    font-size: 1.8em;
+    position: relative;
+    top: 5px;
+
+    .fa-times-circle{
+        // color: #3496fe;
+        color: #636b6f;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 400px) {
+    .conference-title {
+        font-size: 1.3rem;
+    }
+    .speech-search-input{
+        width: 180px!important;
+    }
+    .search-clear-icon{
+        top: -80px;
+    }
+}
+//end search input
+
 .pointer{
     cursor: pointer;
 }

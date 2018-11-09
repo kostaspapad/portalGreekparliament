@@ -26,16 +26,29 @@
                                     <span slot="next-nav">&gt;</span>
                                 </pagination>
                                 <vs-input
-                                    vs-icon="search" 
-                                    placeholder="Αναζήτηση λέξεων ομιλιών" 
+                                    icon="search" 
+                                    placeholder="Αναζήτηση λέξεων ομιλιών"
+                                    description-text="Γράψτε μόνο με πεζά γράμματα και χρησιμοποιήστε τόνους."
                                     v-model.trim="search_string"
                                     @keypress.enter="searchConferenceSpeeches"
-                                    style="width: 235px;color:inherit;"
+                                    class="speech-search-input d-inline-block"
                                 />
+                                <div v-if="search_string" class="d-inline-block search-clear-icon">
+                                    <span @click="clearInput" class="speech-search-input-icon pointer"><i class="fas fa-times-circle"></i></span>
+                                </div>
                             </div>
                             <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                <div v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
-                                    <speech :speech="conference"></speech>
+                                <div v-if="search.speechesData.length > 0" class="search-result">
+                                    <vs-divider color="#636b6f">Αποτελέσματα</vs-divider>
+                                    <div v-for="conference in search.speechesData" :key="conference.speech_id">
+                                        <speech :speech="conference" isFromSearch=true isFromConference=true></speech>
+                                    </div>
+                                </div>
+                                <div v-if="search.noDataMsg">
+                                    <p>{{search.noDataMsg}}</p>
+                                </div>
+                                <div v-if="!search.speechesData.length" v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
+                                    <speech :speech="conference" isFromConference=true></speech>
                                 </div>
                             </div>
                             <div v-else>
@@ -78,7 +91,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
     .conferences-bg {
         background-color: #ffffff;
     }
@@ -91,11 +104,6 @@
         background-color: #dbf0ff;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
-    }
-    @media only screen and (min-width: 320px) and (max-width: 400px) {
-        .conference-title {
-            font-size: 1.3rem;
-        }
     }
     .pickerDiv{
         margin-bottom: 10px;
@@ -143,6 +151,10 @@
                     },
                     isLoaded: false
                 },
+                search: {
+                    speechesData: [],
+                    noDataMsg: null
+                },
                 conf_date: null,
                 defaultImg: 'default_speaker_icon.png',
                 startUrl: 'https://www.hellenicparliament.gr',
@@ -159,25 +171,61 @@
             }
         },
         methods:{
-            searchConferenceSpeeches() {
-                if(this.search_string === ''){
-                    this.getConferenceSpeeches();
+            clearInput() {
+                this.search_string = ''
+                if(this.search.speechesData){
+                    this.search.speechesData = []
                 }
-                this.ajaxData.isLoaded = false
-                setTimeout(() => {
-                    api.call('get', this.api_path + 'conference/' + this.conf_date + '/speeches/search/' + this.search_string)
-                        .then( response => {
-                            if (response.status == 200) {
-                                this.noDataConfSpeeches = false
-                                this.ajaxData.conferenceData = response
-                                this.ajaxData.isLoaded = true
-                            } else {
-                                this.noDataConfSpeeches = true
-                            }
+                this.search.noDataMsg = ''
+            },
+            searchConferenceSpeeches() {
+                //search_string is not empty
+                if(this.search_string){
+                    let tmp_speech_data = this.ajaxData.conferenceData.data.data.filter(speech => {
+                        //console.log(speech)
+                        //console.log(speech.speech.includes(this.search_string))
+                        return speech.speech.toLowerCase().includes(this.search_string)
+                        // return post.title.toLowerCase().includes(this.search.toLowerCase())
+                    })
+                    //console.log(tmp_speech_data)
 
-                            this.ajaxDoneConfSpeeches = true
-                        })
-                }, 500)
+                    //the result found something
+                    if(tmp_speech_data.length > 0){
+                        this.search.speechesData = tmp_speech_data
+                    }else{
+                        //didn't found something
+                        this.search.noDataMsg = 'Δεν βρέθηκαν ομιλίες που να περιλαμβάνουν τις λέξεις που δώσατε.'
+                    }
+                }else{
+                    //if search_string is empty , clear the array and the no message text
+                    if(this.search.speechesData){
+                        this.search.speechesData = []
+                    }
+                    this.search.noDataMsg = ''
+                }
+                // filteredList() {
+                //     return this.postList.filter(post => {
+                //         return post.title.toLowerCase().includes(this.search.toLowerCase())
+                //     })
+                // }
+                // if(this.search_string === ''){
+                //     this.getConferenceSpeeches();
+                // }
+                // this.ajaxData.isLoaded = false
+                // setTimeout(() => {
+                //     api.call('get', this.api_path + 'conference/' + this.conf_date + '/speeches/search/' + this.search_string)
+                //         .then( response => {
+                //             if (response.status == 200) {
+                //                 this.noDataConfSpeeches = false
+                //                 this.ajaxData.conferenceData = response
+                //                 this.ajaxData.isLoaded = true
+                //             } else {
+                //                 this.noDataConfSpeeches = true
+                //             }
+
+                //             this.ajaxDoneConfSpeeches = true
+                //         })
+                // }, 500)
             },
             changePage(page) {
                 axios.get(this.api_path + 

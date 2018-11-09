@@ -1,6 +1,26 @@
 <template>
     <div v-if="isDone">
-        <div v-if="speech_data.speech_id && speech_data.greek_name && speech_data.missing_prev">
+        <!-- Speaker Profile -->
+        <div v-if="isFromSpeakerProfile" class="speakerProfile-speech-data">
+            <div class="row">
+                <!-- <div v-if="speech.greek_name == ajaxData.speechesData.data.data.greek_name">
+                    <small>
+                        <p><ins><router-link :to="/speaker/+speech_data.speaker_id" class="text-info">{{speech_data.greek_name}}</router-link></ins></p>
+                        · {{speech_data.speech_conference_date}}
+                    </small>
+                </div> -->
+                <div>
+                    <small><router-link :to="/speaker/+speech_data.speaker_id" class="text-info">{{speech_data.greek_name}}</router-link>
+                        · {{speech_data.speech_conference_date}}</small>
+                </div>
+            </div>
+            <div class="speech-container-speech ml-2 pt-2">
+                <read-more more-str="περισσότερα" :text="speech_data.speech" link="#" less-str="λιγότερα" :max-chars="2000"></read-more>
+            </div>
+        </div>
+        <!-- End Speaker Profile -->
+
+        <div v-if="speech_data.speech_id && speech_data.greek_name && speech_data.missing_prev && !isFromSearch && !isFromSpeakerProfile && isFromConference">
             <div class="speech-data-container p-2">
                 <div class="row" style="margin-right: 0;">
                     <div class="speech-container-speech ml-2 pt-2">
@@ -9,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="speech_data.speech_id && speech_data.greek_name" class="speech-container py-2">
+        <div v-if="speech_data.speech_id && speech_data.greek_name && isFromConference" class="speech-container3 py-2">
             <div class="speech-data-container p-2">
                 <div class="row" style="margin-right: 0;">
                     <div class="speaker-image-container">
@@ -22,7 +42,7 @@
                             <router-link :to="/speaker/ + speech_data.speaker_id" class="" style="margin-top:8px;">{{speech_data.greek_name}}</router-link>
                         </h4>
                         <div class="speech_speaker_party ml-2" v-bind:style="getPartyColor">
-                            <h5>{{speech_data.fullname_el | capitalize}} ({{speech_data.on_behalf_of_id}})</h5>
+                            <h5>{{speech_data.fullname_el | capitalize}} </h5>
                         </div>
                     </div>
                 </div>
@@ -177,7 +197,16 @@
     import { mapState, mapGetters } from 'vuex'
     export default {
         props: {
-            speech: null
+            speech: null,
+            isFromSearch: {
+                default: false
+            },
+            isFromSpeakerProfile: {
+                default: false
+            },
+            isFromConference: {
+                default: false
+            }
         },
         data() {
             return {

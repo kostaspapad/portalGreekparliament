@@ -43,12 +43,16 @@
                     <div class="col-12 pr-5 mb-4 mt-4 float-right">
                         <div class="float-right">
                              <vs-input
-                                vs-icon="search" 
-                                placeholder="Αναζήτηση" 
+                                icon="search" 
+                                placeholder="Αναζήτηση λέξεων ομιλητή" 
+                                description-text="Γράψτε μόνο με πεζά γράμματα και χρησιμοποιήστε τόνους."
                                 v-model.trim="search_string"
                                 @keypress.enter="searchSpeakerSpeeches"
-                                style="width: 235px;color:inherit;"
+                                class="speech-search-input d-inline-block"
                             />
+                            <div v-if="search_string" class="d-inline-block search-clear-icon">
+                                <span @click="clearInput" class="speech-search-input-icon pointer"><i class="fas fa-times-circle"></i></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -57,24 +61,16 @@
                         <vs-tab vs-label="Ομιλίες">
                             <div class="p-3 tab-pane fade show speeches-container mb-0">
                                 <div v-if="ajaxDoneSpeeches && ajaxData.isLoaded && noDataSpeeches == false">
-                                    <div v-for="speech in ajaxData.speechesData.data.data" :key="speech.speech_id" class="speeches py-2">
-                                        <div class="row">
-                                            <div v-if="speech.greek_name == ajaxData.speechesData.data.data.greek_name">
-                                                <small>
-                                                    <p><ins><router-link :to="/speaker/+speech.speaker_id" class="text-info">{{speech.greek_name}}</router-link></ins></p>
-                                                    · {{speech.speech_conference_date}}
-                                                </small>
-                                            </div>
-                                            <div v-else>
-                                                <small><router-link :to="/speaker/+speech.speaker_id" class="text-info">{{speech.greek_name}}</router-link>
-                                                    · {{speech.speech_conference_date}}</small>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="">
-                                            <p class="text-left">{{speech.speech}}</p>
-                                        </div> -->
-                                        <div class="speech-container-speech ml-2 pt-2">
-                                            <read-more more-str="περισσότερα" :text="speech.speech" link="#" less-str="λιγότερα" :max-chars="2000"></read-more>
+                                    <div v-show="search.noDataMsg">
+                                        <p>{{search.noDataMsg}}</p>
+                                    </div>
+                                    <div v-if="!search.speechesData.length" v-for="speech in ajaxData.speechesData.data.data" :key="speech.speech_id" class="speeches py-2">
+                                        <speech :speech="speech" isFromSpeakerProfile=true></speech>
+                                    </div>
+                                    <div v-if="search.speechesData.length" class="search-result">
+                                        <vs-divider color="#636b6f">Αποτελέσματα</vs-divider>
+                                        <div v-for="speech in search.speechesData" :key="speech.speech_id">
+                                            <speech :speech="speech" isFromSearch=true isFromSpeakerProfile=true></speech>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-5" style="padding-left: 2.5rem;">
@@ -235,6 +231,13 @@
             text-align: left;
         }
     }
+    .speech-search-input-icon {
+        .fa-times-circle{
+            color: #ffffff;
+            background: #495057;
+            border-radius: 50%;
+        }
+    }
 </style>
 
 <script>
@@ -260,6 +263,10 @@
                     },
                     timelineData: []
                 },
+                search: {
+                    speechesData: [],
+                    noDataMsg: null
+                },
                 finalName: null,
                 speaker_id: null,
                 conferenceDate: null,
@@ -278,6 +285,13 @@
             }
         },
         methods: {
+            clearInput() {
+                this.search_string = ''
+                if(this.search.speechesData){
+                    this.search.speechesData = []
+                }
+                this.search.noDataMsg = ''
+            },
             sortBy(sortField, sortOrientation = null) {
                 if (sortField) {
                     this.order_field = sortField
@@ -354,26 +368,52 @@
                 }, 1000)
             },
             searchSpeakerSpeeches() {
+                if(this.search_string){
+                    let tmp_speech_data = this.ajaxData.speechesData.data.data.filter(speech => {
+                        // console.log(speech)
+                        // console.log(speech.speech.includes(this.search_string))
+                        return speech.speech.toLowerCase().includes(this.search_string)
+                        // return post.title.toLowerCase().includes(this.search.toLowerCase())
+                    })
+                    //console.log(tmp_speech_data)
 
-                var search_data = {
-                    'input': self.search_string,
-                    'speaker_id': self.ajaxData.speakerData.speaker_id
+                    //the result found something
+                    if(tmp_speech_data.length > 0){
+                        this.search.speechesData = tmp_speech_data
+                        this.search.noDataMsg = ''
+                    }else{
+                        //didn't found something
+                        if(this.search.speechesData){
+                            this.search.speechesData = []
+                        }
+                        this.search.noDataMsg = 'Δεν βρέθηκαν ομιλίες που να περιλαμβάνουν τις λέξεις που δώσατε.'
+                    }
+                }else{
+                    //if search_string is empty , clear the array and the no message text
+                    if(this.search.speechesData){
+                        this.search.speechesData = []
+                    }
+                    this.search.noDataMsg = ''
                 }
-                this.ajaxData.isLoaded = false
-                setTimeout(() => {
-                    api.call('post', this.api_path + 'speaker/speeches/search/', search_data)
-                        .then( response => {
-                            if (response.status == 200) {
-                                this.noDataSpeeches = false
-                                this.ajaxData.speechesData = response
-                                this.ajaxData.isLoaded = true
-                            } else {
-                                this.noDataSpeeches = true
-                            }
+                // let search_data = {
+                //     'input': this.search_string,
+                //     'speaker_id': this.ajaxData.speakerData.speaker_id
+                // }
+                // this.ajaxData.isLoaded = false
+                // setTimeout(() => {
+                //     api.call('post', this.api_path + 'speaker/speeches/search/', search_data)
+                //         .then( response => {
+                //             if (response.status == 200) {
+                //                 this.noDataSpeeches = false
+                //                 this.ajaxData.speechesData = response
+                //                 this.ajaxData.isLoaded = true
+                //             } else {
+                //                 this.noDataSpeeches = true
+                //             }
 
-                            this.ajaxDoneSpeeches = true
-                        })
-                }, 500)
+                //             this.ajaxDoneSpeeches = true
+                //         })
+                // }, 500)
             },
             onlyUnique(value, index, self) { 
                 return self.indexOf(value) === index;
