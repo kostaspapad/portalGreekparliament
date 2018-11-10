@@ -6,10 +6,17 @@
 @import '~bootstrap/scss/bootstrap';
 
 //font-awesome
-@import "~font-awesome/scss/font-awesome.scss";
-
+// @import "~font-awesome/scss/font-awesome.scss";
+// @import "node_modules/font-awesome/scss/font-awesome.scss";
+// @import "~font-awesome/scss/font-awesome.scss";
+// @import "~font-awesome/scss/font-awesome.scss";
+// You might have to change the font-path, we'll come to this later
+$fa-font-path:  "webfonts/" !default;
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid";
 //vue-multiselect
 //@import "~vue-multiselect/dist/vue-multiselect.min.css";
 
-//custom css
-@import "custom";
+//custom css 
+@import "custom"; 

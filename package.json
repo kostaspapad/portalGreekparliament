@@ -20,6 +20,7 @@
     "vue": "^2.5.17"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "axios": "^0.18.0",
     "chart.js": "^2.7.2",
     "chartjs": "^0.3.24",
