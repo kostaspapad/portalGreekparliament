@@ -9,7 +9,7 @@
                         @click="redirectToParty(party.fullname_el)"
                         style="margin-bottom: 15px">
                         <router-link :to="/party/ + party.fullname_el" class="party-link">
-                        <img :src=" '/img/parties/' + printImg(party.image) " class="party-img">
+                        <img :src=" '/img/parties' + printImg(party.image) " class="party-img">
                         <h2 class="party-name text-left">{{party.fullname_el}}</h2>
                             <!--<p class="party-membership text-left">
                                 <span class="party-name">{{party.party_fullname}}</span>
