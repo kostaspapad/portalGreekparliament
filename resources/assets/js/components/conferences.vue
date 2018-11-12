@@ -264,7 +264,7 @@
                 axios.get(this.api_path + url)
                     .then(response => {
                         if (response.status == 200 && response.statusText == "OK") {
-                            if(this.search.multipleDates){
+                            if(this.search.type == "multiple" && this.search.hasData){
                                 //if we have searched something
                                 this.search.multipleDates = response
                             }else{
