@@ -58,11 +58,22 @@
                     ></favorite>
                     <!-- End of favorite -->
                     <div class="d-inline-block comment-text pointer" @click="isCommentOn = !isCommentOn" :class="isCommentOn ? 'hide-text' : 'show-text'">
-                        <span v-if="!isCommentOn" class="show-letters">{{ $t("speeches.show_comments") }}</span>
+                        <span v-if="!isCommentOn" class="show-letters d-none d-sm-block">{{ $t("speeches.show_comments") }} <i class="fas fa-comments"></i></span>
+                        <span v-if="!isCommentOn" class="show-letters d-block d-sm-none">Σχόλια <i class="fas fa-comments"></i></span>
                         <span v-else class="hide-letters">{{ $t("speeches.hide_comments") }}</span>
                     </div>
                     <div class="d-inline-block report-button">
-                        <vs-button color="rgb(255, 71, 87)" type="filled" @click="addReport" style="padding: 1vh;">{{ $t("speeches.report") }}</vs-button>
+                        <vs-button 
+                            color="rgb(255, 71, 87)" 
+                            type="filled" 
+                            @click="addReport" 
+                            style="padding: 1vh;"
+                            icon-pack="fas"
+                            icon="fa-exclamation-triangle"
+                            icon-after
+                        >
+                            {{ $t("speeches.report") }}
+                        </vs-button>
                     </div>
                     <!-- Comments -->
                     <transition name="slide-fade">
