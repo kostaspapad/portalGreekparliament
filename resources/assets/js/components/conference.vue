@@ -20,13 +20,16 @@
                                     </a>
                                 </span>
                             </div>
-                            <div v-if="ajaxData.isLoaded" class="col-12 pl-3 mt-2">
+                            <div v-if="ajaxData.isLoaded && !search.speechesData.length" class="col-12 pl-3 mt-2">
                                 <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
                                     <span slot="prev-nav">&lt;</span>
                                     <span slot="next-nav">&gt;</span>
                                 </pagination>
+                            </div>
+                            <div id="search-input" class="col-12 pl-3 mt-2">
                                 <vs-input
-                                    icon="search" 
+                                    icon-pack="fas"
+                                    icon="fa-search" 
                                     placeholder="Αναζήτηση λέξεων ομιλιών"
                                     description-text="Γράψτε μόνο με πεζά γράμματα και χρησιμοποιήστε τόνους."
                                     v-model.trim="search_string"
@@ -54,7 +57,7 @@
                             <div v-else>
                                 <h4>{{ $t("conference.no_speeches_avail") }}</h4>
                             </div>
-                            <div v-if="ajaxData.isLoaded" class="col-12" style="padding-left: 2.5rem;">
+                            <div v-if="ajaxData.isLoaded && !search.speechesData.length" class="col-12" style="padding-left: 2.5rem;">
                                 <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
                                     <span slot="prev-nav">&lt;</span>
                                     <span slot="next-nav">&gt;</span>

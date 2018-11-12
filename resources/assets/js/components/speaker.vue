@@ -43,7 +43,8 @@
                     <div class="col-12 pr-5 mb-4 mt-4 float-right">
                         <div class="float-right">
                              <vs-input
-                                icon="search" 
+                                icon-pack="fas"
+                                icon="fa-search"  
                                 placeholder="Αναζήτηση λέξεων ομιλητή" 
                                 description-text="Γράψτε μόνο με πεζά γράμματα και χρησιμοποιήστε τόνους."
                                 v-model.trim="search_string"

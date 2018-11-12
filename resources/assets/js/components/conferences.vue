@@ -20,7 +20,7 @@
                             </router-link>
                         </div>
                         <!-- Single date filter -->
-                        <div v-if="search.hasData && singleDate" class="p-4 bg-white conference-content-box">
+                        <div v-if="search.hasData && singleDate && search.type == 'single' " class="p-4 bg-white conference-content-box">
                             <router-link :to="'/conference/' + search.singleDate.conference_date + '/speeches'" class="conference-link">
                                 <h3>
                                     {{search.singleDate.conference_date}}
@@ -40,17 +40,19 @@
                         </div>
                         <!-- End of single date filter -->
                         <!-- Multiple Filter -->
-                        <div v-if="search.multipleDates && search.hasData">
-                            <div class="p-4 bg-white conference-content-box" v-for="conference in search.multipleDates.data.data" :key="conference.id">
-                                <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
-                                    <h3>
-                                        {{conference.conference_date}}
-                                    </h3>
-                                    <div>
-                                        <p class="session-margin">{{conference.session}}</p>
-                                        <span>{{conference.time_period}}</span>
-                                    </div>
-                                </router-link>
+                        <div v-if="search.isDone">
+                            <div v-if="search.type == 'multiple' && search.hasData">
+                                <div class="p-4 bg-white conference-content-box" v-for="conference in search.multipleDates.data.data" :key="conference.id">
+                                    <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
+                                        <h3>
+                                            {{conference.conference_date}}
+                                        </h3>
+                                        <div>
+                                            <p class="session-margin">{{conference.session}}</p>
+                                            <span>{{conference.time_period}}</span>
+                                        </div>
+                                    </router-link>
+                                </div>
                             </div>
                         </div>
                         <!-- End of multiple filter -->
@@ -62,7 +64,7 @@
                             </pagination>
                         </div>
                         <!-- Multiple pagination -->
-                        <div v-if="search.multipleDates && search.hasData" class="col-12 mt-5 pagination-pad">
+                        <div v-if="search.type == 'multiple' && search.hasData" class="col-12 mt-5 pagination-pad">
                             <pagination :data="search.multipleDates.data.meta" @pagination-change-page="changePage"
                                 :limit=1>
                                 <span slot="prev-nav">&lt;</span>
@@ -114,6 +116,9 @@
                                 <button class="btn reset-btn datepkr-btn-color" @click="getDate" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
                                 <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('single')" :disabled="isDisabled">Επαναφορά</button>
                             </div>
+                        </div>
+                        <div v-if="search.isDone && !search.hasData" class="col-12 mt-2">
+                            <h4>{{ $t("conferences.no_conferences_available") }}</h4>
                         </div>
                     </div>
                 </div>
@@ -223,7 +228,9 @@
                 search: {
                     singleDate: [],
                     multipleDates: [],
-                    hasData: false
+                    hasData: false,
+                    isDone: false,
+                    type: ''
                 },
                 selected_date: [],
                 startDate: null,
@@ -317,7 +324,8 @@
             },
             getDates(date) {
                 //get dates from datepicker
-
+                this.search.isDone = false
+                this.search.type = 'multiple'
                 if (this.startDate && this.endDate) {
                     this.startDate = moment(this.startDate).format('YYYY-MM-DD')
                     this.endDate = moment(this.endDate).format('YYYY-MM-DD')
@@ -334,6 +342,7 @@
                                 }
                             }
                             this.ajaxDone = true
+                            this.search.isDone = true
                         }).catch(function (error) {
                             console.log(error)
                         });
@@ -358,6 +367,8 @@
             //     });
             // },
             getDate() {
+                this.search.isDone = false
+                this.search.type = 'single'
                 if (this.singleDate) {
                     this.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
                     axios.get(this.api_path + 'conference/date/' + this.singleDate)
@@ -371,6 +382,7 @@
                                 }
                             }
                             this.ajaxDone = true
+                            this.search.isDone = true
                         })
                         .catch(function (error) {
                             console.log(error)
@@ -384,6 +396,8 @@
             },
             clearDatesInput(mode) {
                 this.search.hasData = false
+                this.search.isDone = false
+                this.search.type = ''
                 if(mode == 'single'){
                     this.search.singleDate = []
                     this.singleDate = ''
