@@ -99,19 +99,19 @@
                         <div v-if="isMultipleFilter">
                             <label>{{ $t("conferences.datepicker.from") }}</label>
                             <datepicker v-model="startDate" :format="myFormattedDate" :bootstrap-styling="true"
-                                wrapper-class="pickerDiv" placeholder="Select start date"></datepicker>
+                                wrapper-class="pickerDiv" placeholder="Επιλέξτε αρχική ημερομηνία"></datepicker>
                             <label>{{ $t("conferences.datepicker.to") }}</label>
                             <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true"
-                                wrapper-class="pickerDiv" placeholder="Select end date"></datepicker>
+                                wrapper-class="pickerDiv" placeholder="Επιλέξτε τελική ημερομηνία"></datepicker>
                             <div class="datepkr-btn">
                                 <button class="btn reset-btn datepkr-btn-color" @click="getDates" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
                                 <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('multiple')" :disabled="isDisabled">Επαναφορά</button>
                             </div>
                         </div>
-                        <div v-else class="datepkr-toggle">
-                            <label>{{ $t("conferences.datepicker.select_single_date") }}</label>
+                        <div v-else class="datepkr-toggle mt-2">
+                            <!-- <label>{{ $t("conferences.datepicker.select_single_date") }}</label> -->
                             <datepicker v-model="singleDate" :format="myFormattedDate" :bootstrap-styling="true"
-                                wrapper-class="pickerDiv" placeholder="Select date"></datepicker>
+                                wrapper-class="pickerDiv" placeholder="Επιλέξτε ημερομηνία"></datepicker>
                             <div class="datepkr-btn">
                                 <button class="btn reset-btn datepkr-btn-color" @click="getDate" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
                                 <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('single')" :disabled="isDisabled">Επαναφορά</button>
