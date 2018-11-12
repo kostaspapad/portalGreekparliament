@@ -34,9 +34,9 @@
                         </div>
                         <div class="float-left">
                             <div class="row">
-                            <div v-if="ajaxData.speakerData.wiki_el"><span class="text-success">(el)</span><a :href="`${ajaxData.speakerData.wiki_el}`"><span class="fa fa-wikipedia-w iconsFont iconsColor"></span></a></div>
-                            <div v-if="ajaxData.speakerData.wiki_en"><span class="text-success">(en)</span><a :href="`${ajaxData.speakerData.wiki_en}`"><span class="fa fa-wikipedia-w iconsFont iconsColor"></span></a></div>
-                            <div v-if="ajaxData.speakerData.twitter"><a :href="`${ajaxData.speakerData.twitter}`"><span class="fa fa-twitter iconsFont iconsColor"></span></a></div>
+                            <div v-if="ajaxData.speakerData.wiki_el"><span class="text-success">(el)</span><a :href="`${ajaxData.speakerData.wiki_el}`"><span class="fab fa-wikipedia-w iconsFont iconsColor"></span></a></div>
+                            <div v-if="ajaxData.speakerData.wiki_en"><span class="text-success">(en)</span><a :href="`${ajaxData.speakerData.wiki_en}`"><span class="fab fa-wikipedia-w iconsFont iconsColor"></span></a></div>
+                            <div v-if="ajaxData.speakerData.twitter"><a :href="`${ajaxData.speakerData.twitter}`"><span class="fab fa-twitter iconsFont iconsColor"></span></a></div>
                             </div>·
                         </div>
                     </div>

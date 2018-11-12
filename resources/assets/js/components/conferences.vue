@@ -7,9 +7,9 @@
                 </div> -->
                 <div class="row pt-2">
                     <div class="col-12 col-sm-6 col-md-6 col-lg-8">
-                        <div v-if="ajaxData.conferenceData.data.data && !noData && !singleDate" class="p-4 bg-white conference-content-box"
+                        <div v-if="ajaxData.conferenceData.data.data && hasData && !search.hasData" class="p-4 bg-white conference-content-box"
                             v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
-                            <router-link :to="'/conference/' + conference.conference_date + '/speeches'">
+                            <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
                                 <h3>
                                     {{conference.conference_date}}
                                 </h3>
@@ -19,23 +19,58 @@
                                 </div>
                             </router-link>
                         </div>
-                        <div v-if="singleDate && !noData" class="p-4 bg-white conference-content-box">
-                            <h3 class="show-details-dates">
+                        <!-- Single date filter -->
+                        <div v-if="search.hasData && singleDate" class="p-4 bg-white conference-content-box">
+                            <router-link :to="'/conference/' + search.singleDate.conference_date + '/speeches'" class="conference-link">
+                                <h3>
+                                    {{search.singleDate.conference_date}}
+                                </h3>
+                                <div>
+                                    <p class="session-margin">{{search.singleDate.session}}</p>
+                                    <span>{{search.singleDate.time_period}}</span>
+                                </div>
+                            </router-link>
+                            <!-- <h3 class="show-details-dates">
                                 <div @click="redirectToConference(ajaxData.conferenceData.data.data.conference_date)">{{ajaxData.conferenceData.data.data.conference_date}}</div>
                             </h3>
                             <div>
                                 <p class="session-margin">{{ajaxData.conferenceData.data.data.session}}</p>
                                 <span>{{ajaxData.conferenceData.data.data.time_period}}</span>
+                            </div> -->
+                        </div>
+                        <!-- End of single date filter -->
+                        <!-- Multiple Filter -->
+                        <div v-if="search.multipleDates && search.hasData">
+                            <div class="p-4 bg-white conference-content-box" v-for="conference in search.multipleDates.data.data" :key="conference.id">
+                                <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
+                                    <h3>
+                                        {{conference.conference_date}}
+                                    </h3>
+                                    <div>
+                                        <p class="session-margin">{{conference.session}}</p>
+                                        <span>{{conference.time_period}}</span>
+                                    </div>
+                                </router-link>
                             </div>
                         </div>
-                        <div class="col-12 mt-5 pagination-pad">
+                        <!-- End of multiple filter -->
+                        <div v-if="!search.hasData" class="col-12 mt-5 pagination-pad">
                             <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage"
                                 :limit=1>
                                 <span slot="prev-nav">&lt;</span>
                                 <span slot="next-nav">&gt;</span>
                             </pagination>
                         </div>
-                        <div v-show="noData" class="col-12 col-sm-6 col-md-6 col-lg-8">
+                        <!-- Multiple pagination -->
+                        <div v-if="search.multipleDates && search.hasData" class="col-12 mt-5 pagination-pad">
+                            <pagination :data="search.multipleDates.data.meta" @pagination-change-page="changePage"
+                                :limit=1>
+                                <span slot="prev-nav">&lt;</span>
+                                <span slot="next-nav">&gt;</span>
+                            </pagination>
+                        </div>
+                        <!-- End of multiple pagination -->
+                        <div v-if="!hasData" class="col-12 col-sm-6 col-md-6 col-lg-8">
                             <h4>{{ $t("conferences.no_conferences_available") }}</h4>
                         </div>
                     </div>
@@ -50,10 +85,11 @@
                                 </button>
                                 <h4 class="alert-heading">{{ $t("conferences.search") }}</h4>
                                 <p>{{ $t("conferences.datepicker.select_date_ranges") }}</p>
+                                <p>Η Επαναφορά καθαρίζει το πεδίο στο οποίο βάλατε την ημερομηνία.</p>
                             </div>
                         </transition>
                         <div class="datepkr-toggle">
-                            <vs-switch vs-color="#82C7EB" v-model="isMultipleFilter">
+                            <vs-switch color="#4896e5" v-model="isMultipleFilter">
                                 <span slot="on" class="switch-font">{{ $t("conferences.datepicker.from_to") }}</span>
                                 <span slot="off" class="switch-font">{{ $t("conferences.datepicker.date") }}</span>
                             </vs-switch>
@@ -67,6 +103,7 @@
                                 wrapper-class="pickerDiv" placeholder="Select end date"></datepicker>
                             <div class="datepkr-btn">
                                 <button class="btn reset-btn datepkr-btn-color" @click="getDates" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
+                                <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('multiple')" :disabled="isDisabled">Επαναφορά</button>
                             </div>
                         </div>
                         <div v-else class="datepkr-toggle">
@@ -75,6 +112,7 @@
                                 wrapper-class="pickerDiv" placeholder="Select date"></datepicker>
                             <div class="datepkr-btn">
                                 <button class="btn reset-btn datepkr-btn-color" @click="getDate" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
+                                <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('single')" :disabled="isDisabled">Επαναφορά</button>
                             </div>
                         </div>
                     </div>
@@ -114,6 +152,15 @@
         text-align: initial;
         background-color: $containerBoxColor;
         /* margin: 15px 0 15px 0; */
+
+        .conference-link{
+            display: block;
+            color: inherit;
+            transition: all .2s ease-in-out;
+        }
+        .conference-link:hover{
+            color:#62b356;
+        }
     }
 
     .conference-content-box:hover {
@@ -127,7 +174,7 @@
     }
 
     .datepicker {
-        padding-right: 30px;
+        padding: 10px 30px 10px 15px;
     }
 
     @media (min-width: 768px) {
@@ -173,24 +220,28 @@
                     conferenceData: [],
                     details: []
                 },
+                search: {
+                    singleDate: [],
+                    multipleDates: [],
+                    hasData: false
+                },
                 selected_date: [],
                 startDate: null,
                 endDate: null,
                 singleDate: null,
                 isMultipleFilter: false,
                 showInfoDiv: false,
-                noData: true,
+                hasData: false,
                 loading: true,
                 ajaxDone: false,
                 defaultImg: 'default_speaker_icon.png',
                 order_field: 'conference_date',
-                order_orientation: 'asc'
+                order_orientation: 'desc'
             }
         },
         methods: {
             changePage(page) {
                 //for pagination
-                var self = this
                 let url = null
                 if (this.startDate && this.endDate) {
                     url = 'conference/start/' + this.startDate + 
@@ -204,9 +255,14 @@
                 }
 
                 axios.get(this.api_path + url)
-                    .then(function (response) {
+                    .then(response => {
                         if (response.status == 200 && response.statusText == "OK") {
-                            self.ajaxData.conferenceData = response
+                            if(this.search.multipleDates){
+                                //if we have searched something
+                                this.search.multipleDates = response
+                            }else{
+                                this.ajaxData.conferenceData = response
+                            }
                         }
                     })
                     .catch(function (error) {
@@ -240,20 +296,19 @@
                 }
             },
             getLatestConferences() {
-                const self = this
                 setTimeout(() => {
                     axios.get(this.api_path +
-                            'conferences?order_field=conference_date&orientation=desc')
-                        .then(function (response) {
+                            'conferences?order_field=' + this.order_field +'&orientation=' + this.order_orientation)
+                        .then(response => {
                             if (response.status == 200 && response.statusText == "OK") {
                                 if (response.data.data.length > 0) {
-                                    self.noData = false
-                                    self.ajaxData.conferenceData = response
+                                    this.hasData = true
+                                    this.ajaxData.conferenceData = response
                                 } else {
-                                    self.noData = true
+                                    this.hasData = false
                                 }
                             }
-                            self.ajaxDone = true
+                            this.ajaxDone = true
 
                         }).catch(function (error) {
                             console.log(error)
@@ -262,24 +317,23 @@
             },
             getDates(date) {
                 //get dates from datepicker
-                const self = this
 
                 if (this.startDate && this.endDate) {
                     this.startDate = moment(this.startDate).format('YYYY-MM-DD')
                     this.endDate = moment(this.endDate).format('YYYY-MM-DD')
 
-                    axios.get(this.api_path + 'conference/start/' + this.startDate + '/end/' + this.endDate)
-                        .then(function (response) {
+                    axios.get(this.api_path + 'conference/start/' + this.startDate + '/end/' + this.endDate + '?order_field=' + this.order_field +'&orientation=' + this.order_orientation)
+                        .then(response => {
 
                             if (response.status == 200 && response.statusText == "OK") {
                                 if (response.data.data.length > 0) {
-                                    self.noData = false
-                                    self.ajaxData.conferenceData = response
+                                    this.search.hasData = true
+                                    this.search.multipleDates = response
                                 } else {
-                                    self.noData = true
+                                    this.search.hasData = false
                                 }
                             }
-                            self.ajaxDone = true
+                            this.ajaxDone = true
                         }).catch(function (error) {
                             console.log(error)
                         });
@@ -304,20 +358,19 @@
             //     });
             // },
             getDate() {
-                const self = this
                 if (this.singleDate) {
                     this.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
                     axios.get(this.api_path + 'conference/date/' + this.singleDate)
-                        .then(function (response) {
+                        .then( response => {
                             if (response.status == 200 && response.statusText == "OK") {
                                 if (response.data.data != null) {
-                                    self.noData = false
-                                    self.ajaxData.conferenceData = response
+                                    this.search.hasData = true
+                                    this.search.singleDate = response.data.data
                                 } else {
-                                    self.noData = true
+                                    this.search.hasData = false
                                 }
                             }
-                            self.ajaxDone = true
+                            this.ajaxDone = true
                         })
                         .catch(function (error) {
                             console.log(error)
@@ -328,6 +381,17 @@
                 //reset selected dates from dropdown
                 this.selected_date = [];
                 this.ajaxData.details = [];
+            },
+            clearDatesInput(mode) {
+                this.search.hasData = false
+                if(mode == 'single'){
+                    this.search.singleDate = []
+                    this.singleDate = ''
+                }else if(mode == 'multiple'){
+                    this.startDate = ''
+                    this.endDate = ''
+                    this.search.multipleDates = []
+                }
             },
             removeOption(removedOption) {
                 //remove the selected option from array

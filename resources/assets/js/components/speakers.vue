@@ -102,6 +102,7 @@
         margin: 0;
         line-height: 1.2em;
         font-size: 1.4rem;
+        transition: all .2s ease-in-out;
     }
     .person-name:hover{
         color:#62b356;
