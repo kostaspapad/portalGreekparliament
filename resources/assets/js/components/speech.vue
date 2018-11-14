@@ -42,11 +42,13 @@
                             <router-link :to="/speaker/ + speech_data.speaker_id" class="" style="margin-top:8px;">{{speech_data.greek_name}}</router-link>
                         </h4>
                         <div class="speech_speaker_party ml-2" v-bind:style="getPartyColor">
-                            <h5>{{speech_data.fullname_el | capitalize}} </h5>
+                            <router-link :to=" /party/ + speech_data.fullname_el" style="color: inherit;">
+                                <h5>{{speech_data.fullname_el | capitalize}} </h5>
+                            </router-link>
                         </div>
                     </div>
                 </div>
-                <div class="speech-container-speech ml-2 pt-2">
+                <div class="speech-container-speech ml-2 pt-2" style="white-space: pre-line;">
                     <read-more more-str="περισσότερα" :text="speech_data.speech" link="#" less-str="λιγότερα" :max-chars="2000"></read-more>
                 </div>
                 

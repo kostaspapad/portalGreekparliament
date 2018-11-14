@@ -50,7 +50,7 @@ import Modal from './components/modal.vue'
 
 
 import 'vuesax/dist/vuesax.css' //Vuesax styles
-import 'material-icons/iconfont/material-icons.css';
+// import 'material-icons/iconfont/material-icons.css';
 import VueChartkick from 'vue-chartkick'
 
 import VueInternationalization from 'vue-i18n';
