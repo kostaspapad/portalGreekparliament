@@ -40,6 +40,7 @@
                             </ul>
                         </div>
                         <!-- Selected Period -->
+                        <vs-divider class="d-block d-sm-none" />
                         <div class="col-12 col-sm-7 col-md-7 col-lg-8 selected-period-main-div" >
                             <h5 v-if="!period.ajaxDone">Loading <i class="fas fa-spinner fa-spin"></i></h5>
                             <div v-if="period.selected_period_hasData">
