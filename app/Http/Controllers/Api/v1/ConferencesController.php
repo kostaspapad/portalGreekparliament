@@ -8,6 +8,7 @@ use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Conference;
 use Illuminate\Support\Facades\Cache;
+// use Illuminate\Pagination\LengthAwarePaginator;
 
 class ConferencesController extends Controller 
 {
@@ -138,6 +139,51 @@ class ConferencesController extends Controller
             return $this->apiHelper::returnResource('Conference', $conferences);
         }
     }
+
+    // get all time_periods
+    public function conferencesPeriods(){
+        $periods = Conference::
+        // with('speeches')->has('speeches')->
+        where('time_period' , '<>' , 'Empty')
+        ->when($this->order_field && $this->order_orientation, function ($query) {
+            $query->orderBy($this->order_field, $this->order_orientation);
+        })
+        ->groupBy('time_period')
+        ->select(['time_period'])
+        ->get();
+
+        //return $periods;
+        return $this->apiHelper::returnResource('Conference', $periods);
+    }
+
+    public function conferencesByPeriod(Request $request,$period){
+        $period = '"' . $period . '"';
+        // dd($period);
+        if(isset($period)){
+            $period = Conference::with('speeches')->has('speeches')
+                ->when($this->order_field && $this->order_orientation, function ($query) {
+                    $query->orderBy($this->order_field, $this->order_orientation);
+                })
+                ->whereRaw("time_period = ".$period." ")
+                ->groupBy('conferences.id')
+                ->select(['conference_date','time_period','session'])
+                ->paginate(10);
+
+            return $this->apiHelper::returnResource('Conference', $period);
+        }
+    }
+
+    //to create custom paginate 
+    //example $period = $this->arrayPaginator($period, $request);
+    // public function arrayPaginator($array, $request)
+    // {
+    //     $page = $request->input('page', 1);
+    //     $perPage = 10;
+    //     $offset = ($page * $perPage) - $perPage;
+
+    //     return new LengthAwarePaginator(array_slice($array, $offset, $perPage, true), count($array), $perPage, $page,
+    //         ['path' => $request->url(), 'query' => $request->query()]);
+    // }
 
     public function getPartyCountByConference($conf_date)
     {
