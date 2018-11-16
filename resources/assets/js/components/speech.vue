@@ -108,12 +108,6 @@
     </div>
 </template>
 <style lang="scss" scoped>
-    .slide-fade-enter-active, .slide-fade-leave-active {
-        transition: opacity .6s ease;
-    }
-    .slide-fade-enter, .slide-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
-    }
     .speech-container {
         text-align: left;
     }

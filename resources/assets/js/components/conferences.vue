@@ -1,127 +1,186 @@
 <template>
     <div class="container">
         <div class="conferences-container">
-            <div v-if="ajaxDone">
+            <div v-if="ajaxDone" class="toggle-view-mode col-12 mt-3 py-4">
+                <vs-switch color="success" v-model="periodMode">
+                    <span slot="on" class="switch-font">Κοινοβουλευτική περίοδος</span>
+                    <span slot="off" class="switch-font">Συνεδριάσεις</span>
+                </vs-switch>
+            </div>
+            <div v-if="ajaxDone" class="mt-2">
                 <!-- <div class="conference-title-box mb-4">
                     <h2 class="font-weight-bold text-center">Συνεδριάσεις</h2>
                 </div> -->
-                <div class="row pt-2">
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-8">
-                        <div v-if="ajaxData.conferenceData.data.data && hasData && !search.hasData" class="p-4 bg-white conference-content-box"
-                            v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
-                            <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
-                                <h3>
-                                    {{conference.conference_date}}
+                <transition-group name="test" tag="div" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                <!-- <transition-group name="fade" tag="div" class="trans-div"> -->
+                    <!-- Period Mode -->
+                    <div v-show="periodMode" key="period_mode" class="period-mode p-3 row">
+                        <!-- <h2 class="text-center">Κοινοβουλευτική περίοδος</h2> -->
+                        <div class="col-12 col-sm-5 col-md-5 col-lg-4 periods" v-if="ajaxData.periods.length > 0">
+                            <ul class="period-list">
+                                <li 
+                                    v-for="(period_data) in ajaxData.periods" 
+                                    :key="period_data.time_period" 
+                                    @click="getConferencesByPeriod(period_data)" 
+                                    class="pointer"
+                                    :class="{periods_bg: period_data.time_period ==  period.selected_period}"
+                                    v-if="period.ajaxDone"
+                                >
+                                    <span>{{period_data.time_period}}</span>
+                                </li>
+                                <li 
+                                    v-for="(period_data) in ajaxData.periods" 
+                                    :key="period_data.time_period" 
+                                    class="pointer"
+                                    :class="{periods_bg: period_data.time_period ==  period.selected_period}"
+                                    v-if="!period.ajaxDone"
+                                >
+                                    <span>{{period_data.time_period}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Selected Period -->
+                        <div class="col-12 col-sm-7 col-md-7 col-lg-8 selected-period-main-div" >
+                            <h5 v-if="!period.ajaxDone">Loading <i class="fas fa-spinner fa-spin"></i></h5>
+                            <div v-if="period.selected_period_hasData">
+                                <h4>{{period.selected_period}}</h4>
+                                <pagination :data="period.conferences.data.meta" @pagination-change-page="changePagePeriod" :limit=1>
+                                    <span slot="prev-nav">&lt;</span>
+                                    <span slot="next-nav">&gt;</span>
+                                </pagination>
+                                <div class="selected-period">
+                                    <div v-for="period_conf in period.conferences.data.data" :key="period_conf.conference_date" class="p-4 conference-content-box mt-3">
+                                        <router-link :to="'/conference/' + period_conf.conference_date + '/speeches'" class="conference-link">
+                                            <h3>{{period_conf.conference_date}}</h3>
+                                            <div>
+                                                <p class="session-margin">{{period_conf.session}}</p>
+                                                <span>{{period_conf.time_period}}</span>
+                                            </div>
+                                        </router-link>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else-if="!period.selected_period_hasData && period.selected_period && period.ajaxDone" class="col-12 col-sm-7 col-md-7 col-lg-8">
+                                <h4>{{period.selected_period}}</h4>
+                                <p>Δεν βρέθηκαν συνεδριάσεις γιαυτήν την περίοδο.</p>
+                            </div>
+                        </div>
+                        <!-- End of selected period -->
+                    </div>
+                    <!-- End Period Mode -->
+                    <div v-show="!periodMode" class="row pt-2 " key="conference_mode">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-8">
+                            <div v-if="ajaxData.conferenceData.data.data && hasData && !search.hasData" class="p-4 bg-white conference-content-box"
+                                v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
+                                <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
+                                    <h3>{{conference.conference_date}}</h3>
+                                    <div>
+                                        <p class="session-margin">{{conference.session}}</p>
+                                        <span>{{conference.time_period}}</span>
+                                    </div>
+                                </router-link>
+                            </div>
+                            <!-- Single date filter -->
+                            <div v-if="search.hasData && singleDate && search.type == 'single' " class="p-4 bg-white conference-content-box">
+                                <router-link :to="'/conference/' + search.singleDate.conference_date + '/speeches'" class="conference-link">
+                                    <h3>{{search.singleDate.conference_date}}</h3>
+                                    <div>
+                                        <p class="session-margin">{{search.singleDate.session}}</p>
+                                        <span>{{search.singleDate.time_period}}</span>
+                                    </div>
+                                </router-link>
+                                <!-- <h3 class="show-details-dates">
+                                    <div @click="redirectToConference(ajaxData.conferenceData.data.data.conference_date)">{{ajaxData.conferenceData.data.data.conference_date}}</div>
                                 </h3>
                                 <div>
-                                    <p class="session-margin">{{conference.session}}</p>
-                                    <span>{{conference.time_period}}</span>
-                                </div>
-                            </router-link>
-                        </div>
-                        <!-- Single date filter -->
-                        <div v-if="search.hasData && singleDate && search.type == 'single' " class="p-4 bg-white conference-content-box">
-                            <router-link :to="'/conference/' + search.singleDate.conference_date + '/speeches'" class="conference-link">
-                                <h3>
-                                    {{search.singleDate.conference_date}}
-                                </h3>
-                                <div>
-                                    <p class="session-margin">{{search.singleDate.session}}</p>
-                                    <span>{{search.singleDate.time_period}}</span>
-                                </div>
-                            </router-link>
-                            <!-- <h3 class="show-details-dates">
-                                <div @click="redirectToConference(ajaxData.conferenceData.data.data.conference_date)">{{ajaxData.conferenceData.data.data.conference_date}}</div>
-                            </h3>
-                            <div>
-                                <p class="session-margin">{{ajaxData.conferenceData.data.data.session}}</p>
-                                <span>{{ajaxData.conferenceData.data.data.time_period}}</span>
-                            </div> -->
-                        </div>
-                        <!-- End of single date filter -->
-                        <!-- Multiple Filter -->
-                        <div v-if="search.isDone">
-                            <div v-if="search.type == 'multiple' && search.hasData">
-                                <div class="p-4 bg-white conference-content-box" v-for="conference in search.multipleDates.data.data" :key="conference.id">
-                                    <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
-                                        <h3>
-                                            {{conference.conference_date}}
-                                        </h3>
-                                        <div>
-                                            <p class="session-margin">{{conference.session}}</p>
-                                            <span>{{conference.time_period}}</span>
-                                        </div>
-                                    </router-link>
+                                    <p class="session-margin">{{ajaxData.conferenceData.data.data.session}}</p>
+                                    <span>{{ajaxData.conferenceData.data.data.time_period}}</span>
+                                </div> -->
+                            </div>
+                            <!-- End of single date filter -->
+                            <!-- Multiple Filter -->
+                            <div v-if="search.isDone">
+                                <div v-if="search.type == 'multiple' && search.hasData">
+                                    <div class="p-4 bg-white conference-content-box" v-for="conference in search.multipleDates.data.data" :key="conference.id">
+                                        <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
+                                            <h3>{{conference.conference_date}}</h3>
+                                            <div>
+                                                <p class="session-margin">{{conference.session}}</p>
+                                                <span>{{conference.time_period}}</span>
+                                            </div>
+                                        </router-link>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- End of multiple filter -->
+                            <div v-if="!search.hasData" class="col-12 mt-5 pagination-pad">
+                                <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage"
+                                    :limit=1>
+                                    <span slot="prev-nav">&lt;</span>
+                                    <span slot="next-nav">&gt;</span>
+                                </pagination>
+                            </div>
+                            <!-- Multiple pagination -->
+                            <div v-if="search.type == 'multiple' && search.hasData" class="col-12 mt-5 pagination-pad">
+                                <pagination :data="search.multipleDates.data.meta" @pagination-change-page="changePage"
+                                    :limit=1>
+                                    <span slot="prev-nav">&lt;</span>
+                                    <span slot="next-nav">&gt;</span>
+                                </pagination>
+                            </div>
+                            <!-- End of multiple pagination -->
+                            <div v-if="!hasData" class="col-12 col-sm-6 col-md-6 col-lg-8">
+                                <h4>{{ $t("conferences.no_conferences_available") }}</h4>
+                            </div>
                         </div>
-                        <!-- End of multiple filter -->
-                        <div v-if="!search.hasData" class="col-12 mt-5 pagination-pad">
-                            <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage"
-                                :limit=1>
-                                <span slot="prev-nav">&lt;</span>
-                                <span slot="next-nav">&gt;</span>
-                            </pagination>
-                        </div>
-                        <!-- Multiple pagination -->
-                        <div v-if="search.type == 'multiple' && search.hasData" class="col-12 mt-5 pagination-pad">
-                            <pagination :data="search.multipleDates.data.meta" @pagination-change-page="changePage"
-                                :limit=1>
-                                <span slot="prev-nav">&lt;</span>
-                                <span slot="next-nav">&gt;</span>
-                            </pagination>
-                        </div>
-                        <!-- End of multiple pagination -->
-                        <div v-if="!hasData" class="col-12 col-sm-6 col-md-6 col-lg-8">
-                            <h4>{{ $t("conferences.no_conferences_available") }}</h4>
+                        <div class="datepicker col-12 col-sm-6 col-md-6 col-lg-4">
+                            <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" class="datepkr-float">
+                                <i class="fa fa-info-circle info-icon"></i>
+                            </span>
+                            <transition name="slide-fade">
+                                <div v-if="showInfoDiv" class="alert alert-info" role="alert">
+                                    <button @click="showInfoDiv = !showInfoDiv" type="button" class="close" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="alert-heading">{{ $t("conferences.search") }}</h4>
+                                    <p>{{ $t("conferences.datepicker.select_date_ranges") }}</p>
+                                    <p>Η Επαναφορά καθαρίζει το πεδίο στο οποίο βάλατε την ημερομηνία.</p>
+                                </div>
+                            </transition>
+                            <div class="datepkr-toggle">
+                                <vs-switch color="#4896e5" v-model="isMultipleFilter">
+                                    <span slot="on" class="switch-font">{{ $t("conferences.datepicker.from_to") }}</span>
+                                    <span slot="off" class="switch-font">{{ $t("conferences.datepicker.date") }}</span>
+                                </vs-switch>
+                            </div>
+                            <div v-if="isMultipleFilter">
+                                <label>{{ $t("conferences.datepicker.from") }}</label>
+                                <datepicker v-model="startDate" :format="myFormattedDate" :bootstrap-styling="true"
+                                    wrapper-class="pickerDiv" placeholder="Επιλέξτε αρχική ημερομηνία"></datepicker>
+                                <label>{{ $t("conferences.datepicker.to") }}</label>
+                                <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true"
+                                    wrapper-class="pickerDiv" placeholder="Επιλέξτε τελική ημερομηνία"></datepicker>
+                                <div class="datepkr-btn">
+                                    <button class="btn reset-btn datepkr-btn-color" @click="getDates" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
+                                    <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('multiple')" :disabled="isDisabled">Επαναφορά</button>
+                                </div>
+                            </div>
+                            <div v-else class="datepkr-toggle mt-2">
+                                <!-- <label>{{ $t("conferences.datepicker.select_single_date") }}</label> -->
+                                <datepicker v-model="singleDate" :format="myFormattedDate" :bootstrap-styling="true"
+                                    wrapper-class="pickerDiv" placeholder="Επιλέξτε ημερομηνία"></datepicker>
+                                <div class="datepkr-btn">
+                                    <button class="btn reset-btn datepkr-btn-color" @click="getDate" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
+                                    <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('single')" :disabled="isDisabled">Επαναφορά</button>
+                                </div>
+                            </div>
+                            <div v-if="search.isDone && !search.hasData" class="col-12 mt-2">
+                                <h4>{{ $t("conferences.no_conferences_available") }}</h4>
+                            </div>
                         </div>
                     </div>
-                    <div class="datepicker col-12 col-sm-6 col-md-6 col-lg-4">
-                        <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" class="datepkr-float">
-                            <i class="fa fa-info-circle info-icon"></i>
-                        </span>
-                        <transition name="slide-fade">
-                            <div v-if="showInfoDiv" class="alert alert-info" role="alert">
-                                <button @click="showInfoDiv = !showInfoDiv" type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="alert-heading">{{ $t("conferences.search") }}</h4>
-                                <p>{{ $t("conferences.datepicker.select_date_ranges") }}</p>
-                                <p>Η Επαναφορά καθαρίζει το πεδίο στο οποίο βάλατε την ημερομηνία.</p>
-                            </div>
-                        </transition>
-                        <div class="datepkr-toggle">
-                            <vs-switch color="#4896e5" v-model="isMultipleFilter">
-                                <span slot="on" class="switch-font">{{ $t("conferences.datepicker.from_to") }}</span>
-                                <span slot="off" class="switch-font">{{ $t("conferences.datepicker.date") }}</span>
-                            </vs-switch>
-                        </div>
-                        <div v-if="isMultipleFilter">
-                            <label>{{ $t("conferences.datepicker.from") }}</label>
-                            <datepicker v-model="startDate" :format="myFormattedDate" :bootstrap-styling="true"
-                                wrapper-class="pickerDiv" placeholder="Επιλέξτε αρχική ημερομηνία"></datepicker>
-                            <label>{{ $t("conferences.datepicker.to") }}</label>
-                            <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true"
-                                wrapper-class="pickerDiv" placeholder="Επιλέξτε τελική ημερομηνία"></datepicker>
-                            <div class="datepkr-btn">
-                                <button class="btn reset-btn datepkr-btn-color" @click="getDates" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
-                                <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('multiple')" :disabled="isDisabled">Επαναφορά</button>
-                            </div>
-                        </div>
-                        <div v-else class="datepkr-toggle mt-2">
-                            <!-- <label>{{ $t("conferences.datepicker.select_single_date") }}</label> -->
-                            <datepicker v-model="singleDate" :format="myFormattedDate" :bootstrap-styling="true"
-                                wrapper-class="pickerDiv" placeholder="Επιλέξτε ημερομηνία"></datepicker>
-                            <div class="datepkr-btn">
-                                <button class="btn reset-btn datepkr-btn-color" @click="getDate" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
-                                <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('single')" :disabled="isDisabled">Επαναφορά</button>
-                            </div>
-                        </div>
-                        <div v-if="search.isDone && !search.hasData" class="col-12 mt-2">
-                            <h4>{{ $t("conferences.no_conferences_available") }}</h4>
-                        </div>
-                    </div>
-                </div>
+                    
+                </transition-group>
             </div>
             <div v-else>
                 <img :src=" 'img' + '/Spinner.gif' " class="m-auto d-block"/>
@@ -209,6 +268,70 @@
             left: -20px;
         }
     }
+
+    .period-mode{
+        .periods_bg{
+            background-color: #636b6f!important;
+            color:#f3f3f3;
+        }
+        .periods_bg:hover{
+            color: #f3f3f3!important;
+        }
+
+        .period-list {
+            li{
+                transition: all .3s ease-in-out;
+                list-style-type: none;
+                padding: 8px;
+            }
+            .periods{
+            }
+            li:hover{
+                background-color:#62b356;
+                color: #fff;
+            }
+        }
+    
+        .periods{
+            height: 579px;
+            overflow-y: auto;
+        }
+        .selected-period-main-div{
+            h4{ font-size: 1rem; }
+            .selected-period{
+                height: 500px;
+                overflow-y: auto;
+
+                .conference-content-box{
+                    transition: background-color .3s ease-in-out;
+                }
+
+                .conference-content-box:hover{
+                    left: 0!important;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    background-color: #62b356;
+                    color: #fff;
+                }
+                .conference-link:hover{
+                    color: inherit;
+                }
+            }
+        }
+        @media only screen and (max-width: 575px){
+            .periods{
+                height: 100%;
+                overflow-y: auto;
+            }
+        }
+        @media only screen and (min-width: 576px) and (max-width: 767px) {
+            .periods{
+                height: 636px;
+            }
+        }
+    }
+
 </style>
 
 <script>
@@ -223,7 +346,8 @@
             return {
                 ajaxData: {
                     conferenceData: [],
-                    details: []
+                    details: [],
+                    periods: []
                 },
                 search: {
                     singleDate: [],
@@ -232,11 +356,19 @@
                     isDone: false,
                     type: ''
                 },
+                period: {
+                    ajaxDone: false,
+                    selected_period: null,
+                    selected_period_hasData: false,
+                    current_period_page: 0,
+                    conferences: []
+                },
                 selected_date: [],
                 startDate: null,
                 endDate: null,
                 singleDate: null,
                 isMultipleFilter: false,
+                periodMode: false,
                 showInfoDiv: false,
                 hasData: false,
                 loading: true,
@@ -247,6 +379,24 @@
             }
         },
         methods: {
+            changePagePeriod(page){
+                let url = null
+                url = 'period/' + this.period.selected_period + '/conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' + this.order_orientation
+                api.call('get',this.api_path + url)
+                .then( response => {
+                    if (response.status == 200 && response.statusText == "OK") {
+                        if(response.data.data.length > 0){
+                            this.period.selected_period_hasData = true
+                            this.period.conferences = response
+                        }else{
+                            this.period.selected_period_hasData = false
+                        }
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error)
+                });
+            },
             changePage(page) {
                 //for pagination
                 let url = null
@@ -257,8 +407,7 @@
                           '&order_field=' + this.order_field +
                           '&orientation=' + this.order_orientation
                 } else {
-                    url = 'conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' +
-                        this.order_orientation
+                    url = 'conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' + this.order_orientation
                 }
 
                 axios.get(this.api_path + url)
@@ -372,21 +521,63 @@
                 if (this.singleDate) {
                     this.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
                     axios.get(this.api_path + 'conference/date/' + this.singleDate)
+                    .then( response => {
+                        if (response.status == 200 && response.statusText == "OK") {
+                            if (response.data.data != null) {
+                                this.search.hasData = true
+                                this.search.singleDate = response.data.data
+                            } else {
+                                this.search.hasData = false
+                            }
+                        }
+                        this.ajaxDone = true
+                        this.search.isDone = true
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    });
+                }
+            },
+            getPeriods() {
+                this.period.ajaxDone = false
+                api.call('get',this.api_path + 'periods')
+                .then( response => {
+                    if (response.status == 200 && response.statusText == "OK") {
+                        if(response.data.data.length > 0){
+                            this.ajaxData.periods = response.data.data
+                        }
+                        this.period.ajaxDone = true
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error)
+                });
+            },
+            getConferencesByPeriod(period){
+                this.period.ajaxDone = false
+                if(this.period.selected_period == period.time_period){
+                    //if it's the same as the previous don't make a call to server
+                }else{
+                    this.period.selected_period = period.time_period
+                    setTimeout(() => {
+                        let url = null
+                        url = 'period/' + this.period.selected_period + '/conferences' + '?order_field=' + this.order_field + '&orientation=' + this.order_orientation
+                        api.call('get',this.api_path + url)
                         .then( response => {
                             if (response.status == 200 && response.statusText == "OK") {
-                                if (response.data.data != null) {
-                                    this.search.hasData = true
-                                    this.search.singleDate = response.data.data
-                                } else {
-                                    this.search.hasData = false
+                                if(response.data.data.length > 0){
+                                    this.period.selected_period_hasData = true
+                                    this.period.conferences = response
+                                }else{
+                                    this.period.selected_period_hasData = false
                                 }
                             }
-                            this.ajaxDone = true
-                            this.search.isDone = true
+                            this.period.ajaxDone = true
                         })
                         .catch(function (error) {
                             console.log(error)
                         });
+                    }, 1000)
                 }
             },
             resetDates() {
@@ -445,6 +636,7 @@
         created() {
             this.loading = false
             this.getLatestConferences()
+            this.getPeriods()
         }
     }
 </script>

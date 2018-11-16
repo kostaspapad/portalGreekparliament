@@ -102,6 +102,47 @@ html, body {
     nav{ padding: 0!important;}
 }
 
+//transitions
+.slide-fade-enter-active  {
+    // transition: all .6s ease;
+    animation: coming .5s;
+    // animation-delay: .5s;
+    opacity: 0;
+}
+.slide-fade-leave-active{
+    animation: going 1s;
+}
+
+@keyframes going {
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+}
+@keyframes coming {
+    from{
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+// .slide-fade-enter, .slide-fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+//     opacity: 0;
+//     transform: scale(0);
+// }
+// .slide-fade-enter-to {
+//     opacity: 1;
+//     transform: scale(1);
+// }
+//end of transitions
+
 .vs-input--icon{
     padding-right: 0!important;
 }
@@ -288,6 +329,22 @@ html, body {
     opacity: 0;
 }
 
+.fade-enter-active, .fade-leave-active {
+    transition: all .7s ease-in-out;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+.period-mode{
+    // position: absolute;
+    animation-duration: 0.4s;
+}
+.conference-mode{
+    // position: absolute;
+    animation-duration: 0.4s;
+}
+
 .full-height {
     height: 100vh;
 }
@@ -457,13 +514,15 @@ hr.divider {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(130, 199, 235); 
+    // background: rgb(130, 199, 235); 
+    background: #6c757d; 
     border-radius: 15px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(130, 199, 235); 
+    // background: rgb(130, 199, 235); 
+    background: #6c757d; 
 }
 
 /* Cookie alert */
