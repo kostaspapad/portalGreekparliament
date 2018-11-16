@@ -362,7 +362,8 @@
                     selected_period: null,
                     selected_period_hasData: false,
                     current_period_page: 0,
-                    conferences: []
+                    conferences: [],
+                    pageNum: null
                 },
                 selected_date: [],
                 startDate: null,
@@ -376,42 +377,52 @@
                 ajaxDone: false,
                 defaultImg: 'default_speaker_icon.png',
                 order_field: 'conference_date',
-                order_orientation: 'desc'
+                order_orientation: 'desc',
+                pageNum: null
             }
         },
         methods: {
             changePagePeriod(page){
-                let url = null
-                url = 'period/' + this.period.selected_period + '/conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' + this.order_orientation
-                api.call('get',this.api_path + url)
-                .then( response => {
-                    if (response.status == 200 && response.statusText == "OK") {
-                        if(response.data.data.length > 0){
-                            this.period.selected_period_hasData = true
-                            this.period.conferences = response
-                        }else{
-                            this.period.selected_period_hasData = false
+                if(this.period.pageNum == page){
+
+                }else{
+                    this.period.pageNum = page
+                    let url = null
+                    url = 'period/' + this.period.selected_period + '/conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' + this.order_orientation
+                    api.call('get',this.api_path + url)
+                    .then( response => {
+                        if (response.status == 200 && response.statusText == "OK") {
+                            if(response.data.data.length > 0){
+                                this.period.selected_period_hasData = true
+                                this.period.conferences = response
+                            }else{
+                                this.period.selected_period_hasData = false
+                            }
                         }
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error)
-                });
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    });
+                }
             },
             changePage(page) {
                 //for pagination
-                let url = null
-                if (this.startDate && this.endDate) {
-                    url = 'conference/start/' + this.startDate + 
-                          '/end/' + this.endDate + 
-                          '?page=' + page + 
-                          '&order_field=' + this.order_field +
-                          '&orientation=' + this.order_orientation
-                } else {
-                    url = 'conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' + this.order_orientation
-                }
+                if(this.pageNum == page){
 
-                axios.get(this.api_path + url)
+                }else{
+                    this.pageNum = page
+                    let url = null
+                    if (this.startDate && this.endDate) {
+                        url = 'conference/start/' + this.startDate + 
+                              '/end/' + this.endDate + 
+                              '?page=' + page + 
+                              '&order_field=' + this.order_field +
+                              '&orientation=' + this.order_orientation
+                    } else {
+                        url = 'conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' + this.order_orientation
+                    }
+    
+                    axios.get(this.api_path + url)
                     .then(response => {
                         if (response.status == 200 && response.statusText == "OK") {
                             if(this.search.type == "multiple" && this.search.hasData){
@@ -424,7 +435,8 @@
                     })
                     .catch(function (error) {
                         console.log(error)
-                    });
+                     });
+                }
             },
             isJsonString(str) {
                 //decode JSON
