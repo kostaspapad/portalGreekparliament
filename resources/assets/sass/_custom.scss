@@ -109,6 +109,14 @@ html, body {
     nav{ padding: 0!important;}
 }
 
+//pagination
+.page-item.active .page-link{
+    z-index: 1;
+    color: #fff;
+    background-color: #636b6f;
+    border-color: #636b6f;
+}
+
 //transitions
 .slide-fade-enter-active  {
     // transition: all .6s ease;
