@@ -44,7 +44,7 @@
                         <div class="col-12 col-sm-7 col-md-7 col-lg-8 selected-period-main-div" >
                             <h5 v-if="!period.ajaxDone">Loading <i class="fas fa-spinner fa-spin"></i></h5>
                             <div v-if="period.selected_period_hasData">
-                                <h4>{{period.selected_period}}</h4>
+                                <h4 class="selected-period-title">{{period.selected_period}}</h4>
                                 <pagination :data="period.conferences.data.meta" @pagination-change-page="changePagePeriod" :limit=1>
                                     <span slot="prev-nav">&lt;</span>
                                     <span slot="next-nav">&gt;</span>
@@ -298,7 +298,7 @@
             overflow-y: auto;
         }
         .selected-period-main-div{
-            h4{ font-size: 1rem; }
+            
             .selected-period{
                 height: 500px;
                 overflow-y: auto;
@@ -334,7 +334,13 @@
         }
         @media only screen and (min-width: 576px) and (max-width: 767px) {
             .periods{
-                height: 636px;
+                height: 610px;
+            }
+            .selected-period-title{ font-size: 1rem; }
+            .period-list{
+                li{
+                    font-size: 0.66rem;
+                }
             }
         }
     }
