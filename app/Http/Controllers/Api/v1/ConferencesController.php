@@ -149,6 +149,7 @@ class ConferencesController extends Controller
             $query->orderBy($this->order_field, $this->order_orientation);
         })
         ->groupBy('time_period')
+        ->orderBy('time_period', 'desc')
         ->select(['time_period'])
         ->get();
 
