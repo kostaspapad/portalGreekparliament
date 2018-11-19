@@ -326,6 +326,12 @@
                 overflow-y: auto;
             }
         }
+        @media only screen and (min-width: 320px) and (max-width: 335px) {
+            .selected-period-main-div{
+                padding-right: 0;
+                padding-left: 0;
+            }
+        }
         @media only screen and (min-width: 576px) and (max-width: 767px) {
             .periods{
                 height: 636px;
@@ -370,7 +376,7 @@
                 endDate: null,
                 singleDate: null,
                 isMultipleFilter: false,
-                periodMode: false,
+                periodMode: true,
                 showInfoDiv: false,
                 hasData: false,
                 loading: true,
