@@ -52,7 +52,8 @@ $mainContentBgColor: green;
 $footerBgColor: yellow;
 // $logoColor: #dbf0ff;
 $logoColor: rgba(0, 0, 0, 0.05);
-$imageContainerColor: #33a8ff;
+//$imageContainerColor: #33a8ff;
+$imageContainerColor: #2B4162;
 
 //tou kwsta
 // $color1: rgba(56, 61, 59, 1);
@@ -350,6 +351,129 @@ html, body {
 }
 
 .period-mode{
+    .periods_bg{
+        background-color: #636b6f!important;
+        color:#f3f3f3;
+    }
+    .periods_bg:hover{
+        color: #f3f3f3!important;
+    }
+
+    .period-list {
+        li{
+            transition: all .3s ease-in-out;
+            list-style-type: none;
+            padding: 8px;
+        }
+        .periods{
+        }
+        li:hover{
+            background-color:#62b356;
+            color: #fff;
+        }
+    }
+
+    //from speaker profile
+    .periods{
+        &.speaker-profile-periods{
+            height: 637px;
+        }
+    }
+
+    .periods{
+        height: 579px;
+        overflow-y: auto;
+    }
+    .selected-period-main-div{
+        
+        .selected-period{
+
+            &.speaker-speeches-content{
+                height: 579px;
+            }
+
+            height: 500px;
+            overflow-y: auto;
+
+            .conference-content-box{
+                transition: background-color .3s ease-in-out;
+            }
+
+            .conference-content-box:hover{
+                left: 0!important;
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+                background-color: #62b356;
+                color: #fff;
+            }
+            .conference-link:hover{
+                color: inherit;
+            }
+        }
+    }
+    @media only screen and (max-width: 575px){
+        .periods{
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        //from speaker profile
+        .periods{
+            &.speaker-profile-periods{
+                height: 100%;
+                overflow-y: auto;
+            }
+        }
+        
+        .selected-period{
+            &.speaker-speeches-content{
+                height: 100%!important;
+                overflow-y: auto;
+            }
+        }
+             
+         
+    }
+    @media only screen and (min-width: 320px) and (max-width: 335px) {
+        .selected-period-main-div{
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+    @media only screen and (min-width: 576px) and (max-width: 767px) {
+        .periods{
+            height: 610px;
+        }
+        //from speaker profile
+        .periods{
+            &.speaker-profile-periods{
+                height: 667px;
+            }
+        }
+        .selected-period{
+            &.speaker-speeches-content{
+                height: 610px!important;
+            }
+        }
+        .selected-period-title{ font-size: 1rem; }
+        .period-list{
+            li{
+                font-size: 0.66rem;
+            }
+        }
+        .conf-period-title{
+            font-size: 0.66rem;
+        }
+    }
+    @media only screen and (min-width: 1200px){
+        .conf-period-title{
+            font-size: 1rem;
+        }
+    }
+}
+
+.period-mode{
     // position: absolute;
     animation-duration: 0.4s;
 }
@@ -467,7 +591,8 @@ hr.divider {
     font-family: "Source Sans Pro","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
     font-weight: 600;
     text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    color: #dc3545;
+    // color: #dc3545;
+    color: #EF233C;
 }
 .imagebox-text {
     padding-top:20px;
@@ -475,7 +600,7 @@ hr.divider {
     color: #fff;
     text-shadow: 0 2px 4px rgba(0,0,0,0.2);
     font-size: 18px;
-    text-align: justify;
+    // text-align: justify;
 }
 
 /* css for home page*/

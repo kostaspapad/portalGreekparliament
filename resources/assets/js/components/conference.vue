@@ -5,7 +5,7 @@
                 <div class="conference-title-box py-4 pl-4">
                     <h2 class="font-weight-bold conference-title">{{ $t("conference.conference") }} · {{conf_date}}</h2>
                     <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
-                    <div>{{ajaxData.conferenceInfo.data.data.time_period}}</div>
+                    <div>{{ajaxData.conferenceInfo.data.data.time_period}} Περίοδος</div>
                 </div>
                 <vs-tabs color='#007bff'>
                     <vs-tab vs-label="Συνδεδρίαση">
