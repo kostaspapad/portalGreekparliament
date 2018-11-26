@@ -14,7 +14,7 @@
                         · {{speech_data.speech_conference_date}}</small>
                 </div>
             </div>
-            <div class="speech-container-speech ml-2 pt-2">
+            <div class="speech-container-speech pt-2">
                 <read-more more-str="περισσότερα" :text="speech_data.speech" link="#" less-str="λιγότερα" :max-chars="2000"></read-more>
             </div>
         </div>

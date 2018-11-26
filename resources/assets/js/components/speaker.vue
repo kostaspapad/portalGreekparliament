@@ -1,26 +1,10 @@
 <template>
     <div class="container">
-        <!-- <div class="chart-btn-div pointer d-inline-block mb-2" @click="showChart = !showChart" :class="showChart ? 'hide-text' : 'show-text'">
-            <span v-if="!showChart">Show chart</span>
-            <span v-else class="hide-letters">Hide Chart</span>
-        </div> -->
-        <!-- <transition name="slide-fade">
-            <div class="small m-auto" v-if="showChart">
-                <line-chart 
-                    v-if="ajaxData.isLoaded"
-                    :chart-data="ajaxData.memberships.start_dates" 
-                    :chart-labels="ajaxData.memberships.start_dates"
-                    :chart-bg-colors="ajaxData.memberships.party_colors"
-                    :chart-party-labels="ajaxData.memberships.party_name_en"
-                    :height="325"
-                >
-                </line-chart>
-            </div>
-        </transition> -->
         <div class="speaker-container">
             <div v-if="ajaxDoneSpeaker" class="row mr-0">
                 <div class="w-100 bg-img">
                     <div class="container-fluid speaker-data">
+                        <!-- Speaker info -->
                         <div class="speaker-info">
                             <div class="speaker-img">
                                 <img :src=" '/img' + '/' + ajaxData.speakerData.image " class="img-fluid" style="margin: 5px 0 5px 0;">
@@ -32,6 +16,8 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- End of speaker info -->
+                        <!-- Social links -->
                         <div class="float-left">
                             <div class="row">
                             <div v-if="ajaxData.speakerData.wiki_el"><span class="text-success">(el)</span><a :href="`${ajaxData.speakerData.wiki_el}`"><span class="fab fa-wikipedia-w iconsFont iconsColor"></span></a></div>
@@ -39,7 +25,9 @@
                             <div v-if="ajaxData.speakerData.twitter"><a :href="`${ajaxData.speakerData.twitter}`"><span class="fab fa-twitter iconsFont iconsColor"></span></a></div>
                             </div>·
                         </div>
+                        <!-- End of social links -->
                     </div>
+                    <!-- Search input -->
                     <div class="col-12 pr-5 mb-4 mt-4 float-right">
                         <div class="float-right">
                              <vs-input
@@ -56,11 +44,102 @@
                             </div>
                         </div>
                     </div>
+                    <!-- End of search input -->
                 </div>
                 <div class="container">
                     <vs-tabs vs-color='#17a2b8'>
                         <vs-tab vs-label="Ομιλίες">
-                            <div class="p-3 tab-pane fade show speeches-container mb-0">
+                            <div v-if="showLinks" class="row period-mode">
+                                <div class="conf-links col-12 col-sm-3 col-md-3 col-lg-2 mt-3">
+                                    <h6 class="conf-period-title d-none d-sm-block">Conference Dates</h6>
+                                    <h6 class="conf-period-title text-center d-block d-sm-none">Conference Dates</h6>
+                                    <!-- Conferences dates -->
+                                    <div class="periods speaker-profile-periods">
+                                        <ul v-if="ajaxData.conferences.linksData.length" class="period-list">
+                                            <li 
+                                                v-for="(period_data) in ajaxData.conferences.linksData" 
+                                                :key="period_data.conference_date"
+                                                @click="getSpeechesByConference(period_data)"
+                                                class="pointer"
+                                                :class="{periods_bg: period_data.conference_date ==  period.selected_period}"
+                                                v-if="period.ajaxDone"
+                                            >
+                                                <span>{{period_data.conference_date}}</span>
+                                            </li>
+                                            <li 
+                                                v-for="(period_data) in ajaxData.conferences.linksData" 
+                                                :key="period_data.conference_date" 
+                                                class="pointer"
+                                                :class="{periods_bg: period_data.conference_date ==  period.selected_period}"
+                                                v-if="!period.ajaxDone"
+                                            >
+                                                <span>{{period_data.conference_date}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- End of conferences dates -->
+                                </div>
+                                <!-- Selected Period -->
+                                <vs-divider class="d-block d-sm-none" />
+                                <div class="col-12 col-sm-9 col-md-9 col-lg-10 selected-period-main-div mt-3" >
+                                    <!-- Period has data -->
+                                    <div v-if="period.ajaxDone  && period.selected_period_hasData">
+                                        <div v-show="search.noDataMsg">
+                                            <p>{{search.noDataMsg}}</p>
+                                        </div>
+                                        <!-- Search result -->
+                                        <div v-if="search.speechesData.length" class="search-result">
+                                            <vs-divider color="#636b6f">Αποτελέσματα</vs-divider>
+                                            <div v-for="speech in search.speechesData" :key="speech.speech_id">
+                                                <speech :speech="speech" isFromSearch=true isFromSpeakerProfile=true></speech>
+                                            </div>
+                                        </div>
+                                        <!-- End of search result -->
+                                        <!-- Not search result -->
+                                        <div v-else-if="!search.speechesData.length">
+                                            <div v-if="period.selected_period_hasData">
+                                                <div class="text-link">
+                                                    <h4 class="selected-period-title text-center d-none d-sm-block">
+                                                        <span>Μετάβαση στην συνεδρίαση <i class="fas fa-long-arrow-alt-right"></i></span>
+                                                        <router-link :to="'/conference/' + period.selected_period + '/speeches'" style="color: #1f74ff;">
+                                                            {{period.selected_period}}
+                                                        </router-link>
+                                                    </h4>
+                                                    <h4 class="selected-period-title text-center d-block d-sm-none">
+                                                        <span>Συνεδρίαση <i class="fas fa-long-arrow-alt-right"></i></span>
+                                                        <router-link :to="'/conference/' + period.selected_period + '/speeches'" style="color: #1f74ff;">
+                                                            {{period.selected_period}}
+                                                        </router-link>
+                                                    </h4>
+                                                    <pagination :data="period.speeches.data.meta" @pagination-change-page="changePagePeriod" :limit=1>
+                                                        <span slot="prev-nav">&lt;</span>
+                                                        <span slot="next-nav">&gt;</span>
+                                                    </pagination>
+                                                </div>
+                                                <div class="selected-period speaker-speeches-content">
+                                                    <div v-for="period_speeches in period.speeches.data.data" :key="period_speeches.speech_id" class="p-3 mt-3">
+                                                        <speech :speech="period_speeches" isFromSpeakerProfile=true></speech>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End not search result -->
+                                    </div>
+                                    <!-- End of period has data -->
+                                    <div v-if="!period.ajaxDone">
+                                        <h5>Loading <i class="fas fa-spinner fa-spin"></i></h5>
+                                    </div>
+                                    <!-- Error message of selected_period -->
+                                    <div v-else-if="!period.selected_period_hasData && period.selected_period && period.ajaxDone" class="">
+                                        <h4>{{period.selected_period}}</h4>
+                                        <p>Δεν βρέθηκαν Ομιλίες γιαυτήν την περίοδο.</p>
+                                    </div>
+                                    <!-- End of error message of selected_period -->
+                                </div>
+                                <!-- End of selected period -->
+                            </div>
+                            <div v-else class="p-3 tab-pane fade show speeches-container mb-0">
+                                <!-- Ajax is completed and has data -->
                                 <div v-if="ajaxDoneSpeeches && ajaxData.isLoaded && noDataSpeeches == false">
                                     <div v-show="search.noDataMsg">
                                         <p>{{search.noDataMsg}}</p>
@@ -82,12 +161,17 @@
                                         </pagination>
                                     </div>
                                 </div>
+                                <!-- End of ajax is completed and has data -->
+                                <!-- Ajax is not completed -->
                                 <div v-else-if="noDataSpeeches == true && ajaxData.isLoaded == false">
                                     <h5>Loading <i class="fas fa-spinner fa-spin"></i></h5>
                                 </div>
+                                <!-- End of ajax is not completed -->
+                                <!-- Speeches no data error message -->
                                 <div v-else-if="noDataSpeeches">
                                     <h5>{{ $t("speaker.no_speeches_available") }}</h5>
                                 </div>
+                                <!-- End of speeches no data error message -->
                             </div>
                         </vs-tab>
                         <vs-tab vs-label="Θητεία">
@@ -262,11 +346,22 @@
                         party_name_en: [],
                         party_name_el: []
                     },
+                    conferences: {
+                        linksData: []
+                    },
                     timelineData: []
                 },
                 search: {
                     speechesData: [],
                     noDataMsg: null
+                },
+                period: {
+                    ajaxDone: false,
+                    selected_period: null,
+                    selected_period_hasData: false,
+                    current_period_page: 0,
+                    speeches: [],
+                    pageNum: null
                 },
                 finalName: null,
                 speaker_id: null,
@@ -283,6 +378,7 @@
                 order_orientation: 'asc',
                 search_string: null,
                 showChart: false,
+                showLinks: true
             }
         },
         methods: {
@@ -304,6 +400,29 @@
                 }
                 if (this.order_field && this.order_orientation) {
                     this.getSpeakers()
+                }
+            },
+            changePagePeriod(page){
+                if(this.period.pageNum == page){
+
+                }else{
+                    this.period.pageNum = page
+                    let url = null
+                    url = 'period/' + this.period.selected_period + '/speeches/'+ this.speaker_id +'?page=' + page + '&order_field=' + this.order_field + '&orientation=' + this.order_orientation
+                    api.call('get',this.api_path + url)
+                    .then( response => {
+                        if (response.status == 200 && response.statusText == "OK") {
+                            if(response.data.data.length > 0){
+                                this.period.selected_period_hasData = true
+                                this.period.speeches = response
+                            }else{
+                                this.period.selected_period_hasData = false
+                            }
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    });
                 }
             },
             changePage(page) {
@@ -354,6 +473,62 @@
                         })
                 }, 1000)
             },
+            getSpeakerConferences() {
+                this.ajaxData.isLoaded = false
+                this.period.ajaxDone = false
+                setTimeout(() => {
+                    api.call('get',this.api_path + 'speaker/' + this.speaker_id + '/conference_dates')
+                        .then( response => {
+                            if (response.status == 200 && response.data.data.length > 0) {
+                                // this.noDataSpeeches = false
+                                this.ajaxData.conferences.linksData = response.data.data
+                                this.ajaxData.isLoaded = true
+                            } else {
+                                // this.noDataSpeeches = true
+                            }
+                            this.period.ajaxDone = true
+                            // this.ajaxDoneSpeeches = true
+                        })
+                }, 1000)
+            },
+            clearSearchData(){
+                this.search.noDataMsg = ''
+                this.search.speechesData = []
+                this.search_string = ''
+            },
+            getSpeechesByConference(period){
+                if(this.search.noDataMsg || this.search.speechesData.length > 0){
+                    this.clearSearchData()
+                }
+                this.period.ajaxDone = false
+                if(this.period.selected_period == period.conference_date){
+                    //if it's the same as the previous don't make a call to server
+                }else{
+                    this.period.selected_period = period.conference_date
+                    let data = {
+                        speaker_id: this.speaker_id
+                    };
+                    setTimeout(() => {
+                        let url = null
+                        url = 'period/' + this.period.selected_period + '/speeches/'+ this.speaker_id + '?order_field=' + this.order_field + '&orientation=' + this.order_orientation
+                        api.call('get',this.api_path + url)
+                        .then( response => {
+                            if (response.status == 200 && response.statusText == "OK") {
+                                if(response.data.data.length > 0){
+                                    this.period.selected_period_hasData = true
+                                    this.period.speeches = response
+                                }else{
+                                    this.period.selected_period_hasData = false
+                                }
+                            }
+                            this.period.ajaxDone = true
+                        })
+                        .catch(function (error) {
+                            console.log(error)
+                        });
+                    }, 1000)
+                }
+            },
             getSpeakerData() {
                 setTimeout(() => {
                     api.call('get',this.api_path + 'speaker/' + this.speaker_id)
@@ -370,7 +545,9 @@
             },
             searchSpeakerSpeeches() {
                 if(this.search_string){
-                    let tmp_speech_data = this.ajaxData.speechesData.data.data.filter(speech => {
+                    //the previous data
+                    //let tmp_speech_data = this.ajaxData.speechesData.data.data.filter(speech => {
+                    let tmp_speech_data = this.period.speeches.data.data.filter(speech => {
                         // console.log(speech)
                         // console.log(speech.speech.includes(this.search_string))
                         return speech.speech.toLowerCase().includes(this.search_string)
@@ -452,7 +629,8 @@
             //this.finalName = this.$route.params.speaker_name
             this.speaker_id = this.$route.params.speaker_id
             this.getSpeakerData()
-            this.getSpeakerSpeeches()
+            //this.getSpeakerSpeeches()
+            this.getSpeakerConferences()
             this.getTimelineMembershipData()
         }
     }

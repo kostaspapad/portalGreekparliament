@@ -76,6 +76,7 @@ Route::get('/user', function (Request $request) {
 
     // Speaker->Speeches
     Route::get('speaker/{speaker_id}/speeches', 'Api\v1\Speakers\SpeechesController@speechesBySpeakerId');
+    Route::get('speaker/{speaker_id}/conference_dates', 'Api\v1\Speakers\ConferenceController@conferencesBySpeakerId');
     Route::get('speaker/name/{speaker_name}/speeches', 'Api\v1\Speakers\SpeechesController@speechesBySpeakerName');
     Route::post('speaker/speeches/search', 'Api\v1\Speakers\SpeechesController@searchSpeakerSpeeches');
     /**
@@ -100,6 +101,7 @@ Route::get('/user', function (Request $request) {
     //periods
     Route::get('periods', 'Api\v1\ConferencesController@conferencesPeriods');
     Route::get('period/{period}/conferences', 'Api\v1\ConferencesController@conferencesByPeriod');
+    Route::get('period/{conf_date}/speeches/{speaker_id}', 'Api\v1\Speakers\ConferenceController@speechesByConferenceDate');
 
     // Memberships->Speaker
     // http://localhost:8000/api/v1/speaker/002483ab-3653-4458-b410-6b0ee380cc76/memberships

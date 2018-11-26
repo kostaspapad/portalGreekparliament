@@ -37,7 +37,9 @@
                         style="margin-bottom: 15px;">
                         <router-link :to="'/speaker/' + speaker.speaker_id" class="person-link">
                             <img :src=" 'img' + '/' + printImg(speaker.image) " class="person-img">
-                            <h2 class="person-name text-left">{{speaker.greek_name}}</h2>
+                            <h2 class="person-name text-left">{{speaker.greek_name}}
+                                <!-- <i class="fas fa-address-card speaker-profile-icon d-none d-sm-none d-md-inline"></i> -->
+                            </h2>
                             <p class="person-membership text-left">
                                 <span class="party-name">{{speaker.party_fullname}}</span>
                                 <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
@@ -59,7 +61,7 @@
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
     .sort-ul{
         font-size: 0.9em;
         color: #6c6b68;
@@ -124,6 +126,11 @@
         .person-name{
             font-size: 1.2rem;
         }
+    }
+    .speaker-profile-icon{
+        margin-left: 4px;
+        position: relative;
+        top: 2px;
     }
 </style>
 
