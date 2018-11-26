@@ -4,15 +4,14 @@
             <td>
                 <div>
                     <span @click="expand = !expand" v-if="!expand" class="pointer">
-                        <i class="material-icons"> keyboard_arrow_right</i>
+                        <i class="fas fa-arrow-right"></i>
                     </span>
                     <span @click="expand = !expand" v-else class="pointer">
-                        <i class="material-icons"> keyboard_arrow_down</i>
+                        <i class="fas fa-arrow-down"></i>
                     </span>
                     <router-link 
                         :to="/conference/+infoData.conference_date+'/speeches'" 
                         class="link_to_speech position-relative"
-                        style="top: -7px;"
                     >
                         {{infoData.conference_date}}
                     </router-link>
@@ -33,7 +32,7 @@
             <td class="border-0 p-0" colspan="6">
                 <transition-expand>
                     <div v-if="expand" class="expand-content">
-                        <!-- <h4>Hello</h4> -->
+                        <h4>Hello</h4>
                     </div>
                 </transition-expand>
             </td>

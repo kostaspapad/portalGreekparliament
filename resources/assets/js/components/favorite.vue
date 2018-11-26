@@ -1,10 +1,10 @@
 <template>
     <span>
         <a href="#" v-if="isFavorited" @click.prevent="unFavorite">
-            <i class="fa fa-star fa-2x" aria-hidden="true" style="color:#fff645"></i>
+            <i class="fas fa-star fa-2x" aria-hidden="true" style="color:#fff645"></i>
         </a>
         <a href="#" v-else @click.prevent="favorite">
-            <i class="fa fa-star-o fa-2x" aria-hidden="true" style="color:#fff645"></i>
+            <i class="far fa-star fa-2x" aria-hidden="true" style="color:#fff645"></i>
         </a>
     </span>
 </template>
