@@ -390,6 +390,10 @@ html, body {
 
             &.speaker-speeches-content{
                 height: 579px;
+
+                &.paginationUnavailable{
+                    height: calc(579px + 1rem + 35px);
+                }
             }
 
             height: 500px;
@@ -452,6 +456,12 @@ html, body {
             }
         }
         .selected-period{
+            &.speaker-speeches-content{
+                &.paginationUnavailable{
+                    //the numbers is from pagination, div 1rem and 35px is the height of div
+                    height: calc(610px + 1rem + 35px)!important;
+                }
+            }
             &.speaker-speeches-content{
                 height: 610px!important;
             }

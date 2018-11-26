@@ -111,12 +111,16 @@
                                                             {{period.selected_period}}
                                                         </router-link>
                                                     </h4>
-                                                    <pagination :data="period.speeches.data.meta" @pagination-change-page="changePagePeriod" :limit=1>
+                                                    <pagination v-if="period.speeches.data.meta" :data="period.speeches.data.meta" @pagination-change-page="changePagePeriod" :limit=1>
                                                         <span slot="prev-nav">&lt;</span>
                                                         <span slot="next-nav">&gt;</span>
                                                     </pagination>
                                                 </div>
-                                                <div class="selected-period speaker-speeches-content">
+                                                <!-- height: calc(579px + 1rem + 35px); -->
+                                                <div 
+                                                    class="selected-period speaker-speeches-content" 
+                                                    :class="{paginationUnavailable: period.speeches.data.meta.last_page == 1}"
+                                                >
                                                     <div v-for="period_speeches in period.speeches.data.data" :key="period_speeches.speech_id" class="p-3 mt-3">
                                                         <speech :speech="period_speeches" isFromSpeakerProfile=true></speech>
                                                     </div>
@@ -503,6 +507,7 @@
                 this.period.ajaxDone = false
                 if(this.period.selected_period == period.conference_date){
                     //if it's the same as the previous don't make a call to server
+                    this.period.ajaxDone = true
                 }else{
                     this.period.selected_period = period.conference_date
                     let data = {
