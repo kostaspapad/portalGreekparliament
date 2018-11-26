@@ -315,9 +315,10 @@
         watch: {
             startInterval: function(newVal) {
                 if(newVal){
-                    setInterval( () => {
-                        this.GET_COMMENTS_CONFERENCE(this.conf_date)
-                    },60000);
+                    this.$options.interval = setInterval( () => {
+                        let data = {data: this.conf_date, choice: 'conference'}
+                        this.GET_COMMENTS_CONFERENCE(data)
+                    },60000)
                 }
             }
         },
@@ -328,8 +329,14 @@
             
             this.getPartyCountByConference()
             if(this.user){
-                this.GET_COMMENTS_CONFERENCE(this.conf_date)
+                let data = {data: this.conf_date, choice: 'conference'}
+                this.GET_COMMENTS_CONFERENCE(data)
                 this.startInterval = true
+            }
+        },
+        beforeDestroy(){
+            if(this.$options.interval){
+                clearInterval(this.$options.interval)
             }
         }
     }

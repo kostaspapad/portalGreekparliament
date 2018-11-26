@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="speech_data.speech_id && speech_data.greek_name && isFromConference" class="speech-container3 py-2">
+        <div v-if="speech_data.speech_id && speech_data.greek_name && (isFromConference || singleSpeech)" class="speech-container3 py-2">
             <div class="speech-data-container p-2">
                 <div class="row" style="margin-right: 0;">
                     <div class="speaker-image-container">
@@ -80,7 +80,8 @@
                     <!-- Comments -->
                     <transition name="slide-fade">
                         <div v-if="isCommentOn" class="comments-area mt-2">
-                            <comments :speech_id="speech_data.speech_id"></comments>
+                            <comments v-if="!singleSpeech" :speech_id="speech_data.speech_id"></comments>
+                            <comments v-else :speech_id="speech_data.speech_id" singleSpeech=true></comments>
                         </div>
                     </transition>
                     <!-- End of Comments -->
@@ -201,7 +202,7 @@
     }
 </style>
 <script>
-    import { mapState, mapGetters } from 'vuex'
+    import { mapState, mapGetters, mapActions } from 'vuex'
     export default {
         props: {
             speech: null,
@@ -221,7 +222,9 @@
                 speech_data: null,
                 isDone: false,
                 showModal: false,
-                report_text: ''
+                report_text: '',
+                singleSpeech: false,
+                startInterval: false
             }
         },
         methods: {
@@ -248,7 +251,10 @@
                         }
                     })
                 }
-            }
+            },
+            ...mapActions([
+                'GET_COMMENTS_CONFERENCE'
+            ])
         },
         computed: {
             isDisabled(){
@@ -274,6 +280,16 @@
                 api_path: 'get_api_path'
             })
         },
+         watch: {
+            startInterval: function(newVal) {
+                if(newVal){
+                    this.$options.interval = setInterval( () => {
+                        let data = {data: this.$route.params.speech_id, choice: 'single_speech'}
+                        this.GET_COMMENTS_CONFERENCE(data)
+                    },60000)
+                }
+            }
+        },
         mounted() {
             if(!this.speech){
                 api.call('get', this.api_path + 'speech/' + this.$route.params.speech_id)
@@ -281,11 +297,22 @@
                     if( data.status == 200 && data.statusText == "OK" && data.data ){
                         this.speech_data = data.data.data
                         this.isDone = true
+                        this.singleSpeech = true
                     }
                 })
+                 if(this.user){
+                    let data = {data: this.$route.params.speech_id, choice: 'single_speech'}
+                    this.GET_COMMENTS_CONFERENCE(data)
+                    this.startInterval = true
+                }
             }else{
                 this.speech_data = this.speech
                 this.isDone = true
+            }
+        },
+        beforeDestroy(){
+            if(this.$options.interval){
+                clearInterval(this.$options.interval)
             }
         }
     }

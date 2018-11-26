@@ -1,10 +1,11 @@
 <template>
     <div v-if="speech_comments">
         <div v-chat-scroll class="comments-area" :class="{ 'comments-scroll' : speech_comments.length > 6 }">
-            <div v-for="comment in speech_comments" :key="comment.comment_id" class="comment">
-                <!-- <div v-if="">
-
-                </div> -->
+            <div v-if="!singleSpeech" v-for="comment in speech_comments" :key="comment.comment_id" class="comment">
+                <p class="m-0">{{comment.comment}}</p>
+                <small>{{myFormattedDate(comment.created_at.date)}} - {{comment.user_name}}</small>
+            </div>
+            <div v-if="singleSpeech" v-for="comment in single_speech_comments" :key="comment.comment_id" class="comment">
                 <p class="m-0">{{comment.comment}}</p>
                 <small>{{myFormattedDate(comment.created_at.date)}} - {{comment.user_name}}</small>
             </div>
@@ -53,6 +54,9 @@
             speech_id:{
                 type: String,
                 required: true
+            },
+            singleSpeech: {
+                default: false
             }
         },
         data() {
@@ -99,7 +103,10 @@
             speech_comments(){
                 return this.$store.getters.get_conference_speech_comments.filter(obj => 
                     obj.speech_id === this.speech_id
-                );
+                )
+            },
+            single_speech_comments(){
+                return this.$store.getters.get_single_speech_comments
             }
         },
         created(){

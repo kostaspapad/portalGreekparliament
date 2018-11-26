@@ -7,7 +7,8 @@ export default new Vuex.Store({
     state: {
         api_path: '',
         user: null,
-        conference_speech_comments: []
+        conference_speech_comments: [],
+        single_speech_comments: []
     },
     mutations: {
         SAVE_USER: (state,user) => {
@@ -25,16 +26,30 @@ export default new Vuex.Store({
         },
         SAVE_CONFERENCE_SPEECH_COMMENTS: (state,comments) => {
             state.conference_speech_comments = comments
+        },
+        SAVE_SPEECH_COMMENTS: (state,comments) => {
+            state.single_speech_comments = comments
         }
     },
     actions: {
-        GET_COMMENTS_CONFERENCE: (context,conferece_date) => {
-            api.call('get', context.state.api_path + 'comments/' + conferece_date)
-            .then(  data => {
-                if( data.data && data.statusText == "OK" && data.status == 200 ){
-                    context.commit('SAVE_CONFERENCE_SPEECH_COMMENTS',data.data.data)
-                }
-            })
+        GET_COMMENTS_CONFERENCE: (context,argument) => {
+            if(argument.choice == 'conference'){
+                //to show all comments for all the conference
+                api.call('get', context.state.api_path + 'comments/' + argument.data)
+                .then(  data => {
+                    if( data.data && data.statusText == "OK" && data.status == 200 ){
+                        context.commit('SAVE_CONFERENCE_SPEECH_COMMENTS',data.data.data)
+                    }
+                })
+            }else if(argument.choice == 'single_speech'){
+                //to show only comment of one speech
+                api.call('get', context.state.api_path + 'comments/speech/' + argument.data)
+                .then(  data => {
+                    if( data.data && data.statusText == "OK" && data.status == 200 ){
+                        context.commit('SAVE_SPEECH_COMMENTS',data.data.data)
+                    }
+                })
+            }
         }
     },
     getters: {
@@ -46,6 +61,9 @@ export default new Vuex.Store({
         },
         get_conference_speech_comments: state => {
             return state.conference_speech_comments
+        },
+        get_single_speech_comments: state => {
+            return state.single_speech_comments
         }
     }
 })
