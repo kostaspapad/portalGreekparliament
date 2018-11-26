@@ -636,6 +636,11 @@ hr.divider {
 .footer-top-div {
     margin-top: 2rem;
 }
+.page-footer{
+    .email-link{
+        color: inherit;
+    }
+}
 .container-footer {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
     background-color: #fff;
