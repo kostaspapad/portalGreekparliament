@@ -19,7 +19,7 @@
             
         </table>
         <div v-else>
-            <h3>You don't have do any comments or favorite a speech!</h3>
+            <h3>Δεν έχετε κάνει κάποιο σχόλιο ή να έχετε ορίσει μια ομιλία ως αγαπημένη!</h3>
         </div>
 
         <!-- Must remove bootstrap.scss to work correctly -->

@@ -33,7 +33,7 @@
             <td class="border-0 p-0" colspan="6">
                 <transition-expand>
                     <div v-if="expand" class="expand-content">
-                        <h4>Hello</h4>
+                        <!-- <h4>Hello</h4> -->
                     </div>
                 </transition-expand>
             </td>
