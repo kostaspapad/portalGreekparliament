@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58724981-1"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58724981-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -10,7 +10,6 @@
 
             gtag('config', 'UA-58724981-1');
         </script>
-        <script src="https://www.gstatic.com/charts/loader.js"></script> -->
         <script src="https://www.gstatic.com/charts/loader.js"></script>
         <meta name="theme-color" content="#33a8ff">
         <meta charset="utf-8">
