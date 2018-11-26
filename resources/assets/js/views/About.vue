@@ -49,8 +49,7 @@
         </div>
         <div class="col-12">
             <h3 class="question">Μπορω να εχω τα δεδομένα σε raw form για την έρευνα ή την επιχείρηση μου;</h3>
-            <p class="answer">Πιθανότατα ναι. Επικοινωνήστε μαζί μας σε Direct message ή στο <a href="mailto:info@greekparliament.info">info@greekparliament.info<a>    
-.</p>
+            <p class="answer">Πιθανότατα ναι. Επικοινωνήστε μαζί μας σε Direct message ή στο <a href="mailto:info@greekparliament.info" title="Email us">info@greekparliament.info</a>.</p>
         </div>
     </div>
 
