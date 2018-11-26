@@ -79,6 +79,25 @@ class CommentsController extends Controller
         return $this->apiHelper::returnResource('Comment', $comments);
     }
 
+    public function show_by_speech_id( Request $request , $speech_id){
+        $comments = Comment::join('users','comments.user_id', '=', 'users.id')
+                    ->join('speeches', 'comments.speech_id', '=', 'speeches.speech_id')
+                    // ->join('conferences', 'speeches.speech_conference_date', '=', 'conferences.conference_date')
+                    ->select([
+                        'comments.id as comment_id',
+                        'comments.comment',
+                        'comments.speech_id',
+                        'comments.user_id',
+                        'comments.created_at',
+                        'users.name as user_name'
+                    ])
+                    ->groupBy('speeches.speech_id' , 'comments.id')
+                    ->where('speeches.speech_id' , '=', $speech_id)
+                    ->get();
+       // dd($comments);
+        return $this->apiHelper::returnResource('Comment', $comments);
+    }
+
     public function afterSaveGetRow($comment_id) {
 
         // $comment = Comment::join('users','comments.user_id', '=', 'users.id')
