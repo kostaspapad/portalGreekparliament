@@ -65,8 +65,8 @@ class SpeechesController extends Controller
     public function getSpeechById($id)
     {
         // $speech = Speech::findorfail($id);
-        $user = auth('api')->user();
-        if ($user) {
+        // $user = auth('api')->user();
+        // if ($user) {
             // One speaker can be in many parties (check it later)
             $speech = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                 ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
@@ -94,7 +94,7 @@ class SpeechesController extends Controller
                 // ->orWhere('favorites.speech_id', '=', NULL)
                 // ->orWhere('favorites.speech_id', '!=', NULL)
                 ->first();
-        } 
+        // } 
         
         return $this->apiHelper::returnResource('Speech', $speech);
     }
