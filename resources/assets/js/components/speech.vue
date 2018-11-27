@@ -47,6 +47,11 @@
                             </router-link>
                         </div>
                     </div>
+                    <div v-if="speech" class="speech-link col-12 text-center">
+                        <router-link :to="/speech/ + speech_data.speech_id">
+                            <h5>Μετάβαση στην ομιλία</h5>
+                        </router-link>
+                    </div>
                 </div>
                 <div class="speech-container-speech ml-2 pt-2" style="white-space: pre-line;">
                     <read-more more-str="περισσότερα" :text="speech_data.speech" link="#" less-str="λιγότερα" :max-chars="2000"></read-more>

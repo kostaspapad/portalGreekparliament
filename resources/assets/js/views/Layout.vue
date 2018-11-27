@@ -158,9 +158,8 @@
                 this.authenticated = false
                 this.user = null
                 this.CHECK_USER()
-                //this.$router.go(-10)
-                 this.$router.push('/')
-                 location.reload()
+                this.$router.push('/')
+                //  location.reload()
             })
         },
     }

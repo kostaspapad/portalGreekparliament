@@ -54,8 +54,10 @@
                                     <speech :speech="conference" isFromConference=true></speech>
                                 </div>
                             </div>
-                            <div v-else>
-                                <h4>{{ $t("conference.no_speeches_avail") }}</h4>
+                            <div v-if="ajaxDoneConfSpeeches">
+                                <div v-if="!ajaxData.conferenceData.data.data.length">
+                                    <h4>{{ $t("conference.no_speeches_avail") }}</h4>
+                                </div>
                             </div>
                             <div v-if="ajaxData.isLoaded && !search.speechesData.length" class="col-12" style="padding-left: 2.5rem;">
                                 <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
