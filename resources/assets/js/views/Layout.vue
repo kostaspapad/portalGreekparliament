@@ -117,8 +117,8 @@
                                 <router-link class="nav-link" to="/policy">{{ $t("footer.policy")}}</router-link>
                             </li> -->
                         </ul>
-                        <a target="_blank" title="follow me on facebook" href="https://www.facebook.com/greekparliament">
-                            <img alt="follow us on facebook" src="img/facebook30x30.png" border=0>
+                        <a target="_blank" title="follow me on facebook" href="https://www.facebook.com/greekparliament" style="font-size: 2rem;">
+                            <i class="fab fa-facebook-square"></i>
                         </a>
                     </div>
                 </div>
