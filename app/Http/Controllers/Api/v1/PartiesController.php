@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Helpers\ApiHelper;
 use App\Models\Party;
 use App\Models\Speaker;
+use App\Helpers\CacheExpiration;
+use Illuminate\Support\Facades\Cache;
 
 
 class PartiesController extends Controller
@@ -26,9 +28,14 @@ class PartiesController extends Controller
      */
     public function index()
     {
-        // Get speakers
-        $parties = Party::orderBy('fullname_el', 'asc')->paginate(50);
+        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+        //CacheExpiration::checkCache('parties',false,0,0,0,false);
 
+        // Get parties
+        $parties = Cache::rememberForever('parties', function() {
+            return Party::orderBy('fullname_el', 'asc')->get();
+        });
+  
         return $this->apiHelper::returnResource('Party', $parties);
     }
 

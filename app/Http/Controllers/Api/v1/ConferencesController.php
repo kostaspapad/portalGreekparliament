@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use Illuminate\Http\Request;
 use DB;
 use App\Helpers\ApiHelper;
+use App\Helpers\CacheExpiration;
 use App\Http\Controllers\Controller;
 use App\Models\Conference;
 use Illuminate\Support\Facades\Cache;
@@ -55,8 +56,16 @@ class ConferencesController extends Controller
      */
     public function index() 
     {
+        if(isset($_GET['page'])){
+            $current_page = $_GET['page'];
+        }else{
+            $current_page = 1;
+        }
 
-        // $conferences =  Cache::remember('conferencesIndex', 22*60, function() {
+        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+        //CacheExpiration::checkCache('conferences',true,$current_page,0,0,true);
+
+        $cache_conferences =  Cache::remember('conferences-'.$current_page, CacheExpiration::expiration(720), function() {
         
             $conferences = Conference::with('speeches')
                 ->when($this->order_field && $this->order_orientation, function ($query) {
@@ -72,10 +81,11 @@ class ConferencesController extends Controller
                 ->withCount('speeches')
                 ->groupBy('conferences.id')
                 ->paginate(10);
-                    
-        // });
+
+            return $conferences;        
+        });
         
-        return $this->apiHelper::returnResource('Conference', $conferences);
+        return $this->apiHelper::returnResource('Conference', $cache_conferences);
     }
 
     
@@ -161,16 +171,28 @@ class ConferencesController extends Controller
         $period = '"' . $period . '"';
         // dd($period);
         if(isset($period)){
-            $period = Conference::with('speeches')->has('speeches')
-                ->when($this->order_field && $this->order_orientation, function ($query) {
-                    $query->orderBy($this->order_field, $this->order_orientation);
-                })
-                ->whereRaw("time_period = ".$period." ")
-                ->groupBy('conferences.id')
-                ->select(['conference_date','time_period','session'])
-                ->paginate(10);
-
-            return $this->apiHelper::returnResource('Conference', $period);
+            if(isset($_GET['page'])){
+                $current_page = $_GET['page'];
+            }else{
+                $current_page = 1;
+            }
+    
+            //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+            //CacheExpiration::checkCache('conferences_time_periods_speeches',true,$current_page,$period,0,true);
+    
+            $cache_conferences_time_periods_speeches =  Cache::remember('conferences_time_periods_speeches-'.$period.'-'.$current_page, CacheExpiration::expiration(720), function() use ($period) {
+                $period = Conference::has('speeches')
+                // with('speeches')
+                    ->when($this->order_field && $this->order_orientation, function ($query) {
+                        $query->orderBy($this->order_field, $this->order_orientation);
+                    })
+                    ->whereRaw("time_period = ".$period." ")
+                    ->groupBy('conferences.id')
+                    ->select(['conference_date','time_period','session'])
+                    ->paginate(10);
+                return $period;
+            });
+            return $this->apiHelper::returnResource('Conference', $cache_conferences_time_periods_speeches);
         }
     }
 
@@ -188,35 +210,41 @@ class ConferencesController extends Controller
 
     public function getPartyCountByConference($conf_date)
     {
-        $count_party_speeches = DB::select(
-            'SELECT 
-                conf_speeches.conference_date AS conference_date,
-                conf_speeches.on_behalf_of_id AS on_behalf_of_id,
-                conf_speeches.fullname_el AS fullname_el,
-                conf_speeches.color AS color,
-                COUNT(conf_speeches.on_behalf_of_id) AS party_count
-            FROM
-                (SELECT 
-                    conf.conference_date AS conference_date,
-                        m.on_behalf_of_id AS on_behalf_of_id,
-                        portal.parties.fullname_el AS fullname_el,
-                        portal.party_colors.color AS color
+        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+        //CacheExpiration::checkCache('count_party_speeches',true,0,$conf_date,0,false);
+        $cache_count_party_speeches =  Cache::remember('count_party_speeches-'.$conf_date, CacheExpiration::expiration(720), function() use ($conf_date) {
+            $count_party_speeches = DB::select(
+                'SELECT 
+                    conf_speeches.conference_date AS conference_date,
+                    conf_speeches.on_behalf_of_id AS on_behalf_of_id,
+                    conf_speeches.fullname_el AS fullname_el,
+                    conf_speeches.color AS color,
+                    COUNT(conf_speeches.on_behalf_of_id) AS party_count
                 FROM
-                    (((((portal.speeches
-                JOIN portal.conferences conf ON (conf.conference_date = portal.speeches.speech_conference_date))
-                JOIN portal.speakers sp ON (sp.speaker_id = portal.speeches.speaker_id))
-                JOIN portal.memberships m ON (sp.speaker_id = m.person_id))
-                JOIN portal.parties ON (portal.parties.party_id = m.on_behalf_of_id))
-                JOIN portal.party_colors ON (portal.parties.party_id = portal.party_colors.party_id))
-                WHERE conf.conference_date = :conf_date1
-                GROUP BY portal.speeches.speech_id) conf_speeches
-            WHERE conference_date = :conf_date2
-            GROUP BY conf_speeches.conference_date , conf_speeches.on_behalf_of_id', [
-                'conf_date1' => $conf_date,
-                'conf_date2' => $conf_date
-            ]);
+                    (SELECT 
+                        conf.conference_date AS conference_date,
+                            m.on_behalf_of_id AS on_behalf_of_id,
+                            portal.parties.fullname_el AS fullname_el,
+                            portal.party_colors.color AS color
+                    FROM
+                        (((((portal.speeches
+                    JOIN portal.conferences conf ON (conf.conference_date = portal.speeches.speech_conference_date))
+                    JOIN portal.speakers sp ON (sp.speaker_id = portal.speeches.speaker_id))
+                    JOIN portal.memberships m ON (sp.speaker_id = m.person_id))
+                    JOIN portal.parties ON (portal.parties.party_id = m.on_behalf_of_id))
+                    JOIN portal.party_colors ON (portal.parties.party_id = portal.party_colors.party_id))
+                    WHERE conf.conference_date = :conf_date1
+                    GROUP BY portal.speeches.speech_id) conf_speeches
+                WHERE conference_date = :conf_date2
+                GROUP BY conf_speeches.conference_date , conf_speeches.on_behalf_of_id', [
+                    'conf_date1' => $conf_date,
+                    'conf_date2' => $conf_date
+                ]);
+            
+            return $count_party_speeches;
+        });
         
-        return $count_party_speeches;
+        return $cache_count_party_speeches;
     }
 }
 
