@@ -282,6 +282,20 @@ html, body {
         }
     }
 }
+@media only screen and (min-width: 431px) and (max-width: 500px) {
+    .speech-data-container{
+        .speaker-image-container{
+            // width: 25%;
+        }
+        .speech-container-speaker{
+            // width: 75%;
+            h4{ font-size: 1rem!important; }
+        }
+        .speech_speaker_party{
+            h5{ font-size: 1rem!important; }
+        }
+    }
+}
 
 .pointer{
     cursor: pointer;
