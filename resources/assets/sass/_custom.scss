@@ -212,7 +212,7 @@ html, body {
         color: #636b6f;
     }
 }
-@media only screen and (min-width: 320px) and (max-width: 400px) {
+@media only screen and (min-width: 320px) and (max-width: 40px) {
     .conference-title {
         font-size: 1.3rem;
     }
@@ -224,6 +224,64 @@ html, body {
     // }
 }
 //end search input
+
+@media only screen and (min-width: 320px) and (max-width: 338px) {
+    .conferences-container{
+        .conference-title{
+            font-size: 1.3rem!important;
+        }
+    }
+    .speech-data-container{
+        .speaker-image-container{
+            width: 25%;
+        }
+        .speech-container-speaker{
+            width: 75%;
+            h4{ font-size: 0.72rem!important; }
+        }
+        .speech_speaker_party{
+            h5{ font-size: 0.72rem!important; }
+        }
+    }
+}
+@media only screen and (min-width: 339px) and (max-width: 355px) {
+    .conferences-container{
+        .conference-title{
+            font-size: 1.36rem!important;
+        }
+    }
+    .speech-data-container{
+        .speaker-image-container{
+            width: 25%;
+        }
+        .speech-container-speaker{
+            width: 75%;
+            h4{ font-size: 0.9rem!important; }
+        }
+        .speech_speaker_party{
+            h5{ font-size: 0.9rem!important; }
+        }
+    }
+}
+@media only screen and (min-width: 356px) and (max-width: 430px) {
+    .conferences-container{
+        .conference-title{
+            font-size: 1.45rem!important;
+        }
+    }
+    .speech-data-container{
+        .speaker-image-container{
+            // width: 25%;
+        }
+        .speech-container-speaker{
+            // width: 75%;
+            h4{ font-size: 1rem!important; }
+        }
+        .speech_speaker_party{
+            h5{ font-size: 1rem!important; }
+        }
+    }
+}
 
 .pointer{
     cursor: pointer;

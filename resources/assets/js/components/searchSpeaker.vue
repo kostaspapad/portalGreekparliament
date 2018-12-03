@@ -10,7 +10,7 @@
         :searchable="true" 
         :loading="isLoading" 
         :internal-search="false" 
-        :clear-on-select="false" 
+        :clear-on-select="true" 
         :close-on-select="false" 
         :options-limit="100" 
         :limit="1" 

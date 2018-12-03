@@ -8,7 +8,7 @@
                     <div>{{ajaxData.conferenceInfo.data.data.time_period}} Περίοδος</div>
                 </div>
                 <!-- Scroll to top btn -->
-                <div class="scroll-btn conf-scroll-btn-pos d-block d-sm-none">
+                <div class="scroll-btn conf-scroll-btn-pos">
                     <a href="#" v-scroll-to=" {
                             el: '#search-input',
                             duration: 800,
@@ -56,7 +56,7 @@
                                     <span @click="clearInput" class="speech-search-input-icon pointer"><i class="fas fa-times-circle"></i></span>
                                 </div>
                             </div>
-                            <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
                                 <div v-if="search.noDataMsg">
                                     <p>{{search.noDataMsg}}</p>
                                 </div>
