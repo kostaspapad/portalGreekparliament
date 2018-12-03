@@ -116,16 +116,28 @@ html, body {
     border-color: #636b6f;
 }
 
+//scroll btn
+.scroll-btn{
+    font-size: 2.4rem;
+    position: fixed;
+    right: 0;
+    z-index: 2;
+
+    a{
+        color: inherit;
+    }
+}
+
 //transitions
-.slide-fade-enter-active  {
-    // transition: all .6s ease;
-    animation: coming .5s;
-    // animation-delay: .5s;
-    opacity: 0;
-}
-.slide-fade-leave-active{
-    animation: going 1s;
-}
+// .slide-fade-enter-active  {
+//     // transition: all .6s ease;
+//     animation: coming .5s;
+//     // animation-delay: .5s;
+//     opacity: 0;
+// }
+// .slide-fade-leave-active{
+//     animation: going 1s;
+// }
 
 @keyframes going {
     from{
@@ -156,6 +168,13 @@ html, body {
 //     transform: scale(1);
 // }
 //end of transitions
+
+//documents links for xs screen
+@media only screen and (min-width: 320px) and (max-width: 330px) {
+    .documents-links{
+        font-size: 0.8rem;
+    }
+}
 
 .vs-input--icon{
     padding-right: 0!important;
@@ -444,6 +463,9 @@ html, body {
             padding-right: 0;
             padding-left: 0;
         }
+        .documents-links{
+            font-size: 0.8rem;
+        }
     }
     @media only screen and (min-width: 576px) and (max-width: 767px) {
         .periods{
@@ -473,7 +495,7 @@ html, body {
             }
         }
         .conf-period-title{
-            font-size: 0.66rem;
+            // font-size: 0.66rem;
         }
     }
     @media only screen and (min-width: 1200px){
