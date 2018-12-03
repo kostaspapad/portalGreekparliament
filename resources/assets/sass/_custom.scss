@@ -574,6 +574,15 @@ html, body {
         .conf-period-title{
             font-size: 1rem;
         }
+        .scroll-btn{
+            font-size: 4.4rem;
+        }
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    .scroll-btn{
+        font-size: 4.4rem;
     }
 }
 
