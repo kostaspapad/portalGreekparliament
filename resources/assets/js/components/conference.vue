@@ -7,11 +7,27 @@
                     <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
                     <div>{{ajaxData.conferenceInfo.data.data.time_period}} Περίοδος</div>
                 </div>
+                <!-- Scroll to top btn -->
+                <div class="scroll-btn conf-scroll-btn-pos d-block d-sm-none">
+                    <a href="#" v-scroll-to=" {
+                            el: '#search-input',
+                            duration: 800,
+                            offset: -100,
+                            easing: 'linear',
+                            force: true,
+                            x: false,
+                            y: true
+                        } 
+                    ">
+                        <i class="fas fa-chevron-circle-up"></i>
+                    </a>
+                </div>
+                <!-- End of scroll to top btn -->
                 <vs-tabs color='#007bff'>
                     <vs-tab vs-label="Συνδεδρίαση">
                         <div class="row w-100">
                             <div class="col-12 pt-3">
-                                <span v-if="ajaxData.conferenceInfo">
+                                <span class="documents-links" v-if="ajaxData.conferenceInfo">
                                     <a :href="startUrl + '/' + ajaxData.conferenceInfo.data.data.pdf_loc + '/' + ajaxData.conferenceInfo.data.data.pdf_name">
                                         {{ $t("conference.pdf") }} <i class="fas fa-file-pdf" style="color: #dc3545;"></i>
                                     </a>
@@ -134,6 +150,9 @@
     .speech{
         /* margin: -50px 0 0 90px; */
         text-align: justify;
+    }
+    .conf-scroll-btn-pos{
+        top: 50%;
     }
 </style>
 

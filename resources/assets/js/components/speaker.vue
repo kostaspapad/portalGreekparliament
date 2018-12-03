@@ -49,39 +49,67 @@
                 <div class="container">
                     <vs-tabs vs-color='#17a2b8'>
                         <vs-tab vs-label="Ομιλίες">
+                            <div id="top_of_periods"></div>
                             <div v-if="showLinks" class="row period-mode">
-                                <div class="conf-links col-12 col-sm-3 col-md-3 col-lg-2 mt-3">
-                                    <h6 class="conf-period-title d-none d-sm-block">Conference Dates</h6>
-                                    <h6 class="conf-period-title text-center d-block d-sm-none">Conference Dates</h6>
+                                <div class="conf-links col-12 col-sm-3 col-md-3 col-lg-2 mt-3" id="conf-links">
+                                    <h6 class="conf-period-title d-none d-sm-block">Συνεδριάσεις</h6>
+                                    <h6 class="conf-period-title text-center d-block d-sm-none">Συνεδριάσεις</h6>
                                     <!-- Conferences dates -->
-                                    <div class="periods speaker-profile-periods">
-                                        <ul v-if="ajaxData.conferences.linksData.length" class="period-list">
-                                            <li 
-                                                v-for="(period_data) in ajaxData.conferences.linksData" 
-                                                :key="period_data.conference_date"
-                                                @click="getSpeechesByConference(period_data)"
-                                                class="pointer"
-                                                :class="{periods_bg: period_data.conference_date ==  period.selected_period}"
-                                                v-if="period.ajaxDone"
-                                            >
-                                                <span>{{period_data.conference_date}}</span>
-                                            </li>
-                                            <li 
-                                                v-for="(period_data) in ajaxData.conferences.linksData" 
-                                                :key="period_data.conference_date" 
-                                                class="pointer"
-                                                :class="{periods_bg: period_data.conference_date ==  period.selected_period}"
-                                                v-if="!period.ajaxDone"
-                                            >
-                                                <span>{{period_data.conference_date}}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- End of conferences dates -->
+                                    <!-- <transition-group name="test" tag="div" enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutLeft"> -->
+                                        <div v-if="!hidePeriods" class="periods speaker-profile-periods" :class="{animTest: hidePeriods}" key="show_period">
+                                            <ul v-if="ajaxData.conferences.linksData.length" class="period-list">
+                                                <li 
+                                                    v-for="(period_data) in ajaxData.conferences.linksData" 
+                                                    :key="period_data.conference_date"
+                                                    @click="getSpeechesByConference(period_data)"
+                                                    class="pointer"
+                                                    :class="{periods_bg: period_data.conference_date ==  period.selected_period}"
+                                                    v-if="period.ajaxDone"
+                                                >
+                                                    <span>{{period_data.conference_date}}</span>
+                                                </li>
+                                                <li 
+                                                    v-for="(period_data) in ajaxData.conferences.linksData" 
+                                                    :key="period_data.conference_date" 
+                                                    class="pointer"
+                                                    :class="{periods_bg: period_data.conference_date ==  period.selected_period}"
+                                                    v-if="!period.ajaxDone"
+                                                >
+                                                    <span>{{period_data.conference_date}}</span>
+                                                </li>
+                                            </ul>
+                                            <div class="d-block d-sm-none">
+                                                <button class="btn p-2" @click="showHidePeriods">Συνεδριάσεις <i class="fas fa-eye-slash"></i></button>
+                                            </div>
+                                        </div>
+                                        <!-- End of conferences dates -->
+                                        
+                                        <!-- Show the periods -->
+                                        <div v-else class="d-block d-sm-none" key="hide_period">
+                                            <button class="btn p-2" @click="hidePeriods = false">Συνεδριάσεις <i class="fas fa-eye"></i></button>
+                                        </div>
+                                        <!-- End of show the periods -->
+                                    <!-- </transition-group> -->
                                 </div>
+                                <!-- Scroll to top btn -->
+                                <div class="scroll-btn d-block d-sm-none">
+                                    <a href="#" v-scroll-to=" {
+                                            el: '#conf-links',
+                                            duration: 800,
+                                            offset: -100,
+                                            easing: 'linear',
+                                            force: true,
+                                            x: false,
+                                            y: true
+                                        } 
+                                    ">
+                                        <i class="fas fa-chevron-circle-up"></i>
+                                    </a>
+                                </div>
+                                <!-- End of scroll to top btn -->
                                 <!-- Selected Period -->
                                 <vs-divider class="d-block d-sm-none" />
-                                <div class="col-12 col-sm-9 col-md-9 col-lg-10 selected-period-main-div mt-3" >
+                                <div class="col-12 col-sm-9 col-md-9 col-lg-10 selected-period-main-div mt-3" id="selected_period">
                                     <!-- Period has data -->
                                     <div v-if="period.ajaxDone  && period.selected_period_hasData">
                                         <div v-show="search.noDataMsg">
@@ -105,8 +133,8 @@
                                                             {{period.selected_period}}
                                                         </router-link>
                                                     </h4>
-                                                    <h4 class="selected-period-title text-center d-block d-sm-none">
-                                                        <span>Συνεδρίαση <i class="fas fa-long-arrow-alt-right"></i></span>
+                                                    <h4 class="selected-period-title text-center d-block d-sm-none" style="font-size: 0.8rem;">
+                                                        <span>Μετάβαση στην συνεδρίαση <i class="fas fa-long-arrow-alt-right"></i></span>
                                                         <router-link :to="'/conference/' + period.selected_period + '/speeches'" style="color: #1f74ff;">
                                                             {{period.selected_period}}
                                                         </router-link>
@@ -200,6 +228,13 @@
 
 <style lang="scss" scoped>
     $ContainerColor: white;
+
+    .show-hide-periods { 
+        background: cadetblue;
+        position: fixed;
+        right: 0;
+        z-index: 2;
+    }
 
     .speaker-container {
         background-color: $ContainerColor;
@@ -367,6 +402,7 @@
                     speeches: [],
                     pageNum: null
                 },
+                hidePeriods: false,
                 finalName: null,
                 speaker_id: null,
                 conferenceDate: null,
@@ -386,6 +422,16 @@
             }
         },
         methods: {
+            scrollToTop() {
+                 window.scrollTo(0,100);
+            },
+            showHidePeriods(){
+                this.hidePeriods = !this.hidePeriods
+                this.scrollToTop()
+                //to inlcude when we add animation
+                // setTimeout( () => {
+                // },1000)
+            },
             clearInput() {
                 this.search_string = ''
                 if(this.search.speechesData){
@@ -500,7 +546,19 @@
                 this.search.speechesData = []
                 this.search_string = ''
             },
+            goToSpeeches() {
+                //scroll to the element that contains the speeches
+                let options = {
+                    easing: 'linear',
+                    // offset: -60,
+                    force: true,
+                    x: false,
+                    y: true
+                }
+                this.$scrollTo('#selected_period', 800, options)
+            },
             getSpeechesByConference(period){
+                this.goToSpeeches()
                 if(this.search.noDataMsg || this.search.speechesData.length > 0){
                     this.clearSearchData()
                 }
