@@ -26,7 +26,11 @@
                         <vs-tab vs-label="Speakers">
                             <div class="p-3 tab-pane fade show speakers-container mb-0">
                                 <div v-if="ajaxDoneSpeakers && noDataSpeakers == false">
-                                    <div v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.speaker_id" class="speakers py-2">
+                                    <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
+                                        <span slot="prev-nav">&lt;</span>
+                                        <span slot="next-nav">&gt;</span>
+                                    </pagination>
+                                    <div v-for="speaker in ajaxData.speakersData.data.data" :key="speaker.speaker_id" class="speakers py-2 mt-2">
                                         <div class="row">
                                             <router-link :to="'/speaker/' + speaker.speaker_id" class="person-link">
                                                 <img :src=" '/img/' + printImg(speaker.image) " class="person-img">
@@ -34,13 +38,10 @@
                                             </router-link>
                                         </div>
                                     </div>
-                                    <div class="col-12 mt-5" style="padding-left: 2.5rem;">
-                                        <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage"
-                                            :limit=1>
-                                            <span slot="prev-nav">&lt;</span>
-                                            <span slot="next-nav">&gt;</span>
-                                        </pagination>
-                                    </div>
+                                    <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1 class="mt-4">
+                                        <span slot="prev-nav">&lt;</span>
+                                        <span slot="next-nav">&gt;</span>
+                                    </pagination>
                                 </div>
                                 <div v-else>
                                     <h5>No speakers found</h5>
