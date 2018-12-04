@@ -21,6 +21,7 @@ class Speech extends JsonResource
             'speaker_id' => $this->speaker_id,
             'speech' => $this->speech,
             'f_name' => $this->f_name,
+            'party_id' => $this->party_id,
             // 'created_at' => $this->created_at,
             // 'updated_at' => $this->updated_at,
             'md5' => $this->md5,

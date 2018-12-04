@@ -65,13 +65,12 @@ class SpeechesController extends Controller
     public function getSpeechById($id)
     {
         // $speech = Speech::findorfail($id);
-        // $user = auth('api')->user();
-        // if ($user) {
+        $user = auth('api')->user();
+        if ($user) {
             // One speaker can be in many parties (check it later)
             $speech = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                 ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
+                ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
                 ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
                 ->leftJoin('favorites', 'favorites.speech_id', '=', 'speeches.speech_id')
                 ->select([
@@ -81,7 +80,7 @@ class SpeechesController extends Controller
                     'speeches.speech_id', 
                     'speeches.speech', 
                     'sp.image', 
-                    'm.on_behalf_of_id', 
+                    'speeches.party_id', 
                     'parties.fullname_el',
                     'party_colors.color',
                     'favorites.isFavorite'
@@ -94,7 +93,7 @@ class SpeechesController extends Controller
                 // ->orWhere('favorites.speech_id', '=', NULL)
                 // ->orWhere('favorites.speech_id', '!=', NULL)
                 ->first();
-        // } 
+        } 
         
         return $this->apiHelper::returnResource('Speech', $speech);
     }
@@ -124,9 +123,8 @@ class SpeechesController extends Controller
 
             $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                 ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
-                ->select(['sp.speaker_id', 'conf.conference_date', 'sp.greek_name', 'sp.english_name', 'speeches.speech_id', 'speeches.speech', 'sp.image', 'm.on_behalf_of_id', 'parties.fullname_el'])
+                ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
+                ->select(['sp.speaker_id', 'conf.conference_date', 'sp.greek_name', 'sp.english_name', 'speeches.speech_id', 'speeches.speech', 'sp.image', 'speeches.party_id', 'parties.fullname_el'])
                 ->groupBy('speeches.speech_id')
                 ->whereRaw($query)
                 ->paginate(25);

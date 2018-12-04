@@ -87,6 +87,8 @@ class SpeechesController extends Controller
             $grid->created_at();
             $grid->updated_at();
             $grid->md5();
+            $grid->party_id();
+            $grid->role();
             
             $grid->filter(function($filter){
                 $filter->like('speech', 'speech');
@@ -94,6 +96,9 @@ class SpeechesController extends Controller
                 $filter->like('created_at', 'created_at');
                 $filter->like('updated_at', 'updated_at');
                 $filter->like('md5', 'md5');
+                $filter->like('party_id', 'party_id');
+                $filter->like('role', 'role');
+
             });
         });
     }
