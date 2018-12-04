@@ -116,16 +116,28 @@ html, body {
     border-color: #636b6f;
 }
 
+//scroll btn
+.scroll-btn{
+    font-size: 2.4rem;
+    position: fixed;
+    right: 0;
+    z-index: 2;
+
+    a{
+        color: inherit;
+    }
+}
+
 //transitions
-.slide-fade-enter-active  {
-    // transition: all .6s ease;
-    animation: coming .5s;
-    // animation-delay: .5s;
-    opacity: 0;
-}
-.slide-fade-leave-active{
-    animation: going 1s;
-}
+// .slide-fade-enter-active  {
+//     // transition: all .6s ease;
+//     animation: coming .5s;
+//     // animation-delay: .5s;
+//     opacity: 0;
+// }
+// .slide-fade-leave-active{
+//     animation: going 1s;
+// }
 
 @keyframes going {
     from{
@@ -156,6 +168,13 @@ html, body {
 //     transform: scale(1);
 // }
 //end of transitions
+
+//documents links for xs screen
+@media only screen and (min-width: 320px) and (max-width: 330px) {
+    .documents-links{
+        font-size: 0.8rem;
+    }
+}
 
 .vs-input--icon{
     padding-right: 0!important;
@@ -193,7 +212,7 @@ html, body {
         color: #636b6f;
     }
 }
-@media only screen and (min-width: 320px) and (max-width: 400px) {
+@media only screen and (min-width: 320px) and (max-width: 40px) {
     .conference-title {
         font-size: 1.3rem;
     }
@@ -205,6 +224,78 @@ html, body {
     // }
 }
 //end search input
+
+@media only screen and (min-width: 320px) and (max-width: 338px) {
+    .conferences-container{
+        .conference-title{
+            font-size: 1.3rem!important;
+        }
+    }
+    .speech-data-container{
+        .speaker-image-container{
+            width: 25%;
+        }
+        .speech-container-speaker{
+            width: 75%;
+            h4{ font-size: 0.72rem!important; }
+        }
+        .speech_speaker_party{
+            h5{ font-size: 0.72rem!important; }
+        }
+    }
+}
+@media only screen and (min-width: 339px) and (max-width: 355px) {
+    .conferences-container{
+        .conference-title{
+            font-size: 1.36rem!important;
+        }
+    }
+    .speech-data-container{
+        .speaker-image-container{
+            width: 25%;
+        }
+        .speech-container-speaker{
+            width: 75%;
+            h4{ font-size: 0.9rem!important; }
+        }
+        .speech_speaker_party{
+            h5{ font-size: 0.9rem!important; }
+        }
+    }
+}
+@media only screen and (min-width: 356px) and (max-width: 430px) {
+    .conferences-container{
+        .conference-title{
+            font-size: 1.45rem!important;
+        }
+    }
+    .speech-data-container{
+        .speaker-image-container{
+            // width: 25%;
+        }
+        .speech-container-speaker{
+            // width: 75%;
+            h4{ font-size: 1rem!important; }
+        }
+        .speech_speaker_party{
+            h5{ font-size: 1rem!important; }
+        }
+    }
+}
+@media only screen and (min-width: 431px) and (max-width: 500px) {
+    .speech-data-container{
+        .speaker-image-container{
+            // width: 25%;
+        }
+        .speech-container-speaker{
+            // width: 75%;
+            h4{ font-size: 1rem!important; }
+        }
+        .speech_speaker_party{
+            h5{ font-size: 1rem!important; }
+        }
+    }
+}
 
 .pointer{
     cursor: pointer;
@@ -444,6 +535,9 @@ html, body {
             padding-right: 0;
             padding-left: 0;
         }
+        .documents-links{
+            font-size: 0.8rem;
+        }
     }
     @media only screen and (min-width: 576px) and (max-width: 767px) {
         .periods{
@@ -473,13 +567,22 @@ html, body {
             }
         }
         .conf-period-title{
-            font-size: 0.66rem;
+            // font-size: 0.66rem;
         }
     }
     @media only screen and (min-width: 1200px){
         .conf-period-title{
             font-size: 1rem;
         }
+        .scroll-btn{
+            font-size: 4.4rem;
+        }
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    .scroll-btn{
+        font-size: 4.4rem;
     }
 }
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Speaker;
 use App\Helpers\ApiHelper;
+use App\Helpers\CacheExpiration;
+use Illuminate\Support\Facades\Cache;
 
 class SpeakersController extends Controller
 {
@@ -34,6 +36,16 @@ class SpeakersController extends Controller
      */
     public function index()
     {
+        
+        if(isset($_GET['page'])){
+            $current_page = $_GET['page'];
+        }else{
+            $current_page = 1;
+        }
+
+        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+        //CacheExpiration::checkCache('speakers',true,$current_page,0,0,true);
+
         // Query parameter validation
         if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)){
             return ['Error' => 'Invalid order field'];
@@ -52,8 +64,11 @@ class SpeakersController extends Controller
             }
         }
 
-        // Use the start_date field to find the latest membership
-        // $speakers = DB::table('speakers as s')
+        //use to have cache all the pages from pagination
+        //if it's set it returns from cache else execute the code in function and then set the key to cache
+        $cache_speakers = Cache::remember('speakers-'.$current_page, CacheExpiration::expiration(720), function(){
+            // Use the start_date field to find the latest membership
+            // $speakers = DB::table('speakers as s')
             $speakers = Speaker::join(
                 DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
                         FROM(
@@ -85,13 +100,14 @@ class SpeakersController extends Controller
                 'pc.color',
             ]);
 
-        if ($this->order_field && $this->order_orientation) {
-            $speakers->orderBy($this->order_field, $this->order_orientation);
-        }
+            if ($this->order_field && $this->order_orientation) {
+                $speakers->orderBy($this->order_field, $this->order_orientation);
+            }
 
-        $speakers = $speakers->paginate(50);
-
-        return $this->apiHelper::returnResource('Speaker', $speakers);
+            return $speakers = $speakers->paginate(50);
+        });
+        
+        return $this->apiHelper::returnResource('Speaker', $cache_speakers);
     }
     
     /**

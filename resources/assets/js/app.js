@@ -53,8 +53,9 @@ import 'vuesax/dist/vuesax.css' //Vuesax styles
 // import 'material-icons/iconfont/material-icons.css';
 import VueChartkick from 'vue-chartkick'
 
-import VueInternationalization from 'vue-i18n';
-import Locale from './vue-i18n-locales.generated';
+import VueInternationalization from 'vue-i18n'
+import Locale from './vue-i18n-locales.generated'
+import VueScrollTo from 'vue-scrollto'
 
 // must be before auth
 window.api = new Api()
@@ -69,7 +70,8 @@ Vue.use(VueChatScroll)
 Vue.use(Vuesax)
 // Vue.use(VueFrappe)
 Vue.use(VueChartkick)
-Vue.use(VueInternationalization);
+Vue.use(VueInternationalization)
+Vue.use(VueScrollTo)
 
 // register globally
 Vue.component('pagination', laravelVuePagination)

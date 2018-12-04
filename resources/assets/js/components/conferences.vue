@@ -11,7 +11,7 @@
                 <!-- <div class="conference-title-box mb-4">
                     <h2 class="font-weight-bold text-center">Συνεδριάσεις</h2>
                 </div> -->
-                <transition-group name="test" tag="div" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                <!-- <transition-group name="test" tag="div" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut"> -->
                 <!-- <transition-group name="fade" tag="div" class="trans-div"> -->
                     <!-- Period Mode -->
                     <div v-show="periodMode" key="period_mode" class="period-mode p-3 row">
@@ -71,7 +71,7 @@
                     <!-- End Period Mode -->
                     <div v-show="!periodMode" class="row pt-2 " key="conference_mode">
                         <div class="col-12 col-sm-6 col-md-6 col-lg-8">
-                            <div v-if="ajaxData.conferenceData.data.data && hasData && !search.hasData" class="p-4 bg-white conference-content-box"
+                            <div v-if="ajaxData.conferenceData.data.data && hasData && !search.hasData" class="p-4 conference-content-box"
                                 v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
                                 <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
                                     <h3>{{conference.conference_date}}</h3>
@@ -149,9 +149,11 @@
                                 </div>
                             </transition>
                             <div class="datepkr-toggle">
-                                <vs-switch color="#4896e5" v-model="isMultipleFilter">
-                                    <span slot="on" class="switch-font">{{ $t("conferences.datepicker.from_to") }}</span>
-                                    <span slot="off" class="switch-font">{{ $t("conferences.datepicker.date") }}</span>
+                                <vs-switch color="#4896e5" v-model="isMultipleFilter" class="switch-btn">
+                                    <!-- <span slot="on" class="switch-font">{{ $t("conferences.datepicker.from_to") }}</span> -->
+                                    <span slot="on" class="switch-font">Από έως</span>
+                                    <!-- <span slot="off" class="switch-font">{{ $t("conferences.datepicker.date") }}</span> -->
+                                    <span slot="off" class="switch-font">Ημερομηνία</span>
                                 </vs-switch>
                             </div>
                             <div v-if="isMultipleFilter">
@@ -181,7 +183,7 @@
                         </div>
                     </div>
                     
-                </transition-group>
+                <!-- </transition-group> -->
             </div>
             <div v-else>
                 <img :src=" 'img' + '/Spinner.gif' " class="m-auto d-block"/>
@@ -196,6 +198,10 @@
     $containerColor: white;
     $containerBoxColor: white;
     $contentBoxColor: #e6e6e6;
+
+    .switch-btn{
+        width: 130px!important;
+    }
 
     .conferences-container {
         background-color: $containerColor;
@@ -217,21 +223,24 @@
         text-align: initial;
         background-color: $containerBoxColor;
         /* margin: 15px 0 15px 0; */
+        transition: all .2s ease-in-out;
 
         .conference-link{
             display: block;
             color: inherit;
-            transition: all .2s ease-in-out;
+            // transition: color .2s ease-in-out;
         }
         .conference-link:hover{
-            color:#62b356;
+            // color:#62b356;
+            // color: #fff;
         }
     }
 
     .conference-content-box:hover {
-        cursor: hand;
         cursor: pointer;
         opacity: .9;
+        background-color: #62b356;
+        color: #fff;
     }
 
     .switch-font {
@@ -247,7 +256,8 @@
             position: relative;
             /* height: 200px; */
             width: inherit;
-            background: #fff;
+            // background: #fff;
+            background-color: #62b356;
             border: none;
             /* top: -30px;*/
             padding: 20px;
@@ -260,13 +270,13 @@
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
-            left: -20px;
+            // left: -20px;
         }
     }
 
     @media (min-width: 992px) {
         .conference-content-box:hover {
-            left: -20px;
+            // left: -20px;
         }
     }
 </style>

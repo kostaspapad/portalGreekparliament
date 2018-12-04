@@ -8,6 +8,8 @@ use DB;
 use App\Models\Speaker;
 use App\Models\Conference;
 use App\Helpers\ApiHelper;
+use App\Helpers\CacheExpiration;
+use Illuminate\Support\Facades\Cache;
 
 class ConferenceController extends Controller
 {
@@ -53,17 +55,23 @@ class ConferenceController extends Controller
     public function conferencesBySpeakerId($speaker_id) 
     {
         if(isset($speaker_id)){
-            $speaker_id = $this->apiHelper::test_input($speaker_id);
+            //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+            //CacheExpiration::checkCache('speaker_profile_conferences',true,0,$speaker_id,0,false);
+    
+            $cache_speaker_profile_conferences =  Cache::remember('speaker_profile_conferences-'.$speaker_id, CacheExpiration::expiration(720), function() use ($speaker_id) {
+                $speaker_id = $this->apiHelper::test_input($speaker_id);
 
-            $conferences = Conference::join('speeches' , 'speeches.speech_conference_date' , '=' , 'conferences.conference_date')
-                ->join('speakers' ,'speakers.speaker_id', '=','speeches.speaker_id')
-                ->where('speakers.speaker_id', '=', $speaker_id)
-                ->groupBy('conferences.conference_date')
-                ->orderBy('conferences.conference_date', 'desc')
-                ->select(['conferences.conference_date'])
-                ->get();
-            //dd($conferences);
-            return $this->apiHelper::returnResource('Conference', $conferences);
+                $conferences = Conference::join('speeches' , 'speeches.speech_conference_date' , '=' , 'conferences.conference_date')
+                    ->join('speakers' ,'speakers.speaker_id', '=','speeches.speaker_id')
+                    ->where('speakers.speaker_id', '=', $speaker_id)
+                    ->groupBy('conferences.conference_date')
+                    ->orderBy('conferences.conference_date', 'desc')
+                    ->select(['conferences.conference_date'])
+                    ->get();
+                //dd($conferences);
+                return $conferences;
+            });
+            return $this->apiHelper::returnResource('Conference', $cache_speaker_profile_conferences);
         }
     }
 

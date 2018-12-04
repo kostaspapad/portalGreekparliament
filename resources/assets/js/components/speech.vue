@@ -47,7 +47,7 @@
                             </router-link>
                         </div>
                     </div>
-                    <div v-if="speech" class="speech-link col-12 text-center">
+                    <div v-if="speech" class="speech-link col-12 text-center mt-2">
                         <router-link :to="/speech/ + speech_data.speech_id">
                             <h5>Μετάβαση στην ομιλία</h5>
                         </router-link>
@@ -135,7 +135,7 @@
         }
     }
     .speech_speaker_img{
-        border-radius: 60px;
+        border-radius: 50%;
         border: 2px solid #35495e;
         max-width: 60px !important;
     }
