@@ -17,47 +17,54 @@ class CreateSpeechesTable extends Migration
         if (!Schema::hasTable('speeches')) {
             if (Schema::hasTable('conferences')) {
                 if (Schema::hasTable('speakers')){
-                    Schema::create('speeches', function (Blueprint $table) {
-                        
-                        // Primary key
-                        $table->string('speech_id')->unique();
-                        $table->primary('speech_id');
+                    if (Schema::hasTable('parties')){
+                        Schema::create('speeches', function (Blueprint $table) {
+                            
+                            // Primary key
+                            $table->string('speech_id')->unique();
+                            $table->primary('speech_id');
 
-                        // Foreign key
-                        $table->date('speech_conference_date');
+                            // Foreign key
+                            $table->date('speech_conference_date');
 
-                        // Create index
-                        $table->index('speech_conference_date');
+                            // Create index
+                            $table->index('speech_conference_date');
 
-                        $table->foreign('speech_conference_date')
-                            ->references('conference_date')
-                            ->on('conferences');
-                            //->onDelete('set null');
+                            $table->foreign('speech_conference_date')
+                                ->references('conference_date')
+                                ->on('conferences');
+                                //->onDelete('set null');
 
-                        // Foreign key
-                        $table->string('speaker_id')->nullable();
-                        $table->foreign('speaker_id')
-                            ->references('speaker_id')
-                            ->on('speakers')
-                            ->onDelete('set null');
+                            // Foreign key
+                            $table->string('speaker_id')->nullable();
+                            $table->foreign('speaker_id')
+                                ->references('speaker_id')
+                                ->on('speakers')
+                                ->onDelete('set null');
 
-                        // Text
-                        $table->text('speech');
+                            $table->string('party_id');
 
-                        // Speech timestamp(when the speech parsed and inserted to db)
-                        $table->timestamps();
-                        
-                        // MD5 hash generated from the speech text
-                        $table->string('md5');
+                            // Text
+                            $table->text('speech');
 
-                        // Set db engine type
-                        $table->engine = 'InnoDB';
-                        $table->charset = 'utf8';
-                        $table->collation = 'utf8_unicode_ci';
-                    });
+                            // Speech timestamp(when the speech parsed and inserted to db)
+                            $table->timestamps();
+                            
+                            // MD5 hash generated from the speech text
+                            $table->string('md5');
 
-                    // Full Text Index
-                    DB::statement('ALTER TABLE portal.speeches ADD FULLTEXT (speech)');
+                            // Set db engine type
+                            $table->engine = 'InnoDB';
+                            $table->charset = 'utf8';
+                            $table->collation = 'utf8_unicode_ci';
+                        });
+
+                        // Full Text Index
+                        DB::statement('ALTER TABLE portal.speeches ADD FULLTEXT (speech)');
+                    } else {
+                        echo 'Parties table does not exist' . PHP_EOL;
+                        die;
+                    }        
 
                 } else {
                     echo 'Speakers table does not exist' . PHP_EOL;
