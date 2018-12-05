@@ -14,38 +14,8 @@ class Speech extends JsonResource
      */
     public function toArray($request)
     {
-        if (!isset($this->isFavorite)){
-            $this->isFavorite = NULL;
-        }
-        // return parent::toArray($request);
-        $arr = [
-            'speech_id' => $this->speech_id,
-            'speech_conference_date' => $this->speech_conference_date,
-            'speaker_id' => $this->speaker_id,
-            'speech' => $this->speech,
-            // 'f_name' => $this->f_name,
-            // 'created_at' => $this->created_at,
-            // 'updated_at' => $this->updated_at,
-            // 'md5' => $this->md5,
-            'speaker_id' => $this->speaker_id,
-            'english_name' => $this->english_name,
-            'greek_name' => $this->greek_name,
-            'image' => $this->image,
-            //'email' => $this->email,
-            // 'wiki_el' => $this->wiki_el,
-            // 'wiki_en' => $this->wiki_en,
-            // 'twitter' => $this->twitter,
-            // 'website' => $this->website,
-            'on_behalf_of_id' => $this->on_behalf_of_id,
-            'fullname_el' => $this->fullname_el,
-            'party_color' => $this->color,
-            'isFavorite' => $this->isFavorite,
-            'missing_prev' => $this->missing_prev
-        ];
-        
         // array_filter without second argument removes null elements of entry array
-        return array_filter((array) $arr);
-        
+        return array_filter((array) $this->resource);
     }
 
     /**

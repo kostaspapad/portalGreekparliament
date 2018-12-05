@@ -14,18 +14,8 @@ class Membership extends JsonResource
      */
     public function toArray($request)
     {
-        $arr = [
-            'area_id' => $this->area_id,
-            'legislative_period_id' => $this->legislative_period_id,
-            'on_behalf_of_id' => $this->on_behalf_of_id,
-            'organization_id' => $this->organization_id,
-            'role' => $this->role,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-        ];
-
         // array_filter without second argument removes null elements of entry array
-        return array_filter((array) $arr);
+        return array_filter((array) $this->resource);
     }
 
     /**
