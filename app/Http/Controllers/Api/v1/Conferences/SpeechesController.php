@@ -126,10 +126,6 @@ class SpeechesController extends Controller
                         ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
                         ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
                         ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
-                        ->leftJoin('favorites', function($join) use ($user_id){
-                            $join->on('favorites.speech_id', '=', 'speeches.speech_id')
-                                ->where('favorites.user_id', '=', $user_id);
-                        })
                         ->select([
                             'conf.conference_date', 
                             'sp.greek_name', 
