@@ -43,9 +43,6 @@ class SpeakersController extends Controller
             $current_page = 1;
         }
 
-        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
-        //CacheExpiration::checkCache('speakers',true,$current_page,0,0,true);
-
         // Query parameter validation
         if ($this->order_field && !in_array($this->order_field, $this->allowed_order_fields)){
             return ['Error' => 'Invalid order field'];
@@ -63,6 +60,9 @@ class SpeakersController extends Controller
                 $this->order_field = 'speakers.'.$this->order_field;
             }
         }
+
+        //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
+        //CacheExpiration::checkCache('speakers',true,$current_page,0,0,true);
 
         //use to have cache all the pages from pagination
         //if it's set it returns from cache else execute the code in function and then set the key to cache
@@ -121,40 +121,49 @@ class SpeakersController extends Controller
      */
     public function getSpeakerById($speaker_id)
     {
-        $speaker = Speaker::join(
-            DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
-                    FROM(
-                        SELECT
-                            person_id,
-                            MAX(start_date) AS start_date
-                            FROM
-                                memberships
-                            GROUP BY
-                                person_id
-                    ) r
-                    INNER JOIN memberships m
-                    ON m.start_date = r.start_date 
-                    AND m.person_id = r.person_id) AS m"), 'm.person_id', '=', 'speakers.speaker_id')
-            ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
-            ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
-            ->select([
-                'speakers.speaker_id', 
-                'speakers.english_name',
-                'speakers.greek_name',
-                'speakers.wiki_en',
-                'speakers.wiki_el',
-                'speakers.twitter',
-                'speakers.image',
-                'speakers.email',
-                'p.party_id',
-                'p.image as party_image',
-                'p.fullname_el',
-                'pc.color',
-            ])
-            ->where('speakers.speaker_id', '=', $speaker_id)
-            ->first();
+        //use to have cache all the pages from pagination
+        //if it's set it returns from cache else execute the code in function and then set the key to cache
 
-        return $this->apiHelper::returnResource('Speaker', $speaker);
+        //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
+        //CacheExpiration::checkCache('speaker',true,0,$speaker_id,0,false);
+        $cache_speaker = Cache::remember('speaker-'.$speaker_id, CacheExpiration::expiration(720), function() use ($speaker_id){
+            $speaker = Speaker::join(
+                DB::raw("(SELECT m.person_id, m.on_behalf_of_id, m.start_date
+                        FROM(
+                            SELECT
+                                person_id,
+                                MAX(start_date) AS start_date
+                                FROM
+                                    memberships
+                                GROUP BY
+                                    person_id
+                        ) r
+                        INNER JOIN memberships m
+                        ON m.start_date = r.start_date 
+                        AND m.person_id = r.person_id) AS m"), 'm.person_id', '=', 'speakers.speaker_id')
+                ->join('parties as p', 'p.party_id', '=', 'm.on_behalf_of_id')
+                ->join('party_colors as pc', 'pc.party_id', '=', 'p.party_id')
+                ->select([
+                    'speakers.speaker_id', 
+                    'speakers.english_name',
+                    'speakers.greek_name',
+                    'speakers.wiki_en',
+                    'speakers.wiki_el',
+                    'speakers.twitter',
+                    'speakers.image',
+                    'speakers.email',
+                    'p.party_id',
+                    'p.image as party_image',
+                    'p.fullname_el',
+                    'pc.color',
+                ])
+                ->where('speakers.speaker_id', '=', $speaker_id)
+                ->first();
+
+                return $speaker;
+            });
+
+        return $this->apiHelper::returnResource('Speaker', $cache_speaker);
     }
     
     /**

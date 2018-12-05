@@ -12,12 +12,12 @@
         /**
          * $key -> key of cache
          * $current_page -> pagination page
-         * $main_var -> used after key, such as speaker_id,speech_id etc... ,example: '$key-speaker_id'
+         * $no_pagination_var -> used after key, such as speaker_id,speech_id etc... ,example: '$key-speaker_id'
          * $middle_var -> used before current_page, example: '$key-$middle_var-$current_page'
          * $isPagination -> if it is pagination
          * 
          */
-        public static function checkCache($key,$seperator = false,$current_page,$main_var,$before_page,$isPagination = false){
+        public static function checkCache($key,$seperator = false,$current_page,$no_pagination_var,$before_page,$isPagination = false){
             $seperator_str = '-';
             echo "key -> $key ";
             if($isPagination){
@@ -43,9 +43,9 @@
                 }
             }else{
                 if($seperator){
-                    if($main_var){
-                        echo "\nmain_var -> $main_var";
-                        if (Cache::has($key.$seperator_str.$main_var)) {
+                    if($no_pagination_var){
+                        echo "\nno_pagination_var -> $no_pagination_var";
+                        if (Cache::has($key.$seperator_str.$no_pagination_var)) {
                             self::$isCacheSet = true;
                         }else{
                             self::$isCacheSet = false;

@@ -28,7 +28,7 @@ class PartiesController extends Controller
      */
     public function index()
     {
-        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+        //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
         //CacheExpiration::checkCache('parties',false,0,0,0,false);
 
         // Get parties

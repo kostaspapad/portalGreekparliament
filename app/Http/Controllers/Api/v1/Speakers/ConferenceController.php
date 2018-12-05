@@ -55,7 +55,7 @@ class ConferenceController extends Controller
     public function conferencesBySpeakerId($speaker_id) 
     {
         if(isset($speaker_id)){
-            //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+            //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
             //CacheExpiration::checkCache('speaker_profile_conferences',true,0,$speaker_id,0,false);
     
             $cache_speaker_profile_conferences =  Cache::remember('speaker_profile_conferences-'.$speaker_id, CacheExpiration::expiration(720), function() use ($speaker_id) {

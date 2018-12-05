@@ -29,7 +29,7 @@ class SpeakersController extends Controller {
         }else{
             $current_page = 1;
         }
-        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+        //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
         //CacheExpiration::checkCache('party_speakers',true,$current_page,0,$party_id,true);
     
         $cache_party_speakers =  Cache::remember('party_speakers-'.$party_id.'-'.$current_page, CacheExpiration::expiration(720), function() use ($party_id) {

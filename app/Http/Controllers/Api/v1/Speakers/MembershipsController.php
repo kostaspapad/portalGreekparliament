@@ -97,7 +97,7 @@ class MembershipsController extends Controller
     }
     public function membershipsTimelineBySpeakerId($speaker_id) 
     {
-        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+        //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
         //CacheExpiration::checkCache('membership_timeline',0,$speaker_id,0,false);
 
         $cache_membership_timeline =  Cache::remember('membership_timeline-'.$speaker_id, CacheExpiration::expiration(720), function() use ($speaker_id) {

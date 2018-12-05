@@ -62,7 +62,7 @@ class ConferencesController extends Controller
             $current_page = 1;
         }
 
-        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+        //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
         //CacheExpiration::checkCache('conferences',true,$current_page,0,0,true);
 
         $cache_conferences =  Cache::remember('conferences-'.$current_page, CacheExpiration::expiration(720), function() {
@@ -177,7 +177,7 @@ class ConferencesController extends Controller
                 $current_page = 1;
             }
     
-            //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+            //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
             //CacheExpiration::checkCache('conferences_time_periods_speeches',true,$current_page,$period,0,true);
     
             $cache_conferences_time_periods_speeches =  Cache::remember('conferences_time_periods_speeches-'.$period.'-'.$current_page, CacheExpiration::expiration(720), function() use ($period) {
@@ -210,7 +210,7 @@ class ConferencesController extends Controller
 
     public function getPartyCountByConference($conf_date)
     {
-        //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+        //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
         //CacheExpiration::checkCache('count_party_speeches',true,0,$conf_date,0,false);
         $cache_count_party_speeches =  Cache::remember('count_party_speeches-'.$conf_date, CacheExpiration::expiration(720), function() use ($conf_date) {
             $count_party_speeches = DB::select(
