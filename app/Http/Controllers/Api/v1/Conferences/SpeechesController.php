@@ -120,6 +120,8 @@ class SpeechesController extends Controller
                         )')
                         ->paginate(25);
                 } else {
+                    //GUEST USER
+                    
                     // One speaker can be in many parties (check it later)
                     $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                         ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
@@ -140,7 +142,6 @@ class SpeechesController extends Controller
                             'm.end_date',
                             'parties.fullname_el',
                             'party_colors.color',
-                            'favorites.isFavorite'
                         ])
                         ->orderBy('speeches.speech_id')
                         // ->groupBy('speeches.speech_id')
