@@ -14,8 +14,24 @@ class Speaker extends JsonResource
      */
     public function toArray($request)
     {
+        $arr = [
+            'speaker_id' => $this->speaker_id,
+            'english_name' => $this->english_name,
+            'greek_name' => $this->greek_name,
+            'image' => $this->image,
+            'party_image' => $this->party_image,
+            'email' => $this->email,
+            'wiki_el' => $this->wiki_el,
+            'wiki_en' => $this->wiki_en,
+            'twitter' => $this->twitter,
+            'website' => $this->website,
+            'party_id' => $this->party_id,
+            'party_fullname' => $this->fullname_el,
+            'color' => $this->color,
+        ];
+
         // array_filter without second argument removes null elements of entry array
-        return array_filter((array) $this->resource);
+        return array_filter((array) $arr);
     }
 
     /**

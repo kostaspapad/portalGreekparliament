@@ -42,7 +42,7 @@ class Speech extends JsonResource
         ];
         
         // array_filter without second argument removes null elements of entry array
-        return array_filter((array) $this->resource);
+        return array_filter((array) $arr);
     }
 
     /**

@@ -14,8 +14,13 @@ class Party extends JsonResource
      */
     public function toArray($request)
     {
-        // array_filter without second argument removes null elements of entry array
-        return array_filter((array) $this->resource);
+        return [
+            'party_id' => $this->party_id,
+            'fullname_el' => $this->fullname_el,
+            'fullname_en' => $this->fullname_en,
+            'image' => $this->image,
+            'url' => $this->url
+        ];
     }
 
     /**
