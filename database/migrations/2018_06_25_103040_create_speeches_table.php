@@ -43,6 +43,10 @@ class CreateSpeechesTable extends Migration
                                 ->onDelete('set null');
 
                             $table->string('party_id');
+                            $table->foreign('party_id')
+                                ->references('party_id')
+                                ->on('parties')
+                                ->onDelete('set null');
 
                             // Text
                             $table->text('speech');
