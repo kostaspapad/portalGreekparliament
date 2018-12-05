@@ -56,66 +56,9 @@ class SpeechesController extends Controller
                 $current_page = $_GET['page'];
             }else{
                 $current_page = 1;
-            // Convert string to date object
-            $date = date($date);
-            if ($user) {
-                
-                $user_id = $user->id;
-                
-                // One speaker can be in many parties (check it later)
-                $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
-                    ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                    ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
-                    ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
-                    ->leftJoin('favorites', function($join) use ($user_id){
-                        $join->on('favorites.speech_id', '=', 'speeches.speech_id')
-                             ->where('favorites.user_id', '=', $user_id);
-                    })
-                    ->select([
-                        'conf.conference_date', 
-                        'sp.greek_name', 
-                        'sp.english_name',
-                        'sp.speaker_id', 
-                        'speeches.speech_id', 
-                        'speeches.speech',
-                        'speeches.party_id', 
-                        'sp.image', 
-                        'parties.fullname_el',
-                        'party_colors.color',
-                        'favorites.isFavorite'
-                    ])
-                    ->groupBy('speeches.speech_id')
-                    ->where([
-                        ['conf.conference_date', '=', $date]
-                    ])
-                    ->paginate(25);
-                
-            } else {
-                // One speaker can be in many parties (check it later)
-                $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
-                    ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                    ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
-                    ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
-                    ->select([
-                        'conf.conference_date', 
-                        'sp.greek_name', 
-                        'sp.english_name',
-                        'sp.speaker_id', 
-                        'speeches.speech_id', 
-                        'speeches.speech', 
-                        'speeches.party_id',
-                        'sp.image', 
-                        'parties.fullname_el',
-                        'party_colors.color'
-                    ])
-                    ->groupBy('speeches.speech_id')
-                    ->where([
-                        ['conf.conference_date', '=', $date],
-                    ])
-                    ->paginate(25);
             }
-
-            //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
+            
+            //check if cache is set or not ($key,$seperator,$current_page,$no_pagination_var,$before_page,$isPagination)
             //CacheExpiration::checkCache('conference_speeches',true,$current_page,0,$date,true);
             $cache_conference_speeches =  Cache::remember('conference_speeches-'.$date.'-'.$current_page, CacheExpiration::expiration(720), function() use ($date,$user) {
                 // Convert string to date object
