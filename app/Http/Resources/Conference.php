@@ -14,24 +14,8 @@ class Conference extends JsonResource
      */
     public function toArray($request)
     {
-        $arr = [
-            'id' => $this->id,
-            'conference_date' => $this->conference_date,
-            'conference_indicator' => $this->conference_indicator,
-            'doc_location' => $this->doc_location,
-            'doc_name' => $this->doc_name,
-            'video_link' => $this->video_link,
-            'session' => $this->session,
-            'date_of_crawl' => $this->date_of_crawl,
-            'pdf_loc' => $this->pdf_loc,
-            'pdf_name' => $this->pdf_name,
-            'time_period' => $this->time_period,
-            // 'downloaded' => $this->downloaded
-            'speeches_count' => $this->speeches_count
-        ];
-        
         // array_filter without second argument removes null elements of entry array
-        return array_filter((array) $arr);
+        return array_filter((array) $this->resource);
     }
 
     /**

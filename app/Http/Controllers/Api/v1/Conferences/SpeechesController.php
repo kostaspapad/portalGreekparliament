@@ -116,7 +116,7 @@ class SpeechesController extends Controller
             }
 
             //check if cache is set or not ($key,$seperator,$current_page,$main_var,$before_page,$isPagination)
-           // CacheExpiration::checkCache('conference_speeches',true,$current_page,$date,0,true);
+            //CacheExpiration::checkCache('conference_speeches',true,$current_page,0,$date,true);
             $cache_conference_speeches =  Cache::remember('conference_speeches-'.$date.'-'.$current_page, CacheExpiration::expiration(720), function() use ($date,$user) {
                 // Convert string to date object
                 $date = date($date);
@@ -140,20 +140,45 @@ class SpeechesController extends Controller
                             'sp.english_name',
                             'sp.speaker_id', 
                             'speeches.speech_id', 
-                            'speeches.speech', 
+                            'speeches.speech',
+                            'speeches.speech_conference_date',
                             'sp.image', 
-                            'm.on_behalf_of_id', 
+                            'm.on_behalf_of_id',
+                            'm.start_date',
+                            'm.end_date',
                             'parties.fullname_el',
                             'party_colors.color',
                             'favorites.isFavorite'
                         ])
-                        ->groupBy('speeches.speech_id')
+                        ->orderBy('speeches.speech_id')
+                        // ->groupBy('speeches.speech_id')
                         ->where([
                             ['conf.conference_date', '=', $date]
-                        ])
+                        ]);
+                        // ->paginate(25);
+
+                        $speeches = DB::table( DB::raw("({$speeches->toSql()}) as all_speeches"))
+                        ->mergeBindings($speeches->getQuery()) 
+                        ->whereRaw('all_speeches.fullname_el = IF(
+                            #if conf_date is between range return the party
+                            (all_speeches.conference_date >= all_speeches.start_date AND all_speeches.conference_date <= all_speeches.end_date),
+                            #then
+                            all_speeches.fullname_el
+                            ,
+                            #else if not in range check if conf_date is greater then start_date and end_date is NULL
+                            #if true return party
+                            IF( 
+                                (all_speeches.conference_date >= all_speeches.start_date AND all_speeches.end_date IS NULL)
+                                #then
+                                ,all_speeches.fullname_el
+                                #else
+                                ,NULL
+                            )
+                        )')
                         ->paginate(25);
-                    
                 } else {
+                    //GUEST USER
+                    
                     // One speaker can be in many parties (check it later)
                     $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                         ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
@@ -166,27 +191,51 @@ class SpeechesController extends Controller
                             'sp.english_name',
                             'sp.speaker_id', 
                             'speeches.speech_id', 
-                            'speeches.speech', 
+                            'speeches.speech',
+                            'speeches.speech_conference_date',
                             'sp.image', 
-                            'm.on_behalf_of_id', 
+                            'm.on_behalf_of_id',
+                            'm.start_date',
+                            'm.end_date',
                             'parties.fullname_el',
                             'party_colors.color'
                         ])
-                        ->groupBy('speeches.speech_id')
+                        ->orderBy('speeches.speech_id')
+                        // ->groupBy('speeches.speech_id')
                         ->where([
-                            ['conf.conference_date', '=', $date],
-                        ])
+                            ['conf.conference_date', '=', $date]
+                        ]);
+                        // ->paginate(25);
+
+                        $speeches = DB::table( DB::raw("({$speeches->toSql()}) as all_speeches"))
+                        ->mergeBindings($speeches->getQuery()) 
+                        ->whereRaw('all_speeches.fullname_el = IF(
+                            #if conf_date is between range return the party
+                            (all_speeches.conference_date >= all_speeches.start_date AND all_speeches.conference_date <= all_speeches.end_date),
+                            #then
+                            all_speeches.fullname_el
+                            ,
+                            #else if not in range check if conf_date is greater then start_date and end_date is NULL
+                            #if true return party
+                            IF( 
+                                (all_speeches.conference_date >= all_speeches.start_date AND all_speeches.end_date IS NULL)
+                                #then
+                                ,all_speeches.fullname_el
+                                #else
+                                ,NULL
+                            )
+                        )')
                         ->paginate(25);
                 }
 
                 //check if is there a missing speech
                 $speeches->transform(function ($item, $key) {
                     $currentLast3Chars = substr($item->speech_id, -3);
-                    $res = $currentLast3Chars + 001; //is integer
+                    //$res = $currentLast3Chars + 001; //is integer
                     if($this->prev_speech_id){
                         //if id is the next one ex: 000 -> 001
                         if($this->prev_speech_id + 001 == $currentLast3Chars){
-                        
+                            $item->missing_prev = false;
                         }else{
                             $item->missing_prev = true;
                         }
@@ -195,6 +244,7 @@ class SpeechesController extends Controller
                         return $item;
                     }else{
                         $this->prev_speech_id = $currentLast3Chars;
+                        $item->missing_prev = false;
                         //must return the current object
                         return $item;
                     }
@@ -202,7 +252,7 @@ class SpeechesController extends Controller
 
                 return $speeches;
             });
-           // dd($speeches);
+            //dd($speeches);
 
             return $this->apiHelper::returnResource('Speech', $cache_conference_speeches);
         }

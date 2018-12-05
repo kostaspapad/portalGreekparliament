@@ -218,28 +218,47 @@ class ConferencesController extends Controller
                     conf_speeches.conference_date AS conference_date,
                     conf_speeches.on_behalf_of_id AS on_behalf_of_id,
                     conf_speeches.fullname_el AS fullname_el,
-                    conf_speeches.color AS color,
+                    conf_speeches.greek_name,
+                    conf_speeches.color,
                     COUNT(conf_speeches.on_behalf_of_id) AS party_count
                 FROM
                     (SELECT 
-                        conf.conference_date AS conference_date,
-                            m.on_behalf_of_id AS on_behalf_of_id,
-                            portal.parties.fullname_el AS fullname_el,
-                            portal.party_colors.color AS color
+                        conferences.conference_date AS conference_date,
+                        memberships.on_behalf_of_id AS on_behalf_of_id,
+                        speakers.greek_name,
+                        memberships.start_date,
+                        memberships.end_date,
+                        parties.fullname_el AS fullname_el,
+                        party_colors.color
                     FROM
-                        (((((portal.speeches
-                    JOIN portal.conferences conf ON (conf.conference_date = portal.speeches.speech_conference_date))
-                    JOIN portal.speakers sp ON (sp.speaker_id = portal.speeches.speaker_id))
-                    JOIN portal.memberships m ON (sp.speaker_id = m.person_id))
-                    JOIN portal.parties ON (portal.parties.party_id = m.on_behalf_of_id))
-                    JOIN portal.party_colors ON (portal.parties.party_id = portal.party_colors.party_id))
-                    WHERE conf.conference_date = :conf_date1
-                    GROUP BY portal.speeches.speech_id) conf_speeches
-                WHERE conference_date = :conf_date2
-                GROUP BY conf_speeches.conference_date , conf_speeches.on_behalf_of_id', [
-                    'conf_date1' => $conf_date,
-                    'conf_date2' => $conf_date
-                ]);
+                        speeches
+                    INNER JOIN conferences ON conferences.conference_date = speeches.speech_conference_date
+                    INNER JOIN speakers ON speakers.speaker_id = speeches.speaker_id
+                    INNER JOIN memberships ON speakers.speaker_id = memberships.person_id
+                    INNER JOIN parties ON parties.party_id = memberships.on_behalf_of_id
+                    INNER JOIN party_colors ON party_colors.party_id = parties.party_id
+                    WHERE
+                        conferences.conference_date = :conf_date
+                    ORDER BY speeches.speech_id
+                    ) conf_speeches
+                    WHERE conf_speeches.fullname_el = IF(
+                                #if conf_date is between range return the party
+                                (conf_speeches.conference_date >= conf_speeches.start_date AND conf_speeches.conference_date <= conf_speeches.end_date),
+                                #then
+                                conf_speeches.fullname_el
+                                ,
+                                #else if not in range check if conf_date is greater then start_date and end_date is NULL
+                                #if true return party
+                                IF( 
+                                    (conf_speeches.conference_date >= conf_speeches.start_date AND conf_speeches.end_date IS NULL)
+                                    #then
+                                    ,conf_speeches.fullname_el
+                                    #else
+                                    ,NULL
+                                )
+                            )
+                    GROUP BY conf_speeches.conference_date , conf_speeches.on_behalf_of_id',['conf_date' => $conf_date]
+                );
             
             return $count_party_speeches;
         });
