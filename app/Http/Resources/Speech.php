@@ -14,6 +14,9 @@ class Speech extends JsonResource
      */
     public function toArray($request)
     {
+        if (!isset($this->isFavorite)){
+            $this->isFavorite = NULL;
+        }
         // return parent::toArray($request);
         $arr = [
             'speech_id' => $this->speech_id,

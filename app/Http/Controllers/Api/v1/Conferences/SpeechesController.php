@@ -141,7 +141,7 @@ class SpeechesController extends Controller
                             'm.start_date',
                             'm.end_date',
                             'parties.fullname_el',
-                            'party_colors.color',
+                            'party_colors.color'
                         ])
                         ->orderBy('speeches.speech_id')
                         // ->groupBy('speeches.speech_id')
