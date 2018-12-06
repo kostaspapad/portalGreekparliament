@@ -71,7 +71,7 @@ class SpeechesController extends Controller
                     $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                         ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
                         ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                        ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
+                        ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
                         ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
                         ->leftJoin('favorites', function($join) use ($user_id){
                             $join->on('favorites.speech_id', '=', 'speeches.speech_id')
@@ -89,6 +89,7 @@ class SpeechesController extends Controller
                             'm.on_behalf_of_id',
                             'm.start_date',
                             'm.end_date',
+                            'speeches.party_id',
                             'parties.fullname_el',
                             'party_colors.color',
                             'favorites.isFavorite'
@@ -97,28 +98,9 @@ class SpeechesController extends Controller
                         // ->groupBy('speeches.speech_id')
                         ->where([
                             ['conf.conference_date', '=', $date]
-                        ]);
-                        // ->paginate(25);
-
-                        $speeches = DB::table( DB::raw("({$speeches->toSql()}) as all_speeches"))
-                        ->mergeBindings($speeches->getQuery()) 
-                        ->whereRaw('all_speeches.fullname_el = IF(
-                            #if conf_date is between range return the party
-                            (all_speeches.conference_date >= all_speeches.start_date AND all_speeches.conference_date <= all_speeches.end_date),
-                            #then
-                            all_speeches.fullname_el
-                            ,
-                            #else if not in range check if conf_date is greater then start_date and end_date is NULL
-                            #if true return party
-                            IF( 
-                                (all_speeches.conference_date >= all_speeches.start_date AND all_speeches.end_date IS NULL)
-                                #then
-                                ,all_speeches.fullname_el
-                                #else
-                                ,NULL
-                            )
-                        )')
+                        ])
                         ->paginate(25);
+
                 } else {
                     //GUEST USER
                     
@@ -126,7 +108,7 @@ class SpeechesController extends Controller
                     $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                         ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
                         ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                        ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
+                        ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
                         ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
                         ->select([
                             'conf.conference_date', 
@@ -139,35 +121,16 @@ class SpeechesController extends Controller
                             'sp.image', 
                             'm.on_behalf_of_id',
                             'm.start_date',
+                            'speeches.party_id',
                             'm.end_date',
                             'parties.fullname_el',
                             'party_colors.color'
                         ])
                         ->orderBy('speeches.speech_id')
-                        // ->groupBy('speeches.speech_id')
+                        ->groupBy('speeches.speech_id')
                         ->where([
                             ['conf.conference_date', '=', $date]
-                        ]);
-                        // ->paginate(25);
-
-                        $speeches = DB::table( DB::raw("({$speeches->toSql()}) as all_speeches"))
-                        ->mergeBindings($speeches->getQuery()) 
-                        ->whereRaw('all_speeches.fullname_el = IF(
-                            #if conf_date is between range return the party
-                            (all_speeches.conference_date >= all_speeches.start_date AND all_speeches.conference_date <= all_speeches.end_date),
-                            #then
-                            all_speeches.fullname_el
-                            ,
-                            #else if not in range check if conf_date is greater then start_date and end_date is NULL
-                            #if true return party
-                            IF( 
-                                (all_speeches.conference_date >= all_speeches.start_date AND all_speeches.end_date IS NULL)
-                                #then
-                                ,all_speeches.fullname_el
-                                #else
-                                ,NULL
-                            )
-                        )')
+                        ])
                         ->paginate(25);
                 }
 
