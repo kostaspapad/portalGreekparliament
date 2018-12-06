@@ -95,7 +95,7 @@ class SpeechesController extends Controller
                             'favorites.isFavorite'
                         ])
                         ->orderBy('speeches.speech_id')
-                        // ->groupBy('speeches.speech_id')
+                        ->groupBy('speeches.speech_id')
                         ->where([
                             ['conf.conference_date', '=', $date]
                         ])
