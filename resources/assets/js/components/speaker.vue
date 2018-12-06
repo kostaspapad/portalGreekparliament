@@ -51,7 +51,8 @@
                         <vs-tab vs-label="Ομιλίες">
                             <div id="top_of_periods"></div>
                             <div v-if="showLinks" class="row period-mode">
-                                <div class="conf-links col-12 col-sm-3 col-md-3 col-lg-2 mt-3" id="conf-links">
+                                <div v-if="!period.has_conf_dates" class="conf-period-title text-center w-100"><h3>Δεν υπάρχουν διαθέσιμες συνεδριάσεις.</h3></div>
+                                <div v-if="period.has_conf_dates" class="conf-links col-12 col-sm-3 col-md-3 col-lg-2 mt-3" id="conf-links">
                                     <h6 class="conf-period-title d-none d-sm-block">Συνεδριάσεις</h6>
                                     <h6 class="conf-period-title text-center d-block d-sm-none">Συνεδριάσεις</h6>
                                     <!-- Conferences dates -->
@@ -396,6 +397,7 @@
                 },
                 period: {
                     ajaxDone: false,
+                    has_conf_dates: false,
                     selected_period: null,
                     selected_period_hasData: false,
                     current_period_page: 0,
@@ -533,8 +535,10 @@
                                 // this.noDataSpeeches = false
                                 this.ajaxData.conferences.linksData = response.data.data
                                 this.ajaxData.isLoaded = true
+                                this.period.has_conf_dates = true
                             } else {
                                 // this.noDataSpeeches = true
+                                this.period.has_conf_dates = false
                             }
                             this.period.ajaxDone = true
                             // this.ajaxDoneSpeeches = true
