@@ -93,7 +93,32 @@ class SpeechesController extends Controller
                 // ->orWhere('favorites.speech_id', '=', NULL)
                 // ->orWhere('favorites.speech_id', '!=', NULL)
                 ->first();
-        } 
+        }else{
+            // One speaker can be in many parties (check it later)
+            $speech = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
+                ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
+                ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
+                ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
+                ->select([
+                    'conf.conference_date', 
+                    'sp.greek_name', 
+                    'sp.english_name', 
+                    'speeches.speech_id', 
+                    'speeches.speech', 
+                    'sp.image', 
+                    'speeches.party_id', 
+                    'parties.fullname_el',
+                    'party_colors.color'
+                ])
+                ->groupBy('speeches.speech_id')
+                ->where([
+                    ['speeches.speech_id', '=', $id]
+                    //,['favorites.user_id', '=', $user->id]
+                ])
+                // ->orWhere('favorites.speech_id', '=', NULL)
+                // ->orWhere('favorites.speech_id', '!=', NULL)
+                ->first();
+        }
         
         return $this->apiHelper::returnResource('Speech', $speech);
     }
