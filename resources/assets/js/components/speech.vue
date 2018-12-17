@@ -135,8 +135,8 @@
         }
     }
     .speech_speaker_img{
-        border-radius: 50%;
-        border: 2px solid #35495e;
+        /*border-radius: 50%;
+        border: 2px solid #35495e;*/
         max-width: 60px !important;
     }
     .speech-container-options {
