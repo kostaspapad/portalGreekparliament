@@ -136,7 +136,7 @@
             findParty() {
                 var self = this
 
-                axios.get(self.$root.host+'/api/v1/parties/search/'+self.search_msg)
+                axios.get(this.api_path + 'parties/search/' + self.search_msg)
                 .then(function(response) {
                     if (response.status == 200) {
                         self.ajaxData.partiesData = response
@@ -178,7 +178,7 @@
                 this.loading = true
 
                 setTimeout( () => {
-                    axios.get(this.$root.host+'/api/v1/parties')
+                    axios.get(this.api_path + 'parties')
                     .then(function(response){
                         if(response.status == 200 && response.data.data){
                             self.loading = false
@@ -198,6 +198,10 @@
             },
         },
         computed:{
+            ...mapGetters({
+                api_path: 'get_api_path'
+                // speech_comments: 'get_conference_speech_comments'
+            }),
             // is_search_msg_empty(){
                 // //when search_msg is empty return true to show the initial "data"
                 // if (this.search_msg.length > 0) {

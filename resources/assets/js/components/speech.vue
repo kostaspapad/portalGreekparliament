@@ -248,7 +248,7 @@
                         speech_id: this.speech_data.speech_id,
                         issue: this.report_text
                     }
-                    api.call('post',this.api_path + 'reports/create',data)
+                    api.call('post', this.api_path + 'reports/create',data)
                     .then( data => {
                         if(data.data.msg == "Report Submitted" && data.statusText == "Created" && data.status == 201){
                             this.closeModal()
@@ -289,9 +289,11 @@
             startInterval: function(newVal) {
                 if(newVal){
                     this.$options.interval = setInterval( () => {
-                        let data = {data: this.$route.params.speech_id, choice: 'single_speech'}
+                        let data = { 
+                            data: this.$route.params.speech_id, choice: 'single_speech' 
+                        }
                         this.GET_COMMENTS_CONFERENCE(data)
-                    },60000)
+                    }, 60000)
                 }
             }
         },
@@ -299,14 +301,16 @@
             if(!this.speech){
                 api.call('get', this.api_path + 'speech/' + this.$route.params.speech_id)
                 .then( data => {
-                    if( data.status == 200 && data.statusText == "OK" && data.data ){
+                    if( data.status == 200 && data.statusText == "OK" && data.data ) {
                         this.speech_data = data.data.data
                         this.isDone = true
                         this.singleSpeech = true
                     }
                 })
                  if(this.user){
-                    let data = {data: this.$route.params.speech_id, choice: 'single_speech'}
+                    let data = {
+                        data: this.$route.params.speech_id, choice: 'single_speech'
+                    }
                     this.GET_COMMENTS_CONFERENCE(data)
                     this.startInterval = true
                 }

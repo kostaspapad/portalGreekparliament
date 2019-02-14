@@ -175,7 +175,7 @@
             findSpeaker() {
                 var self = this;
 
-                axios.get(this.api_path+'speakers/search/'+self.search_msg)
+                axios.get(this.api_path + 'speakers/search/' + self.search_msg)
                 .then(function(response){
                     if (response.status == 200 && response.data.data.length > 0) {
                         self.ajaxData.search_data = response;
@@ -210,7 +210,9 @@
                 this.loading = true
 
                 setTimeout( () => {
-                    axios.get(this.api_path+'speakers?order_field='+this.order_field+'&orientation='+this.order_orientation)
+                    axios.get(this.api_path + 'speakers?order_field=' + 
+                              this.order_field + '&orientation=' + 
+                              this.order_orientation)
                     .then(function(response){
                         if(response.status == 200 && response.data.data){
                             self.loading = false

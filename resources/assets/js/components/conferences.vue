@@ -514,9 +514,9 @@
             },
             getConferencesByPeriod(period){
                 this.period.ajaxDone = false
-                if(this.period.selected_period == period.time_period){
+                if (this.period.selected_period == period.time_period) {
                     //if it's the same as the previous don't make a call to server
-                }else{
+                } else {
                     this.period.selected_period = period.time_period
                     setTimeout(() => {
                         let url = null
@@ -524,10 +524,10 @@
                         api.call('get',this.api_path + url)
                         .then( response => {
                             if (response.status == 200 && response.statusText == "OK") {
-                                if(response.data.data.length > 0){
+                                if (response.data.data.length > 0) {
                                     this.period.selected_period_hasData = true
                                     this.period.conferences = response
-                                }else{
+                                } else {
                                     this.period.selected_period_hasData = false
                                 }
                             }

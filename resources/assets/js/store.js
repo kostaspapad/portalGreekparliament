@@ -22,7 +22,9 @@ export default new Vuex.Store({
             }
         },
         GET_PATH: state => {
-            state.api_path = process.env.NODE_ENV == 'production' ? 'https://greekparliament.info/api/v1/' : 'http://127.0.0.1:8000/api/v1/'
+            // state.api_path =  process.env.NODE_ENV == 'production' ? 'https://greekparliament.info/api/v1/' : 'http://127.0.0.1:8000/api/v1/'
+            state.api_path =  '/api/v1/'
+            // state.api_path = '/api/v1/'
         },
         SAVE_CONFERENCE_SPEECH_COMMENTS: (state,comments) => {
             state.conference_speech_comments = comments
@@ -42,7 +44,7 @@ export default new Vuex.Store({
                     }
                 })
             }else if(argument.choice == 'single_speech'){
-                //to show only comment of one speech
+                //to show only ciomment of one speech
                 api.call('get', context.state.api_path + 'comments/speech/' + argument.data)
                 .then(  data => {
                     if( data.data && data.statusText == "OK" && data.status == 200 ){

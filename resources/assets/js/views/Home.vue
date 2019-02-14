@@ -1,7 +1,7 @@
 <template>
-    <div class="container-imagebox" style="margin-top: -2rem;">
-        <div class="row" style="margin-right: 0;">
-            <div class="image-container col-12 col-sm-6 col-md-4" style="    padding-left: 20px;">
+    <div class="container-imagebox">
+        <div class="row" style="">
+            <div class="image-container col-12 col-sm-6 col-md-4" >
                 <img src="/img/mainpage_logo.png" class="img-fluid">
                 <div>
                     <h3 class="image-text">Αναζήτηση ομιλητή</h3>

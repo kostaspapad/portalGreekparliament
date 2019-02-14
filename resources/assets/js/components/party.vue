@@ -221,7 +221,7 @@
             },
             changePage(page) {
                 var self = this;
-                axios.get(this.api_path+'party/'+this.ajaxData.partyData.data.data.party_id+'/speakers?page='+page)
+                axios.get(this.api_path + 'party/' + this.ajaxData.partyData.data.data.party_id + '/speakers?page=' + page)
                 .then(function(response) {
                     self.ajaxData.speakersData = response;
                 })
@@ -230,7 +230,7 @@
                 var self = this;
 
                 setTimeout(() => {
-                    api.call('get', this.api_path+'speeches/party/party_id/'+this.finalName)
+                    api.call('get', this.api_path + 'speeches/party/party_id/' + this.finalName)
                         .then(function (response) {
                             if (response.status == 200) {
                                 self.noDataSpeeches = false
@@ -248,7 +248,7 @@
                 var self = this
 
                 setTimeout(() => {
-                    api.call('get', this.api_path+'party/name/'+this.finalName)
+                    api.call('get', this.api_path + 'party/name/' + this.finalName)
                         .then(function (response) {
                             if (response.status == 200) {
                                 self.noDataParty = false
@@ -268,7 +268,7 @@
                 var self = this
 
                 setTimeout(() => {
-                    api.call('get', this.api_path+'party/'+this.ajaxData.partyData.data.data.party_id+'/speakers')
+                    api.call('get', this.api_path + 'party/' + this.ajaxData.partyData.data.data.party_id + '/speakers')
                         .then(function (response) {
                             if (response.status == 200) {
                                 self.noDataSpeakers = false

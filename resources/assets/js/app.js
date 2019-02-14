@@ -35,6 +35,8 @@ import Vuesax from 'vuesax'
 import speakers from './components/speakers.vue'
 import parties from './components/parties.vue'
 import party from './components/party.vue'
+import navbar from './components/navbar.vue'
+import foot from './components/foot.vue'
 import speaker from './components/speaker.vue'
 import conferences from './components/conferences.vue'
 import conference from './components/conference.vue'
@@ -56,6 +58,8 @@ import VueChartkick from 'vue-chartkick'
 import VueInternationalization from 'vue-i18n'
 import Locale from './vue-i18n-locales.generated'
 import VueScrollTo from 'vue-scrollto'
+import vSelect from 'vue-select'
+import InputTag from 'vue-input-tag'
 
 // must be before auth
 window.api = new Api()
@@ -72,15 +76,19 @@ Vue.use(Vuesax)
 Vue.use(VueChartkick)
 Vue.use(VueInternationalization)
 Vue.use(VueScrollTo)
+Vue.component('v-select', vSelect)
+Vue.component('input-tag', InputTag)
 
 // register globally
 Vue.component('pagination', laravelVuePagination)
-// Vue.component('navbar', navbar)
+Vue.component('search', search)
+Vue.component('navbar', navbar)
 Vue.component('parties', parties)
 Vue.component('party', party)
 Vue.component('speakers', speakers)
 Vue.component('speaker', speaker)
 Vue.component('conferences', conferences)
+Vue.component('foot', foot)
 Vue.component('conference', conference)
 Vue.component('custom-multiselect', MultiSelect)
 Vue.component('datepicker', datepicker)
@@ -96,6 +104,7 @@ Vue.component('pie-chart', PieChart)
 Vue.component('modal', Modal)
 Vue.component('expand-table-data', DashboardTableBody)
 Vue.component('transition-expand', TransitionExpand)
+
 
 //filters
 Vue.filter('capitalize', function (value) {
@@ -119,7 +128,8 @@ const i18n = new VueInternationalization({
     messages: Locale
 });
 
-
+// process.env.NODE_ENV == 'production' ? Vue.config.devtools = false  : Vue.config.devtools = true 
+Vue.config.performance = process.env.NODE_ENV !== 'production'
 const app = new Vue({
     el: '#app',
     router,
@@ -130,6 +140,6 @@ const app = new Vue({
         this.$store.commit('GET_PATH')
 	},
     data: {
-        host: process.env.NODE_ENV == 'production' ? 'https://greekparliament.info' : 'http://127.0.0.1:8000'
+        host: process.env.NODE_ENV == 'production' ? 'greekparliament.info' : 'http://127.0.0.1:8000'
     }
 })

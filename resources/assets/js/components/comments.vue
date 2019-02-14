@@ -75,7 +75,7 @@
                     speech_id: this.speech_id,
                     comment: this.comment
                 };
-                api.call('post',this.api_path + 'comments/create',data)
+                api.call('post', this.api_path + 'comments/create',data)
                 .then( data => {
                     if(data.data.msg == "Comment Sent" && data.statusText == "Created" && data.status == 201){
                         this.clearVariables()

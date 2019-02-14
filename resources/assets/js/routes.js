@@ -56,6 +56,10 @@ let routes = [
     {
         path: '/contact',
         component: require('./views/Contact.vue')
+    },
+    {
+        path: '/search',
+        component: require('./components/search.vue')
     }
     // {
     //     path: '/donate',
