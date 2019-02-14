@@ -7,24 +7,24 @@
                     <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
                     <div>{{ajaxData.conferenceInfo.data.data.time_period}} Περίοδος</div>
                 </div>
-                <!-- Scroll to top btn -->
-                <div class="scroll-btn conf-scroll-btn-pos">
-                    <a href="#" v-scroll-to=" {
-                            el: '#search-input',
-                            duration: 800,
-                            offset: -100,
-                            easing: 'linear',
-                            force: true,
-                            x: false,
-                            y: true
-                        } 
-                    ">
-                        <i class="fas fa-chevron-circle-up"></i>
-                    </a>
-                </div>
-                <!-- End of scroll to top btn -->
                 <vs-tabs color='#007bff'>
                     <vs-tab vs-label="Συνδεδρίαση">
+                        <!-- Scroll to top btn -->
+                        <div class="scroll-btn conf-scroll-btn-pos">
+                            <a href="#" v-scroll-to=" {
+                                    el: '#search-input',
+                                    duration: 800,
+                                    offset: -100,
+                                    easing: 'linear',
+                                    force: true,
+                                    x: false,
+                                    y: true
+                                } 
+                            ">
+                                <i class="fas fa-chevron-circle-up"></i>
+                            </a>
+                        </div>
+                        <!-- End of scroll to top btn -->
                         <div class="row w-100">
                             <div class="col-12 pt-3">
                                 <span class="documents-links" v-if="ajaxData.conferenceInfo">
