@@ -47,11 +47,11 @@
                             </router-link>
                         </div>
                     </div>
-                    <div v-if="speech" class="speech-link col-12 text-center mt-2">
+                    <!-- <div v-if="speech" class="speech-link col-12 text-center mt-2">
                         <router-link :to="/speech/ + speech_data.speech_id">
-                            <h5>Μετάβαση στην ομιλία</h5>
+                            <h5>Μετάβαση στην ομιλία</h5><span class="fa fa-share"></span>
                         </router-link>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="speech-container-speech ml-2 pt-2" style="white-space: pre-line;">
                     <read-more more-str="περισσότερα" :text="speech_data.speech" link="#" less-str="λιγότερα" :max-chars="2000"></read-more>
@@ -91,12 +91,12 @@
                     </transition>
                     <!-- End of Comments -->
                     <!-- Modal -->
-                    <modal v-if="showModal" title="Make a report" @close="closeModal" isLarge="true">
+                    <modal v-if="showModal" title="Αναφορά" @close="closeModal" isLarge="true">
                         <slot>
                             <div class="modal-report-area">
                                 <TextareaAutogrow 
                                     v-model="report_text"
-                                    placeholder="Type your report"
+                                    placeholder=""
                                     classes="form-control form-control-line textarea"
                                 />
                                 <div class="mt-2 text-right">
@@ -114,12 +114,19 @@
     </div>
 </template>
 <style lang="scss" scoped>
+    a {
+        color: #1b1b1b;
+    }
     .speech-container {
         text-align: left;
+        
     }
     .speech-data-container {
-        background-color: ghostwhite;
-        border-radius: 5px;
+        background-color: #fff;
+        color: #373737;
+        box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px
+        rgba(10,10,10,.1);
+        
     }
     @media only screen and (min-width: 550px) {
         .speech-data-container {
@@ -135,8 +142,8 @@
         }
     }
     .speech_speaker_img{
-        /*border-radius: 50%;
-        border: 2px solid #35495e;*/
+        border-radius: 5%;
+        // border: 1px solid #35495e;
         max-width: 60px !important;
     }
     .speech-container-options {
@@ -145,7 +152,7 @@
     .comment-text {
         padding: 1vh;
         background: #33a8ff63;
-        border-radius: 50px;
+        border-radius: 6px;
         color: #4e5356;
         position: relative;
         top: -4px;

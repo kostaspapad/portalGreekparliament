@@ -13,7 +13,7 @@
         <div class="comment-textarea">
             <TextareaAutogrow 
                 v-model="comment"
-                placeholder="Type your comment"
+                placeholder=""
                 classes="form-control form-control-line textarea"
             />
         </div>
@@ -31,7 +31,7 @@
     }
     .comment-textarea textarea {
         width: 100%;
-        border-radius: 20px;
+        // border-radius: 20px;
         resize: none;
     }
     .comments-scroll {
