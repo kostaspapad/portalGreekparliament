@@ -123,4 +123,9 @@ Run seed:
 
     php artisan db:seed
 
+Configure Passport:
+
+    php artisan passport:install
+    php artisan passport:keys
+
 Done
