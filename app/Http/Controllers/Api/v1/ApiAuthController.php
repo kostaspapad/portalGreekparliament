@@ -146,21 +146,21 @@ class ApiAuthController extends Controller
                 'message' => "Your Password Must Contain At Least 8 Characters!",
                 'status' => 400
             ], 400);
-        } elseif ( !preg_match("#[0-9]+#",$password) ) {
-            return response()->json([
-                'message' => "Your Password Must Contain At Least 1 Number!",
-                'status' => 400
-            ], 400);
-        } elseif ( !preg_match("#[A-Z]+#",$password )) {
-            return response()->json([
-                'message' => "Your Password Must Contain At Least 1 Capital Letter!",
-                'status' => 400
-            ], 400);
-        } elseif ( !preg_match("#[a-z]+#",$password )) {
-            return response()->json([
-                'message' => "Your Password Must Contain At Least 1 Lowercase Letter!",
-                'status' => 400
-            ], 400);
+        // } elseif ( !preg_match("#[0-9]+#",$password) ) {
+        //     return response()->json([
+        //         'message' => "Your Password Must Contain At Least 1 Number!",
+        //         'status' => 400
+        //     ], 400);
+        // } elseif ( !preg_match("#[A-Z]+#",$password )) {
+        //     return response()->json([
+        //         'message' => "Your Password Must Contain At Least 1 Capital Letter!",
+        //         'status' => 400
+        //     ], 400);
+        // } elseif ( !preg_match("#[a-z]+#",$password )) {
+        //     return response()->json([
+        //         'message' => "Your Password Must Contain At Least 1 Lowercase Letter!",
+        //         'status' => 400
+        //     ], 400);
         }
 
         if (User::where('email', '=', $email)->first() == null){

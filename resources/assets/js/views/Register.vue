@@ -61,15 +61,15 @@
                                     <div class="error" v-if="!$v.registerData.password.minLength">
                                         {{ $t("register.pass_least") }} {{$v.registerData.password.$params.minLength.min}} {{ $t("register.letters") }}
                                     </div>
-                                    <div class="error" v-if="!$v.registerData.password.number">
+                                    <!-- <div class="error" v-if="!$v.registerData.password.number">
                                         {{ $t("register.least_one_number") }}
-                                    </div>
-                                    <div class="error" v-if="!$v.registerData.password.uppercaseLetter">
+                                    </div> -->
+                                    <!-- <div class="error" v-if="!$v.registerData.password.uppercaseLetter">
                                         {{ $t("register.least_one_uppercase") }}
                                     </div>
                                     <div class="error" v-if="!$v.registerData.password.lowercaseLetter">
                                         {{ $t("register.least_one_lowercase") }}
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
@@ -140,9 +140,9 @@
                 password: {
                     required,
                     minLength: minLength(8),
-                    number,
-                    uppercaseLetter,
-                    lowercaseLetter,
+                    // number,
+                    // uppercaseLetter,
+                    // lowercaseLetter,
                 },
                 confirm_password:{
                     sameAsPassword: sameAs('password')
