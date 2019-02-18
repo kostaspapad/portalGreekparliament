@@ -17,7 +17,7 @@
 
                         <div class="modal-bottom-content text-right p-3">
                             <button type="button" class="btn btn-close" aria-label="Close" @click="close">
-                               Close
+                               Κλείσιμο
                             </button>
                         </div>
                     </div>
