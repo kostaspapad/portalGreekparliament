@@ -7,7 +7,7 @@
                     <span slot="off" class="switch-font">Συνεδριάσεις</span>
                 </vs-switch>
             </div>
-            <div v-if="ajaxDone" class="mt-2">
+            <div v-if="ajaxDone" class="mt-2 mb-2">
                 <!-- <div class="conference-title-box mb-4">
                     <h2 class="font-weight-bold text-center">Συνεδριάσεις</h2>
                 </div> -->
@@ -337,7 +337,7 @@
                     url = 'period/' + this.period.selected_period + '/conferences?page=' + page + '&order_field=' + this.order_field + '&orientation=' + this.order_orientation
                     api.call('get',this.api_path + url)
                     .then( response => {
-                        if (response.status == 200 && response.statusText == "OK") {
+                        if (response.status == 200) {
                             if(response.data.data.length > 0){
                                 this.period.selected_period_hasData = true
                                 this.period.conferences = response
@@ -370,7 +370,7 @@
     
                     axios.get(this.api_path + url)
                     .then(response => {
-                        if (response.status == 200 && response.statusText == "OK") {
+                        if (response.status == 200) {
                             if(this.search.type == "multiple" && this.search.hasData){
                                 //if we have searched something
                                 this.search.multipleDates = response
@@ -415,7 +415,7 @@
                     axios.get(this.api_path +
                             'conferences?order_field=' + this.order_field +'&orientation=' + this.order_orientation)
                         .then(response => {
-                            if (response.status == 200 && response.statusText == "OK") {
+                            if (response.status == 200) {
                                 if (response.data.data.length > 0) {
                                     this.hasData = true
                                     this.ajaxData.conferenceData = response
@@ -441,7 +441,7 @@
                     axios.get(this.api_path + 'conference/start/' + this.startDate + '/end/' + this.endDate + '?order_field=' + this.order_field +'&orientation=' + this.order_orientation)
                         .then(response => {
 
-                            if (response.status == 200 && response.statusText == "OK") {
+                            if (response.status == 200) {
                                 if (response.data.data.length > 0) {
                                     this.search.hasData = true
                                     this.search.multipleDates = response
@@ -465,7 +465,7 @@
             //     let tmp = []
             //     axios.get('http://95.85.38.123/api/conferences/' + formattedDate)
             //     .then(function(response){
-            //         if(response.status == 200 && response.statusText == "OK"){
+            //         if(response.status == 200){
             //             tmp = response.data.conferences
             //             self.ajaxData.details.push(tmp)
             //         }
@@ -481,7 +481,7 @@
                     this.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
                     axios.get(this.api_path + 'conference/date/' + this.singleDate)
                     .then( response => {
-                        if (response.status == 200 && response.statusText == "OK") {
+                        if (response.status == 200) {
                             if (response.data.data != null) {
                                 this.search.hasData = true
                                 this.search.singleDate = response.data.data
@@ -501,7 +501,7 @@
                 this.period.ajaxDone = false
                 api.call('get',this.api_path + 'periods')
                 .then( response => {
-                    if (response.status == 200 && response.statusText == "OK") {
+                    if (response.status == 200) {
                         if(response.data.data.length > 0){
                             this.ajaxData.periods = response.data.data
                         }
@@ -523,7 +523,7 @@
                         url = 'period/' + this.period.selected_period + '/conferences' + '?order_field=' + this.order_field + '&orientation=' + this.order_orientation
                         api.call('get',this.api_path + url)
                         .then( response => {
-                            if (response.status == 200 && response.statusText == "OK") {
+                            if (response.status == 200) {
                                 if (response.data.data.length > 0) {
                                     this.period.selected_period_hasData = true
                                     this.period.conferences = response

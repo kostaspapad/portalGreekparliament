@@ -228,6 +228,7 @@
 </template>
 
 <style lang="scss" scoped>
+
     $ContainerColor: white;
 
     .show-hide-periods { 
@@ -463,7 +464,7 @@
                     url = 'period/' + this.period.selected_period + '/speeches/'+ this.speaker_id +'?page=' + page + '&order_field=' + this.order_field + '&orientation=' + this.order_orientation
                     api.call('get',this.api_path + url)
                     .then( response => {
-                        if (response.status == 200 && response.statusText == "OK") {
+                        if (response.status == 200) {
                             if(response.data.data.length > 0){
                                 this.period.selected_period_hasData = true
                                 this.period.speeches = response
@@ -487,7 +488,7 @@
                 this.ajaxData.isLoaded = false
                 api.call('get',this.api_path + url)
                     .then( response => {
-                        if (response.status == 200 && response.statusText == "OK") {
+                        if (response.status == 200) {
                             this.ajaxData.speechesData = response
                             this.ajaxData.isLoaded = true
                         }
@@ -580,7 +581,7 @@
                         url = 'period/' + this.period.selected_period + '/speeches/'+ this.speaker_id + '?order_field=' + this.order_field + '&orientation=' + this.order_orientation
                         api.call('get',this.api_path + url)
                         .then( response => {
-                            if (response.status == 200 && response.statusText == "OK") {
+                            if (response.status == 200) {
                                 if(response.data.data.length > 0){
                                     this.period.selected_period_hasData = true
                                     this.period.speeches = response
@@ -667,7 +668,7 @@
                 setTimeout(() => {
                     api.call('get', this.api_path + 'speaker/' + this.speaker_id + '/timeline')
                     .then( response => {
-                        if(response.status == 200 && response.statusText == "OK" && response.data){
+                        if(response.status == 200 && response.data){
                             response.data.forEach( element => {
                                 if (element.end_date) {
                                     this.ajaxData.timelineData.push([element.fullname_el, element.start_date, element.end_date])

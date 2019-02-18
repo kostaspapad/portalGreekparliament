@@ -56,7 +56,7 @@
                                     <span @click="clearInput" class="speech-search-input-icon pointer"><i class="fas fa-times-circle"></i></span>
                                 </div>
                             </div>
-                            <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12 p-0">
+                            <div v-if="ajaxDoneConfSpeeches" class="col-12 col-sm-12 col-md-12 col-lg-12 p-0 pl-2">
                                 <div v-if="search.noDataMsg">
                                     <p>{{search.noDataMsg}}</p>
                                 </div>
@@ -114,17 +114,19 @@
 </template>
 <style lang="scss" scoped>
     .conferences-bg {
-        background-color: #ffffff;
+        // background-color: #ffffff;
     }
     .conferences-container {
-        background-color: white;
-        border-radius: 5px;
+        background-color: #fff;
+        margin-top: 20px;
+
+        // border-radius: 5px;
     }
 
     .conference-title-box {
-        background-color: #dbf0ff;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        background-color: #6d7fcc;
     }
     .pickerDiv{
         margin-bottom: 10px;
@@ -275,7 +277,7 @@
                     this.ajaxData.isLoaded = false
                     axios.get(this.api_path + 'conference/'+ this.conf_date +'/speeches')
                     .then(response => {
-                        if(response.status == 200 && response.statusText == "OK"){
+                        if(response.status == 200){
                             this.noDataConfSpeeches = false
                             this.ajaxData.conferenceData = response
                         } else {
@@ -293,7 +295,7 @@
                 setTimeout( () => {
                     axios.get(this.api_path + 'conference/date/'+ this.conf_date)
                     .then(response => {
-                        if(response.status == 200 && response.statusText == "OK"){
+                        if(response.status == 200){
                             this.noDataConfInfo = false
                             //because we only get one conference we add [0] to get it
                             this.ajaxData.conferenceInfo = response
@@ -310,7 +312,7 @@
             getPartyCountByConference() {
                 api.call('get', this.api_path + 'conferences/count-party-speeches/' + this.conf_date)
                 .then( response => {
-                    if(response.status == 200 && response.statusText == "OK" && response.data){
+                    if(response.status == 200 && response.data){
                         response.data.forEach( element => {
                             this.ajaxData.party_count_speeches.party_names.push(element.fullname_el)
                             this.ajaxData.party_count_speeches.party_count.push(element.party_count)
