@@ -31,7 +31,7 @@ class CreateConferencesTable extends Migration
                     # Document location + document name e.x UserFiles/a08fc2dd-61a9-4a83-b09a-09f4c564609d/es20170731000490.docx
                     $table->string('doc_location');
 
-                    $table->string('doc_name', 300);
+                    $table->text('doc_name');
 
                     # e.x "/Vouli-ton-Ellinon/ToKtirio/Fotografiko-Archeio/#0e9a3d7f-ee81-4396-acc6-a7c200abaaa9"
                     $table->string('video_link');
