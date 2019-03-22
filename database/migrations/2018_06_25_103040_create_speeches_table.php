@@ -21,7 +21,7 @@ class CreateSpeechesTable extends Migration
                         Schema::create('speeches', function (Blueprint $table) {
                             
                             // Primary key
-                            $table->string('speech_id')->unique();
+                            $table->bigInteger('speech_id')->unique();
                             $table->primary('speech_id');
 
                             // Foreign key
