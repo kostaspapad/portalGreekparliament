@@ -1,22 +1,18 @@
 <template>
-    <div class="wrapper">
+    <div class="row m-0">
         <!-- Sidebar  -->
-        <nav id="sidebar">
-            <!-- <div class="sidebar-header">
-                 <input v-model="keywords" type="fulltext" class="form-control" id="fulltext-searchbox" placeholder="Search">
-            </div> -->
+        <nav id="sidebar" class="d-none">
             <ul class="list-unstyled components">
-                <input-tag placeholder="tags" v-model="tags"></input-tag>
-                <search-plugin></search-plugin>
+                <search-plugin :taggable="true"></search-plugin>
                 
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{$t("conferences.datepicker.date")}}</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
                             <div class="datepicker pr-2 pl-2">
-                                <!-- <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" class="datepkr-float">
+                                <span @click="showInfoDiv = !showInfoDiv" v-show="!showInfoDiv" class="datepkr-float">
                                     <i class="fa fa-info-circle info-icon"></i>
-                                </span> -->
+                                </span>
                                 <transition name="slide-fade">
                                     <div v-if="showInfoDiv" class="alert alert-info" role="alert">
                                         <button @click="showInfoDiv = !showInfoDiv" type="button" class="close" aria-label="Close">
@@ -65,7 +61,6 @@
                             
                         </li>
                     </ul>
-                    <v-select multiple v-model="parties_dropdown_selected" :options="parties_dropdown_options" placeholder="Parties"></v-select>
                 </li>
             </ul>
 
@@ -79,8 +74,98 @@
             </ul>
         </nav>
 
+        <div class="my-filter-sidebar d-block d-sm-block d-md-none">
+            <!-- <vs-button @click="activeMenu=!activeMenu" color="primary" type="filled">Φίλτρα</vs-button> -->
+            <button @click="activeMenu = !activeMenu" class="btn">Φίλτρα</button>
+            <vs-sidebar parent="body" color="primary" class="sidebarx search-sidebar-comp" spacer v-model="activeMenu">
+                <div class="header-sidebar" slot="header">
+                    <h4 class="text-white">Φίλτρα</h4>
+                    <!-- <h3 @click="openSideMenu" class="close-filters"><span class="fas fa-times"></span></h3> -->
+                </div>
+                <div class="">
+                    <ul class="my-filter-list">
+                        <li>
+                           <custom-multiselect v-model="tag_keywords" :options="user_tags_keywords" tag-placeholder="Add this as new tag" placeholder="Βάλτε λέξεις κλειδιά" label="name" track-by="code" :multiple="true" :taggable="true" @tag="addTag" class="mt-3" :close-on-select="false" :max-height="100" ></custom-multiselect>
+                        </li>
+                        <li>
+                            <search-plugin :taggable="true" :clearInputs="clearInputs" @getTaggedSpeakers="storeSpeakers"></search-plugin>
+                        </li>
+                        <li>
+                            <search-plugin :parties="true" :clearInputs="clearInputs" :partiesData="parties_dropdown_options" @getTaggedParties="storeParties"></search-plugin>
+                        </li>
+                        <li>
+                            <div class="datepkr-toggle">
+                                <vs-switch color="#4896e5" v-model="isMultipleFilter" class="switch-btn">
+                                    <span slot="on" class="switch-font">Από έως</span>
+                                    <span slot="off" class="switch-font">Ημερομηνία</span>
+                                </vs-switch>
+                            </div>
+                            <div v-if="isMultipleFilter">
+                                <label class="text-white">{{ $t("conferences.datepicker.from") }}</label>
+                                <datepicker v-model="startDate" :format="myFormattedDate" :bootstrap-styling="true"
+                                    wrapper-class="pickerDiv search-pickerDiv" placeholder="Επιλέξτε αρχική ημερομηνία"></datepicker>
+                                <label class="text-white">{{ $t("conferences.datepicker.to") }}</label>
+                                <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true"
+                                    wrapper-class="pickerDiv search-pickerDiv" placeholder="Επιλέξτε τελική ημερομηνία"></datepicker>
+                            </div>
+                            <div v-else class="datepkr-toggle mt-2">
+                                <datepicker v-model="singleDate" :format="myFormattedDate" :bootstrap-styling="true"
+                                    wrapper-class="pickerDiv search-pickerDiv" placeholder="Επιλέξτε ημερομηνία"></datepicker>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="search-btn-div mt-4">
+                                <button @click="do_search" class="btn btn-secondary w-100">{{ $t("conferences.search") }}</button>
+                                <button @click="clearAllFilters" class="btn btn-secondary w-100 mt-3">Καθαριστμός φίλτρων</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </vs-sidebar>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4 d-none d-sm-none d-md-block" style="background-color: #2B4162;">
+            <custom-multiselect v-model="tag_keywords" :options="user_tags_keywords" tag-placeholder="Add this as new tag" placeholder="Βάλτε λέξεις κλειδιά" label="name" track-by="code" :multiple="true" :taggable="true" @tag="addTag" class="mt-3"></custom-multiselect>
+            <search-plugin :taggable="true" :clearInputs="clearInputs" @getTaggedSpeakers="storeSpeakers"></search-plugin>
+            <search-plugin :parties="true" :clearInputs="clearInputs" :partiesData="parties_dropdown_options" @getTaggedParties="storeParties"></search-plugin>
+            <!-- Date selection -->
+            <div class="datepkr-toggle">
+                <vs-switch color="#4896e5" v-model="isMultipleFilter" class="switch-btn">
+                    <!-- <span slot="on" class="switch-font">{{ $t("conferences.datepicker.from_to") }}</span> -->
+                    <span slot="on" class="switch-font">Από έως</span>
+                    <!-- <span slot="off" class="switch-font">{{ $t("conferences.datepicker.date") }}</span> -->
+                    <span slot="off" class="switch-font">Ημερομηνία</span>
+                </vs-switch>
+            </div>
+            <div v-if="isMultipleFilter">
+                <label class="text-white">{{ $t("conferences.datepicker.from") }}</label>
+                <datepicker v-model="startDate" :format="myFormattedDate" :bootstrap-styling="true"
+                    wrapper-class="pickerDiv" placeholder="Επιλέξτε αρχική ημερομηνία"></datepicker>
+                <label class="text-white">{{ $t("conferences.datepicker.to") }}</label>
+                <datepicker v-model="endDate" :format="myFormattedDate" :bootstrap-styling="true"
+                    wrapper-class="pickerDiv" placeholder="Επιλέξτε τελική ημερομηνία"></datepicker>
+                <!-- <div class="datepkr-btn">
+                    <button class="btn reset-btn datepkr-btn-color" @click="getDates" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
+                    <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('multiple')" :disabled="isDisabled">Επαναφορά</button>
+                </div> -->
+            </div>
+            <div v-else class="datepkr-toggle mt-2">
+                <!-- <label>{{ $t("conferences.datepicker.select_single_date") }}</label> -->
+                <datepicker v-model="singleDate" :format="myFormattedDate" :bootstrap-styling="true"
+                    wrapper-class="pickerDiv" placeholder="Επιλέξτε ημερομηνία"></datepicker>
+                <!-- <div class="datepkr-btn mt-3">
+                    <button class="btn reset-btn datepkr-btn-color" @click="getDate" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button>
+                    <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('single')" :disabled="isDisabled">Επαναφορά</button>
+                </div> -->
+            </div>
+            <!-- end of date selection -->
+            <div class="search-btn-div mt-4">
+                <button @click="do_search" class="btn btn-secondary w-100">{{ $t("conferences.search") }}</button>
+                <button @click="clearAllFilters" class="btn btn-secondary w-100 mt-3">Καθαριστμός φίλτρων</button>
+            </div>
+        </div>
+
         <!-- Page Content  -->
-        <div id="content">
+        <div class="col-12 col-md-6 col-lg-5 col-xl-8">
 
             <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -121,178 +206,22 @@
     </div>
 </template>
 <style lang="scss" scoped>
-/*
-    perioxi apo to membership 
-    koinov periodos (time-period)
-    komma
-
-*/
-
-// @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
-}
-
-p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1.7em;
-    color: #999;
-}
-
-a,
-a:hover,
-a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.navbar {
-    padding: 15px 10px;
-    background: #fff;
-    border: none;
-    border-radius: 0;
-    margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-btn {
-    box-shadow: none;
-    outline: none !important;
-    border: none;
-}
-
-.line {
-    width: 100%;
-    height: 1px;
-    border-bottom: 1px dashed #ddd;
-    margin: 40px 0;
-}
-
-/* ---------------------------------------------------
-    SIDEBAR STYLE
------------------------------------------------------ */
-
-.wrapper {
-    display: flex;
-    width: 100%;
-    align-items: stretch;
-}
-
-#sidebar {
-    min-width: 435px;
-    max-width: 435px;
-    background: #7386D5;
-    color: #fff;
-    transition: all 0.3s;
-}
-
-#sidebar.active {
-    margin-left: -250px;
-}
-
-#sidebar .sidebar-header {
-    padding: 20px;
-    background: #6d7fcc;
-}
-
-#sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #47748b;
-}
-
-#sidebar ul p {
-    color: #fff;
-    padding: 10px;
-}
-
-#sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
-}
-
-#sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
-}
-
-#sidebar ul li.active>a,
-a[aria-expanded="true"] {
-    color: #fff;
-    background: #6d7fcc;
-}
-
-a[data-toggle="collapse"] {
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-}
-
-ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6d7fcc;
-}
-
-ul.CTAs {
-    padding: 20px;
-}
-
-ul.CTAs a {
-    text-align: center;
-    font-size: 0.9em !important;
-    display: block;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
-a.reset {
-    background: #fff;
-    color: #7386D5;
-}
-
-a.article,
-a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
-}
-
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
-
-#content {
-    width: 100%;
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-}
-
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
-
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
+    // .wrapper {
+    //     display: flex;
+    //     width: 100%;
+    //     align-items: stretch;
+    // }
+    .switch-btn{
+        width: 130px!important;
+        font-size: 1.5em;
     }
-    #sidebar.active {
-        margin-left: 0;
-    }
-    #sidebarCollapse span {
-        display: none;
-    }
-}
+    // .multiselect__option--highlight {
+    //     background: #41B883;
+    //     background: #495057ad;
+    //     outline: none;
+    //     color: white;
+    // }
+    
 </style>
 <script>
     import moment from 'moment';
@@ -321,36 +250,88 @@ a.article:hover {
                 singleDate: null,
                 parties_dropdown_selected: [],
                 parties_dropdown_options: [],
-                parties: []
+                parties: [],
+                activeMenu: false,
+                multiple_search_data: {
+                    speakers: [],
+                    parties: [],
+                    tags: [],
+                    dateRange: {
+                        startDate: null,
+                        endDate: null
+                    },
+                    singleDate: null
+                },
+                user_tags_keywords: [
+                    { name: 'Μνημόνιο', code:  1 },
+                    // { name: 'Javascript', code: 'js' },
+                    // { name: 'Open Source', code: 'os' }
+                ],
+                tag_keywords: [
+                    { name: 'Μνημόνιο', code: 1 }
+                ],
+                clearInputs: false
             }
         },
         methods:{
-            do_search() {
-                let data = {
-                    tags: this.tags,
-                    parties: this.parties_dropdown_selected,
-                    start_date: this.startDate,
-                    end_date: this.endDate
-                };
-                console.log(data)
+            clearAllFilters() {
+                this.multiple_search_data.speakers = null
+                this.multiple_search_data.parties = null
+                this.startDate = null
+                this.endDate = null
+                this.singleDate = null
+                // to send to the searchSpeaker component signal to clear the inputs
+                this.clearInputs = true
+                // after one sec return to initial value
                 setTimeout(() => {
-                    api.call('post',this.api_path + 'search', data)
-                    .then( response => {
-                        console.log(111)
-                    })
-                }, 500)
+                    this.clearInputs = false
+                }, 1000);
+            },
+            addTag(newTag) {
+                // console.log(newTag)
+                const tag = {
+                    name: newTag,
+                    code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+                }
+                //this.user_tags_keywords.push(tag)
+                this.tag_keywords.push(tag)
+            },
+            storeSpeakers(event) {
+                // console.log(event)
+                this.multiple_search_data.speakers = event;
+            },
+            storeParties(event) {
+                // console.log(event)
+                this.multiple_search_data.parties = event;
+            },
+            do_search() {
+                if(this.tag_keywords.length > 0) {
+                    this.multiple_search_data.tags = this.tag_keywords
+                }
+                if(this.startDate && this.endDate) {
+                    this.multiple_search_data.dateRange.startDate = moment(this.startDate).format('YYYY-MM-DD')
+                    this.multiple_search_data.dateRange.endDate = moment(this.endDate).format('YYYY-MM-DD')
+                }
+                if(this.singleDate) {
+                    this.multiple_search_data.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
+                }
+                // setTimeout(() => {
+                //     api.call('post',this.api_path + 'search', this.multiple_search_data)
+                //     .then( response => {
+                //         console.log(response)
+                //     })
+                // }, 500)
             },
             load_parties_dropdown() {
-                var self = this
-
                 setTimeout(() => {
                     api.call('get', this.api_path + 'parties')
-                    .then( response => {
+                    .then( (response) => {
                         if (response.status == 200 && response.statusText == "OK") {
-                            if (response.data != null) {
-                                response.data.data.forEach(function (arrayItem) {
-                                    self.parties_dropdown_options.push(arrayItem.fullname_el);
-                                });
+                            if (response.data) {
+                                this.parties_dropdown_options = response.data.data
+                                // response.data.data.forEach( (arrayItem) => {
+                                //     this.parties_dropdown_options.push(arrayItem.fullname_el);
+                                // });
                             }
                         }
                     })
@@ -466,6 +447,19 @@ a.article:hover {
             ...mapGetters({
                 api_path: 'get_api_path'
             })
+        },
+        watch: {
+            isMultipleFilter: function(val) {
+                if(val) {
+                    this.singleDate = null
+                    this.multiple_search_data.singleDate = null
+                } else {
+                    this.startDate = null
+                    this.endDate = null
+                    this.multiple_search_data.dateRange.startDate = null
+                    this.multiple_search_data.dateRange.endDate = null
+                }
+            }
         },
         created() {
             this.load_parties_dropdown()

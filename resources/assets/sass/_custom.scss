@@ -53,7 +53,8 @@ $footerBgColor: yellow;
 // $logoColor: #dbf0ff;
 $logoColor: rgba(0, 0, 0, 0.05);
 //$imageContainerColor: #33a8ff;
-$imageContainerColor: #6d7fcc;
+$imageContainerColor: #2B4162;
+// $imageContainerColor: #6d7fcc;
 
 //tou kwsta
 // $color1: rgba(56, 61, 59, 1);
@@ -108,6 +109,10 @@ html, body {
 }
 @media (min-width: 768px){
     nav{ padding: 0!important;}
+}
+
+.no-overflow {
+    overflow: hidden;
 }
 
 //pagination
@@ -856,3 +861,106 @@ button:focus {
     background: salmon;
     color: white;
 }
+
+.vs-sidebar {
+    background: rgb(43, 65, 98)!important;
+    // color: #fff;
+}
+
+.search-sidebar-comp {
+    .vs-sidebar {
+        max-width: 290px!important;
+    }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 767px) {
+    .search-sidebar-comp {
+        .vs-sidebar {
+            max-width: 360px!important;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .vs-sidebar--items {
+        padding: 10px 8px!important;
+        list-style: none;
+        height: 100%;
+    }
+    .search-pickerDiv {
+        .vdp-datepicker__calendar {
+            width: 100%!important;
+        }
+    }
+
+    .my-filter-list {
+        .multiselect__content-wrapper {
+            position: relative!important;
+            height: auto!important;
+        }
+    }
+}
+
+.my-filter-list {
+    .con-vs-checkbox {
+        justify-content: left!important;
+    }
+}
+.my-filter-sidebar {
+    button {
+        padding-left: 15px;
+        position: fixed;
+        top: 55px;
+        margin: 0;
+        min-width: 0;
+        z-index: 9999;
+        border: 0;
+        -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+        background-color: rgb(43, 65, 98);
+        // background-color: #1c7ece;
+        color: #fff;
+        padding: 8px 20px;
+    }
+}
+.header-sidebar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    h4{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        > button{
+            margin-left: 10px;
+        }
+    }
+}
+
+.footer-sidebar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    > button{
+        border: 0px solid rgba(0,0,0,0) !important;
+        border-left: 1px solid rgba(0,0,0,.07) !important;
+        border-radius: 0px !important;
+    }
+}
+
+.multiselect__option:after{
+    right: 20px!important;
+}
+.multiselect__option--selected{
+    font-weight: normal!important;
+}
+// .multiselect__tag {
+//     background-color: #2b4162!important;
+// }
+// .multiselect__tag-icon:after{
+//     color: white!important;
+// }

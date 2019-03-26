@@ -46,6 +46,8 @@ export default {
       fontColor (index,option){
         if(index === this.pointer && this.showPointer){
           return 'myFontColor'
+        } else {
+          return {'multiselect__option--selected': this.isSelected(option)}
         }
       },
       customBgColor(index,option, isDesktop = null){

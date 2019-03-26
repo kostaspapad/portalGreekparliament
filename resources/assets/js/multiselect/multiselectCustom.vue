@@ -187,7 +187,7 @@
       */
       selectedLabel: {
         type: String,
-        default: 'Selected'
+        default: 'Επιλεγμένο'
       },
       /**
        * String to show when pointing to an alredy selected option
@@ -279,7 +279,11 @@
       tabindex: {
         type: Number,
         default: 0
-      }
+      },
+      // chooseCustomWords: {
+      //   type: Boolean,
+      //   default: false
+      // }
     },
     computed: {
       isSingleLabelVisible () {
@@ -319,9 +323,9 @@
           : ''
       },
       selectedLabelText () {
-        return this.showLabels
-          ? this.selectedLabel
-          : ''
+        // return this.showLabels
+        //   ? this.selectedLabel
+        //   : ''
       },
       inputStyle () {
         if (this.multiple && this.value && this.value.length) {
@@ -356,7 +360,11 @@ fieldset[disabled] .multiselect {
 }
 .myFontColor{
   outline: none;
-  color: white;
+  /* color: white; */
+}
+.myFontColor:hover {
+    background-color: rgb(43, 65, 98);
+    color: white;
 }
 .font-small-device {
   font-size: 14px;

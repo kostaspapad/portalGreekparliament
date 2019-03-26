@@ -70,8 +70,8 @@
                     </div>
                     <!-- End Period Mode -->
                     <div v-show="!periodMode" class="row pt-2 " key="conference_mode">
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-8">
-                            <div v-if="ajaxData.conferenceData.data.data && hasData && !search.hasData" class="p-4 conference-content-box"
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-8" v-if="ajaxDone">
+                            <div v-if="ajaxData.conferenceData.data.data.length > 0 && hasData && !search.hasData" class="p-4 conference-content-box"
                                 v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
                                 <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
                                     <h3>{{conference.conference_date}}</h3>
@@ -411,6 +411,7 @@
                 }
             },
             getLatestConferences() {
+                this.ajaxDone = false
                 setTimeout(() => {
                     axios.get(this.api_path +
                             'conferences?order_field=' + this.order_field +'&orientation=' + this.order_orientation)

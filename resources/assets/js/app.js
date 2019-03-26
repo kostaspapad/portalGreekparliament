@@ -58,8 +58,8 @@ import VueChartkick from 'vue-chartkick'
 import VueInternationalization from 'vue-i18n'
 import Locale from './vue-i18n-locales.generated'
 import VueScrollTo from 'vue-scrollto'
-import vSelect from 'vue-select'
-import InputTag from 'vue-input-tag'
+// import vSelect from 'vue-select'
+// import InputTag from 'vue-input-tag'
 
 // must be before auth
 window.api = new Api()
@@ -76,8 +76,8 @@ Vue.use(Vuesax)
 Vue.use(VueChartkick)
 Vue.use(VueInternationalization)
 Vue.use(VueScrollTo)
-Vue.component('v-select', vSelect)
-Vue.component('input-tag', InputTag)
+// Vue.component('v-select', vSelect)
+// Vue.component('input-tag', InputTag)
 
 // register globally
 Vue.component('pagination', laravelVuePagination)
