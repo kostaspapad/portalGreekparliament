@@ -59,7 +59,7 @@ Route::get('/user', function (Request $request) {
     Route::get('speech/{id}', 'Api\v1\SpeechesController@getSpeechById');
 
     // http://localhost:8000/api/v1/speeches/search/μνημόνιο
-    Route::get('speeches/search/{text}', 'Api\v1\SpeechesController@fulltextSpeechSearch');
+    // Route::get('speeches/search/{text}', 'Api\v1\SpeechesController@fulltextSpeechSearch');
 
     /**
      *   Speakers
@@ -125,6 +125,8 @@ Route::get('/user', function (Request $request) {
     // Parties->Speeches
     // http://localhost:8000/api/v1/speeches/party/syriza
     // Route::get('party/{party_id}/speeches', 'Api\v1\Parties\SpeechesController@speechesByPartyId');
+    
+    Route::post('search', 'Api\v1\SpeechesController@search_all_speeches');
     
 });
 
