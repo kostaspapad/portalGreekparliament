@@ -210,7 +210,19 @@ class SpeechesController extends Controller
         $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
             ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
             ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
-            ->select(['sp.speaker_id', 'speeches.speech_conference_date', 'sp.greek_name', 'sp.english_name', 'speeches.speech_id', 'speeches.speech', 'sp.image', 'speeches.party_id', 'parties.fullname_el'])
+            ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
+            ->select([
+                'sp.speaker_id',
+                'speeches.speech_conference_date',
+                'sp.greek_name',
+                'sp.english_name',
+                'speeches.speech_id',
+                'speeches.speech',
+                'sp.image',
+                'speeches.party_id',
+                'parties.fullname_el',
+                'party_colors.color'
+            ])
             ->groupBy('speeches.speech_id')
             ->whereRaw($query);
 
