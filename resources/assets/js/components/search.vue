@@ -85,16 +85,63 @@
                 <div class="">
                     <ul class="my-filter-list">
                         <li>
-                           <custom-multiselect v-model="tag_keywords" :options="user_tags_keywords" tag-placeholder="Add this as new tag" placeholder="Βάλτε λέξεις κλειδιά" label="name" track-by="code" :multiple="true" :taggable="true" @tag="addTag" class="mt-3" :close-on-select="false" :max-height="100" ></custom-multiselect>
+                           <custom-multiselect v-model="tag_keywords" :options="user_tags_keywords" tag-placeholder="Add this as new tag" placeholder="Εισάγετε λέξεις κλειδιά" label="name" track-by="code" :multiple="true" :taggable="true" @tag="addTag" class="mt-3" :close-on-select="false" :clear-on-select="false" :max-height="100" ></custom-multiselect>
                         </li>
                         <li>
-                            <search-plugin :taggable="true" :clearInputs="clearInputs" @getTaggedSpeakers="storeSpeakers"></search-plugin>
+                            <!-- <search-plugin :taggable="true" :clearInputs="clearInputs" @getTaggedSpeakers="storeSpeakers"></search-plugin> -->
+                            <custom-multiselect 
+                                v-model="multiple_search_data.speakers" 
+                                placeholder="Αναζήτηση ομιλιτή" 
+                                open-direction="bottom" 
+                                :options="search.speakers"
+                                track-by="speaker_id"
+                                label="greek_name"
+                                :searchable="true" 
+                                :loading="isLoading" 
+                                :internal-search="false" 
+                                :clear-on-select="false" 
+                                :close-on-select="false" 
+                                :options-limit="100" 
+                                :limit="1" 
+                                :max-height="600" 
+                                :show-no-results="true" 
+                                :hide-selected="false"
+                                :preserveSearch="true"
+                                @search-change="asyncFind"
+                                tag-placeholder="Add this as new tag"
+                                :multiple="true"
+                                :taggable="true"
+                                @tag="addTag"
+                                class="mt-3">
+                                <span slot="noResult">Δεν βρέθηκαν ομιλητές</span>
+                            </custom-multiselect>
                         </li>
                         <li>
-                            <search-plugin :parties="true" :clearInputs="clearInputs" :partiesData="parties_dropdown_options" @getTaggedParties="storeParties"></search-plugin>
+                            <!-- <search-plugin :parties="true" :selectedParties="multiple_search_data.parties" :clearInputs="clearInputs" :partiesData="parties_dropdown_options" @getTaggedParties="storeParties"></search-plugin> -->
+                            <custom-multiselect 
+                                v-model="multiple_search_data.parties" 
+                                placeholder="Επιλογή κομμάτων" 
+                                open-direction="bottom" 
+                                :options="parties_dropdown_options"
+                                track-by="party_id"
+                                label="fullname_el"
+                                :internal-search="true" 
+                                :clear-on-select="false" 
+                                :close-on-select="false" 
+                                :options-limit="100" 
+                                :limit="1" 
+                                :max-height="600" 
+                                :show-no-results="true" 
+                                :hide-selected="false"
+                                tag-placeholder="Add this as new tag"
+                                :multiple="true"
+                                :taggable="true"
+                                class="mt-3">
+                                <span slot="noResult">Δεν βρέθηκαν κόμματα</span>
+                            </custom-multiselect>
                         </li>
                         <li>
-                            <div class="datepkr-toggle">
+                            <div class="datepkr-toggle mt-3">
                                 <vs-switch color="#4896e5" v-model="isMultipleFilter" class="switch-btn">
                                     <span slot="on" class="switch-font">Από έως</span>
                                     <span slot="off" class="switch-font">Ημερομηνία</span>
@@ -115,7 +162,7 @@
                         </li>
                         <li>
                             <div class="search-btn-div mt-4">
-                                <button @click="do_search" class="btn btn-secondary w-100">{{ $t("conferences.search") }}</button>
+                                <button @click="do_search" :disabled="canSearch" class="btn btn-secondary w-100">{{ $t("conferences.search") }}</button>
                                 <button @click="clearAllFilters" class="btn btn-secondary w-100 mt-3">Καθαριστμός φίλτρων</button>
                             </div>
                         </li>
@@ -123,12 +170,60 @@
                 </div>
             </vs-sidebar>
         </div>
-        <div class="col-md-6 col-lg-5 col-xl-4 d-none d-sm-none d-md-block" style="background-color: #2B4162;">
-            <custom-multiselect v-model="tag_keywords" :options="user_tags_keywords" tag-placeholder="Add this as new tag" placeholder="Βάλτε λέξεις κλειδιά" label="name" track-by="code" :multiple="true" :taggable="true" @tag="addTag" class="mt-3"></custom-multiselect>
-            <search-plugin :taggable="true" :clearInputs="clearInputs" @getTaggedSpeakers="storeSpeakers"></search-plugin>
-            <search-plugin :parties="true" :clearInputs="clearInputs" :partiesData="parties_dropdown_options" @getTaggedParties="storeParties"></search-plugin>
+
+        <div class="col-md-6 col-lg-5 col-xl-4 d-none d-sm-none d-md-block" :class="{ 'initial-height': !search.hasData }" style="background-color: #2B4162;">
+            <custom-multiselect v-model="tag_keywords" :options="user_tags_keywords" tag-placeholder="Add this as new tag" placeholder="Εισάγετε λέξεις κλειδιά" label="name" track-by="code" :close-on-select="false" :multiple="true" :taggable="true" @tag="addTag" class="mt-3"></custom-multiselect>
+            <!-- <search-plugin :clearInputs="clearInputs" :selectedParties="multiple_search_data.parties" @getTaggedSpeakers="storeSpeakers"></search-plugin> -->
+            <custom-multiselect 
+                v-model="multiple_search_data.speakers" 
+                placeholder="Αναζήτηση ομιλιτή" 
+                open-direction="bottom" 
+                :options="search.speakers"
+                track-by="speaker_id"
+                label="greek_name"
+                :searchable="true" 
+                :loading="isLoading" 
+                :internal-search="false" 
+                :clear-on-select="false" 
+                :close-on-select="false" 
+                :options-limit="100" 
+                :limit="1" 
+                :max-height="600" 
+                :show-no-results="true" 
+                :hide-selected="false"
+                :preserveSearch="true"
+                @search-change="asyncFind"
+                tag-placeholder="Add this as new tag"
+                :multiple="true"
+                :taggable="true"
+                @tag="addTag"
+                class="mt-3">
+                <span slot="noResult">Δεν βρέθηκαν ομιλητές</span>
+            </custom-multiselect>
+            <!-- <search-plugin :parties="true" :clearInputs="clearInputs" :partiesData="parties_dropdown_options" @getTaggedParties="storeParties"></search-plugin> -->
+            <custom-multiselect 
+                v-model="multiple_search_data.parties" 
+                placeholder="Επιλογή κομμάτων" 
+                open-direction="bottom" 
+                :options="parties_dropdown_options"
+                track-by="party_id"
+                label="fullname_el"
+                :internal-search="true" 
+                :clear-on-select="false" 
+                :close-on-select="false" 
+                :options-limit="100" 
+                :limit="1" 
+                :max-height="400" 
+                :show-no-results="true" 
+                :hide-selected="false"
+                tag-placeholder="Add this as new tag"
+                :multiple="true"
+                :taggable="true"
+                class="mt-3">
+                <span slot="noResult">Δεν βρέθηκαν κόμματα</span>
+            </custom-multiselect>
             <!-- Date selection -->
-            <div class="datepkr-toggle">
+            <div class="datepkr-toggle mt-3">
                 <vs-switch color="#4896e5" v-model="isMultipleFilter" class="switch-btn">
                     <!-- <span slot="on" class="switch-font">{{ $t("conferences.datepicker.from_to") }}</span> -->
                     <span slot="on" class="switch-font">Από έως</span>
@@ -159,49 +254,31 @@
             </div>
             <!-- end of date selection -->
             <div class="search-btn-div mt-4">
-                <button @click="do_search" class="btn btn-secondary w-100">{{ $t("conferences.search") }}</button>
+                <button @click="do_search" :disabled="canSearch" class="btn btn-secondary w-100">{{ $t("conferences.search") }}</button>
                 <button @click="clearAllFilters" class="btn btn-secondary w-100 mt-3">Καθαριστμός φίλτρων</button>
             </div>
         </div>
 
         <!-- Page Content  -->
-        <div class="col-12 col-md-6 col-lg-5 col-xl-8">
-
-            <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
-                    <nav class="navbar navbar-expand-md py-0 px-4 navbar-light navbar-laravel navbar-bg-color menu-navbar d-none d-md-block">
-            
-                    </nav>
-                </div>
-            </nav> -->
-            <img src="img/search-icon.png">
-            <h2>Collapsible Sidebar Using Bootstrap 4</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-            <div class="line"></div>
-
-            <h2>Lorem Ipsum Dolor</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-            <div class="line"></div>
-
-            <h2>Lorem Ipsum Dolor</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-            <div class="line"></div>
-
-            <h3>Lorem Ipsum Dolor</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="col-12 col-md-6 col-lg-7 col-xl-8 search-data-scroll mt-5 mt-md-3" v-if="search.isDone && !search.loading">
+            <div v-if="search.isDone && search.hasData && search.results.data.data.length > 0" class="col-12 p-0">
+                <pagination :data="search.results.data.meta" @pagination-change-page="changePage" :limit=1>
+                    <span slot="prev-nav">&lt;</span>
+                    <span slot="next-nav">&gt;</span>
+                </pagination>
+            </div>
+            <div v-for="search_data in search.results.data.data" :key="search_data.speech_id">
+                <speech :speech="search_data" isFromConference=true :isFromSearchPage="true"></speech>
+            </div>
+            <div v-if="search.isDone && search.hasData && search.results.data.data.length > 0" class="col-12 p-0 mt-2">
+                <pagination :data="search.results.data.meta" @pagination-change-page="changePage" :limit=1>
+                    <span slot="prev-nav">&lt;</span>
+                    <span slot="next-nav">&gt;</span>
+                </pagination>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-7 col-xl-8 mt-5 mt-md-3" v-if="search.loading">
+            <img :src=" 'img' + '/Spinner.gif' " class="m-auto d-block"/>
         </div>
     </div>
 </template>
@@ -221,6 +298,45 @@
     //     outline: none;
     //     color: white;
     // }
+    .initial-height {
+        height: 85vh;
+    }
+    .search-data-scroll {
+        height: 75vh;
+        overflow-y: auto;
+    }
+    @media only screen and (min-width: 992px){
+        .search-data-scroll {
+            flex: 0 0 57.333333%!important;
+            max-width: 57.333333%!important;
+        }
+    }
+    @media only screen and (max-width: 767px){
+        .search-data-scroll {
+            height: auto;
+            overflow-y: initial;
+        }
+        .multiselect__content-wrapper{
+            /* width: 350px!important; */
+            position: relative!important;
+            height: 350px!important;
+        }
+        .multiselect__option{
+           /* white-space: normal!important; */
+           word-break: break-word;
+        }
+    }
+    @media only screen and (min-width: 768px) {
+        .multiselect__option{
+           white-space: normal!important;
+        }
+        .vs-sidebar--items {
+            padding: 10px 10px;
+            background: inherit;
+            overflow-y: auto;
+            list-style: none;
+        }
+    }
     
 </style>
 <script>
@@ -240,7 +356,10 @@
                     multipleDates: [],
                     hasData: false,
                     isDone: false,
-                    type: ''
+                    type: '',
+                    results: [],
+                    speakers: [],
+                    loading: false
                 },
                 isMultipleFilter: false,
                 showInfoDiv: false,
@@ -255,7 +374,9 @@
                 multiple_search_data: {
                     speakers: [],
                     parties: [],
-                    tags: [],
+                    tags: [
+                        { name: 'Μνημόνιο', code: 1 }
+                    ],
                     dateRange: {
                         startDate: null,
                         endDate: null
@@ -263,20 +384,54 @@
                     singleDate: null
                 },
                 user_tags_keywords: [
-                    { name: 'Μνημόνιο', code:  1 },
-                    // { name: 'Javascript', code: 'js' },
-                    // { name: 'Open Source', code: 'os' }
+                    { name: 'Μνημόνιο', code:  1 }
                 ],
                 tag_keywords: [
                     { name: 'Μνημόνιο', code: 1 }
                 ],
-                clearInputs: false
+                clearInputs: false,
+                isLoading: false
             }
         },
         methods:{
+            changePage(page) {
+                api.call('post',this.api_path + 'search?page=' + page, this.multiple_search_data)
+                .then(response => {
+                    if(response) {
+                        this.search.results = response
+                        // this.search.hasData = true
+                    }else{
+                        // this.search.hasData = false
+                    }
+
+                    // this.search.isDone = true
+                    // this.search.loading = false
+                })
+            },
+            asyncFind(query){
+                if(query.length > 2){
+                    this.isLoading = true
+                    if(this.debounceTimer){
+                        clearTimeout(this.debounceTimer)   // clearing debounceTimer
+                    }
+                    this.debounceTimer = setTimeout( () =>{
+                        axios.get(this.api_path + 'speakers/search/' + query)
+                        .then( response => {
+                            if(response.status == 200 && response.data.data.length > 0){
+                                this.isLoading = false
+                                this.search.speakers = response.data.data;
+                            }else{
+                                this.isLoading = false
+                            }
+                        })
+                    }, 500)
+                }
+            },
             clearAllFilters() {
-                this.multiple_search_data.speakers = null
-                this.multiple_search_data.parties = null
+                this.multiple_search_data.speakers = []
+                this.multiple_search_data.parties = []
+                this.multiple_search_data.tags = []
+                this.tag_keywords = []
                 this.startDate = null
                 this.endDate = null
                 this.singleDate = null
@@ -305,6 +460,8 @@
                 this.multiple_search_data.parties = event;
             },
             do_search() {
+                this.search.isDone = false
+                this.search.loading = true
                 if(this.tag_keywords.length > 0) {
                     this.multiple_search_data.tags = this.tag_keywords
                 }
@@ -315,12 +472,21 @@
                 if(this.singleDate) {
                     this.multiple_search_data.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
                 }
-                // setTimeout(() => {
-                //     api.call('post',this.api_path + 'search', this.multiple_search_data)
-                //     .then( response => {
-                //         console.log(response)
-                //     })
-                // }, 500)
+                setTimeout(() => {
+                    api.call('post',this.api_path + 'search', this.multiple_search_data)
+                    .then( response => {
+                        console.log(response)
+                        if(response) {
+                            this.search.results = response
+                            this.search.hasData = true
+                        }else{
+                            this.search.hasData = false
+                        }
+
+                        this.search.isDone = true
+                        this.search.loading = false
+                    })
+                }, 1500)
             },
             load_parties_dropdown() {
                 setTimeout(() => {
@@ -443,6 +609,10 @@
                         return true;
                     }
                 }
+            },
+            canSearch() {
+                if(this.tag_keywords.length > 0) return false
+                else return true
             },
             ...mapGetters({
                 api_path: 'get_api_path'

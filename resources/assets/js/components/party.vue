@@ -211,7 +211,7 @@
         },
         methods:{
             printImg(img) {
-                console.log(img)
+                // console.log(img)
                 if (img == 'default_speaker_icon.png' || img == null) {
                     return 'default_speaker_icon.png';
 

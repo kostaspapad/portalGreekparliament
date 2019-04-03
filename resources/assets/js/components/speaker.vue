@@ -67,7 +67,7 @@
                                                     :class="{periods_bg: period_data.conference_date ==  period.selected_period}"
                                                     v-if="period.ajaxDone"
                                                 >
-                                                    <span>{{period_data.conference_date}}</span>
+                                                    <span>{{ $helpers.myFormattedDate(period_data.conference_date,'el') }}</span>
                                                 </li>
                                                 <li 
                                                     v-for="(period_data) in ajaxData.conferences.linksData" 
@@ -76,7 +76,7 @@
                                                     :class="{periods_bg: period_data.conference_date ==  period.selected_period}"
                                                     v-if="!period.ajaxDone"
                                                 >
-                                                    <span>{{period_data.conference_date}}</span>
+                                                    <span>{{ $helpers.myFormattedDate(period_data.conference_date,'el') }}</span>
                                                 </li>
                                             </ul>
                                             <div class="d-block d-sm-none">
@@ -131,13 +131,13 @@
                                                     <h4 class="selected-period-title text-center d-none d-sm-block">
                                                         <span>Μετάβαση στην συνεδρίαση <i class="fas fa-long-arrow-alt-right"></i></span>
                                                         <router-link :to="'/conference/' + period.selected_period + '/speeches'" style="color: #1f74ff;">
-                                                            {{period.selected_period}}
+                                                            {{ $helpers.myFormattedDate(period.selected_period,'el') }}
                                                         </router-link>
                                                     </h4>
                                                     <h4 class="selected-period-title text-center d-block d-sm-none" style="font-size: 0.8rem;">
                                                         <span>Μετάβαση στην συνεδρίαση <i class="fas fa-long-arrow-alt-right"></i></span>
                                                         <router-link :to="'/conference/' + period.selected_period + '/speeches'" style="color: #1f74ff;">
-                                                            {{period.selected_period}}
+                                                            {{ $helpers.myFormattedDate(period.selected_period,'el') }}
                                                         </router-link>
                                                     </h4>
                                                     <pagination v-if="period.speeches.data.meta" :data="period.speeches.data.meta" @pagination-change-page="changePagePeriod" :limit=1>

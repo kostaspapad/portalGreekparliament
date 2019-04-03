@@ -52,7 +52,7 @@
                                 <div class="selected-period">
                                     <div v-for="period_conf in period.conferences.data.data" :key="period_conf.conference_date" class="p-4 conference-content-box mt-3">
                                         <router-link :to="'/conference/' + period_conf.conference_date + '/speeches'" class="conference-link">
-                                            <h3>{{period_conf.conference_date}}</h3>
+                                            <h3>{{ $helpers.myFormattedDate(period_conf.conference_date,'el') }}</h3>
                                             <div>
                                                 <p class="session-margin">{{period_conf.session}}</p>
                                                 <span>{{period_conf.time_period}}</span>
@@ -74,7 +74,7 @@
                             <div v-if="ajaxData.conferenceData.data.data.length > 0 && hasData && !search.hasData" class="p-4 conference-content-box"
                                 v-for="conference in ajaxData.conferenceData.data.data" :key="conference.id">
                                 <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
-                                    <h3>{{conference.conference_date}}</h3>
+                                    <h3>{{ $helpers.myFormattedDate(conference.conference_date,'el') }}</h3>
                                     <div>
                                         <p class="session-margin">{{conference.session}}</p>
                                         <span>{{conference.time_period}}</span>

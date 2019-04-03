@@ -1,6 +1,6 @@
 <template>
     <div class="container-imagebox">
-        <div class="row" style="">
+        <div class="row m-0" style="">
             <div class="image-container col-12 col-sm-6 col-md-4" >
                 <img src="/img/mainpage_logo.png" class="img-fluid">
                 <div>

@@ -1,8 +1,7 @@
 <template>
-    <div class="row mr-0" v-if="ajaxDoneConfInfo">
+    <div class="container" v-if="ajaxDoneConfInfo">
         <!-- for small screen -->
-        <div class="my-filter-sidebar d-block d-sm-block d-md-none">
-            <!-- <vs-button @click="activeMenu=!activeMenu" color="primary" type="filled">Φίλτρα</vs-button> -->
+        <!-- <div class="my-filter-sidebar d-block d-sm-block d-md-none">
             <button @click="openSideMenu" class="btn">Φίλτρα</button>
             <vs-sidebar parent="body" color="primary" class="sidebarx" spacer v-model="activeMenu">
                 <div class="header-sidebar" slot="header">
@@ -25,39 +24,11 @@
                         </li>
                     </ul>
                 </div>
-
-                <!-- <vs-sidebar-item index="1" icon="question_answer">
-                    Dashboard
-                </vs-sidebar-item>
-
-                <vs-sidebar-item index="2" icon="gavel">
-                    History
-                </vs-sidebar-item>
-
-                <vs-divider icon="person" position="left">
-                    User
-                </vs-divider>
-
-                <vs-sidebar-item index="3" icon="verified_user">
-                    Configurations
-                </vs-sidebar-item>
-                <vs-sidebar-item index="4" icon="account_box">
-                    Profile
-                </vs-sidebar-item>
-                <vs-sidebar-item index="5" >
-                    Card
-                </vs-sidebar-item> -->
-
-                <!-- <div class="footer-sidebar" slot="footer">
-                    <vs-button icon="reply" color="danger" type="flat">log out</vs-button>
-                    <vs-button icon="settings" color="primary" type="border"></vs-button>
-                </div> -->
-
             </vs-sidebar>
-        </div>
+        </div> -->
 
         <!-- for big screen to display left -->
-        <div class="col-md-3 d-none d-sm-none d-md-block">
+        <!-- <div class="col-md-3 d-none d-sm-none d-md-block">
             <div class="">
                 <ul class="my-filter-list">
                     <li>
@@ -74,13 +45,13 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <!-- <div class="container"> -->
-        <div class="main-content-conferenece col-md-9">
+        <div class="main-content-conferenece">
             <div class="conferences-container">
                 <div v-if="ajaxDoneConfInfo">
                     <div class="conference-title-box py-4 pl-4">
-                        <h2 class="font-weight-bold conference-title">{{ $t("conference.conference") }} · {{conf_date}}</h2>
+                        <h2 class="font-weight-bold conference-title">{{ $t("conference.conference") }} · {{ $helpers.myFormattedDate(conf_date,'el') }}</h2>
                         <div>{{ajaxData.conferenceInfo.data.data.session}}</div>
                         <div>{{ajaxData.conferenceInfo.data.data.time_period}} Περίοδος</div>
                     </div>
@@ -153,7 +124,7 @@
                                         <h4>{{ $t("conference.no_speeches_avail") }}</h4>
                                     </div>
                                 </div>
-                                <div v-if="ajaxData.isLoaded && !search.speechesData.length" class="col-12" style="padding-left: 2.5rem;">
+                                <div v-if="ajaxData.isLoaded && !search.speechesData.length" class="col-12 pl-3">
                                     <pagination :data="ajaxData.conferenceData.data.meta" @pagination-change-page="changePage" :limit=1>
                                         <span slot="prev-nav">&lt;</span>
                                         <span slot="next-nav">&gt;</span>

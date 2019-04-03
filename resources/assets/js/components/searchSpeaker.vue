@@ -54,12 +54,12 @@
     <div class="multiselect-div" v-else-if="parties" :class="parties ? 'mt-4' : ''">
         <custom-multiselect 
             v-model="party_selected" 
-            placeholder="Επιλογή κόμματος" 
+            placeholder="Επιλογή κομμάτων" 
             open-direction="bottom" 
             :options="partiesData"
             track-by="party_id"
             label="fullname_el"
-            :internal-search="false" 
+            :internal-search="true" 
             :clear-on-select="false" 
             :close-on-select="false" 
             :options-limit="100" 
@@ -115,6 +115,7 @@
             taggable: Boolean,
             parties: Boolean,
             partiesData: Array,
+            // selectedParties: Array,
             clearInputs: Boolean
         },
         data(){
@@ -158,7 +159,7 @@
                 })
             },
             addTag(newTag) {
-                console.log(newTag)
+                //console.log(newTag)
             }
         },
         watch: {
@@ -178,6 +179,10 @@
                    this.party_selected = null
                }
             }
+            // ,selectedParties: function(val){
+            //     console.log(val)
+            //     this.party_selected = [...val]
+            // }
         },
         computed:{
             ...mapGetters({

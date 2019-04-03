@@ -37,15 +37,22 @@
                             <img :src="'/img/' + speech_data.image" class="speech_speaker_img"/>
                         </div>
                     </div>
-                    <div class="speech-container-speaker">
-                        <h4 class="speech_speaker_name ml-2">
+                    <div class="speech-container-speaker" >
+                        <h4 class="speech_speaker_name ml-2" :class="isFromSearchPage ? 'appear-in-search' : ''">
                             <router-link :to="/speaker/ + speech_data.speaker_id" class="" style="margin-top:8px;">{{speech_data.greek_name}}</router-link>
                         </h4>
-                        <div class="speech_speaker_party ml-2" v-bind:style="getPartyColor">
+                        <div class="speech_speaker_party ml-2" v-bind:style="getPartyColor" :class="isFromSearchPage ? 'appear-in-search' : ''">
                             <router-link :to=" /party/ + speech_data.fullname_el" style="color: inherit;">
                                 <h5>{{speech_data.fullname_el | capitalize}} </h5>
                             </router-link>
                         </div>
+                    </div>
+                    <div v-if="speech && isFromSearchPage" class="speech-link col-12 text-center mt-2">
+                        <h5>{{ $helpers.myFormattedDate(speech_data.speech_conference_date,'el') }}</h5>
+                        <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
+                            <h5>Μετάβαση στην συνεδρία</h5>
+                            <!-- <span class="fa fa-share"></span> -->
+                        </router-link>
                     </div>
                     <div v-if="speech" class="speech-link col-12 text-center mt-2">
                         <router-link :to="/speech/ + speech_data.speech_id">
@@ -54,11 +61,15 @@
                         </router-link>
                     </div>
                 </div>
-                <div class="speech-container-speech ml-2 pt-2" style="white-space: pre-line;">
+                <div class="speech-container-speech ml-2 pt-2" style="white-space: pre-line;" v-if="!isFromSearchPage">
                     <read-more more-str="περισσότερα" :text="speech_data.speech" link="#" less-str="λιγότερα" :max-chars="2000"></read-more>
                 </div>
+                <div class="speech-container-speech ml-2 pt-2" style="white-space: pre-line;" v-else>
+                    <!-- <read-more more-str="περισσότερα" :text="speech_data.speech" link="#" less-str="λιγότερα" :max-chars="200" ></read-more> -->
+                    <p>{{ speech_data.speech.substring(0,200) + '...' }}</p>
+                </div>
                 
-                <div v-if="user" class="speech-actions mt-4">
+                <div v-if="user && !isFromSearchPage" class="speech-actions mt-4">
                     <!-- Favorite -->
                     <favorite
                         :speech_id='speech_data.speech_id'
@@ -115,9 +126,11 @@
     </div>
 </template>
 <style lang="scss" scoped>
-    a {
-        // color: #1b1b1b;
-        color: red;
+    .speech_speaker_name {
+        a {
+            color: #1b1b1b;
+        }
+        // color: red;
     }
     .speech-container {
         text-align: left;
@@ -214,6 +227,18 @@
     .modal-report-area{
         padding: 3em;
     }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .speech_speaker_name.appear-in-search {
+           font-size: 13px;
+        }
+        .speech_speaker_party.appear-in-search {
+            a {
+                h5 {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
 </style>
 <script>
     import { mapState, mapGetters, mapActions } from 'vuex'
@@ -228,6 +253,10 @@
             },
             isFromConference: {
                 default: false
+            },
+            isFromSearchPage: {
+                default: false,
+                type: Boolean
             }
         },
         data() {
