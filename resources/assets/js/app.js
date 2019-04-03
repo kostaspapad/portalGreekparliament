@@ -61,6 +61,8 @@ import VueScrollTo from 'vue-scrollto'
 // import vSelect from 'vue-select'
 // import InputTag from 'vue-input-tag'
 
+import helpers from './Helpers/HelperFunc'
+
 // must be before auth
 window.api = new Api()
 
@@ -128,6 +130,15 @@ const i18n = new VueInternationalization({
     messages: Locale
 });
 
+// global helper functions
+const plugin = {
+    install () {
+        Vue.helpers = helpers
+        Vue.prototype.$helpers = helpers
+    }
+}
+Vue.use(plugin)
+
 // process.env.NODE_ENV == 'production' ? Vue.config.devtools = false  : Vue.config.devtools = true 
 Vue.config.performance = process.env.NODE_ENV !== 'production'
 const app = new Vue({
@@ -138,7 +149,7 @@ const app = new Vue({
     beforeCreate() {
         this.$store.commit('CHECK_USER')
         this.$store.commit('GET_PATH')
-	},
+    },
     data: {
         host: process.env.NODE_ENV == 'production' ? 'greekparliament.info' : 'http://127.0.0.1:8000'
     }
