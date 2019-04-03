@@ -1,6 +1,6 @@
 <template>
     <!-- <div> -->
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel navbar-bg-color">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel navbar-bg-color pl-0">
             <div class="container-fluid">
                 <div class="navbar-brand logo">
                     <router-link to="/" class="logo-link">Greekparliament.info</router-link>
@@ -10,7 +10,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="container ml-0">
+                <div class="container ml-0 nav-container">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
@@ -31,7 +31,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse d-none" id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                          <!-- Authentication Links -->
@@ -88,6 +88,19 @@
         </nav>
     <!-- </div> -->
 </template>
+<style lang="scss" scoped>
+    .nav-item {
+        // font-size: 1.2em;
+        // border-bottom: 1px solid rgba(0,0,0,.2);
+    }
+    .nav-container {
+        background: white;
+        z-index: 9999999999;
+        position: relative;
+        top: -1px;
+    }
+</style>
+
 <script>
     import { mapMutations } from 'vuex'
     export default {
