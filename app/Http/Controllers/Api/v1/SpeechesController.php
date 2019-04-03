@@ -224,6 +224,7 @@ class SpeechesController extends Controller
                 'party_colors.color'
             ])
             ->groupBy('speeches.speech_id')
+            ->orderBy('speeches.speech_conference_date', 'desc')
             ->whereRaw($query);
 
         if ($date_range) {
