@@ -100,18 +100,15 @@
                                 :loading="isLoading" 
                                 :internal-search="false" 
                                 :clear-on-select="false" 
-                                :close-on-select="false" 
-                                :options-limit="100" 
-                                :limit="1" 
+                                :close-on-select="false"
                                 :max-height="600" 
                                 :show-no-results="true" 
-                                :hide-selected="false"
+                                :hide-selected="true"
                                 :preserveSearch="true"
                                 @search-change="asyncFind"
                                 tag-placeholder="Add this as new tag"
                                 :multiple="true"
                                 :taggable="true"
-                                @tag="addTag"
                                 class="mt-3">
                                 <span slot="noResult">Δεν βρέθηκαν ομιλητές</span>
                             </custom-multiselect>
@@ -127,12 +124,10 @@
                                 label="fullname_el"
                                 :internal-search="true" 
                                 :clear-on-select="false" 
-                                :close-on-select="false" 
-                                :options-limit="100" 
-                                :limit="1" 
+                                :close-on-select="false"
                                 :max-height="600" 
                                 :show-no-results="true" 
-                                :hide-selected="false"
+                                :hide-selected="true"
                                 tag-placeholder="Add this as new tag"
                                 :multiple="true"
                                 :taggable="true"
@@ -182,22 +177,20 @@
                 track-by="speaker_id"
                 label="greek_name"
                 :searchable="true" 
+                :preserveSearch="true"
                 :loading="isLoading" 
                 :internal-search="false" 
                 :clear-on-select="false" 
-                :close-on-select="false" 
-                :options-limit="100" 
-                :limit="1" 
+                :close-on-select="false"
                 :max-height="600" 
                 :show-no-results="true" 
-                :hide-selected="false"
-                :preserveSearch="true"
+                :hide-selected="true"
                 @search-change="asyncFind"
                 tag-placeholder="Add this as new tag"
                 :multiple="true"
                 :taggable="true"
-                @tag="addTag"
-                class="mt-3">
+                class="mt-3"
+                id="ajax">
                 <span slot="noResult">Δεν βρέθηκαν ομιλητές</span>
             </custom-multiselect>
             <!-- <search-plugin :parties="true" :clearInputs="clearInputs" :partiesData="parties_dropdown_options" @getTaggedParties="storeParties"></search-plugin> -->
@@ -210,12 +203,10 @@
                 label="fullname_el"
                 :internal-search="true" 
                 :clear-on-select="false" 
-                :close-on-select="false" 
-                :options-limit="100" 
-                :limit="1" 
+                :close-on-select="false"
                 :max-height="400" 
                 :show-no-results="true" 
-                :hide-selected="false"
+                :hide-selected="true"
                 tag-placeholder="Add this as new tag"
                 :multiple="true"
                 :taggable="true"
@@ -299,16 +290,22 @@
     //     color: white;
     // }
     .initial-height {
-        height: 85vh;
+        // height: 85vh;
+        padding-bottom: 3em;
     }
     .search-data-scroll {
         height: 75vh;
         overflow-y: auto;
     }
-    @media only screen and (min-width: 992px){
+    @media only screen and (min-width: 992px) and (max-width: 1199px){
         .search-data-scroll {
             flex: 0 0 57.333333%!important;
             max-width: 57.333333%!important;
+        }
+    }
+    @media only screen and (min-width: 1200px) {
+        .search-data-scroll {
+            flex: 0 0 65.666667%!important;
         }
     }
     @media only screen and (max-width: 767px){
@@ -399,13 +396,11 @@
                 .then(response => {
                     if(response) {
                         this.search.results = response
+                        // this.sortArrByDate()
                         // this.search.hasData = true
                     }else{
                         // this.search.hasData = false
                     }
-
-                    // this.search.isDone = true
-                    // this.search.loading = false
                 })
             },
             asyncFind(query){
@@ -432,6 +427,7 @@
                 this.multiple_search_data.parties = []
                 this.multiple_search_data.tags = []
                 this.tag_keywords = []
+                this.search.speakers = []
                 this.startDate = null
                 this.endDate = null
                 this.singleDate = null
@@ -459,6 +455,9 @@
                 // console.log(event)
                 this.multiple_search_data.parties = event;
             },
+            sortArrByDate() {
+                this.search.results.data.data.sort( (a,b) => new Date(b.speech_conference_date) - new Date(a.speech_conference_date))
+            },
             do_search() {
                 this.search.isDone = false
                 this.search.loading = true
@@ -478,6 +477,7 @@
                         console.log(response)
                         if(response) {
                             this.search.results = response
+                            // this.sortArrByDate()
                             this.search.hasData = true
                         }else{
                             this.search.hasData = false
