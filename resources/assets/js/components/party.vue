@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container pt-2 pb-2">
         <div class="party-container">
             <div v-if="ajaxDoneParty" class="row mr-0">
                 <div class="w-100 bg-img">

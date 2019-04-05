@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container pt-2 pb-2">
         <div class="speaker-container">
             <div v-if="ajaxDoneSpeaker" class="row mr-0">
                 <div class="w-100 bg-img">
@@ -241,6 +241,8 @@
     .speaker-container {
         background-color: $ContainerColor;
         border-radius: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .nav-tabs a {

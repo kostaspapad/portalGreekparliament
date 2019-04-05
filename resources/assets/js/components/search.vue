@@ -271,15 +271,15 @@
         <div class="info-container m-2 pt-3 col-md-7 " v-if="!search.loading && !search.hasData">
             <div>
                 <h3>Λέξεις κλειδιά</h3>
-                <p class="pl-2">Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ)</p>
+                <p class="pl-2">Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</p>
             </div>
             <div>
                 <h3>Ομιλητές</h3>
-                <p class="pl-2">Επιλέξτε ένα ή περισσότερους ομιλητές</p>
+                <p class="pl-2">Επιλέξτε ένα ή περισσότερους ομιλητές.</p>
             </div>
             <div>
                 <h3>Πολιτικές παρατάξεις</h3>
-                <p class="pl-2">Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις</p>
+                <p class="pl-2">Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</p>
             </div>
             <div>
                 <h3>Ημερομηνία</h3>
@@ -289,8 +289,9 @@
                 </ul>
             </div>
         </div>
+        <!-- css spinner -->
         <div class="col-12 col-md-6 col-lg-7 col-xl-8 mt-5 mt-md-3" v-if="search.loading">
-            <img :src=" 'img' + '/Spinner.gif' " class="m-auto d-block"/>
+            <div class="m-auto d-block lds-css ng-scope" style="width: 200px; height: 200px;"><div style="width:100%;height:100%" class="lds-ripple"><div></div><div></div></div></div>
         </div>
     </div>
 </template>
