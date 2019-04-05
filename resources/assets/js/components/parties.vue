@@ -1,31 +1,40 @@
 <template>
     <div class="container">
-        <div v-if="!loading" class="row parties-bg">
-            <div class="row w-100"> <!-- Parties loop -->
-                <div class="row w-100">
-                    <div class="col-12 party"
-                        v-for="party in ajaxData.partiesData.data.data"
-                        :key="party.party_id"
-                        @click="redirectToParty(party.fullname_el)"
-                        style="margin-bottom: 15px">
-                        <router-link :to="/party/ + party.fullname_el" class="party-link">
-                        <img :src=" '/img/parties/' + printImg(party.image) " class="party-img">
-                        <h2 class="party-name text-left">{{party.fullname_el}}</h2>
-                            <!--<p class="party-membership text-left">
-                                <span class="party-name">{{party.party_fullname}}</span>
-                                <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
-                            </p>-->
-                        </router-link>
+        <div class="parties-container">
+            <div v-if="!loading" class="row parties-bg">
+                <div class="row w-100"> <!-- Parties loop -->
+                    <div class="row w-100">
+                        <div class="col-12 party"
+                            v-for="party in ajaxData.partiesData.data.data"
+                            :key="party.party_id"
+                            @click="redirectToParty(party.fullname_el)"
+                            style="margin-bottom: 15px">
+                            <router-link :to="/party/ + party.fullname_el" class="party-link">
+                            <img :src=" '/img/parties/' + printImg(party.image) " class="party-img">
+                            <h2 class="party-name text-left">{{party.fullname_el}}</h2>
+                                <!--<p class="party-membership text-left">
+                                    <span class="party-name">{{party.party_fullname}}</span>
+                                    <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
+                                </p>-->
+                            </router-link>
+                        </div>
                     </div>
-                </div>
-            </div> <!-- Parties loop -->
-        </div>
-        <div v-else>
-            <div class="m-auto d-block lds-css ng-scope" style="width: 200px; height: 200px;"><div style="width:100%;height:100%" class="lds-ripple"><div></div><div></div></div></div>
+                </div> <!-- Parties loop -->
+            </div>
+            <div v-else>
+                <div class="m-auto d-block lds-css ng-scope" style="width: 200px; height: 200px;"><div style="width:100%;height:100%" class="lds-ripple"><div></div><div></div></div></div>
+            </div>
         </div>
     </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
+    $containerColor: white;
+    .parties-container {
+        background-color: $containerColor;
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
     .sort-ul{
         font-size: 0.9em;
         color: #6c6b68;

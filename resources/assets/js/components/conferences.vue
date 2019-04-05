@@ -1,13 +1,13 @@
 <template>
     <div class="container">
         <div class="conferences-container">
-            <div v-if="ajaxDone" class="toggle-view-mode col-12 mt-3 py-4">
+            <div v-if="ajaxDone" class="col-12 py-4">
                 <vs-switch color="success" v-model="periodMode">
                     <span slot="on" class="switch-font">Κοινοβουλευτική περίοδος</span>
                     <span slot="off" class="switch-font">Συνεδριάσεις</span>
                 </vs-switch>
             </div>
-            <div v-if="ajaxDone" class="mt-2 mb-2">
+            <div v-if="ajaxDone">
                 <!-- <div class="conference-title-box mb-4">
                     <h2 class="font-weight-bold text-center">Συνεδριάσεις</h2>
                 </div> -->
@@ -206,6 +206,8 @@
     .conferences-container {
         background-color: $containerColor;
         border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
     .conference-title-box {

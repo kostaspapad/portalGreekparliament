@@ -1,67 +1,76 @@
 <template>
     <div class="container">
-        <div v-if="!loading" class="row speakers-bg">
-            <div class="mt-5 col-12 col-md-6 speaker-search">
-                <search-plugin></search-plugin>
-            </div>
-            <div class="col-12 text-left mt-2 mb-2">
-                <ul class="sort-ul">
-                    <li>
-                        <strong>{{ $t("speakers.sort_by") }}</strong>
-                        <span v-if="order_field == 'greek_name' ">{{ $t("speakers.name") }}</span>
-                        <span v-else>{{ $t("speakers.party") }}</span>
-                        <span>({{order_orientation | capitalizeAll}})</span>
-                        <span @click=sortBy(order_field,order_orientation)><i class="fa fa-sort pointer"></i></span>
-                    </li>
-                    <li v-if="order_field == 'greek_name' ">
-                        <span>{{ $t("speakers.sort_by") }}</span>
-                        <span class="sort-text" @click="sortBy('fullname_el')">{{ $t("speakers.party") }}</span>
-                    </li>
-                    <li v-else>
-                        <span>{{ $t("speakers.sort_by") }}</span>
-                        <span class="sort-text" @click="sortBy('greek_name')">{{ $t("speakers.name") }}</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="row w-100">
+        <div class="speakers-container">
+            <div v-if="!loading" class="row speakers-bg">
+                <div class="mt-5 col-12 col-md-6 speaker-search">
+                    <search-plugin></search-plugin>
+                </div>
+                <div class="col-12 text-left mt-2 mb-2">
+                    <ul class="sort-ul">
+                        <li>
+                            <strong>{{ $t("speakers.sort_by") }}</strong>
+                            <span v-if="order_field == 'greek_name' ">{{ $t("speakers.name") }}</span>
+                            <span v-else>{{ $t("speakers.party") }}</span>
+                            <span>({{order_orientation | capitalizeAll}})</span>
+                            <span @click=sortBy(order_field,order_orientation)><i class="fa fa-sort pointer"></i></span>
+                        </li>
+                        <li v-if="order_field == 'greek_name' ">
+                            <span>{{ $t("speakers.sort_by") }}</span>
+                            <span class="sort-text" @click="sortBy('fullname_el')">{{ $t("speakers.party") }}</span>
+                        </li>
+                        <li v-else>
+                            <span>{{ $t("speakers.sort_by") }}</span>
+                            <span class="sort-text" @click="sortBy('greek_name')">{{ $t("speakers.name") }}</span>
+                        </li>
+                    </ul>
+                </div>
                 <div class="row w-100">
-                    <div class="col-12" style="padding-left: 2.5rem;">
-                        <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
-                            <span slot="prev-nav">&lt;</span>
-                            <span slot="next-nav">&gt;</span>
-                        </pagination>
-                    </div>
-                    <div class="col-12 speaker"
-                        v-for="speaker in ajaxData.speakersData.data.data" 
-                        :key="speaker.id" 
-                        style="margin-bottom: 15px;">
-                        <router-link :to="'/speaker/' + speaker.speaker_id" class="person-link">
-                            <img :src=" 'img' + '/' + printImg(speaker.image) " class="person-img">
-                            <h2 class="person-name text-left">{{speaker.greek_name}}
-                                <!-- <i class="fas fa-address-card speaker-profile-icon d-none d-sm-none d-md-inline"></i> -->
-                            </h2>
-                            <p class="person-membership text-left">
-                                <span class="party-name">{{speaker.party_fullname}}</span>
-                                <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
-                            </p>
-                        </router-link>
-                    </div>
-                    <div class="col-12" style="padding-left: 2.5rem;">
-                        <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
-                            <span slot="prev-nav">&lt;</span>
-                            <span slot="next-nav">&gt;</span>
-                        </pagination>
+                    <div class="row w-100">
+                        <div class="col-12" style="padding-left: 2.5rem;">
+                            <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
+                                <span slot="prev-nav">&lt;</span>
+                                <span slot="next-nav">&gt;</span>
+                            </pagination>
+                        </div>
+                        <div class="col-12 speaker"
+                            v-for="speaker in ajaxData.speakersData.data.data" 
+                            :key="speaker.id" 
+                            style="margin-bottom: 15px;">
+                            <router-link :to="'/speaker/' + speaker.speaker_id" class="person-link">
+                                <img :src=" 'img' + '/' + printImg(speaker.image) " class="person-img">
+                                <h2 class="person-name text-left">{{speaker.greek_name}}
+                                    <!-- <i class="fas fa-address-card speaker-profile-icon d-none d-sm-none d-md-inline"></i> -->
+                                </h2>
+                                <p class="person-membership text-left">
+                                    <span class="party-name">{{speaker.party_fullname}}</span>
+                                    <span class="party-indicator" :style="{ backgroundColor: speaker.color }"></span>
+                                </p>
+                            </router-link>
+                        </div>
+                        <div class="col-12" style="padding-left: 2.5rem;">
+                            <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
+                                <span slot="prev-nav">&lt;</span>
+                                <span slot="next-nav">&gt;</span>
+                            </pagination>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div v-else>
-            <div class="m-auto d-block lds-css ng-scope" style="width: 200px; height: 200px;"><div style="width:100%;height:100%" class="lds-ripple"><div></div><div></div></div></div>
+            <div v-else>
+                <div class="m-auto d-block lds-css ng-scope" style="width: 200px; height: 200px;"><div style="width:100%;height:100%" class="lds-ripple"><div></div><div></div></div></div>
+            </div>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
+    $containerColor: white;
+    .speakers-container {
+        background-color: $containerColor;
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
     .sort-ul{
         font-size: 0.9em;
         color: #6c6b68;
