@@ -14,19 +14,19 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/search">{{ $t("navbar.search")}}</router-link>
+                                <router-link class="nav-link" to="/search" data-toggle="collapse" data-target=".navbar-collapse.show">{{ $t("navbar.search")}}</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/conferences">{{ $t("navbar.conferences")}}</router-link>
+                                <router-link class="nav-link" to="/conferences" data-toggle="collapse" data-target=".navbar-collapse.show">{{ $t("navbar.conferences")}}</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/parties">{{ $t("navbar.political_parties")}}</router-link>
+                                <router-link class="nav-link" to="/parties" data-toggle="collapse" data-target=".navbar-collapse.show">{{ $t("navbar.political_parties")}}</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/speakers">{{ $t("navbar.speakers")}}</router-link>
+                                <router-link class="nav-link" to="/speakers" data-toggle="collapse" data-target=".navbar-collapse.show">{{ $t("navbar.speakers")}}</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/about">{{ $t("navbar.about")}}</router-link>
+                                <router-link class="nav-link" to="/about" data-toggle="collapse" data-target=".navbar-collapse.show">{{ $t("navbar.about")}}</router-link>
                             </li>
                         </ul>
                     </div>
