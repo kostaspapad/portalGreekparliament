@@ -268,6 +268,27 @@
                 </pagination>
             </div>
         </div>
+        <div class="info-container m-2 pt-3 col-md-7 " v-if="!search.loading && !search.hasData">
+            <div>
+                <h3>Λέξεις κλειδιά</h3>
+                <p class="pl-2">Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ)</p>
+            </div>
+            <div>
+                <h3>Ομιλητές</h3>
+                <p class="pl-2">Επιλέξτε ένα ή περισσότερους ομιλητές</p>
+            </div>
+            <div>
+                <h3>Πολιτικές παρατάξεις</h3>
+                <p class="pl-2">Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις</p>
+            </div>
+            <div>
+                <h3>Ημερομηνία</h3>
+                <ul class="pl-4">
+                    <li>Συγκεριμένη ημερομηνία</li>
+                    <li>Έυρος ημερομηνιών</li>
+                </ul>
+            </div>
+        </div>
         <div class="col-12 col-md-6 col-lg-7 col-xl-8 mt-5 mt-md-3" v-if="search.loading">
             <img :src=" 'img' + '/Spinner.gif' " class="m-auto d-block"/>
         </div>
@@ -296,6 +317,13 @@
     .search-data-scroll {
         height: 75vh;
         overflow-y: auto;
+    }
+    .info-container {
+        background-color: #fff;
+        color: #373737;
+        box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px
+        rgba(10,10,10,.1);
+        
     }
     @media only screen and (min-width: 992px) and (max-width: 1199px){
         .search-data-scroll {
