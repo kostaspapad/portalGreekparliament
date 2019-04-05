@@ -48,12 +48,12 @@
                         </div>
                     </div>
                     
-                    <div class="ml-auto">
+                    <div v-if="speech" class="ml-auto d-none d-sm-none d-md-block">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-th-list"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
-                            <a v-if="speech" class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="#">
                                 <div class="text-center mt-2">
                                     <router-link :to="/speech/ + speech_data.speech_id">
                                         <h6>Μετάβαση στην ομιλία</h6>
@@ -76,6 +76,20 @@
                                 </div>
                             </a>
                         </div>  
+                    </div>
+                </div>
+
+                <div v-if="speech" class="d-block d-sm-block d-md-none">
+                    <div v-if="isFromSearchPage" class="speech-link col-12 text-center mt-2">
+                        <h5>{{ $helpers.myFormattedDate(speech_data.speech_conference_date,'el') }}</h5>
+                        <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
+                            <h5>Μετάβαση στην συνεδρία</h5>
+                        </router-link>
+                    </div>
+                    <div class="speech-link col-12 text-center mt-2">
+                        <router-link :to="/speech/ + speech_data.speech_id">
+                            <h5>Μετάβαση στην ομιλία</h5>
+                        </router-link>
                     </div>
                 </div>
                 
@@ -245,14 +259,26 @@
     .modal-report-area{
         padding: 3em;
     }
-    @media only screen and (min-width: 768px) and (max-width: 991px) {
+    @media only screen and (min-width: 768px) and (max-width: 835px) {
         .speech_speaker_name.appear-in-search {
-           font-size: 13px;
+           font-size: 13px!important;
         }
         .speech_speaker_party.appear-in-search {
             a {
                 h5 {
-                    font-size: 13px;
+                    font-size: 12px!important;
+                }
+            }
+        }
+    }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .speech_speaker_name.appear-in-search {
+           font-size: 1.3em;
+        }
+        .speech_speaker_party.appear-in-search {
+            a {
+                h5 {
+                    font-size: 1em;
                 }
             }
         }

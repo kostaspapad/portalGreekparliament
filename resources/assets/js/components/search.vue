@@ -162,6 +162,36 @@
                             </div>
                         </li>
                     </ul>
+                    <div class="mt-4 info-container">
+                        <div>
+                            <h3>Λέξεις κλειδιά</h3>
+                            <ul class="pl-4">
+                                <li>Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</li>
+                            </ul>
+                            <!-- <p class="pl-2">Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</p> -->
+                        </div>
+                        <div>
+                            <h3>Ομιλητές</h3>
+                            <ul class="pl-4">
+                                <li>Επιλέξτε ένα ή περισσότερους ομιλητές.</li>
+                            </ul>
+                            <!-- <p class="pl-2">Επιλέξτε ένα ή περισσότερους ομιλητές.</p> -->
+                        </div>
+                        <div>
+                            <h3>Πολιτικές παρατάξεις</h3>
+                            <ul class="pl-4">
+                                <li>Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</li>
+                            </ul>
+                            <!-- <p class="pl-2">Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</p> -->
+                        </div>
+                        <div>
+                            <h3>Ημερομηνία</h3>
+                            <ul class="pl-4">
+                                <li>Συγκεριμένη ημερομηνία</li>
+                                <li>Έυρος ημερομηνιών</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </vs-sidebar>
         </div>
@@ -248,6 +278,37 @@
                 <button @click="do_search" :disabled="canSearch" class="btn btn-secondary w-100">{{ $t("conferences.search") }}</button>
                 <button @click="clearAllFilters" class="btn btn-secondary w-100 mt-3">Καθαριστμός φίλτρων</button>
             </div>
+
+            <div class="mt-4 info-container">
+                <div>
+                    <h3>Λέξεις κλειδιά</h3>
+                    <ul class="pl-4">
+                        <li>Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</li>
+                    </ul>
+                    <!-- <p class="pl-2">Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</p> -->
+                </div>
+                <div>
+                    <h3>Ομιλητές</h3>
+                    <ul class="pl-4">
+                        <li>Επιλέξτε ένα ή περισσότερους ομιλητές.</li>
+                    </ul>
+                    <!-- <p class="pl-2">Επιλέξτε ένα ή περισσότερους ομιλητές.</p> -->
+                </div>
+                <div>
+                    <h3>Πολιτικές παρατάξεις</h3>
+                    <ul class="pl-4">
+                        <li>Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</li>
+                    </ul>
+                    <!-- <p class="pl-2">Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</p> -->
+                </div>
+                <div>
+                    <h3>Ημερομηνία</h3>
+                    <ul class="pl-4">
+                        <li>Συγκεριμένη ημερομηνία</li>
+                        <li>Έυρος ημερομηνιών</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <!-- Page Content  -->
@@ -268,30 +329,13 @@
                 </pagination>
             </div>
         </div>
-        <div class="info-container m-2 pt-3 col-md-7 " v-if="!search.loading && !search.hasData">
-            <div>
-                <h3>Λέξεις κλειδιά</h3>
-                <p class="pl-2">Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</p>
-            </div>
-            <div>
-                <h3>Ομιλητές</h3>
-                <p class="pl-2">Επιλέξτε ένα ή περισσότερους ομιλητές.</p>
-            </div>
-            <div>
-                <h3>Πολιτικές παρατάξεις</h3>
-                <p class="pl-2">Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</p>
-            </div>
-            <div>
-                <h3>Ημερομηνία</h3>
-                <ul class="pl-4">
-                    <li>Συγκεριμένη ημερομηνία</li>
-                    <li>Έυρος ημερομηνιών</li>
-                </ul>
-            </div>
-        </div>
         <!-- css spinner -->
         <div class="col-12 col-md-6 col-lg-7 col-xl-8 mt-5 mt-md-3" v-if="search.loading">
-            <div class="m-auto d-block lds-css ng-scope" style="width: 200px; height: 200px;"><div style="width:100%;height:100%" class="lds-ripple"><div></div><div></div></div></div>
+            <div class="m-auto d-block lds-css ng-scope" style="width: 200px; height: 200px;">
+                <div style="width:100%;height:100%" class="lds-ripple">
+                    <div></div><div></div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -316,14 +360,13 @@
         padding-bottom: 3em;
     }
     .search-data-scroll {
-        height: 75vh;
+        height: 85vh;
         overflow-y: auto;
     }
     .info-container {
-        background-color: #fff;
-        color: #373737;
-        box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px
-        rgba(10,10,10,.1);
+        color: #fff;
+        // box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px
+        // rgba(10,10,10,.1);
         
     }
     @media only screen and (min-width: 992px) and (max-width: 1199px){

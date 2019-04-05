@@ -157,7 +157,11 @@
     </div>
     <!-- If it's loading -->
     <div v-else class="col-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="m-auto d-block lds-css ng-scope" style="width: 200px; height: 200px;"><div style="width:100%;height:100%" class="lds-ripple"><div></div><div></div></div></div>
+        <div class="m-auto d-block lds-css ng-scope" style="width: 200px; height: 200px;">
+            <div style="width:100%;height:100%" class="lds-ripple">
+                <div></div><div></div>
+            </div>
+        </div>
     </div>
     <!-- End of if it's loading -->
 </template>
