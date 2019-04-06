@@ -19,7 +19,8 @@ export default new Vuex.Store({
                 startDate: null,
                 endDate: null
             },
-            singleDate: null
+            singleDate: null,
+            search_results: []
         },
     },
     mutations: {
@@ -46,12 +47,14 @@ export default new Vuex.Store({
             state.single_speech_comments = comments
         },
         SAVE_SEARCH_DATA: (state,searchData) => {
-            state.search_data.dateRange.startDate = searchData.dateRange.startDate
-            state.search_data.dateRange.endDate = searchData.dateRange.endDate
-            state.search_data.singleDate = searchData.singleDate
-            state.search_data.parties = searchData.parties
-            state.search_data.speakers = searchData.speakers
-            state.search_data.tags = searchData.tags
+            state.search_data.dateRange.startDate = searchData.ajax.dateRange.startDate
+            state.search_data.dateRange.endDate = searchData.ajax.dateRange.endDate
+            state.search_data.singleDate = searchData.ajax.singleDate
+            state.search_data.parties = searchData.ajax.parties
+            state.search_data.speakers = searchData.ajax.speakers
+            state.search_data.tags = searchData.ajax.tags
+            state.search_data.search_results = searchData.search_results
+            
         },
         SAVE_HAS_DONE_SEARCH: (state,has_done_search) => {
             state.search_data.hasDoneSearch = has_done_search
@@ -63,6 +66,7 @@ export default new Vuex.Store({
             state.search_data.parties = []
             state.search_data.speakers = []
             state.search_data.tags = []
+            state.search_data.search_results = []
         }
     },
     actions: {

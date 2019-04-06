@@ -541,7 +541,7 @@
                 this.prepare_for_api()
 
                 // save the current data to store so if we come back to have the data already
-                this.SAVE_SEARCH_DATA(this.ajax_search_data)
+                // this.SAVE_SEARCH_DATA(this.ajax_search_data)
                 this.SAVE_HAS_DONE_SEARCH(true)
 
                 this.search_api()
@@ -576,6 +576,12 @@
                         console.log(response)
                         if(response) {
                             this.search.results = response
+                            const search_data = {
+                                ajax: this.ajax_search_data,
+                                search_results: this.search.results
+                            }
+                            // save the current data to store so if we come back to have the data already
+                            this.SAVE_SEARCH_DATA(search_data)
                             // this.sortArrByDate()
                             this.search.hasData = true
                         }else{
@@ -730,7 +736,10 @@
                 
 
                 if(this.previous_search_data.hasDoneSearch) {
-                    this.search_api()
+                    // this.search_api()
+                    this.search.results = this.previous_search_data.search_results
+                    this.search.isDone = true
+                    this.search.hasData = true
                 }
             }
         },
