@@ -88,9 +88,8 @@
                            <custom-multiselect v-model="tag_keywords" :options="user_tags_keywords" tag-placeholder="Add this as new tag" placeholder="Εισάγετε λέξεις κλειδιά" label="name" track-by="code" :multiple="true" :taggable="true" @tag="addTag" class="mt-3" :close-on-select="false" :clear-on-select="false" :max-height="100" ></custom-multiselect>
                         </li>
                         <li>
-                            <!-- <search-plugin :taggable="true" :clearInputs="clearInputs" @getTaggedSpeakers="storeSpeakers"></search-plugin> -->
                             <custom-multiselect 
-                                v-model="multiple_search_data.speakers" 
+                                v-model="ajax_search_data.speakers" 
                                 placeholder="Αναζήτηση ομιλιτή" 
                                 open-direction="bottom" 
                                 :options="search.speakers"
@@ -114,9 +113,8 @@
                             </custom-multiselect>
                         </li>
                         <li>
-                            <!-- <search-plugin :parties="true" :selectedParties="multiple_search_data.parties" :clearInputs="clearInputs" :partiesData="parties_dropdown_options" @getTaggedParties="storeParties"></search-plugin> -->
                             <custom-multiselect 
-                                v-model="multiple_search_data.parties" 
+                                v-model="ajax_search_data.parties" 
                                 placeholder="Επιλογή κομμάτων" 
                                 open-direction="bottom" 
                                 :options="parties_dropdown_options"
@@ -198,9 +196,8 @@
 
         <div class="col-md-6 col-lg-5 col-xl-4 d-none d-sm-none d-md-block" :class="{ 'initial-height': !search.hasData }" style="background-color: #2B4162;">
             <custom-multiselect v-model="tag_keywords" :options="user_tags_keywords" tag-placeholder="Add this as new tag" placeholder="Εισάγετε λέξεις κλειδιά" label="name" track-by="code" :close-on-select="false" :multiple="true" :taggable="true" @tag="addTag" class="mt-3"></custom-multiselect>
-            <!-- <search-plugin :clearInputs="clearInputs" :selectedParties="multiple_search_data.parties" @getTaggedSpeakers="storeSpeakers"></search-plugin> -->
             <custom-multiselect 
-                v-model="multiple_search_data.speakers" 
+                v-model="ajax_search_data.speakers" 
                 placeholder="Αναζήτηση ομιλιτή" 
                 open-direction="bottom" 
                 :options="search.speakers"
@@ -223,9 +220,8 @@
                 id="ajax">
                 <span slot="noResult">Δεν βρέθηκαν ομιλητές</span>
             </custom-multiselect>
-            <!-- <search-plugin :parties="true" :clearInputs="clearInputs" :partiesData="parties_dropdown_options" @getTaggedParties="storeParties"></search-plugin> -->
             <custom-multiselect 
-                v-model="multiple_search_data.parties" 
+                v-model="ajax_search_data.parties" 
                 placeholder="Επιλογή κομμάτων" 
                 open-direction="bottom" 
                 :options="parties_dropdown_options"
@@ -410,7 +406,7 @@
 </style>
 <script>
     import moment from 'moment';
-    import { mapState, mapGetters } from 'vuex'
+    import { mapState, mapGetters, mapMutations } from 'vuex'
     export default {
         props: {
             name: String,
@@ -440,7 +436,11 @@
                 parties_dropdown_options: [],
                 parties: [],
                 activeMenu: false,
-                multiple_search_data: {
+                // input_data: {
+                //     speakers: [],
+                //     parties: []
+                // },
+                ajax_search_data: {
                     speakers: [],
                     parties: [],
                     tags: [
@@ -463,8 +463,13 @@
             }
         },
         methods:{
+            ...mapMutations([
+                'SAVE_SEARCH_DATA',
+                'SAVE_HAS_DONE_SEARCH',
+                'RESET_SEARCH_DATA'
+            ]),
             changePage(page) {
-                api.call('post',this.api_path + 'search?page=' + page, this.multiple_search_data)
+                api.call('post',this.api_path + 'search?page=' + page, this.ajax_search_data)
                 .then(response => {
                     if(response) {
                         this.search.results = response
@@ -495,9 +500,9 @@
                 }
             },
             clearAllFilters() {
-                this.multiple_search_data.speakers = []
-                this.multiple_search_data.parties = []
-                this.multiple_search_data.tags = []
+                this.ajax_search_data.speakers = []
+                this.ajax_search_data.parties = []
+                this.ajax_search_data.tags = []
                 this.tag_keywords = []
                 this.search.speakers = []
                 this.startDate = null
@@ -509,6 +514,13 @@
                 setTimeout(() => {
                     this.clearInputs = false
                 }, 1000);
+
+                this.search.isDone = false
+                this.search.hasData = false
+                this.search.results = []
+
+                this.RESET_SEARCH_DATA()
+                this.SAVE_HAS_DONE_SEARCH(false)
             },
             addTag(newTag) {
                 // console.log(newTag)
@@ -519,32 +531,47 @@
                 //this.user_tags_keywords.push(tag)
                 this.tag_keywords.push(tag)
             },
-            storeSpeakers(event) {
-                // console.log(event)
-                this.multiple_search_data.speakers = event;
-            },
-            storeParties(event) {
-                // console.log(event)
-                this.multiple_search_data.parties = event;
-            },
             sortArrByDate() {
                 this.search.results.data.data.sort( (a,b) => new Date(b.speech_conference_date) - new Date(a.speech_conference_date))
             },
             do_search() {
                 this.search.isDone = false
                 this.search.loading = true
+                
+                this.prepare_for_api()
+
+                // save the current data to store so if we come back to have the data already
+                this.SAVE_SEARCH_DATA(this.ajax_search_data)
+                this.SAVE_HAS_DONE_SEARCH(true)
+
+                this.search_api()
+            },
+            prepare_for_api() {
                 if(this.tag_keywords.length > 0) {
-                    this.multiple_search_data.tags = this.tag_keywords
+                    this.ajax_search_data.tags = this.tag_keywords
                 }
                 if(this.startDate && this.endDate) {
-                    this.multiple_search_data.dateRange.startDate = moment(this.startDate).format('YYYY-MM-DD')
-                    this.multiple_search_data.dateRange.endDate = moment(this.endDate).format('YYYY-MM-DD')
+                    this.ajax_search_data.dateRange.startDate = moment(this.startDate).format('YYYY-MM-DD')
+                    this.ajax_search_data.dateRange.endDate = moment(this.endDate).format('YYYY-MM-DD')
                 }
                 if(this.singleDate) {
-                    this.multiple_search_data.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
+                    this.ajax_search_data.singleDate = moment(this.singleDate).format('YYYY-MM-DD')
                 }
+
+                if(this.ajax_search_data.speakers.length > 0) {
+                    this.ajax_search_data.speakers = this.ajax_search_data.speakers.map(obj => {
+                        return { speaker_id: obj.speaker_id, greek_name: obj.greek_name }
+                    })
+                }
+                if(this.ajax_search_data.parties.length > 0) {
+                    this.ajax_search_data.parties = this.ajax_search_data.parties.map(obj => {
+                        return { party_id: obj.party_id, fullname_el: obj.fullname_el }
+                    })
+                }
+            },
+            search_api() {
                 setTimeout(() => {
-                    api.call('post',this.api_path + 'search', this.multiple_search_data)
+                    api.call('post',this.api_path + 'search', this.ajax_search_data)
                     .then( response => {
                         console.log(response)
                         if(response) {
@@ -668,6 +695,43 @@
                 this.parties_dropdown_selected = [],
                 this.parties_dropdown_options = [],
                 this.parties = []
+            },
+            check_previous_values() {
+                if(this.previous_search_data.dateRange.startDate && this.previous_search_data.dateRange.endDate){
+                    this.ajax_search_data.dateRange.startDate = this.previous_search_data.dateRange.startDate
+                    this.ajax_search_data.dateRange.endDate = this.previous_search_data.dateRange.endDate
+
+                    //initialize values to date inputs
+                    this.startDate = this.previous_search_data.dateRange.startDate
+                    this.endDate = this.previous_search_data.dateRange.endDate
+                    this.isMultipleFilter = true
+                }
+
+                if(this.previous_search_data.singleDate){
+                    this.ajax_search_data.singleDate = this.previous_search_data.singleDate
+
+                    //initialize values to date input
+                    this.singleDate = this.previous_search_data.singleDate
+                }
+
+                if(this.previous_search_data.speakers.length > 0){
+                    this.ajax_search_data.speakers = this.previous_search_data.speakers
+                }
+
+                if(this.previous_search_data.parties.length > 0){
+                    this.ajax_search_data.parties = this.previous_search_data.parties
+                }
+
+                if(this.previous_search_data.tags.length > 0){
+                    this.ajax_search_data.tags = this.previous_search_data.tags
+                    this.tag_keywords = this.previous_search_data.tags
+                }
+
+                
+
+                if(this.previous_search_data.hasDoneSearch) {
+                    this.search_api()
+                }
             }
         },
         computed:{
@@ -687,24 +751,26 @@
                 else return true
             },
             ...mapGetters({
-                api_path: 'get_api_path'
+                api_path: 'get_api_path',
+                previous_search_data: 'get_search_data'
             })
         },
         watch: {
             isMultipleFilter: function(val) {
                 if(val) {
                     this.singleDate = null
-                    this.multiple_search_data.singleDate = null
+                    this.ajax_search_data.singleDate = null
                 } else {
                     this.startDate = null
                     this.endDate = null
-                    this.multiple_search_data.dateRange.startDate = null
-                    this.multiple_search_data.dateRange.endDate = null
+                    this.ajax_search_data.dateRange.startDate = null
+                    this.ajax_search_data.dateRange.endDate = null
                 }
             }
         },
         created() {
             this.load_parties_dropdown()
+            this.check_previous_values()
         }
     }
 </script>

@@ -261,12 +261,12 @@
     }
     @media only screen and (min-width: 768px) and (max-width: 835px) {
         .speech_speaker_name.appear-in-search {
-           font-size: 13px!important;
+           font-size: 11px!important;
         }
         .speech_speaker_party.appear-in-search {
             a {
                 h5 {
-                    font-size: 12px!important;
+                    font-size: 11px!important;
                 }
             }
         }

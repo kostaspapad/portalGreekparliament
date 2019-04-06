@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -8,7 +7,20 @@ export default new Vuex.Store({
         api_path: '',
         user: null,
         conference_speech_comments: [],
-        single_speech_comments: []
+        single_speech_comments: [],
+        search_data: {
+            hasDoneSearch: false,
+            speakers: [],
+            parties: [],
+            tags: [
+                { name: 'Μνημόνιο', code: 1 }
+            ],
+            dateRange: {
+                startDate: null,
+                endDate: null
+            },
+            singleDate: null
+        },
     },
     mutations: {
         SAVE_USER: (state,user) => {
@@ -22,8 +34,9 @@ export default new Vuex.Store({
             }
         },
         GET_PATH: state => {
-            // state.api_path =  process.env.NODE_ENV == 'production' ? 'https://greekparliament.info/api/v1/' : 'http://127.0.0.1:8000/api/v1/'
-            state.api_path =  '/api/v1/'
+            //state.api_path =  process.env.NODE_ENV == 'production' ? 'https://greekparliament.info/api/v1/' : 'http://127.0.0.1:8000/api/v1/'
+            state.api_path =  process.env.NODE_ENV == 'production' ? 'api/v1/' : 'http://127.0.0.1:8000/api/v1/'
+            // state.api_path =  '/api/v1/'
             // state.api_path = '/api/v1/'
         },
         SAVE_CONFERENCE_SPEECH_COMMENTS: (state,comments) => {
@@ -31,6 +44,25 @@ export default new Vuex.Store({
         },
         SAVE_SPEECH_COMMENTS: (state,comments) => {
             state.single_speech_comments = comments
+        },
+        SAVE_SEARCH_DATA: (state,searchData) => {
+            state.search_data.dateRange.startDate = searchData.dateRange.startDate
+            state.search_data.dateRange.endDate = searchData.dateRange.endDate
+            state.search_data.singleDate = searchData.singleDate
+            state.search_data.parties = searchData.parties
+            state.search_data.speakers = searchData.speakers
+            state.search_data.tags = searchData.tags
+        },
+        SAVE_HAS_DONE_SEARCH: (state,has_done_search) => {
+            state.search_data.hasDoneSearch = has_done_search
+        },
+        RESET_SEARCH_DATA: state => {
+            state.search_data.dateRange.startDate = null
+            state.search_data.dateRange.endDate = null
+            state.search_data.singleDate = null
+            state.search_data.parties = []
+            state.search_data.speakers = []
+            state.search_data.tags = []
         }
     },
     actions: {
@@ -66,6 +98,9 @@ export default new Vuex.Store({
         },
         get_single_speech_comments: state => {
             return state.single_speech_comments
+        },
+        get_search_data: state => {
+            return state.search_data
         }
     }
 })
