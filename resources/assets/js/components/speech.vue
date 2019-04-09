@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="speech_data.speech_id && speech_data.greek_name && (isFromConference || singleSpeech)" class="speech-container3 py-2">
+        <div v-if="speech_data.speech_id && speech_data.greek_name && (isFromConference || singleSpeech)" :class="singleSpeech ? 'container' : 'speech-container3' " class="py-2">
             <div class="speech-data-container p-2">
                 <div class="row" style="margin-right: 0;">
                     <div class="speaker-image-container">
@@ -391,7 +391,7 @@
             if(!this.speech){
                 api.call('get', this.api_path + 'speech/' + this.$route.params.speech_id)
                 .then( data => {
-                    if( data.status == 200 && data.statusText == "OK" && data.data ) {
+                    if( data.status == 200 && data.data ) {
                         this.speech_data = data.data.data
                         this.isDone = true
                         this.singleSpeech = true
