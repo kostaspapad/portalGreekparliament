@@ -115,8 +115,10 @@
                                             <speech :speech="conference" isFromSearch=true isFromConference=true></speech>
                                         </div>
                                     </div>
-                                    <div v-if="!search.speechesData.length" v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
-                                        <speech :speech="conference" isFromConference=true></speech>
+                                    <div v-if="!search.speechesData.length">
+                                        <div v-for="conference in ajaxData.conferenceData.data.data" :key="conference.speech_id">
+                                            <speech :speech="conference" isFromConference=true></speech>
+                                        </div>
                                     </div>
                                 </div>
                                 <div v-if="ajaxDoneConfSpeeches">

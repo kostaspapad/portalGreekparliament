@@ -316,7 +316,7 @@
                 </pagination>
             </div>
             <div v-for="search_data in search.results.data.data" :key="search_data.speech_id">
-                <speech :speech="search_data" isFromConference=true :isFromSearchPage="true"></speech>
+                <speech :speech="search_data" isFromConference=true :isFromSearchPage="true" :showDropButton="true"></speech>
             </div>
             <div v-if="search.isDone && search.hasData && search.results.data.data.length > 0" class="col-12 p-0 mt-2">
                 <pagination :data="search.results.data.meta" @pagination-change-page="changePage" :limit=1>
@@ -573,7 +573,7 @@
                 setTimeout(() => {
                     api.call('post',this.api_path + 'search', this.ajax_search_data)
                     .then( response => {
-                        console.log(response)
+                        // console.log(response)
                         if(response) {
                             this.search.results = response
                             const search_data = {

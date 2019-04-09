@@ -49,37 +49,41 @@
                     </div>
                     
                     <div v-if="speech" class="ml-auto d-none d-sm-none d-md-block">
-                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-th-list"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">
-                                <div class="text-center mt-2">
-                                    <router-link :to="/speech/ + speech_data.speech_id">
-                                        <h6>Μετάβαση στην ομιλία</h6>
-                                    </router-link>
-                                </div>
-                            </a>
-                            <!-- <a class="dropdown-item" href="#">
-                                <div v-if="speech && isFromSearchPage && !singleSpeech" class="text-center mt-2">
-                                    <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
-                                        Μετάβαση στην συνεδρία
-                                        {{ $helpers.myFormattedDate(speech_data.speech_conference_date,'el') }}
-                                    </router-link>
-                                </div>
-                            </a> -->
-                            <a v-if="isFromSearchPage" class="dropdown-item" href="#">
-                                <div class="text-center mt-2">
-                                    <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
-                                        <h6>Μετάβαση στην συνεδρία {{ $helpers.myFormattedDate(speech_data.speech_conference_date,'el') }}</h6>
-                                    </router-link>
-                                </div>
-                            </a>
-                        </div>  
+                        <div v-if="showDropButton">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-th-list"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">
+                                    <div class="text-center mt-2">
+                                        <router-link :to="/speech/ + speech_data.speech_id">
+                                            <h6>Μετάβαση στην ομιλία</h6>
+                                        </router-link>
+                                    </div>
+                                </a>
+                                <!-- <a class="dropdown-item" href="#">
+                                    <div v-if="speech && isFromSearchPage && !singleSpeech" class="text-center mt-2">
+                                        <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
+                                            Μετάβαση στην συνεδρία
+                                            {{ $helpers.myFormattedDate(speech_data.speech_conference_date,'el') }}
+                                        </router-link>
+                                    </div>
+                                </a> -->
+                                <a v-if="isFromSearchPage" class="dropdown-item" href="#">
+                                    <div class="text-center mt-2">
+                                        <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
+                                            <h6>Μετάβαση στην συνεδρία {{ $helpers.myFormattedDate(speech_data.speech_conference_date,'el') }}</h6>
+                                        </router-link>
+                                    </div>
+                                </a>
+                            </div>  
+                            
+                        </div>
                     </div>
                 </div>
 
-                <div v-if="speech" class="d-block d-sm-block d-md-none">
+                    <!-- class="d-block d-sm-block d-md-none"  -->
+                <div v-if="speech" :class="[ {'d-sm-block': showDropButton}, {'d-md-none': showDropButton},'d-block']">
                     <div v-if="isFromSearchPage" class="speech-link col-12 text-center mt-2">
                         <h5>{{ $helpers.myFormattedDate(speech_data.speech_conference_date,'el') }}</h5>
                         <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
@@ -299,6 +303,10 @@
                 default: false
             },
             isFromSearchPage: {
+                default: false,
+                type: Boolean
+            },
+            showDropButton: {
                 default: false,
                 type: Boolean
             }
