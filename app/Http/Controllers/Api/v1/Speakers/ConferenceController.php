@@ -80,29 +80,50 @@ class ConferenceController extends Controller
      *
      * @return App\Http\Resources\Speech
      */
-    public function speechesByConferenceDate($conf_date,$speaker_id) 
+    public function speechesByConferenceDate($conf_date, $speaker_id) 
     {
+        $speaker_id = $this->apiHelper::test_input($speaker_id);
+
+        $speech_ids = Speech::select('speeches.speech_id')
+                ->where('speeches.speaker_id', '=', $speaker_id)
+                ->get();
+
+        $conversation_ids = array();
+
+        // Get next and previous id
+        foreach($speech_ids as $id){
+            // echo $id->speech_id.PHP_EOL;
+            $conversation_ids[] = $id->speech_id - 1;
+            $conversation_ids[] = $id->speech_id;
+            $conversation_ids[] = $id->speech_id + 1;
+        }
+        
+        // Remove duplicates
+        $conversation_ids = array_unique($conversation_ids);
+        
         if(isset($speaker_id) && isset($conf_date)){
             $speaker_id = $this->apiHelper::test_input($speaker_id);
             $conf_date = $this->apiHelper::test_input($conf_date);
     
             $speeches = Speech::join('conferences' , 'conferences.conference_date' , '=' , 'speeches.speech_conference_date')
-            ->join('speakers as sp', 'speeches.speaker_id', '=', 'sp.speaker_id')
-            ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-            ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
-            ->select(['speeches.speech_conference_date', 'sp.greek_name', 'sp.english_name', 
-                'speeches.speech_id', 'speeches.speech', 'sp.image', 'sp.speaker_id'
-                // 'm.on_behalf_of_id', 
-                // 'parties.fullname_el'
-            ])
-            ->groupBy('speeches.speech_id')
-            ->where([
-                ['conferences.conference_date', '=', $conf_date],
-                ['sp.speaker_id', '=', $speaker_id]
-            ])
-            ->orderBy('speeches.speech_id', 'desc')
-            ->paginate(5);
-            //dd($speeches);
+                ->join('speakers as sp', 'speeches.speaker_id', '=', 'sp.speaker_id')
+                ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
+                ->join('parties', 'parties.party_id', '=', 'm.on_behalf_of_id')
+                ->select(['speeches.speech_conference_date', 'sp.greek_name', 'sp.english_name', 
+                    'speeches.speech_id', 'speeches.speech', 'sp.image', 'sp.speaker_id'
+                    // 'm.on_behalf_of_id', 
+                    // 'parties.fullname_el'
+                ])
+                ->whereIn('speeches.speech_id', $conversation_ids)
+                ->where([
+                    ['conferences.conference_date', '=', $conf_date],
+                    // ['sp.speaker_id', '=', $speaker_id]
+                ])
+                ->groupBy('speeches.speech_id')
+                ->orderBy('speeches.speech_id', 'desc')
+                ->paginate(5);
+            // $speeches = $speeches->toSql();
+            // dd($speeches);
             return $this->apiHelper::returnResource('Speech', $speeches);      
         }
     }
