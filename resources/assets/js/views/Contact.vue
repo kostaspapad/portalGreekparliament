@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row justify-content-center mr-0">
+        <div class="row justify-content-center py-2 mr-0">
             <div style="width: 750px;">
                 <div class="card">
                     <div class="card-header text-center">{{ $t("contact.title") }}</div>

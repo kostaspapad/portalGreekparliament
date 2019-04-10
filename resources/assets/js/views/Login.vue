@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row justify-content-center mr-0">
+        <div class="row justify-content-center py-2 mr-0">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header text-center">{{ $t("login.login") }}</div>
