@@ -17,10 +17,10 @@ let routes = [
         path: '/register',
         component: require('./views/Register.vue')
     },
-    {
-        path: '/dashboard',
-        component: require('./views/Dashboard.vue')
-    },
+    // {
+    //     path: '/dashboard',
+    //     component: require('./views/Dashboard.vue')
+    // },
     {
         path: '/conferences',
         component: require('./components/conferences.vue')

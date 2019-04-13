@@ -28,6 +28,9 @@
                             <li class="nav-item">
                                 <router-link class="nav-link" to="/about" data-toggle="collapse" data-target=".navbar-collapse.show">{{ $t("navbar.about")}}</router-link>
                             </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/contact" data-toggle="collapse" data-target=".navbar-collapse.show">{{ $t("navbar.contact")}}</router-link>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -47,6 +50,9 @@
                         <li class="nav-item d-block d-sm-block d-md-none">
                             <router-link class="nav-link" to="/about">{{ $t("navbar.about")}}</router-link>
                         </li>
+                        <li class="nav-item d-block d-sm-block d-md-none">
+                            <router-link class="nav-link" to="/contact">{{ $t("navbar.contact")}}</router-link>
+                        </li>
                         <hr class="divider">
                         
                         <!-- @guest -->
@@ -62,7 +68,7 @@
                                 <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <router-link to="/dashboard" class="dropdown-item myHoverBg">Dashboard</router-link>
+                                <!-- <router-link to="/dashboard" class="dropdown-item myHoverBg">Dashboard</router-link> -->
                                 <span @click="userLogout" class="dropdown-item pointer myHoverBg">{{$t("auth.logout")}}</span>
                                 <!-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
