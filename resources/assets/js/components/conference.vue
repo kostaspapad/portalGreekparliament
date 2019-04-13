@@ -47,7 +47,7 @@
             </div>
         </div> -->
         <!-- <div class="container"> -->
-        <div class="main-content-conferenece">
+        <div class="main-content-conferenece mb-2">
             <div class="conferences-container">
                 <div v-if="ajaxDoneConfInfo">
                     <div class="conference-title-box py-4 pl-4">

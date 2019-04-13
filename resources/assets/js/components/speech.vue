@@ -202,12 +202,16 @@
     }
     .comment-text {
         padding: 1vh;
-        background: #33a8ff63;
-        border-radius: 6px;
+        // background: #33a8ff63;
+        border-radius: 3px;
         color: #4e5356;
         position: relative;
         top: -4px;
         transition: background .8s ease;
+        box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px
+        rgba(10,10,10,.1);
+        background-color: #fff;
+        // color: #373737;
     }
     .comment-text.show-text {
         // animation-direction: alternate;
@@ -224,7 +228,7 @@
     }
     .comment-text.hide-text {
         // background: #CD5C5C;
-        background: salmon;
+        background: rgb(72, 73, 100);
         color: white;
         // transform: rotate(360deg);
         //transform: rotateY(180deg);

@@ -23,7 +23,7 @@
                 </div>
                 <div class="container">
                     <vs-tabs vs-color='#17a2b8'>
-                        <vs-tab vs-label="Speakers">
+                        <vs-tab vs-label="Ομιλιτές">
                             <div class="p-3 tab-pane fade show speakers-container mb-0">
                                 <div v-if="ajaxDoneSpeakers && noDataSpeakers == false">
                                     <pagination :data="ajaxData.speakersData.data.meta" @pagination-change-page="changePage" :limit=1>
