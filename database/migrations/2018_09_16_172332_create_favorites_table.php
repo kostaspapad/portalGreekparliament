@@ -16,7 +16,7 @@ class CreateFavoritesTable extends Migration
         Schema::create('favorites', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('speech_id');
+            $table->bigInteger('speech_id')->unique();
             $table->foreign('speech_id')->references('speech_id')->on('speeches');
             $table->primary(['user_id', 'speech_id']);
             $table->timestamps();
