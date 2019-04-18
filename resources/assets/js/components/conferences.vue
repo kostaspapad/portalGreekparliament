@@ -318,7 +318,7 @@
                 endDate: null,
                 singleDate: null,
                 isMultipleFilter: false,
-                periodMode: true,
+                periodMode: false,
                 showInfoDiv: false,
                 hasData: false,
                 loading: true,
