@@ -365,6 +365,12 @@
         // rgba(10,10,10,.1);
         
     }
+    @media only screen and (min-width: 768px) and (max-width: 991px){
+        .search-data-scroll {
+            flex: 0 0 49.5%!important;
+            // max-width: 49.5%!important;
+        }
+    }
     @media only screen and (min-width: 992px) and (max-width: 1199px){
         .search-data-scroll {
             flex: 0 0 57.333333%!important;

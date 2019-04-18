@@ -1,6 +1,6 @@
 <template>
     <!-- <div class="footer-top-div"> -->
-        <footer class="footer page-footer font-small">
+        <footer id="myFooter" class="footer page-footer font-small">
             <div class="container-footer text-center ">
                 <div class="col-md-12 mt-md-0 mt-3">
                     <h5 class="font-weight-bold p-3 m-0">Greekparliament.info</h5>
@@ -41,3 +41,11 @@
         </footer>
     <!-- </div> -->
 </template>
+<style lang="scss" scoped>
+    #myFooter {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 182px;
+    }
+</style>

@@ -10,6 +10,7 @@
             </div>
             <div class="imagebox-text col-12 col-sm-6 col-md-8">
                 <h3 class="imagebox-text-title">Μια προσπάθεια εξόρυξης και ταξινόμησης δεδομένων απο τα πρακτικά ομιλιών του Ελληνικού Κοινοβουλίου.</h3>
+                <h3 class="imagebox-text-subtitle d-block d-sm-none text-center">Δοκιμαστική έκδοση</h3>
                 <h3 class="imagebox-text-subtitle d-none d-sm-block">Δοκιμαστική έκδοση</h3>
                 <div class="imagebox-text">
                     <p>Βρείτε πληροφορίες για βουλευτές, κομματικές παρατάξεις και συνεδριάσεις</p>

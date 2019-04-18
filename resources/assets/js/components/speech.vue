@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     
-                    <div v-if="speech" class="ml-auto d-none d-sm-none d-md-block">
+                    <!-- <div v-if="speech" class="ml-auto d-none d-sm-none d-md-block">
                         <div v-if="showDropButton">
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-th-list"></i>
@@ -61,14 +61,6 @@
                                         </router-link>
                                     </div>
                                 </a>
-                                <!-- <a class="dropdown-item" href="#">
-                                    <div v-if="speech && isFromSearchPage && !singleSpeech" class="text-center mt-2">
-                                        <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
-                                            Μετάβαση στην συνεδρία
-                                            {{ $helpers.myFormattedDate(speech_data.speech_conference_date,'el') }}
-                                        </router-link>
-                                    </div>
-                                </a> -->
                                 <a v-if="isFromSearchPage" class="dropdown-item" href="#">
                                     <div class="text-center mt-2">
                                         <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
@@ -79,11 +71,11 @@
                             </div>  
                             
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                     <!-- class="d-block d-sm-block d-md-none"  -->
-                <div v-if="speech" :class="[ {'d-sm-block': showDropButton}, {'d-md-none': showDropButton},'d-block']">
+                <div v-if="speech" >
                     <div v-if="isFromSearchPage" class="speech-link col-12 text-center mt-2">
                         <h5>{{ $helpers.myFormattedDate(speech_data.speech_conference_date,'el') }}</h5>
                         <router-link :to="/conference/ + speech_data.speech_conference_date + '/speeches' ">
@@ -115,7 +107,7 @@
                     <div class="d-inline-block comment-text pointer" @click="isCommentOn = !isCommentOn" :class="isCommentOn ? 'hide-text' : 'show-text'">
                         <span v-if="!isCommentOn" class="show-letters d-none d-sm-block">{{ $t("speeches.show_comments") }} <i class="fas fa-comments"></i></span>
                         <span v-if="!isCommentOn" class="show-letters d-block d-sm-none">Σχόλια <i class="fas fa-comments"></i></span>
-                        <span v-else class="hide-letters">{{ $t("speeches.hide_comments") }}</span>
+                        <span v-else class="hide-letters">{{ $t("speeches.hide_comments_sm") }}</span>
                     </div>
                     <div class="d-inline-block report-button">
                         <vs-button 
@@ -187,8 +179,8 @@
     @media only screen and (max-width: 340px) {
         .report-button {
             button {
-                padding: 7px!important;
-                font-size: .8em;
+                // padding: 7px!important;
+                // font-size: .8em;
             }
         }
     }
@@ -206,26 +198,26 @@
         border-radius: 3px;
         color: #4e5356;
         position: relative;
-        top: -4px;
+        // top: -4px;
         transition: background .8s ease;
         box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px
         rgba(10,10,10,.1);
         background-color: #fff;
         // color: #373737;
     }
-    .comment-text.show-text {
-        // animation-direction: alternate;
-        // animation: showText 2s both;
+    // .comment-text.show-text {
+    //     // animation-direction: alternate;
+    //     // animation: showText 2s both;
 
-        // @keyframes showText {
-        //     0% {
-        //         transform: rotateY(180deg);
-        //     }
-        //     100% {
-        //         transform: rotateY(0deg);
-        //     }
-        // }
-    }
+    //     // @keyframes showText {
+    //     //     0% {
+    //     //         transform: rotateY(180deg);
+    //     //     }
+    //     //     100% {
+    //     //         transform: rotateY(0deg);
+    //     //     }
+    //     // }
+    // }
     .comment-text.hide-text {
         // background: #CD5C5C;
         background: rgb(72, 73, 100);
