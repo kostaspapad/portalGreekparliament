@@ -107,7 +107,7 @@
                     <div class="d-inline-block comment-text pointer" @click="isCommentOn = !isCommentOn" :class="isCommentOn ? 'hide-text' : 'show-text'">
                         <span v-if="!isCommentOn" class="show-letters d-none d-sm-block">{{ $t("speeches.show_comments") }} <i class="fas fa-comments"></i></span>
                         <span v-if="!isCommentOn" class="show-letters d-block d-sm-none">Σχόλια <i class="fas fa-comments"></i></span>
-                        <span v-else class="hide-letters">{{ $t("speeches.hide_comments_sm") }}</span>
+                        <span v-else class="hide-letters">{{ $t("speeches.hide_comments") }}</span>
                     </div>
                     <div class="d-inline-block report-button">
                         <vs-button 
