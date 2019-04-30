@@ -16,18 +16,15 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
             $table->string('issue');
-            $table->string('speech_id');
+            $table->bigInteger('speech_id');
+            $table->foreign('speech_id')->references('speech_id')->on('speeches')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
-        });
-
-        Schema::table('reports' , function($table){
-            $table->foreign('speech_id')->references('speech_id')->on('speeches')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -38,11 +35,8 @@ class CreateReportsTable extends Migration
      */
     public function down()
     {
-        Schema::table('reports' , function($table){
-            $table->dropForeign(['speech_id']);
-            $table->dropForeign(['user_id']);
-        });
-        
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');        
         Schema::dropIfExists('reports');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
