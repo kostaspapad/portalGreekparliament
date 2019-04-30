@@ -16,8 +16,6 @@ class PartiesApiTest extends TestCase
 
         $response = $this->json('GET', $endpoint);
         $response->assertSee('party_id');
-
-        echo $endpoint . ': OK' . PHP_EOL;
     }
     
     public function testGetPartyById()
@@ -35,8 +33,6 @@ class PartiesApiTest extends TestCase
                         "url"
                     ]
                 ]);
-        
-        echo $endpoint . ': OK' . PHP_EOL;
     }
     
     public function testGetPartyByName()
@@ -55,8 +51,6 @@ class PartiesApiTest extends TestCase
                     ]
                 ]);
         
-        echo $endpoint . ': OK' . PHP_EOL;
-        
         $endpoint = $this->api_version . '/party/name/Communist Party of Greece';    
             
         $response = $this->json('GET', $endpoint);
@@ -70,8 +64,6 @@ class PartiesApiTest extends TestCase
                         "url"
                     ]
                 ]);
-        
-        echo $endpoint . ': OK' . PHP_EOL;
     }
 
     // public function testGetPartySpeechesById()

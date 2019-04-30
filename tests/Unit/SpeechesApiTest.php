@@ -19,50 +19,45 @@ class SpeechesApiTest extends TestCase
                  ->assertJsonStructure([
                     "data" => [
                         "speech_id",
-                        "speech_conference_date",
-                        "speaker_id",
                         "speech",
-                        "f_name",
-                        "md5"
+                        "greek_name",
+                        "image",
+                        "fullname_el",
+                        "party_color"
                     ]
                 ]);
 
         // na kanw ton elenxo gia keno kai gia invalid
-        echo $endpoint . ': OK' . PHP_EOL;
     }
 
     public function testSpeechesBySpeakerId()
     {
-        $endpoint = $this->api_version . '/speeches/speaker/0ec3bdd6-140b-473d-806d-6ba089cf7a35';
+        $endpoint = $this->api_version . '/speaker/0ec3bdd6-140b-473d-806d-6ba089cf7a35/speeches';
 
         $response = $this->json('GET', $endpoint);
         $response->assertSee('speech_id');
 
-        // na kanw ton elenxo gia keno kai gia invalid
-        echo $endpoint . ': OK' . PHP_EOL;
     }
 
     
     public function testSpeechesBySpeakerName()
     {
-        $endpoint = $this->api_version . '/speeches/speaker/name/Τσούκαλης Σπυρίδωνος Νικόλαος';
+        $endpoint = $this->api_version . '/speaker/name/Τσούκαλης Σπυρίδωνος Νικόλαος/speeches';
 
         $response = $this->json('GET', $endpoint);
         $response->assertSee('speech_id');
 
         // na kanw ton elenxo gia keno kai gia invalid
-        echo $endpoint . ': OK' . PHP_EOL;
     }
 
     public function testSpeechesByConferenceDate()
     {
-        $endpoint = $this->api_version . '/speeches/conference/2010-05-28';
+        $endpoint = $this->api_version . '/conference/2010-05-28/speeches';
 
         $response = $this->json('GET', $endpoint);
         $response->assertSee('speech_id');
 
         // na kanw ton elenxo gia keno kai gia invalid
-        echo $endpoint . ': OK' . PHP_EOL;
     }
 }
 

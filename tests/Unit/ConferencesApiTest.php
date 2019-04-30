@@ -16,8 +16,6 @@ class ConferencesApiTest extends TestCase
 
         $response = $this->json('GET', $endpoint);
         $response->assertSee('conference_date');
-
-        echo $endpoint . ': OK' . PHP_EOL;
     }
     
     public function testGetConferenceById()
@@ -41,8 +39,6 @@ class ConferencesApiTest extends TestCase
                         "time_period"
                     ]
                 ]);
-        
-        echo $endpoint . ': OK' . PHP_EOL;
     }
 
     public function testGetConferenceByDate()
@@ -66,8 +62,6 @@ class ConferencesApiTest extends TestCase
                         "time_period"
                     ]
                 ]);
-        
-        echo $endpoint . ': OK' . PHP_EOL;
     }
 
     // public function testGetConferenceByTimePeriod()
@@ -126,7 +120,5 @@ class ConferencesApiTest extends TestCase
         
         $response = $this->json('GET', $endpoint);
         $response->assertSee('conference_date');
-        
-        echo $endpoint . ': OK' . PHP_EOL;
     }
 }

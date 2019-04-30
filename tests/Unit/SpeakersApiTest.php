@@ -16,8 +16,6 @@ class SpeakersApiTest extends TestCase
 
         $response = $this->json('GET', $endpoint);
         $response->assertSee('speaker_id');
-
-        echo $endpoint . ': OK' . PHP_EOL;
     }
     
     public function testGetSpeakerById()
@@ -32,8 +30,6 @@ class SpeakersApiTest extends TestCase
                         "greek_name"
                     ]
                 ]);
-
-        echo $endpoint . ': OK' . PHP_EOL;
     }
     
     public function testGetSpeakerByName()
@@ -48,8 +44,6 @@ class SpeakersApiTest extends TestCase
                         "greek_name"
                     ]
                 ]);
-        
-        echo $endpoint . ': OK'.PHP_EOL;
     }
     
     // public function testSearchSpeakerByName()
