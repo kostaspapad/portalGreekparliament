@@ -42,7 +42,7 @@ class CreateSpeechesTable extends Migration
                                 ->on('speakers')
                                 ->onDelete('set null');
 
-                            $table->string('party_id');
+                            $table->string('party_id')->nullable();
                             $table->foreign('party_id')
                                 ->references('party_id')
                                 ->on('parties')
@@ -98,6 +98,8 @@ class CreateSpeechesTable extends Migration
         //     //Put the index back when the migration is rolled back
         //     $table->dropIndex('conference_date');
         // });
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('speeches');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

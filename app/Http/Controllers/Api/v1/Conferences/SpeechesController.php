@@ -70,9 +70,9 @@ class SpeechesController extends Controller
                     // One speaker can be in many parties (check it later)
                     $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                         ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                        ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                        ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
-                        ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
+                        ->leftjoin('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
+                        ->leftjoin('parties', 'parties.party_id', '=', 'speeches.party_id')
+                        ->leftjoin('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
                         ->leftJoin('favorites', function($join) use ($user_id){
                             $join->on('favorites.speech_id', '=', 'speeches.speech_id')
                                 ->where('favorites.user_id', '=', $user_id);
@@ -107,9 +107,9 @@ class SpeechesController extends Controller
                     // One speaker can be in many parties (check it later)
                     $speeches = Speech::join('conferences as conf', 'conf.conference_date', '=', 'speeches.speech_conference_date')
                         ->join('speakers as sp', 'sp.speaker_id', '=', 'speeches.speaker_id')
-                        ->join('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
-                        ->join('parties', 'parties.party_id', '=', 'speeches.party_id')
-                        ->join('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
+                        ->leftjoin('memberships as m', 'sp.speaker_id', '=' ,'m.person_id')
+                        ->leftjoin('parties', 'parties.party_id', '=', 'speeches.party_id')
+                        ->leftjoin('party_colors', 'party_colors.party_id', '=', 'parties.party_id')
                         ->select([
                             'conf.conference_date', 
                             'sp.greek_name', 
@@ -131,6 +131,7 @@ class SpeechesController extends Controller
                         ->where([
                             ['conf.conference_date', '=', $date]
                         ])
+                        // dd($speeches);
                         ->paginate(25);
                 }
 

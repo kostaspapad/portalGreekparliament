@@ -19,25 +19,30 @@ class CreateSpeakersTable extends Migration {
 
                 $table->string('english_name');
                 $table->string('greek_name');
+                $table->string('simple_name');
                 $table->string('image');
                 $table->string('email');
                 $table->string('wiki_el');
                 $table->string('wiki_en');
                 $table->string('twitter');
                 $table->string('website');
+                $table->index(['simple_name', 'speaker_id']);
+                $table->index(['greek_name', 'speaker_id']);
                 $table->engine = 'InnoDB';
                 $table->charset = 'utf8';
                 $table->collation = 'utf8_unicode_ci';
             });
         }
     }
-
+    
     /**
      * Reverse the migrations.
      *
      * @return void
      */
     public function down() {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('speakers');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

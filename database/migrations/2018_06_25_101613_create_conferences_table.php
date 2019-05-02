@@ -80,7 +80,8 @@ class CreateConferencesTable extends Migration
         //     //Put the index back when the migration is rolled back
         //     $table->dropIndex('conference_date');
         // });
-        
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('conferences');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
