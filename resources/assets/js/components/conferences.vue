@@ -82,7 +82,7 @@
                                 </router-link>
                             </div>
                             <!-- Single date filter -->
-                            <div v-if="search.hasData && singleDate && search.type == 'single' " class="p-4 bg-white conference-content-box">
+                            <div v-if="search.hasData && singleDate && search.type == 'single' " class="p-4 conference-content-box">
                                 <router-link :to="'/conference/' + search.singleDate.conference_date + '/speeches'" class="conference-link">
                                     <h3>{{search.singleDate.conference_date}}</h3>
                                     <div>
@@ -102,7 +102,7 @@
                             <!-- Multiple Filter -->
                             <div v-if="search.isDone">
                                 <div v-if="search.type == 'multiple' && search.hasData">
-                                    <div class="p-4 bg-white conference-content-box" v-for="conference in search.multipleDates.data.data" :key="conference.id">
+                                    <div class="p-4 conference-content-box" v-for="conference in search.multipleDates.data.data" :key="conference.id">
                                         <router-link :to="'/conference/' + conference.conference_date + '/speeches'" class="conference-link">
                                             <h3>{{conference.conference_date}}</h3>
                                             <div>
