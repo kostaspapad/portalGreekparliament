@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <span class="star-pos">
         <a href="#" v-if="isFavorited" @click.prevent="unFavorite">
             <i class="fas fa-star fa-2x" aria-hidden="true" style="color:#fff645"></i>
         </a>
@@ -8,6 +8,12 @@
         </a>
     </span>
 </template>
+<style lang="scss" scoped>
+    .star-pos{
+        position: relative;
+        top: 4px;
+    }
+</style>
 
 <script>
     import { mapState, mapGetters } from 'vuex'

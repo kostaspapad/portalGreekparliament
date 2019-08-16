@@ -13,11 +13,11 @@
         <div class="comment-textarea">
             <TextareaAutogrow 
                 v-model="comment"
-                placeholder=""
+                placeholder="Γράψτε το σχόλιο σας."
                 classes="form-control form-control-line textarea"
             />
         </div>
-        <div class="send-comment text-right mt-1 mr-1">
+        <div class="send-comment text-right mt-1">
             <button @click="sendComment" :disabled="isDisabled" :class="{ 'not-allowed': isDisabled }" class="btn send-button">
                 {{ $t("comments.submit") }} <i class="fas fa-paper-plane"></i> 
             </button>
