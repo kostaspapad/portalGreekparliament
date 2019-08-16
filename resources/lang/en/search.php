@@ -10,7 +10,7 @@ return [
     'date' => 'Date',
     'distinct_date' => 'Distinct date',
     'range_date' => 'Date range',
-    'reset_info' => 'Η Επαναφορά καθαρίζει το πεδίο στο οποίο εισάγατε την ημερομηνία.',
+    'reset_info' => 'Reset date',
     'reset_btn' => 'Reset',
     'filters' => 'Filters',
     'clear_filters' => 'Clear filters'
