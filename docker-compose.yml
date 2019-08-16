@@ -2,6 +2,7 @@ version: '3'
 
 networks:
   laravel:
+    driver: bridge
 
 services:
   php:
@@ -37,6 +38,9 @@ services:
     container_name: mysql
     restart: unless-stopped
     tty: true
+    # This is optional and allows us to use
+    # Database tools (e.g. HeidiSQL/Workbench) at 127.0.0.1:3306
+    # Change to something like 33066:3306 if already running mysql locally
     ports:
       - "33061:3306"
     environment:

@@ -9,12 +9,13 @@
                 </div>
             </div>
             <div class="imagebox-text col-12 col-sm-6 col-md-8">
-                <h3 class="imagebox-text-title">Μια προσπάθεια εξόρυξης και ταξινόμησης δεδομένων απο τα πρακτικά ομιλιών του Ελληνικού Κοινοβουλίου.</h3>
-                <h3 class="imagebox-text-subtitle d-block d-sm-none text-center">Δοκιμαστική έκδοση</h3>
-                <h3 class="imagebox-text-subtitle d-none d-sm-block">Δοκιμαστική έκδοση</h3>
+                <h3 class="imagebox-text-title">{{ $t("home.title") }}</h3>
+                <h3 class="imagebox-text-subtitle d-block d-sm-none text-center">{{ $t("home.version") }}</h3>
+                <h3 class="imagebox-text-subtitle d-none d-sm-block">{{ $t("home.version") }}</h3>
                 <div class="imagebox-text">
-                    <p>Βρείτε πληροφορίες για βουλευτές, κομματικές παρατάξεις και συνεδριάσεις</p>
-                    <p>Αναζητήστε φράσεις και λέξεις κλειδιά σε όλα τα πρακτικά</p>
+                    <p>{{ $t("home.info1") }}</p>
+                    <p>{{ $t("home.info2") }}</p>
+                    <p>{{ $t("home.info3") }}</p>
                     <!-- <p>Δημιουργίστε λίστες με λέξεις στις οποίες θέλετε να ενημερώνεστε όταν αναφέρονται σε κάποια συνεδρίαση</p> -->
                     <!-- <ul>
                         <li>5.058 συνεδριάσεις (3 Ιουλίου 1989 μέχρι σήμερα).</li>
@@ -24,6 +25,7 @@
                     </ul> -->
                 </div>
             </div>
+            
         </div>
         <!-- <div v-for="ajaxData.speakers">
             <timeline 

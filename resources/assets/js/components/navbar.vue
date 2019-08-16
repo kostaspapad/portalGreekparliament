@@ -33,6 +33,18 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
+                            <!-- LOCALE -->
+                            <li class="nav-item dropdown mb-2">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img v-if="$i18n.locale == 'en' " src="/img/flags/flag_uk.png">
+                                        <img v-if="$i18n.locale == 'el'" src="/img/flags/flag_gr.png">
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <span class="dropdown-item pointer myHoverBg"  @click="$i18n.locale = 'el' ">{{$t("navbar.lang_el")}}</span>
+                                    <span class="dropdown-item pointer myHoverBg"  @click="$i18n.locale = 'en' ">{{$t("navbar.lang_en")}}</span>
+                                </div>
+                            </li>
+                            <!-- END OF LOCALE -->
                             <li class="nav-item" v-if="!user">
                                 <router-link to="/login" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show">{{$t("auth.login")}}</router-link>
                             </li>

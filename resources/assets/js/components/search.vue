@@ -20,7 +20,7 @@
                                         </button>
                                         <h4 class="alert-heading">{{ $t("conferences.search") }}</h4>
                                         <p>{{ $t("conferences.datepicker.select_date_ranges") }}</p>
-                                        <p>Η Επαναφορά καθαρίζει το πεδίο στο οποίο βάλατε την ημερομηνία.</p>
+                                        <p>{{ $t("search.reset_info") }}</p>
                                     </div>
                                 </transition>
                                 <div class="datepkr-toggle">
@@ -40,7 +40,7 @@
                                         wrapper-class="pickerDiv" placeholder="Επιλέξτε τελική ημερομηνία"></datepicker>
                                     <div class="datepkr-btn">
                                         <!-- <button class="btn reset-btn datepkr-btn-color" @click="getDates" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button> -->
-                                        <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('multiple')" :disabled="isDisabled">Επαναφορά</button>
+                                        <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('multiple')" :disabled="isDisabled">{{ $t("search.reset_btn") }}</button>
                                     </div>
                                 </div>
                                 <div v-else class="datepkr-toggle mt-2">
@@ -49,7 +49,7 @@
                                         wrapper-class="pickerDiv" placeholder="Επιλέξτε ημερομηνία"></datepicker>
                                     <div class="datepkr-btn">
                                         <!-- <button class="btn reset-btn datepkr-btn-color" @click="getDate" :disabled="isDisabled">{{ $t("conferences.datepicker.submit") }}</button> -->
-                                        <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('single')" :disabled="isDisabled">Επαναφορά</button>
+                                        <button class="btn reset-btn datepkr-btn-color" @click="clearDatesInput('single')" :disabled="isDisabled">{{ $t("search.reset_btn") }}</button>
                                     </div>
                                 </div>
                                 <!-- <div v-if="search.isDone && !search.hasData" class="col-12 mt-2">
@@ -79,7 +79,7 @@
             <button @click="activeMenu = !activeMenu" class="btn">Φίλτρα</button>
             <vs-sidebar parent="body" color="primary" class="sidebarx search-sidebar-comp" spacer v-model="activeMenu">
                 <div class="header-sidebar" slot="header">
-                    <h4 class="text-white">Φίλτρα</h4>
+                    <h4 class="text-white">{{ $t("search.filters") }}</h4>
                     <!-- <h3 @click="openSideMenu" class="close-filters"><span class="fas fa-times"></span></h3> -->
                 </div>
                 <div class="">
@@ -156,37 +156,37 @@
                         <li>
                             <div class="search-btn-div mt-4">
                                 <button @click="do_search" :disabled="canSearch" class="btn btn-secondary w-100">{{ $t("conferences.search") }}</button>
-                                <button @click="clearAllFilters" class="btn btn-secondary w-100 mt-3">Καθαριστμός φίλτρων</button>
+                                <button @click="clearAllFilters" class="btn btn-secondary w-100 mt-3">{{ $t("search.clear_filters") }}</button>
                             </div>
                         </li>
                     </ul>
                     <div class="mt-4 info-container">
                         <div>
-                            <h3>Λέξεις κλειδιά</h3>
+                            <h3>{{ $t("search.keywords") }}</h3>
                             <ul class="pl-4">
-                                <li>Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</li>
+                                <li>{{ $t("search.keywords_info") }}</li>
                             </ul>
                             <!-- <p class="pl-2">Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</p> -->
                         </div>
                         <div>
-                            <h3>Ομιλητές</h3>
+                            <h3>{{ $t("search.speakers") }}</h3>
                             <ul class="pl-4">
-                                <li>Επιλέξτε ένα ή περισσότερους ομιλητές.</li>
+                                <li>{{ $t("search.one_or_more_speakers") }}</li>
                             </ul>
                             <!-- <p class="pl-2">Επιλέξτε ένα ή περισσότερους ομιλητές.</p> -->
                         </div>
                         <div>
-                            <h3>Πολιτικές παρατάξεις</h3>
+                            <h3>{{ $t("search.political_parties") }}</h3>
                             <ul class="pl-4">
-                                <li>Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</li>
+                                <li>{{ $t("search.one_or_more_parties") }}</li>
                             </ul>
                             <!-- <p class="pl-2">Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</p> -->
                         </div>
                         <div>
-                            <h3>Ημερομηνία</h3>
+                            <h3>{{ $t("search.date") }}</h3>
                             <ul class="pl-4">
-                                <li>Συγκεριμένη ημερομηνία</li>
-                                <li>Έυρος ημερομηνιών</li>
+                                <li>{{ $t("search.distinct_date") }}</li>
+                                <li>{{ $t("search.range_date") }}</li>
                             </ul>
                         </div>
                     </div>
@@ -272,36 +272,36 @@
             <!-- end of date selection -->
             <div class="search-btn-div mt-4">
                 <button @click="do_search" :disabled="canSearch" class="btn btn-secondary w-100">{{ $t("conferences.search") }}</button>
-                <button @click="clearAllFilters" class="btn btn-secondary w-100 mt-3">Καθαριστμός φίλτρων</button>
+                <button @click="clearAllFilters" class="btn btn-secondary w-100 mt-3">{{ $t("search.clear_filters") }}</button>
             </div>
 
             <div class="mt-4 info-container">
                 <div>
-                    <h3>Λέξεις κλειδιά</h3>
+                    <h3>{{ $t("search.keywords") }}</h3>
                     <ul class="pl-4">
-                        <li>Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</li>
+                        <li>{{ $t("search.keywords_info") }}</li>
                     </ul>
                     <!-- <p class="pl-2">Εισάγετε μια ή περισσοτερες λέξεις κλειδιά. (π.χ. Μνημόνιο, Μακεδονικό, Κόκκινα δάνεια κτλ).</p> -->
                 </div>
                 <div>
-                    <h3>Ομιλητές</h3>
+                    <h3>{{ $t("search.speakers") }}</h3>
                     <ul class="pl-4">
-                        <li>Επιλέξτε ένα ή περισσότερους ομιλητές.</li>
+                        <li>{{ $t("search.one_or_more_speakers") }}</li>
                     </ul>
                     <!-- <p class="pl-2">Επιλέξτε ένα ή περισσότερους ομιλητές.</p> -->
                 </div>
                 <div>
-                    <h3>Πολιτικές παρατάξεις</h3>
+                    <h3>{{ $t("search.political_parties") }}</h3>
                     <ul class="pl-4">
-                        <li>Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</li>
+                        <li>{{ $t("search.one_or_more_parties") }}</li>
                     </ul>
                     <!-- <p class="pl-2">Επιλέξτε μια ή περισσότερες πολιτικές παρατάξεις.</p> -->
                 </div>
                 <div>
-                    <h3>Ημερομηνία</h3>
+                    <h3>{{ $t("search.date") }}</h3>
                     <ul class="pl-4">
-                        <li>Συγκεριμένη ημερομηνία</li>
-                        <li>Έυρος ημερομηνιών</li>
+                        <li>{{ $t("search.distinct_date") }}</li>
+                        <li>{{ $t("search.range_date") }}</li>
                     </ul>
                 </div>
             </div>
