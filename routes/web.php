@@ -45,17 +45,17 @@ Route::group(['middleware' => ['throttle:30,1']], function () {
     // Route::get('parties','PagesController@parties');
     // Route::get('/party/{name}', 'PagesController@party');
 
-    // // Locale
-    // // Get locale
-    // Route::get('locale', function () {
-    //     return \App::getLocale();
-    // });
+    // Locale
+    // Get locale
+    Route::get('locale', function () {
+        return \App::getLocale();
+    });
 
-    // // Set locale
-    // Route::get('locale/{locale}', function ($locale) {
-    //     \Session::put('locale', $locale);
-    //     return redirect()->back();
-    // });
+    // Set locale
+    Route::get('locale/{locale}', function ($locale) {
+        \Session::put('locale', $locale);
+        return redirect()->back();
+    });
 
     // // Favorites
     // Route::post('/speech/{speech_id}/favorite', 'SpeechesController@postFavoriteSpeech');

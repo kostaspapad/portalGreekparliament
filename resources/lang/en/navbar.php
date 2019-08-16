@@ -9,5 +9,6 @@ return [
     'speakers' => 'Speakers',
     'speeches' => 'Speeches',
     'about' => 'About',
-    'search' => 'Search'
+    'search' => 'Search',
+    'contact' => 'Contact'
 ];

@@ -122,7 +122,8 @@ Vue.filter('capitalizeAll', function (value) {
 
 window.Event = new Vue;
 
-const lang = document.documentElement.lang.substr(0, 2); 
+// const lang = document.documentElement.lang.substr(0, 2); 
+const lang = navigator.language.substr(0, 2) || navigator.userLanguage.substr(0, 2);
 // or however you determine your current app locale
 
 const i18n = new VueInternationalization({
