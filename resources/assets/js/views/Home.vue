@@ -4,7 +4,7 @@
             <div class="image-container col-12 col-sm-6 col-md-4" >
                 <img src="/img/mainpage_logo.png" class="img-fluid">
                 <div>
-                    <h3 class="image-text">Αναζήτηση ομιλητή</h3>
+                    <h3 class="image-text">{{ $t("home.find_speaker") }}</h3>
                     <search-plugin></search-plugin>
                 </div>
             </div>
